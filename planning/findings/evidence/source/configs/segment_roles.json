@@ -1,0 +1,22 @@
+{
+  "schema": "R04.segment_roles.v1",
+  "dataset": "sberrio/Mixed-Signals-V2X",
+  "revision": "1a61aea747aa6bc45da2c2f085a1f1d3abc41f91",
+  "development": {"id": "D", "segment": "mini_7", "archive": "train/mini_7.tar", "bytes": 7894272000, "published_lfs_sha256": "46e9dbe9f6e952be9186a6271abbcaaf11c965a5589d785fc278afd3eb235663"},
+  "comparison": [
+    {"id": "C0", "segment": "mini_10", "archive": "train/mini_10.tar", "bytes": 7853803520, "published_lfs_sha256": "ba831ae3e82df52953f70929505faf3e8783b7dc588da7e9ccc5912feeb56a37"},
+    {"id": "C1", "segment": "mini_11", "archive": "train/mini_11.tar", "bytes": 7763056640, "published_lfs_sha256": "c0ce489d33f7ee951edba2e811282b9c0069a054aa8c27e93a112d1ac6024ddf"},
+    {"id": "C2", "segment": "mini_12", "archive": "train/mini_12.tar", "bytes": 7837788160, "published_lfs_sha256": "103fcd519b7284ee7690bddd86b68ce34d559f39d3a6ff8dc0a50b60e270eec0"},
+    {"id": "C3", "segment": "mini_13", "archive": "train/mini_13.tar", "bytes": 7802398720, "published_lfs_sha256": "2d193aaed3b60cfeddd6197ac84b4034418e2e7013065e16320f5e04db3bd83a"}
+  ],
+  "final": {"id": "H", "segment": "mini_14", "archive": "train/mini_14.tar", "bytes": 7768442880, "published_lfs_sha256": "ffdb2c4d04a5debd628c511184262ca970879740743b5bfda88b21473e8471c8"},
+  "folds": [
+    {"id": "F0", "test": "C0", "calibration": "C1", "reference": ["C2", "C3"]},
+    {"id": "F1", "test": "C1", "calibration": "C2", "reference": ["C3", "C0"]},
+    {"id": "F2", "test": "C2", "calibration": "C3", "reference": ["C0", "C1"]},
+    {"id": "F3", "test": "C3", "calibration": "C0", "reference": ["C1", "C2"]},
+    {"id": "FH", "test": "H", "calibration": "C3", "reference": ["C0", "C1", "C2"]}
+  ],
+  "replacement_rule": "Only pre-outcome archive metadata, packaging, agent coverage, timing, or calibration feasibility; dated reason and original candidate required. No outcome-driven substitution.",
+  "replacements": []
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "original_path": "configs/replay_evaluation.json",
+    "copy": "evidence/source/configs/replay_evaluation.json",
+    "sha256": "7bd7d77259a6fe28a7d3f803501c859486e83876258ee65af77af7da7083406a",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "configs/segment_roles.json",
+    "copy": "evidence/source/configs/segment_roles.json",
+    "sha256": "f65c540776825d814fae2e3f6753aca80ceb4dce4112243da676e77cbe30bb7f",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "pyproject.toml",
+    "copy": "evidence/source/pyproject.toml",
+    "sha256": "5ebf740b16a3935923a9183f80c4496efb2b2fe3a1dd552188bb8f7ddd8cafc8",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "planning/evidence_audit.md",
+    "copy": "evidence/source/planning/evidence_audit.md",
+    "sha256": "8d1d14d51a2544ecd22caa182b7ef78c00c01c4c60d45b8f1cfed340a66d368b",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "planning/sources.md",
+    "copy": "evidence/source/planning/sources.md",
+    "sha256": "1d2f5c658395bb6576c7a151ad3a82241ce2e8735c74c8dd0310f3b445161f47",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "planning/dataset_field_matrix.md",
+    "copy": "evidence/source/planning/dataset_field_matrix.md",
+    "sha256": "73bfad1d6f60822660cb5e4cc92e2a5ea4ee29c8c931e268587e4f9ce96462f4",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "artifacts/20261012T134149Z-R05/gate.md",
+    "copy": "evidence/source/artifacts/20261012T134149Z-R05/gate.md",
+    "sha256": "2abc36afce09519414715119b496f2aab7543ab1181506f5523d27ead24be364",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "artifacts/20261012T134149Z-R05/notebook_execution.json",
+    "copy": "evidence/source/artifacts/20261012T134149Z-R05/notebook_execution.json",
+    "sha256": "3fc9eb33a23936ea5a197c48a4effbe0162df73efb0954dbf7e664a0f0a3b2e7",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "artifacts/20261012T134149Z-R05/environment_final.json",
+    "copy": "evidence/source/artifacts/20261012T134149Z-R05/environment_final.json",
+    "sha256": "873da74b13e870cc85f5534cd80857b6777ecfb6e22a9462216585720e56a9a3",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "artifacts/20261012T134149Z-R05/implementation_correction_clock_availability.json",
+    "copy": "evidence/source/artifacts/20261012T134149Z-R05/implementation_correction_clock_availability.json",
+    "sha256": "1c49613b4d59facb130e2ea1d1d7f2e94f8016dc59fac609bb19d36046b68e9d",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "artifacts/20261012T134149Z-R05/T_R05_sessions.csv",
+    "copy": "evidence/source/artifacts/20261012T134149Z-R05/T_R05_sessions.csv",
+    "sha256": "79c08a9fae67cec31a49c592d614b10779f0c0c7eeaadde79179972e63a1f7b2",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "artifacts/20261012T134149Z-R05/test_final.log",
+    "copy": "evidence/source/artifacts/20261012T134149Z-R05/test_final.log",
+    "sha256": "849910ec0587637943d8e17ba18a760ef9098cb04300e428af714c59eb995648",
+    "verification": "fresh SHA-256; contents read"
+  },
+  {
+    "original_path": "artifacts/20261017T190338Z-R05-review/README.md",
+    "copy": "evidence/source/artifacts/20261017T190338Z-R05-review/README.md",
+    "sha256": "4d12a0ce452ecb454ff9ce8d9f2d886c4dbf5710bc772a16b2a1113825621bc7",
+    "verification": "fresh SHA-256; contents read"
+  }
+]

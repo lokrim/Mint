@@ -1,0 +1,12 @@
+{
+  "affected_outputs": "None: only clean raw replays have run. Restart at checkpoint before first calibration/stress episode.",
+  "corrected_new_R05_code": "shift association source stamp only; keep original available_ns; production latest-past eligibility enforces both clocks",
+  "freeze_verification": "80694538e8549256934b3a314301cc8ca821efe0bf36ff4071eab9681f2c039c",
+  "frozen_source_config_changed": false,
+  "new_R05_source_sha256": "ab62c3738fddd285903a61580ac49bd24c3fe8a795c0332eee30194d1826fc91",
+  "old_new_R05_code": "shifted association stamp and availability together",
+  "reason": "Negative modeled clock skew must not advance actual pose availability and expose future input.",
+  "recorded_utc": "2026-10-12T14:06:25.528238+00:00",
+  "status": "PRE_OUTCOME_IMPLEMENTATION_REPAIR",
+  "supersedes": "protocol.json implementation_choices.clock_skew only; frozen configs and GR4 unchanged"
+}

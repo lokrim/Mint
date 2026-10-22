@@ -1,0 +1,43 @@
+# Portable handoff: retiring Valid Point
+
+This brief is self-contained. The accompanying folder is documentation/evidence, not a runnable replacement project. Audit date: **22 October 2026 (Asia/Kolkata)**. Original repository HEAD: `14371e6bee024544678481c0976641ba495dbda6`; the planning directory was untracked and preserved. Paths below are relative to the old repository or to this package, never dependent solely on a user-specific absolute path.
+
+## Objective for the next project
+
+Investigate dynamic reliability of individual received intermediate features, spatial feature regions or feature-supported object hypotheses in cooperative LiDAR perception. The output must refer to evidence at a defined time/spatial/task unit, not persistent sender reputation. Test whether manipulations reduce correctness/usefulness, how benign conditions confound that relationship, and whether reliability improves perception against GT while retaining honest unique viewpoints. Negative results are allowed. Deterministic, statistical, lightweight learned or hybrid approaches remain open. Low compute/memory matters; hardware is undecided.
+
+## What the old study actually did
+
+Early S stages used toy geometry and algebraically generated observations for sender/frame conformity. S03’s clean calibration was not measured from sensors; S04’s proposal/association states were annotations and its old isolation test changed unused variables. Later R stages implemented real ASCII PCD/odometry replay with causal input checks, deterministic XYZ manipulations, count surplus D, directed temporal novelty G, separate instantaneous/EWMA states, clean reference fitting and calibration. Later access/prefix/leakage-positive tests materially improved engineering isolation. There is **no learned intermediate-feature extractor, operational perception fusion/backbone or GT object-detection evaluation** in the audited implementation. [F004–F018,F037,F043]
+
+D takes the maximum clipped positive excess over 32 sensor-relative count references. Pure removal cannot increase it; per-cell-preserving rearrangement cannot change it. G is the 90th percentile of current-to-previous motion-compensated voxel-centroid distances: it is novelty, not independent occupied/free-space truth. Moving objects, disocclusion and alignment error confound it; missing history/search bounds can make it unavailable. Current attacked clouds become later history. Calling these quantities “reliability” would not fix their objective mismatch. [F011–F018]
+
+## Verified terminal state and most useful results
+
+R05 is technically finalized, with a final seal on **18 October 2026 01:00:20 IST**, complete tables, five executed notebooks and a stored 134-test passing suite. Old progress/checklist/history/review documents still incorrectly say reporting and GR5 are pending. Do not run their obsolete continuation commands. No R06/R07 run was found; H/mini_14 is recorded unopened and was not inspected here. [F002–F003,F042]
+
+The saved R05 study reuses four comparison segments in 248 episodes (each segment: 30 attacks, five identity, one clean, 26 benign stresses). There are 240 calibration cells: 156 insufficient known scores, 31 tagged no-power and 53 available. Of the no-power cells, 21 thresholds equal one and cannot be exceeded by the bounded score; ten constant-zero calibrations can still alarm on later positive scores. For sender 003, positive all-attempt recall occurs only in certain addition cases; G-only and max arms cannot produce calibrated alarms. D memoryless clean alarms are 29/999 eligible events; sustained 20% addition gives 199/399 scheduled events, with segment counts 0/99,99/99,100/100,0/101. These are dependent event counts, not universal rates. [F019–F029]
+
+All 12,240 grouped rows were reconciled with 48,960 segment metric rows. Eight important saved score streams were traced against compact attempt records. Selected 65 hash comparisons match their recorded manifest/seal. Large cloud bodies/archives and the full 748-prediction seal were **not** freshly audited. Historic assertions are identified separately. Byte integrity and passing tests do not establish scientific validity. [F046–F049]
+
+## Data and engineering that can be reused carefully
+
+Local data revision is recorded as `1a61aea747aa6bc45da2c2f085a1f1d3abc41f91` of `sberrio/Mixed-Signals-V2X`. Old repository `data/mixed_signals/<revision>/archives/train/` retains mini_7 and mini_10–13 TARs; selected extracts are under `raw/PointClouds/` and `raw/Odometry/`. Five streams represent four principals: vehicles 003/004/laser and an RSU with top+dome sensors. Retained data is exposed development/comparison data; renaming cannot restore untouched test status. Session independence is unverified. [F033–F039]
+
+Variable twist columns exist in all fifteen inspected local odometry CSVs. Their frame/provenance/independence remains unresolved. Label TXT filenames exist in historical archive inventories; expected extracted labels are absent. Do not infer no GT, silently substitute older JSON/PKL labels, or treat label-derived visibility as runtime evidence. Known coordinate conventions include wxyz quaternions, raw RSU map coordinates, paired vehicle −3.25/+3.25 m adjustments and legacy short-subsecond **left-padding**. These are adapter conventions, not independently verified physical laser origins or deskew. Arrival=source and pose availability=stamp are replay assumptions. [F010,F034–F038]
+
+Reuse candidates: strict reader rejection/empty-versus-absent semantics; explicit frames/clocks; causal read allowlists; deterministic seed/overlay generation; actual production reload; intended/injected/realized ledgers; paired comparisons; unknown/censoring semantics; state/prefix tests and compact provenance. Revalidate each in the new environment. Do not inherit old score equations/constants, clean-only training restrictions, scene independence claims or environment locks. D/G tables are neither latent tensors nor reliability supervision. [05](05_reusable_assets_and_migration_spec.md) supplies contracts and acceptance checks.
+
+## Candidate idea and unresolved prerequisites
+
+The user’s colleague informally suggested supporting returns versus traversing rays. It is not SVM and is not selected or claimed novel. A verified ray ending behind an allegedly occupied region may contradict it under justified origin/time/visibility assumptions; a bounding box is not solid and a missing return is not proof of free space. Features alone do not expose emitted rays. Establish whether receiver raw scans or trusted occupancy metadata provide independent coverage; sender-supplied evidence can be jointly corrupted. [F038,F044]
+
+Resolve: reliability unit/target; actual deployable inputs and adversarial control; compatible perception model/checkpoint and encoder layer; preprocessing and feature alignment; compatible label/class/frame conventions; new exposure-aware split; independent evidence availability; benign/attack matrix; uncertainty/abstention costs; resource budget and hardware. Supervised GT training is allowed with proper splits, while deployment inference must not read hidden GT, schedules or clean counterparts. No new methodology is validated by this package. [F045]
+
+## Included evidence and what stays behind
+
+Included locally: ten narrative documents; stable finding ledger; migration inventory; bounded complete-grid summaries with denominators; parsed notebook/code/planning indexes; selected source excerpts/configurations; local metadata and small-file checks; compact-record examples; audit/reconciliation scripts; SHA-256 manifest. Start with [README](README.md), [evidence guide](evidence/README.md), [results](04_experiments_and_verified_results.md) and [requirements](06_requirements_for_the_new_study.md).
+
+Still in the old repository: bulk TARs/PCDs, complete prediction/raw histories, derived geometry arrays, all original figures/notebooks, source trees, historical manifests and logs. Source paths in the ledger identify them; they may be unavailable in a new environment. No bulk data, full old source tree or third-party paper was copied. The included excerpts are evidence, not a complete executable migration.
+
+Next planning actions: read primary literature and compare exact assumptions; verify chosen dataset/model/labels and observable evidence on a bounded exposed example; define estimand/inference/threat/split contracts; choose a minimal set of falsifiable baselines with GT task evaluation and honest-view safeguards; specify resource measurement and substantive notebook outputs. Do not restart Valid Point or open the old holdout as part of this handoff.

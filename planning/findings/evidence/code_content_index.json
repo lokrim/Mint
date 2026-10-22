@@ -1,0 +1,3642 @@
+[
+  {
+    "path": "src/valid_point/__init__.py",
+    "sha256": "7605e556e3531d6e2ca2f70e09b750695e8bd804868c8b65363cc9981557146f",
+    "lines": 1,
+    "docstring": "Valid Point. Importing the package performs no research or I/O.",
+    "definitions": [],
+    "imports": []
+  },
+  {
+    "path": "src/valid_point/ablations.py",
+    "sha256": "fe2d4876b0ab7e11aa8a8be0e7292122b0e7591afd8e8c1d265c89297b455ea6",
+    "lines": 289,
+    "docstring": "S03 diagnostic ablations and deterministic illustrative observations.",
+    "definitions": [
+      {
+        "name": "clean_fixture_rows",
+        "line": 6,
+        "end_line": 23
+      },
+      {
+        "name": "ablation_row",
+        "line": 26,
+        "end_line": 34
+      },
+      {
+        "name": "point_count_sweep",
+        "line": 37,
+        "end_line": 49
+      },
+      {
+        "name": "score_clean_rows",
+        "line": 52,
+        "end_line": 89
+      },
+      {
+        "name": "hand_cases",
+        "line": 92,
+        "end_line": 115
+      },
+      {
+        "name": "_save_figure",
+        "line": 118,
+        "end_line": 128
+      },
+      {
+        "name": "reference_notebook_outputs",
+        "line": 131,
+        "end_line": 169
+      },
+      {
+        "name": "score_notebook_outputs",
+        "line": 172,
+        "end_line": 289
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from .scoring import score",
+      "from .references import Reference, normalize",
+      "from collections import defaultdict",
+      "from .references import select_reference, normalize",
+      "from .scoring import spatial_penalty",
+      "from pathlib import Path",
+      "from .provenance import output_stem, write_json_new, sha256_file",
+      "from pathlib import Path",
+      "import json",
+      "from matplotlib.figure import Figure",
+      "from .references import fit_references, reference_rows, select_reference",
+      "from .provenance import export_table, write_json_new",
+      "import json",
+      "from matplotlib.figure import Figure",
+      "from .references import Reference",
+      "from .calibration import calibrate, alarm",
+      "from .provenance import export_table, write_json_new"
+    ]
+  },
+  {
+    "path": "src/valid_point/attacks/__init__.py",
+    "sha256": "d0a9534013a2f529d4b8331e4973f3962cb473767818d7c3303d29e5fa43afbe",
+    "lines": 1,
+    "docstring": "Deterministic development point-cloud interventions.",
+    "definitions": [],
+    "imports": []
+  },
+  {
+    "path": "src/valid_point/attacks/manifests.py",
+    "sha256": "a53f48133fb7c2d0f0c6a56fdfa7c8898d56ed54373d2e32ad0e8b9c0c61943b",
+    "lines": 45,
+    "docstring": "Evaluator-only attempt ledgers, separate from operational event inputs.",
+    "definitions": [
+      {
+        "name": "file_sha256",
+        "line": 8,
+        "end_line": 13
+      },
+      {
+        "name": "Attempt",
+        "line": 17,
+        "end_line": 45
+      },
+      {
+        "name": "as_dict",
+        "line": 44,
+        "end_line": 45
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import asdict, dataclass",
+      "from hashlib import sha256",
+      "from pathlib import Path"
+    ]
+  },
+  {
+    "path": "src/valid_point/attacks/overlays.py",
+    "sha256": "af394d198558160665b8c25a81230d9c872d89e3a3feb0ca8e61f9561afd3b28",
+    "lines": 129,
+    "docstring": "Point-only overlays. Selection uses immutable row IDs and a frame key.",
+    "definitions": [
+      {
+        "name": "seed_key",
+        "line": 16,
+        "end_line": 21
+      },
+      {
+        "name": "selected_ids",
+        "line": 24,
+        "end_line": 29
+      },
+      {
+        "name": "cell_index",
+        "line": 32,
+        "end_line": 37
+      },
+      {
+        "name": "Target",
+        "line": 41,
+        "end_line": 45
+      },
+      {
+        "name": "freeze_target",
+        "line": 48,
+        "end_line": 62
+      },
+      {
+        "name": "OverlayResult",
+        "line": 66,
+        "end_line": 73
+      },
+      {
+        "name": "apply_overlay",
+        "line": 76,
+        "end_line": 129
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from hashlib import sha256",
+      "import numpy as np",
+      "from valid_point.evidence.density import CELL_IDS, RANGES_M"
+    ]
+  },
+  {
+    "path": "src/valid_point/calibration.py",
+    "sha256": "c534f07eb250e18f9b265b0057f6b091836ed2d758615a63aaa551cc811e87d4",
+    "lines": 67,
+    "docstring": "Separate clean operating calibration; alarm only for known A > c.",
+    "definitions": [
+      {
+        "name": "Calibration",
+        "line": 8,
+        "end_line": 20
+      },
+      {
+        "name": "_wilson",
+        "line": 23,
+        "end_line": 27
+      },
+      {
+        "name": "calibrate",
+        "line": 30,
+        "end_line": 59
+      },
+      {
+        "name": "alarm",
+        "line": 62,
+        "end_line": 67
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from math import ceil, sqrt"
+    ]
+  },
+  {
+    "path": "src/valid_point/contracts.py",
+    "sha256": "7fa31805b2215bd2247a36b23eb1ae7e479d0d7678167cf0fa48b60dca5e1438",
+    "lines": 213,
+    "docstring": "S01 causal records. No scoring or evaluator labels live in these records.",
+    "definitions": [
+      {
+        "name": "MessageState",
+        "line": 12,
+        "end_line": 17
+      },
+      {
+        "name": "EvidenceStatus",
+        "line": 20,
+        "end_line": 24
+      },
+      {
+        "name": "DecisionKey",
+        "line": 28,
+        "end_line": 36
+      },
+      {
+        "name": "RigidTransform",
+        "line": 40,
+        "end_line": 69
+      },
+      {
+        "name": "CausalSample",
+        "line": 73,
+        "end_line": 85
+      },
+      {
+        "name": "DecisionInput",
+        "line": 89,
+        "end_line": 134
+      },
+      {
+        "name": "assert_unique_keys",
+        "line": 137,
+        "end_line": 140
+      },
+      {
+        "name": "RawMeasurement",
+        "line": 144,
+        "end_line": 160
+      },
+      {
+        "name": "NormalizedEvidence",
+        "line": 164,
+        "end_line": 177
+      },
+      {
+        "name": "ScoreRecord",
+        "line": 181,
+        "end_line": 193
+      },
+      {
+        "name": "AlarmRecord",
+        "line": 197,
+        "end_line": 201
+      },
+      {
+        "name": "AllocationRecord",
+        "line": 205,
+        "end_line": 213
+      },
+      {
+        "name": "__post_init__",
+        "line": 34,
+        "end_line": 36
+      },
+      {
+        "name": "__post_init__",
+        "line": 52,
+        "end_line": 60
+      },
+      {
+        "name": "apply",
+        "line": 62,
+        "end_line": 69
+      },
+      {
+        "name": "__post_init__",
+        "line": 80,
+        "end_line": 85
+      },
+      {
+        "name": "__post_init__",
+        "line": 104,
+        "end_line": 134
+      },
+      {
+        "name": "__post_init__",
+        "line": 154,
+        "end_line": 160
+      },
+      {
+        "name": "__post_init__",
+        "line": 172,
+        "end_line": 177
+      },
+      {
+        "name": "__post_init__",
+        "line": 188,
+        "end_line": 193
+      },
+      {
+        "name": "__post_init__",
+        "line": 211,
+        "end_line": 213
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from enum import Enum",
+      "from typing import Literal",
+      "import numpy as np"
+    ]
+  },
+  {
+    "path": "src/valid_point/development_scores.py",
+    "sha256": "d74b5419f7e6486f05df45dce928e400c77994da0d110ba7ec49ca893ed85256",
+    "lines": 136,
+    "docstring": "Exploratory one-segment reference and distinct R03 decision records.",
+    "definitions": [
+      {
+        "name": "ExploratoryReference",
+        "line": 11,
+        "end_line": 22
+      },
+      {
+        "name": "NormalizedFactors",
+        "line": 26,
+        "end_line": 38
+      },
+      {
+        "name": "InstantaneousDecision",
+        "line": 42,
+        "end_line": 54
+      },
+      {
+        "name": "AlarmDecision",
+        "line": 58,
+        "end_line": 71
+      },
+      {
+        "name": "_gap_context",
+        "line": 74,
+        "end_line": 76
+      },
+      {
+        "name": "fit_exploratory",
+        "line": 79,
+        "end_line": 103
+      },
+      {
+        "name": "normalize_raw",
+        "line": 106,
+        "end_line": 126
+      },
+      {
+        "name": "decide",
+        "line": 129,
+        "end_line": 136
+      },
+      {
+        "name": "as_dict",
+        "line": 38,
+        "end_line": 38
+      },
+      {
+        "name": "as_dict",
+        "line": 54,
+        "end_line": 54
+      },
+      {
+        "name": "as_dict",
+        "line": 71,
+        "end_line": 71
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import asdict, dataclass",
+      "import numpy as np",
+      "from valid_point.evidence.density import CELL_IDS",
+      "from valid_point.replay import RawFactorRecord"
+    ]
+  },
+  {
+    "path": "src/valid_point/evaluation/__init__.py",
+    "sha256": "a9012902b927e028fd7b0094b73958591bdf0c6f13b19439b9c3ba826ecba4b0",
+    "lines": 5,
+    "docstring": "Evaluator-only comparisons. Nothing here is an operational policy input.",
+    "definitions": [],
+    "imports": [
+      "from .gap import compare_tracks, run_spatial_experiment"
+    ]
+  },
+  {
+    "path": "src/valid_point/evaluation/gap.py",
+    "sha256": "def62317ceccf326510861a363e71dbddbc7ade16766d5e80f3c5f491dad0b64",
+    "lines": 315,
+    "docstring": "Paired, evaluator-only oracle-minus-GT-free gap analysis for S04.",
+    "definitions": [
+      {
+        "name": "EvaluatorOutcome",
+        "line": 18,
+        "end_line": 28
+      },
+      {
+        "name": "_reference_rows",
+        "line": 31,
+        "end_line": 47
+      },
+      {
+        "name": "fit_track_reference",
+        "line": 50,
+        "end_line": 68
+      },
+      {
+        "name": "fit_track_calibration",
+        "line": 71,
+        "end_line": 95
+      },
+      {
+        "name": "_points_in_box",
+        "line": 98,
+        "end_line": 104
+      },
+      {
+        "name": "_cloud",
+        "line": 107,
+        "end_line": 109
+      },
+      {
+        "name": "spatial_case_fixtures",
+        "line": 112,
+        "end_line": 166
+      },
+      {
+        "name": "compare_tracks",
+        "line": 169,
+        "end_line": 240
+      },
+      {
+        "name": "_outcome",
+        "line": 243,
+        "end_line": 248
+      },
+      {
+        "name": "_object_strata",
+        "line": 251,
+        "end_line": 259
+      },
+      {
+        "name": "run_spatial_experiment",
+        "line": 262,
+        "end_line": 315
+      },
+      {
+        "name": "metrics",
+        "line": 203,
+        "end_line": 215
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import asdict, dataclass",
+      "from typing import Iterable, Mapping",
+      "import numpy as np",
+      "from valid_point.calibration import Calibration, calibrate",
+      "from valid_point.gt_free import GTFreeDecision, score_clouds",
+      "from valid_point.oracle import OracleBox, OracleDecision, decide_oracle",
+      "from valid_point.references import Reference, fit_references, select_reference",
+      "from valid_point.regions import FrozenTileGrid, make_fixed_grid"
+    ]
+  },
+  {
+    "path": "src/valid_point/evaluation/metrics.py",
+    "sha256": "b922a5251bf809e0bd894005b4ec79399e22f9f19fff2ff9de0272c151b524b7",
+    "lines": 183,
+    "docstring": "Offline attempted-event metrics. Inputs here are sealed evaluator joins, never scorer inputs.",
+    "definitions": [
+      {
+        "name": "ratio",
+        "line": 9,
+        "end_line": 14
+      },
+      {
+        "name": "threshold_power",
+        "line": 17,
+        "end_line": 23
+      },
+      {
+        "name": "event_metrics",
+        "line": 26,
+        "end_line": 49
+      },
+      {
+        "name": "false_alarm_metrics",
+        "line": 52,
+        "end_line": 57
+      },
+      {
+        "name": "episode_metrics",
+        "line": 60,
+        "end_line": 108
+      },
+      {
+        "name": "episode_recall",
+        "line": 111,
+        "end_line": 117
+      },
+      {
+        "name": "clean_alarm_runs",
+        "line": 120,
+        "end_line": 141
+      },
+      {
+        "name": "grouped_summary",
+        "line": 144,
+        "end_line": 168
+      },
+      {
+        "name": "paired_group_resample",
+        "line": 171,
+        "end_line": 183
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from collections import defaultdict",
+      "from math import isfinite",
+      "import random"
+    ]
+  },
+  {
+    "path": "src/valid_point/evaluation/real.py",
+    "sha256": "8c162114ec136d9e95e1d7bf1c9bd135377614a2ab884f2927feaec7fe7c0a6e",
+    "lines": 685,
+    "docstring": "R05 local-only orchestration primitives and fold-specific operational scoring.\n\nNo acquisition or extraction is implemented. Evaluator metadata is never an\nargument to normalize/score; the caller owns clean split selection and joins.",
+    "definitions": [
+      {
+        "name": "digest",
+        "line": 28,
+        "end_line": 33
+      },
+      {
+        "name": "write_json",
+        "line": 36,
+        "end_line": 40
+      },
+      {
+        "name": "write_records",
+        "line": 43,
+        "end_line": 47
+      },
+      {
+        "name": "read_records",
+        "line": 50,
+        "end_line": 52
+      },
+      {
+        "name": "raw_from_dict",
+        "line": 55,
+        "end_line": 59
+      },
+      {
+        "name": "verify_freeze",
+        "line": 62,
+        "end_line": 74
+      },
+      {
+        "name": "local_inventory",
+        "line": 77,
+        "end_line": 95
+      },
+      {
+        "name": "require_prediction_seal",
+        "line": 98,
+        "end_line": 107
+      },
+      {
+        "name": "Reference",
+        "line": 111,
+        "end_line": 124
+      },
+      {
+        "name": "fit_references",
+        "line": 127,
+        "end_line": 162
+      },
+      {
+        "name": "normalize",
+        "line": 165,
+        "end_line": 186
+      },
+      {
+        "name": "score_records",
+        "line": 189,
+        "end_line": 214
+      },
+      {
+        "name": "calibrate",
+        "line": 217,
+        "end_line": 234
+      },
+      {
+        "name": "episode_grid",
+        "line": 237,
+        "end_line": 252
+      },
+      {
+        "name": "intake_segment",
+        "line": 255,
+        "end_line": 301
+      },
+      {
+        "name": "source_for",
+        "line": 304,
+        "end_line": 308
+      },
+      {
+        "name": "read_values",
+        "line": 311,
+        "end_line": 314
+      },
+      {
+        "name": "replay_episode",
+        "line": 317,
+        "end_line": 455
+      },
+      {
+        "name": "alignment_poses",
+        "line": 458,
+        "end_line": 476
+      },
+      {
+        "name": "run_stage",
+        "line": 479,
+        "end_line": 621
+      },
+      {
+        "name": "CausalRawMemo",
+        "line": 624,
+        "end_line": 685
+      },
+      {
+        "name": "note",
+        "line": 491,
+        "end_line": 494
+      },
+      {
+        "name": "__init__",
+        "line": 632,
+        "end_line": 635
+      },
+      {
+        "name": "pose_key",
+        "line": 638,
+        "end_line": 642
+      },
+      {
+        "name": "event_key",
+        "line": 645,
+        "end_line": 646
+      },
+      {
+        "name": "admitted",
+        "line": 649,
+        "end_line": 650
+      },
+      {
+        "name": "seed",
+        "line": 652,
+        "end_line": 661
+      },
+      {
+        "name": "replay",
+        "line": 663,
+        "end_line": 685
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from collections import Counter, defaultdict",
+      "from dataclasses import asdict, dataclass",
+      "from hashlib import sha256",
+      "import gzip",
+      "import json",
+      "from math import ceil",
+      "from pathlib import Path",
+      "import numpy as np",
+      "from valid_point.development_scores import NormalizedFactors, decide, _gap_context",
+      "from valid_point.evaluation.splits import canonical_hash, validate_roles",
+      "from valid_point.evidence.density import CELL_IDS, DensityRaw",
+      "from valid_point.evidence.temporal_geometry import GeometryRaw",
+      "from valid_point.replay import RawFactorRecord",
+      "from valid_point.temporal import TemporalEWMA",
+      "from valid_point.io.mixed_signals import safe_members, read_pcd_header, raw_to_top",
+      "from valid_point.replay import AllowedSource",
+      "from valid_point.replay import AllowedSource",
+      "from valid_point.io.mixed_signals import read_pcd",
+      "from dataclasses import replace",
+      "import shutil",
+      "from valid_point.attacks.overlays import apply_overlay, seed_key, freeze_target, cell_index",
+      "from valid_point.io.mixed_signals import write_pcd",
+      "from valid_point.replay import replay, PoseEvent",
+      "from dataclasses import replace",
+      "from datetime import datetime, timezone",
+      "import os, platform, resource, shutil, subprocess, sys, time",
+      "from valid_point.replay import replay",
+      "from valid_point.attacks.overlays import Target",
+      "from valid_point.replay import _select_pose",
+      "from valid_point.replay import replay",
+      "from valid_point.evaluation.statistics import report_run",
+      "from valid_point.evaluation.statistics import finalize_run"
+    ]
+  },
+  {
+    "path": "src/valid_point/evaluation/splits.py",
+    "sha256": "c75d5126f161b96938695907ce0de7dd0477a2c5905095ecac2f8d3448cdae6c",
+    "lines": 105,
+    "docstring": "R04 segment-level split and lineage guards; no cloud or label access.",
+    "definitions": [
+      {
+        "name": "canonical_hash",
+        "line": 9,
+        "end_line": 10
+      },
+      {
+        "name": "Fold",
+        "line": 14,
+        "end_line": 18
+      },
+      {
+        "name": "validate_roles",
+        "line": 21,
+        "end_line": 47
+      },
+      {
+        "name": "validate_membership",
+        "line": 50,
+        "end_line": 65
+      },
+      {
+        "name": "validate_lineage",
+        "line": 69,
+        "end_line": 96
+      },
+      {
+        "name": "validate_threshold_use",
+        "line": 99,
+        "end_line": 105
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from hashlib import sha256",
+      "import json"
+    ]
+  },
+  {
+    "path": "src/valid_point/evaluation/statistics.py",
+    "sha256": "a1c20bc4481a9e188b11473810fa5ced1ba79444bcd660f39e551d10938e8eeb",
+    "lines": 454,
+    "docstring": "Offline R05 summaries. Entry point refuses unsealed predictions.",
+    "definitions": [
+      {
+        "name": "table",
+        "line": 14,
+        "end_line": 25
+      },
+      {
+        "name": "recorded_episode_grid",
+        "line": 28,
+        "end_line": 39
+      },
+      {
+        "name": "grouped_rates",
+        "line": 42,
+        "end_line": 61
+      },
+      {
+        "name": "join_episode",
+        "line": 64,
+        "end_line": 75
+      },
+      {
+        "name": "summarize_episode",
+        "line": 78,
+        "end_line": 105
+      },
+      {
+        "name": "figure_export",
+        "line": 108,
+        "end_line": 112
+      },
+      {
+        "name": "make_figures",
+        "line": 115,
+        "end_line": 183
+      },
+      {
+        "name": "report_run",
+        "line": 186,
+        "end_line": 249
+      },
+      {
+        "name": "exposure_and_common_support",
+        "line": 252,
+        "end_line": 290
+      },
+      {
+        "name": "failure_gallery",
+        "line": 293,
+        "end_line": 304
+      },
+      {
+        "name": "finalize_run",
+        "line": 307,
+        "end_line": 385
+      },
+      {
+        "name": "final_recovery",
+        "line": 388,
+        "end_line": 404
+      },
+      {
+        "name": "severity_figures",
+        "line": 407,
+        "end_line": 446
+      },
+      {
+        "name": "operational_identity",
+        "line": 449,
+        "end_line": 454
+      },
+      {
+        "name": "numeric",
+        "line": 134,
+        "end_line": 134
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from collections import Counter, defaultdict",
+      "from datetime import datetime, timezone",
+      "import csv",
+      "import json",
+      "from pathlib import Path",
+      "import numpy as np",
+      "from valid_point.evaluation.real import read_records, write_json, digest, episode_grid, require_prediction_seal, ARMS, VERSIONS",
+      "from valid_point.evaluation.metrics import event_metrics, false_alarm_metrics, episode_metrics",
+      "from valid_point.evaluation.splits import canonical_hash",
+      "import matplotlib",
+      "import matplotlib.pyplot as plt",
+      "import matplotlib.pyplot as plt",
+      "import os, sys, subprocess, resource, shutil",
+      "import nbformat",
+      "from nbclient import NotebookClient",
+      "from valid_point.evaluation.real import verify_freeze",
+      "import matplotlib.pyplot as plt",
+      "from valid_point.io.mixed_signals import TOP_FROM_MAP"
+    ]
+  },
+  {
+    "path": "src/valid_point/evidence/__init__.py",
+    "sha256": "31d8939b434753bd819ce39fa078a9068af0e3b4c2f14b0e153c2c101d156cf1",
+    "lines": 237,
+    "docstring": "S02 raw measurements and literal demonstration fixtures. No fitting or scoring.\n\nThe notebook adapters below only construct frozen inputs, call measurement\nfunctions, check hand expectations, and export/display complete small results.",
+    "definitions": [
+      {
+        "name": "load_raw_config",
+        "line": 31,
+        "end_line": 37
+      },
+      {
+        "name": "fixture_key",
+        "line": 40,
+        "end_line": 41
+      },
+      {
+        "name": "fixed_regions",
+        "line": 44,
+        "end_line": 47
+      },
+      {
+        "name": "cloud_fixture",
+        "line": 50,
+        "end_line": 74
+      },
+      {
+        "name": "motion_demo",
+        "line": 77,
+        "end_line": 104
+      },
+      {
+        "name": "spatial_demo",
+        "line": 107,
+        "end_line": 130
+      },
+      {
+        "name": "availability_demo",
+        "line": 133,
+        "end_line": 153
+      },
+      {
+        "name": "evidence_figure",
+        "line": 156,
+        "end_line": 217
+      },
+      {
+        "name": "export_demo",
+        "line": 220,
+        "end_line": 237
+      }
+    ],
+    "imports": [
+      "from dataclasses import asdict",
+      "import json",
+      "from pathlib import Path",
+      "import numpy as np",
+      "from valid_point.contracts import DecisionInput, DecisionKey, MessageState, RigidTransform",
+      "from valid_point.io.pointcloud import PointCloud",
+      "from valid_point.provenance import export_table, json_bytes, output_stem, sha256_bytes, sha256_file, write_json_new",
+      "from .availability import ReceiverContext, measure_availability",
+      "from .kinematics import MotionSample, measure_motion",
+      "from .spatial import FixedRegion, RegionSet, count_regions",
+      "import matplotlib",
+      "from matplotlib.figure import Figure",
+      "from matplotlib.patches import Rectangle"
+    ]
+  },
+  {
+    "path": "src/valid_point/evidence/availability.py",
+    "sha256": "01e0e1d29d034d2f5033ffba9995ae08241ab5e12f3cf0ab80ca5a8d0bbc9a3f",
+    "lines": 117,
+    "docstring": "Receiver-observed availability and explicit independent eligibility states.",
+    "definitions": [
+      {
+        "name": "ReceiverContext",
+        "line": 10,
+        "end_line": 26
+      },
+      {
+        "name": "Eligibility",
+        "line": 30,
+        "end_line": 32
+      },
+      {
+        "name": "Availability",
+        "line": 36,
+        "end_line": 45
+      },
+      {
+        "name": "measure_availability",
+        "line": 48,
+        "end_line": 117
+      },
+      {
+        "name": "__post_init__",
+        "line": 20,
+        "end_line": 26
+      }
+    ],
+    "imports": [
+      "from dataclasses import dataclass",
+      "from valid_point.contracts import DecisionInput, EvidenceStatus as Status, MessageState, RawMeasurement, RigidTransform",
+      "from valid_point.io.pointcloud import PointCloud"
+    ]
+  },
+  {
+    "path": "src/valid_point/evidence/density.py",
+    "sha256": "fd86a452008aecb6ccc14d49d0456f0469eacd2a1099f49bbff2b04c55a776aa",
+    "lines": 44,
+    "docstring": "R02 sensor-relative horizontal count cells; raw evidence only.",
+    "definitions": [
+      {
+        "name": "DensityRaw",
+        "line": 11,
+        "end_line": 19
+      },
+      {
+        "name": "count_cells",
+        "line": 22,
+        "end_line": 38
+      },
+      {
+        "name": "occupancy_change",
+        "line": 41,
+        "end_line": 44
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "import numpy as np"
+    ]
+  },
+  {
+    "path": "src/valid_point/evidence/kinematics.py",
+    "sha256": "8030cddf92da8c47e7c1982c7d7fea8d8c3e4a0a824e1c946cfefebe84540e2c",
+    "lines": 115,
+    "docstring": "Causal zero-order motion self-consistency, in metres; no normalization.",
+    "definitions": [
+      {
+        "name": "MotionSample",
+        "line": 10,
+        "end_line": 22
+      },
+      {
+        "name": "MotionResult",
+        "line": 26,
+        "end_line": 33
+      },
+      {
+        "name": "measure_motion",
+        "line": 36,
+        "end_line": 115
+      },
+      {
+        "name": "result",
+        "line": 53,
+        "end_line": 58
+      }
+    ],
+    "imports": [
+      "from dataclasses import dataclass",
+      "import numpy as np",
+      "from valid_point.contracts import DecisionKey, EvidenceStatus as Status, RawMeasurement"
+    ]
+  },
+  {
+    "path": "src/valid_point/evidence/spatial.py",
+    "sha256": "0fe9851fe59ab61c35c4e1c6e3ffb2e1d7dc217ea94c42699d95378835c78ef0",
+    "lines": 90,
+    "docstring": "Counts in externally frozen half-open boxes, including empty boxes; no score.",
+    "definitions": [
+      {
+        "name": "FixedRegion",
+        "line": 12,
+        "end_line": 25
+      },
+      {
+        "name": "RegionSet",
+        "line": 29,
+        "end_line": 44
+      },
+      {
+        "name": "SpatialResult",
+        "line": 48,
+        "end_line": 56
+      },
+      {
+        "name": "count_regions",
+        "line": 59,
+        "end_line": 90
+      },
+      {
+        "name": "__post_init__",
+        "line": 17,
+        "end_line": 21
+      },
+      {
+        "name": "volume_m3",
+        "line": 24,
+        "end_line": 25
+      },
+      {
+        "name": "__post_init__",
+        "line": 37,
+        "end_line": 44
+      },
+      {
+        "name": "measurement",
+        "line": 75,
+        "end_line": 76
+      }
+    ],
+    "imports": [
+      "from dataclasses import dataclass",
+      "import numpy as np",
+      "from valid_point.contracts import DecisionInput, EvidenceStatus as Status, RawMeasurement",
+      "from valid_point.io.pointcloud import PointCloud",
+      "from .availability import ReceiverContext, measure_availability"
+    ]
+  },
+  {
+    "path": "src/valid_point/evidence/temporal_geometry.py",
+    "sha256": "7c9afb1a515d029be70eea43f2ee247e729ef3e8e1ee14d13b9e8e45f51f400e",
+    "lines": 125,
+    "docstring": "Causal directed geometric novelty with deterministic voxel support.",
+    "definitions": [
+      {
+        "name": "GeometryRaw",
+        "line": 7,
+        "end_line": 20
+      },
+      {
+        "name": "voxel_centroids",
+        "line": 23,
+        "end_line": 38
+      },
+      {
+        "name": "_directed_distances",
+        "line": 41,
+        "end_line": 96
+      },
+      {
+        "name": "directed_novelty",
+        "line": 99,
+        "end_line": 125
+      },
+      {
+        "name": "unknown",
+        "line": 105,
+        "end_line": 106
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "import numpy as np",
+      "from collections import defaultdict"
+    ]
+  },
+  {
+    "path": "src/valid_point/gt_free.py",
+    "sha256": "3a9c7e29a24466abb5c515645b6ed972a51630619770b21cd940c417c27a34a3",
+    "lines": 113,
+    "docstring": "Operational GT-free spatial measurement and scoring.\n\nThis module intentionally has no evaluator-label, GT-box, attack-mask, or\nclean-counterpart input.  It is safe to import without the oracle namespace.",
+    "definitions": [
+      {
+        "name": "GTFreeMeasurement",
+        "line": 21,
+        "end_line": 31
+      },
+      {
+        "name": "GTFreeDecision",
+        "line": 35,
+        "end_line": 48
+      },
+      {
+        "name": "measure",
+        "line": 51,
+        "end_line": 77
+      },
+      {
+        "name": "decide",
+        "line": 80,
+        "end_line": 92
+      },
+      {
+        "name": "score_clouds",
+        "line": 95,
+        "end_line": 113
+      },
+      {
+        "name": "as_dict",
+        "line": 43,
+        "end_line": 48
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import asdict, dataclass",
+      "from typing import Mapping",
+      "import numpy as np",
+      "from .calibration import Calibration, alarm",
+      "from .references import Reference, normalize",
+      "from .regions import FrozenTileGrid, count_fixed_tiles, receiver_context",
+      "from .scoring import Score, score"
+    ]
+  },
+  {
+    "path": "src/valid_point/io/__init__.py",
+    "sha256": "ebdc509da40fe27abbe301e19f9b17ec8591697e8688ddb6123ae3f73e226c71",
+    "lines": 5,
+    "docstring": "Canonical small synthetic cloud I/O; no external data formats here.",
+    "definitions": [],
+    "imports": [
+      "from .pointcloud import PointCloud, read_pointcloud, write_pointcloud"
+    ]
+  },
+  {
+    "path": "src/valid_point/io/mixed_signals.py",
+    "sha256": "4434fc33405026c6d04e701706cb61a8c2fdb0c0677e5d60b4289f01ee8cd6af",
+    "lines": 311,
+    "docstring": "Bounded, label independent Mixed Signals intake primitives.\n\nThe published reader's coordinate conventions are recorded in planning/sources.md.\nThis module deliberately keeps source stamps, synchronization IDs and raw fields.",
+    "definitions": [
+      {
+        "name": "CloudName",
+        "line": 31,
+        "end_line": 37
+      },
+      {
+        "name": "parse_stamp",
+        "line": 40,
+        "end_line": 44
+      },
+      {
+        "name": "parse_cloud_name",
+        "line": 47,
+        "end_line": 52
+      },
+      {
+        "name": "safe_members",
+        "line": 55,
+        "end_line": 86
+      },
+      {
+        "name": "select_window",
+        "line": 89,
+        "end_line": 102
+      },
+      {
+        "name": "id_coverage",
+        "line": 105,
+        "end_line": 111
+      },
+      {
+        "name": "extract_selected",
+        "line": 114,
+        "end_line": 136
+      },
+      {
+        "name": "PCDHeader",
+        "line": 140,
+        "end_line": 150
+      },
+      {
+        "name": "read_pcd_header",
+        "line": 153,
+        "end_line": 195
+      },
+      {
+        "name": "read_pcd",
+        "line": 198,
+        "end_line": 224
+      },
+      {
+        "name": "write_pcd",
+        "line": 227,
+        "end_line": 244
+      },
+      {
+        "name": "load_odometry",
+        "line": 247,
+        "end_line": 253
+      },
+      {
+        "name": "pose_matrix",
+        "line": 256,
+        "end_line": 271
+      },
+      {
+        "name": "latest_past",
+        "line": 274,
+        "end_line": 276
+      },
+      {
+        "name": "nearest_reference",
+        "line": 279,
+        "end_line": 282
+      },
+      {
+        "name": "optional_twist",
+        "line": 285,
+        "end_line": 294
+      },
+      {
+        "name": "transform_xyz",
+        "line": 297,
+        "end_line": 298
+      },
+      {
+        "name": "raw_to_top",
+        "line": 301,
+        "end_line": 311
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import bisect",
+      "from collections import Counter",
+      "import csv",
+      "import io",
+      "import os",
+      "from dataclasses import dataclass",
+      "from pathlib import Path, PurePosixPath",
+      "import re",
+      "import shutil",
+      "import tarfile",
+      "from typing import BinaryIO",
+      "import numpy as np"
+    ]
+  },
+  {
+    "path": "src/valid_point/io/pointcloud.py",
+    "sha256": "32c6545f3864442ddf613cd30c3faea971250af32199c8136fde847f17a704b2",
+    "lines": 59,
+    "docstring": "Strict JSON interchange for S01 synthetic clouds, using the later overlay reader.",
+    "definitions": [
+      {
+        "name": "PointCloud",
+        "line": 17,
+        "end_line": 38
+      },
+      {
+        "name": "write_pointcloud",
+        "line": 41,
+        "end_line": 47
+      },
+      {
+        "name": "read_pointcloud",
+        "line": 50,
+        "end_line": 59
+      },
+      {
+        "name": "__post_init__",
+        "line": 22,
+        "end_line": 31
+      },
+      {
+        "name": "count",
+        "line": 34,
+        "end_line": 35
+      },
+      {
+        "name": "xyz",
+        "line": 37,
+        "end_line": 38
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "import json",
+      "from pathlib import Path",
+      "import numpy as np"
+    ]
+  },
+  {
+    "path": "src/valid_point/operational.py",
+    "sha256": "3c3160c088de14ff884a9b2b1e14127e5cf64830b6e2d49877ae85b25d607c48",
+    "lines": 57,
+    "docstring": "R02 operational wrapper superseding S04's illustrative gt_free.score_clouds.\n\nIt measures through the causal replay reader. Optional references are supplied\nexternally; mini_7 R02 does not fit or use a final reference.",
+    "definitions": [
+      {
+        "name": "DCellReference",
+        "line": 12,
+        "end_line": 18
+      },
+      {
+        "name": "OperationalRecord",
+        "line": 21,
+        "end_line": 30
+      },
+      {
+        "name": "_d_normalize",
+        "line": 33,
+        "end_line": 49
+      },
+      {
+        "name": "measure_operational",
+        "line": 52,
+        "end_line": 57
+      },
+      {
+        "name": "as_dict",
+        "line": 28,
+        "end_line": 30
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from typing import Iterable",
+      "from valid_point.replay import AllowedSource, CloudEvent, RawFactorRecord, ReplayConfig, replay",
+      "from valid_point.evidence.density import CELL_IDS",
+      "from dataclasses import asdict"
+    ]
+  },
+  {
+    "path": "src/valid_point/oracle.py",
+    "sha256": "5f12a55accb26357e58d3a0bc968f0b1717e2f6b5ead0b8c6990632b36ed1b14",
+    "lines": 72,
+    "docstring": "Evaluator-only oracle-box research track; never an operational scorer input.",
+    "definitions": [
+      {
+        "name": "OracleBox",
+        "line": 15,
+        "end_line": 26
+      },
+      {
+        "name": "OracleDecision",
+        "line": 30,
+        "end_line": 45
+      },
+      {
+        "name": "decide_oracle",
+        "line": 48,
+        "end_line": 72
+      },
+      {
+        "name": "__post_init__",
+        "line": 21,
+        "end_line": 26
+      },
+      {
+        "name": "as_dict",
+        "line": 40,
+        "end_line": 45
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import asdict, dataclass",
+      "import numpy as np",
+      "from .calibration import Calibration, alarm",
+      "from .references import Reference, normalize",
+      "from .scoring import Score, score"
+    ]
+  },
+  {
+    "path": "src/valid_point/provenance.py",
+    "sha256": "c8ac0fe3f353cb20642a25818dca5a8e57c02706b39b68781ecc0d9504b121bb",
+    "lines": 421,
+    "docstring": "S00 provenance, structural exports, and fresh notebook execution.\n\nNo research computation, data acquisition, or package installation occurs here.\nOptional notebook/plot packages are imported only by the functions that need them.",
+    "definitions": [
+      {
+        "name": "utc_now",
+        "line": 46,
+        "end_line": 47
+      },
+      {
+        "name": "sha256_bytes",
+        "line": 50,
+        "end_line": 51
+      },
+      {
+        "name": "sha256_file",
+        "line": 54,
+        "end_line": 55
+      },
+      {
+        "name": "json_bytes",
+        "line": 58,
+        "end_line": 59
+      },
+      {
+        "name": "write_json_new",
+        "line": 62,
+        "end_line": 65
+      },
+      {
+        "name": "load_config",
+        "line": 68,
+        "end_line": 89
+      },
+      {
+        "name": "source_inventory",
+        "line": 92,
+        "end_line": 103
+      },
+      {
+        "name": "format_source_tree",
+        "line": 106,
+        "end_line": 118
+      },
+      {
+        "name": "environment_inventory",
+        "line": 121,
+        "end_line": 139
+      },
+      {
+        "name": "validate_provenance",
+        "line": 142,
+        "end_line": 147
+      },
+      {
+        "name": "output_stem",
+        "line": 150,
+        "end_line": 155
+      },
+      {
+        "name": "export_table",
+        "line": 158,
+        "end_line": 178
+      },
+      {
+        "name": "structure_figure",
+        "line": 181,
+        "end_line": 210
+      },
+      {
+        "name": "export_roundtrip",
+        "line": 213,
+        "end_line": 232
+      },
+      {
+        "name": "validate_manifest",
+        "line": 235,
+        "end_line": 248
+      },
+      {
+        "name": "execute_notebook",
+        "line": 251,
+        "end_line": 274
+      },
+      {
+        "name": "notebook_context",
+        "line": 277,
+        "end_line": 291
+      },
+      {
+        "name": "bootstrap_tables",
+        "line": 294,
+        "end_line": 312
+      },
+      {
+        "name": "git_revision",
+        "line": 315,
+        "end_line": 325
+      },
+      {
+        "name": "bootstrap_run",
+        "line": 328,
+        "end_line": 421
+      },
+      {
+        "name": "git",
+        "line": 316,
+        "end_line": 318
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from datetime import datetime, timezone",
+      "import hashlib",
+      "import importlib.metadata",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import platform",
+      "import secrets",
+      "import subprocess",
+      "import sys",
+      "import tomllib",
+      "from typing import Any",
+      "import valid_point",
+      "import matplotlib",
+      "from matplotlib.figure import Figure",
+      "import nbformat",
+      "from nbclient import NotebookClient"
+    ]
+  },
+  {
+    "path": "src/valid_point/references.py",
+    "sha256": "03d6b5ddf1d5453f44ccd3cf6f11076537cee8b3597ec198a66bd25a9bc1c45a",
+    "lines": 92,
+    "docstring": "Clean-only contextual upper references for S03 illustrative raw observations.",
+    "definitions": [
+      {
+        "name": "Reference",
+        "line": 10,
+        "end_line": 20
+      },
+      {
+        "name": "context_chain",
+        "line": 23,
+        "end_line": 27
+      },
+      {
+        "name": "fit_references",
+        "line": 30,
+        "end_line": 70
+      },
+      {
+        "name": "select_reference",
+        "line": 73,
+        "end_line": 80
+      },
+      {
+        "name": "normalize",
+        "line": 83,
+        "end_line": 88
+      },
+      {
+        "name": "reference_rows",
+        "line": 91,
+        "end_line": 92
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from collections import defaultdict",
+      "from dataclasses import dataclass, asdict",
+      "from math import isfinite",
+      "import numpy as np"
+    ]
+  },
+  {
+    "path": "src/valid_point/regions.py",
+    "sha256": "1be4ce334288ca4e3937ae1a4e8b24ec372139851c3ba45ec8c564700dd45275",
+    "lines": 116,
+    "docstring": "Receiver-owned spatial regions for the operational GT-free track.",
+    "definitions": [
+      {
+        "name": "Tile",
+        "line": 14,
+        "end_line": 27
+      },
+      {
+        "name": "FrozenTileGrid",
+        "line": 31,
+        "end_line": 60
+      },
+      {
+        "name": "make_fixed_grid",
+        "line": 63,
+        "end_line": 87
+      },
+      {
+        "name": "count_fixed_tiles",
+        "line": 90,
+        "end_line": 101
+      },
+      {
+        "name": "receiver_context",
+        "line": 104,
+        "end_line": 116
+      },
+      {
+        "name": "__post_init__",
+        "line": 21,
+        "end_line": 27
+      },
+      {
+        "name": "__post_init__",
+        "line": 40,
+        "end_line": 46
+      },
+      {
+        "name": "digest",
+        "line": 49,
+        "end_line": 60
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "import hashlib",
+      "import json",
+      "from math import isfinite",
+      "import numpy as np"
+    ]
+  },
+  {
+    "path": "src/valid_point/replay.py",
+    "sha256": "7c6fa388713a5f8b64b44ce5292042938dc56596ae3e3b999885962fc075de4f",
+    "lines": 248,
+    "docstring": "R02 operational, label-independent event ingestion and causal raw factors.\n\nOnly allowlisted cloud and odometry paths are read. This module accepts neither\nlabels nor evaluator state. Arrival=source is a declared replay assumption.",
+    "definitions": [
+      {
+        "name": "ReplayConfig",
+        "line": 24,
+        "end_line": 31
+      },
+      {
+        "name": "CloudEvent",
+        "line": 34,
+        "end_line": 51
+      },
+      {
+        "name": "PoseEvent",
+        "line": 54,
+        "end_line": 60
+      },
+      {
+        "name": "RawFactorRecord",
+        "line": 63,
+        "end_line": 83
+      },
+      {
+        "name": "AllowedSource",
+        "line": 85,
+        "end_line": 152
+      },
+      {
+        "name": "_select_pose",
+        "line": 155,
+        "end_line": 165
+      },
+      {
+        "name": "_frame",
+        "line": 168,
+        "end_line": 180
+      },
+      {
+        "name": "replay",
+        "line": 183,
+        "end_line": 248
+      },
+      {
+        "name": "__post_init__",
+        "line": 45,
+        "end_line": 51
+      },
+      {
+        "name": "as_dict",
+        "line": 82,
+        "end_line": 83
+      },
+      {
+        "name": "__init__",
+        "line": 87,
+        "end_line": 91
+      },
+      {
+        "name": "_check",
+        "line": 93,
+        "end_line": 97
+      },
+      {
+        "name": "cloud_names",
+        "line": 99,
+        "end_line": 111
+      },
+      {
+        "name": "events",
+        "line": 113,
+        "end_line": 115
+      },
+      {
+        "name": "read_cloud",
+        "line": 117,
+        "end_line": 133
+      },
+      {
+        "name": "read_poses",
+        "line": 135,
+        "end_line": 152
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass, asdict",
+      "from pathlib import Path",
+      "from typing import Iterable",
+      "import csv",
+      "import hashlib",
+      "import time",
+      "import numpy as np",
+      "from valid_point.io.mixed_signals import CloudName, STREAM_PRINCIPAL, DOME_FROM_MAP, TOP_FROM_MAP, parse_cloud_name, pose_matrix, read_pcd",
+      "from valid_point.evidence.density import DensityRaw, count_cells, occupancy_change",
+      "from valid_point.evidence.temporal_geometry import GeometryRaw, directed_novelty",
+      "from io import BytesIO"
+    ]
+  },
+  {
+    "path": "src/valid_point/scoring.py",
+    "sha256": "ddf2eefc10699b4565bad81d2a1c91283121b9de16899b1a2df8f67c0dd1800c",
+    "lines": 79,
+    "docstring": "Weight-free sender/frame conformity with strict unknown coverage.",
+    "definitions": [
+      {
+        "name": "Score",
+        "line": 9,
+        "end_line": 18
+      },
+      {
+        "name": "spatial_penalty",
+        "line": 21,
+        "end_line": 40
+      },
+      {
+        "name": "spatial_diagnostic",
+        "line": 43,
+        "end_line": 56
+      },
+      {
+        "name": "score",
+        "line": 59,
+        "end_line": 79
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from math import isfinite",
+      "from .references import Reference, normalize"
+    ]
+  },
+  {
+    "path": "src/valid_point/synthetic.py",
+    "sha256": "b74f0d5291fc37ad8d3423449e97b2fb24e8359cab4d4fda212d3c1893392637",
+    "lines": 283,
+    "docstring": "Tiny deterministic S01 scenes. Evaluator truth is separate from causal inputs.",
+    "definitions": [
+      {
+        "name": "EvaluatorTruth",
+        "line": 17,
+        "end_line": 24
+      },
+      {
+        "name": "SyntheticScene",
+        "line": 28,
+        "end_line": 37
+      },
+      {
+        "name": "load_synthetic_config",
+        "line": 40,
+        "end_line": 59
+      },
+      {
+        "name": "seed_role",
+        "line": 62,
+        "end_line": 66
+      },
+      {
+        "name": "_transform",
+        "line": 69,
+        "end_line": 77
+      },
+      {
+        "name": "_wall_blocks",
+        "line": 80,
+        "end_line": 87
+      },
+      {
+        "name": "generate_scene",
+        "line": 90,
+        "end_line": 150
+      },
+      {
+        "name": "availability_measurement",
+        "line": 153,
+        "end_line": 163
+      },
+      {
+        "name": "kinematics_availability",
+        "line": 166,
+        "end_line": 171
+      },
+      {
+        "name": "scene_contract_rows",
+        "line": 174,
+        "end_line": 189
+      },
+      {
+        "name": "unknown_state_rows",
+        "line": 192,
+        "end_line": 202
+      },
+      {
+        "name": "point_rows",
+        "line": 205,
+        "end_line": 218
+      },
+      {
+        "name": "scene_figure",
+        "line": 221,
+        "end_line": 283
+      },
+      {
+        "name": "cloud",
+        "line": 36,
+        "end_line": 37
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "import json",
+      "from pathlib import Path",
+      "import numpy as np",
+      "from .contracts import DecisionInput, DecisionKey, EvidenceStatus, MessageState, RawMeasurement, RigidTransform, assert_unique_keys",
+      "from .io.pointcloud import PointCloud",
+      "from .provenance import output_stem, sha256_file, write_json_new",
+      "from matplotlib.figure import Figure",
+      "from matplotlib.patches import Rectangle"
+    ]
+  },
+  {
+    "path": "src/valid_point/temporal.py",
+    "sha256": "97bd54bfa4fdcfe4ba8463837676b6d9341a5fe77b019017db12026838ee5638",
+    "lines": 96,
+    "docstring": "Elapsed-time, per-stream EWMA with explicit unknown and warm-up states.",
+    "definitions": [
+      {
+        "name": "TemporalRecord",
+        "line": 9,
+        "end_line": 28
+      },
+      {
+        "name": "TemporalEWMA",
+        "line": 31,
+        "end_line": 96
+      },
+      {
+        "name": "as_dict",
+        "line": 27,
+        "end_line": 28
+      },
+      {
+        "name": "__init__",
+        "line": 32,
+        "end_line": 38
+      },
+      {
+        "name": "update",
+        "line": 40,
+        "end_line": 75
+      },
+      {
+        "name": "_record",
+        "line": 77,
+        "end_line": 84
+      },
+      {
+        "name": "checkpoint",
+        "line": 86,
+        "end_line": 89
+      },
+      {
+        "name": "resume",
+        "line": 92,
+        "end_line": 96
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import asdict, dataclass",
+      "from math import exp, isfinite"
+    ]
+  },
+  {
+    "path": "scripts/check_r03_boundary.py",
+    "sha256": "5d7eec4999d1c08487ed8c411b91e4dd38ba8d7f57c8320b4f2d171bf81f2184",
+    "lines": 80,
+    "docstring": "Exercise changed/withheld evaluator files against real mini_7 score/state.",
+    "definitions": [
+      {
+        "name": "evaluate",
+        "line": 16,
+        "end_line": 30
+      },
+      {
+        "name": "main",
+        "line": 33,
+        "end_line": 77
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from dataclasses import asdict",
+      "from hashlib import sha256",
+      "import json",
+      "from pathlib import Path",
+      "import sys",
+      "from valid_point.development_scores import ExploratoryReference, decide, normalize_raw",
+      "from valid_point.replay import AllowedSource, ReplayConfig, replay",
+      "from valid_point.temporal import TemporalEWMA"
+    ]
+  },
+  {
+    "path": "scripts/compare_spatial_tracks.py",
+    "sha256": "63b22f1384153bc8489e21fb115d79991623b6167a579ec648f83048f092f89b",
+    "lines": 204,
+    "docstring": "Execute S04 tests and NB04 in a fresh kernel; seal the negative G3 result.",
+    "definitions": [
+      {
+        "name": "main",
+        "line": 26,
+        "end_line": 200
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from datetime import datetime, timezone",
+      "import hashlib",
+      "import importlib.metadata",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import platform",
+      "import secrets",
+      "import subprocess",
+      "import sys",
+      "from valid_point.provenance import execute_notebook, git_revision, sha256_file, utc_now, write_json_new"
+    ]
+  },
+  {
+    "path": "scripts/evaluate_replay.py",
+    "sha256": "9169ee2d0d9baf9a156163b3ff3912771a2ef5b4492d25b1ec1480c84c0f3de2",
+    "lines": 14,
+    "docstring": "Run only R05 with existing local pinned data; never download/extract or open H.",
+    "definitions": [],
+    "imports": [
+      "from pathlib import Path",
+      "import argparse",
+      "import sys",
+      "from valid_point.evaluation.real import run_stage"
+    ]
+  },
+  {
+    "path": "scripts/execute_notebooks.py",
+    "sha256": "fe0e594e26fe67b21982cd7534a8cec72e22d8fb1674a991e33004d22302017c",
+    "lines": 18,
+    "docstring": "Run only the invoked S00 notebook and preserve its evidence bundle.",
+    "definitions": [],
+    "imports": [
+      "from pathlib import Path",
+      "import sys",
+      "from valid_point.provenance import bootstrap_run"
+    ]
+  },
+  {
+    "path": "scripts/export_r03_records.py",
+    "sha256": "ecf63933fcf0d7fa1f3c303462e2699cca203e1493a89511c56ccdb29db48095",
+    "lines": 61,
+    "docstring": "Export distinct R03 operational record views from sealed decision rows.",
+    "definitions": [
+      {
+        "name": "rows",
+        "line": 13,
+        "end_line": 14
+      },
+      {
+        "name": "main",
+        "line": 17,
+        "end_line": 58
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from pathlib import Path",
+      "import pickle",
+      "import sys",
+      "from replay_development import save_table"
+    ]
+  },
+  {
+    "path": "scripts/fit_and_score.py",
+    "sha256": "426cdcb0f147a389db00fac1f61dbf02ba586cdac8c6f1018ab3bc0fbcb00b9e",
+    "lines": 131,
+    "docstring": "Execute only S03 tests and two fresh notebooks; seal immutable evidence.",
+    "definitions": [
+      {
+        "name": "main",
+        "line": 20,
+        "end_line": 128
+      }
+    ],
+    "imports": [
+      "from datetime import datetime, timezone",
+      "import hashlib",
+      "import importlib.metadata",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import platform",
+      "import secrets",
+      "import subprocess",
+      "import sys",
+      "from valid_point.provenance import execute_notebook, git_revision, sha256_file, utc_now, write_json_new"
+    ]
+  },
+  {
+    "path": "scripts/freeze_protocol.py",
+    "sha256": "4b83f82e7d770de5addf66a2f3fcbbd26130030105ae043666e014909ae46146",
+    "lines": 173,
+    "docstring": "R04 metadata-only protocol freeze. Does not open C/H archives or labels.",
+    "definitions": [
+      {
+        "name": "digest",
+        "line": 23,
+        "end_line": 28
+      },
+      {
+        "name": "write_json",
+        "line": 31,
+        "end_line": 32
+      },
+      {
+        "name": "table",
+        "line": 35,
+        "end_line": 47
+      },
+      {
+        "name": "main",
+        "line": 50,
+        "end_line": 169
+      },
+      {
+        "name": "escape",
+        "line": 43,
+        "end_line": 44
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from datetime import datetime, timezone",
+      "from hashlib import sha256",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import platform",
+      "import resource",
+      "import shutil",
+      "import subprocess",
+      "import sys",
+      "import time",
+      "from valid_point.evaluation.splits import canonical_hash, validate_roles",
+      "import nbformat",
+      "from nbclient import NotebookClient"
+    ]
+  },
+  {
+    "path": "scripts/inspect_causal_factors.py",
+    "sha256": "0051592e49b358975ce202391ac85259c00a13e24b28b486fde4cd832237cc37",
+    "lines": 260,
+    "docstring": "Execute R02 only on the already extracted, bounded mini_7 window.",
+    "definitions": [
+      {
+        "name": "digest",
+        "line": 24,
+        "end_line": 29
+      },
+      {
+        "name": "save_table",
+        "line": 32,
+        "end_line": 43
+      },
+      {
+        "name": "isolation_check",
+        "line": 46,
+        "end_line": 75
+      },
+      {
+        "name": "figures",
+        "line": 78,
+        "end_line": 112
+      },
+      {
+        "name": "overlap_diagnostic",
+        "line": 115,
+        "end_line": 158
+      },
+      {
+        "name": "main",
+        "line": 161,
+        "end_line": 258
+      },
+      {
+        "name": "guard_read",
+        "line": 53,
+        "end_line": 55
+      },
+      {
+        "name": "guard_open",
+        "line": 56,
+        "end_line": 60
+      },
+      {
+        "name": "cells",
+        "line": 124,
+        "end_line": 126
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from datetime import datetime, timezone",
+      "import hashlib",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import resource",
+      "import subprocess",
+      "import sys",
+      "import tempfile",
+      "import time",
+      "from collections import Counter",
+      "from dataclasses import asdict",
+      "from valid_point.replay import AllowedSource, ReplayConfig",
+      "from valid_point.operational import measure_operational",
+      "from unittest.mock import patch",
+      "from valid_point.replay import AllowedSource",
+      "import matplotlib",
+      "import matplotlib.pyplot as plt",
+      "import numpy as np",
+      "import nbformat",
+      "from nbclient import NotebookClient"
+    ]
+  },
+  {
+    "path": "scripts/intake_segment.py",
+    "sha256": "4da1600b7d4fce90ecf37bf3c14684f2f6ef73ff238de47a5f9a85b21dc5511c",
+    "lines": 303,
+    "docstring": "Execute R01 only: bounded local mini_7 schema/timing/geometry intake.",
+    "definitions": [
+      {
+        "name": "digest",
+        "line": 32,
+        "end_line": 37
+      },
+      {
+        "name": "write_json",
+        "line": 40,
+        "end_line": 41
+      },
+      {
+        "name": "csv_diagnostics",
+        "line": 44,
+        "end_line": 65
+      },
+      {
+        "name": "odometry_records",
+        "line": 68,
+        "end_line": 101
+      },
+      {
+        "name": "per_stream_name_diagnostics",
+        "line": 104,
+        "end_line": 119
+      },
+      {
+        "name": "make_figure",
+        "line": 122,
+        "end_line": 170
+      },
+      {
+        "name": "run",
+        "line": 173,
+        "end_line": 299
+      },
+      {
+        "name": "voxels",
+        "line": 271,
+        "end_line": 272
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "from collections import Counter, defaultdict",
+      "from datetime import datetime, timezone",
+      "import hashlib",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import resource",
+      "import sys",
+      "import time",
+      "import numpy as np",
+      "from valid_point.io.mixed_signals import STREAM_PRINCIPAL, TOP_FROM_MAP, DOME_FROM_MAP, extract_selected, id_coverage, latest_past, load_odometry, nearest_reference, parse_cloud_name, pose_matrix, raw_to_top, read_pcd, read_pcd_header, safe_members, select_window, transform_xyz",
+      "import matplotlib",
+      "import matplotlib.pyplot as plt",
+      "from matplotlib.ticker import MaxNLocator"
+    ]
+  },
+  {
+    "path": "scripts/measure_synthetic.py",
+    "sha256": "4751f4ed6bc7f557014aeb6401563d4b261842168584d2d84d2b558d28a9704c",
+    "lines": 142,
+    "docstring": "Execute only S02: tests, three fresh kernels and an immutable evidence bundle.",
+    "definitions": [
+      {
+        "name": "main",
+        "line": 21,
+        "end_line": 138
+      }
+    ],
+    "imports": [
+      "from datetime import datetime, timezone",
+      "import hashlib",
+      "import importlib.metadata",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import platform",
+      "import secrets",
+      "import subprocess",
+      "import sys",
+      "from valid_point.evidence import LIMITATIONS, load_raw_config",
+      "from valid_point.provenance import execute_notebook, git_revision, sha256_file, utc_now, write_json_new"
+    ]
+  },
+  {
+    "path": "scripts/repair_r03_rearrangement.py",
+    "sha256": "44c268d51c4fbf1b18003f534f3aec163783f62567a4b5fcd86da94cc452513a",
+    "lines": 133,
+    "docstring": "Preserve invalid development attempt and repair the same R03 rearrangement case.",
+    "definitions": [
+      {
+        "name": "load_rows",
+        "line": 25,
+        "end_line": 26
+      },
+      {
+        "name": "read_values",
+        "line": 29,
+        "end_line": 30
+      },
+      {
+        "name": "main",
+        "line": 33,
+        "end_line": 130
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from dataclasses import asdict, replace",
+      "from hashlib import sha256",
+      "import json",
+      "from pathlib import Path",
+      "import pickle",
+      "import shutil",
+      "import sys",
+      "import numpy as np",
+      "from valid_point.attacks.manifests import Attempt, file_sha256",
+      "from valid_point.attacks.overlays import Target, apply_overlay, cell_index",
+      "from valid_point.development_scores import ExploratoryReference",
+      "from valid_point.io.mixed_signals import read_pcd, write_pcd",
+      "from valid_point.replay import AllowedSource, ReplayConfig, replay",
+      "from replay_development import save_table, score_arm"
+    ]
+  },
+  {
+    "path": "scripts/replay_development.py",
+    "sha256": "a42f5f841d98640ca3c30ab98f3d01b66fb4f17bc8b0e74920bbccdf4c14eb38",
+    "lines": 363,
+    "docstring": "Run only the bounded R03 mini_7 development demonstration.",
+    "definitions": [
+      {
+        "name": "save_table",
+        "line": 32,
+        "end_line": 43
+      },
+      {
+        "name": "selected_schedule",
+        "line": 46,
+        "end_line": 47
+      },
+      {
+        "name": "score_arm",
+        "line": 50,
+        "end_line": 79
+      },
+      {
+        "name": "_reader_values",
+        "line": 82,
+        "end_line": 85
+      },
+      {
+        "name": "_benign",
+        "line": 88,
+        "end_line": 93
+      },
+      {
+        "name": "_pose_control",
+        "line": 96,
+        "end_line": 106
+      },
+      {
+        "name": "main",
+        "line": 109,
+        "end_line": 360
+      },
+      {
+        "name": "note",
+        "line": 116,
+        "end_line": 118
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from dataclasses import asdict, replace",
+      "from datetime import datetime, timezone",
+      "from hashlib import sha256",
+      "from io import BytesIO",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import resource",
+      "import shutil",
+      "import subprocess",
+      "import sys",
+      "import time",
+      "import numpy as np",
+      "from valid_point.attacks.manifests import Attempt, file_sha256",
+      "from valid_point.attacks.overlays import FAMILIES, SEED, apply_overlay, cell_index, freeze_target, seed_key",
+      "from valid_point.development_scores import AlarmDecision, decide, fit_exploratory, normalize_raw",
+      "from valid_point.io.mixed_signals import read_pcd, write_pcd",
+      "from valid_point.replay import AllowedSource, CloudEvent, ReplayConfig, replay",
+      "from valid_point.temporal import TemporalEWMA",
+      "from math import cos, sin, radians",
+      "import pickle",
+      "import nbformat",
+      "from nbclient import NotebookClient"
+    ]
+  },
+  {
+    "path": "scripts/seal_r03_run.py",
+    "sha256": "be06dd4d3871b483fff0db268acc9f1134a95c4f0f88a194592fa66283bc28dc",
+    "lines": 152,
+    "docstring": "Freeze the reviewed R03 evidence bundle after all repairs and checks.",
+    "definitions": [
+      {
+        "name": "main",
+        "line": 40,
+        "end_line": 148
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from datetime import datetime, timezone",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import platform",
+      "import resource",
+      "import shutil",
+      "import subprocess",
+      "import sys",
+      "import tarfile",
+      "from io import BytesIO",
+      "from valid_point.attacks.manifests import file_sha256",
+      "import numpy, matplotlib, nbformat, nbclient, pytest"
+    ]
+  },
+  {
+    "path": "scripts/show_synthetic_scene.py",
+    "sha256": "3e07c99f2d2ea229e616daa724e22476a8528c9eea3d3a0ee509d2004436feb4",
+    "lines": 148,
+    "docstring": "Run S01 tests and NB01 from a fresh kernel; seal a new local evidence bundle.",
+    "definitions": [
+      {
+        "name": "source_snapshot",
+        "line": 34,
+        "end_line": 39
+      },
+      {
+        "name": "main",
+        "line": 42,
+        "end_line": 140
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from datetime import datetime, timezone",
+      "import hashlib",
+      "import importlib.metadata",
+      "import os",
+      "from pathlib import Path",
+      "import platform",
+      "import secrets",
+      "import subprocess",
+      "import sys",
+      "from valid_point.provenance import execute_notebook, git_revision, sha256_file, utc_now, write_json_new",
+      "from valid_point.synthetic import load_synthetic_config"
+    ]
+  },
+  {
+    "path": "scripts/summarize_r03_evidence.py",
+    "sha256": "ab5ab7ace9ad07641740bae5823302236465b89ceeff548c3abc24cee42734bf",
+    "lines": 149,
+    "docstring": "Offline paired summaries after R03 prediction sealing; never feeds scoring.",
+    "definitions": [
+      {
+        "name": "rows",
+        "line": 19,
+        "end_line": 20
+      },
+      {
+        "name": "save",
+        "line": 23,
+        "end_line": 31
+      },
+      {
+        "name": "number",
+        "line": 34,
+        "end_line": 36
+      },
+      {
+        "name": "main",
+        "line": 39,
+        "end_line": 146
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "import json",
+      "from pathlib import Path",
+      "import pickle",
+      "import sys",
+      "import numpy as np",
+      "from valid_point.attacks.overlays import apply_overlay",
+      "from valid_point.io.mixed_signals import read_pcd",
+      "from replay_development import save_table"
+    ]
+  },
+  {
+    "path": "scripts/validate_r03_run.py",
+    "sha256": "a9d6c7d1ae80f2e87bf53365c27623cec907c3a084805a83660f98cf3f6e66a5",
+    "lines": 153,
+    "docstring": "Post-seal technical and provenance audit for a single R03 run.",
+    "definitions": [
+      {
+        "name": "table",
+        "line": 20,
+        "end_line": 21
+      },
+      {
+        "name": "check",
+        "line": 24,
+        "end_line": 25
+      },
+      {
+        "name": "main",
+        "line": 28,
+        "end_line": 150
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from hashlib import sha256",
+      "import json",
+      "from pathlib import Path",
+      "import pickle",
+      "import sys",
+      "import xml.etree.ElementTree as ET",
+      "import numpy as np",
+      "from valid_point.attacks.manifests import file_sha256",
+      "from replay_development import save_table",
+      "import nbformat"
+    ]
+  },
+  {
+    "path": "tests/test_availability.py",
+    "sha256": "9dce66e05ce73d4cdc04b17e250dc2bbe5490503ff1fc50d14e4f57deac813a0",
+    "lines": 88,
+    "docstring": "Freshness, health, transform and membership are independent of intent.",
+    "definitions": [
+      {
+        "name": "fixture",
+        "line": 15,
+        "end_line": 16
+      },
+      {
+        "name": "measure",
+        "line": 19,
+        "end_line": 20
+      },
+      {
+        "name": "test_deadline_age_and_exact_freshness_boundary",
+        "line": 23,
+        "end_line": 26
+      },
+      {
+        "name": "test_receipt_at_deadline_is_causal_one_ns_after_is_late_contract",
+        "line": 29,
+        "end_line": 33
+      },
+      {
+        "name": "test_absent_empty_malformed_late_distinct",
+        "line": 36,
+        "end_line": 42
+      },
+      {
+        "name": "test_health_independent_of_content_counts_and_freshness",
+        "line": 45,
+        "end_line": 52
+      },
+      {
+        "name": "test_transform_missing_late_expired_units_and_frame",
+        "line": 55,
+        "end_line": 63
+      },
+      {
+        "name": "test_unverified_clock_membership_and_future_context_unknown",
+        "line": 66,
+        "end_line": 70
+      },
+      {
+        "name": "test_missing_source_count_mismatch_future_source_and_reversed_clock",
+        "line": 73,
+        "end_line": 78
+      },
+      {
+        "name": "test_late_packet_metadata_cannot_supply_freshness_or_transform_time",
+        "line": 81,
+        "end_line": 88
+      }
+    ],
+    "imports": [
+      "from dataclasses import replace",
+      "from pathlib import Path",
+      "import pytest",
+      "from valid_point.contracts import EvidenceStatus as S",
+      "from valid_point.evidence import cloud_fixture, fixed_regions, load_raw_config",
+      "from valid_point.evidence.availability import measure_availability",
+      "from valid_point.evidence.spatial import count_regions"
+    ]
+  },
+  {
+    "path": "tests/test_bootstrap.py",
+    "sha256": "03ee4441609b2e4fd7461caf91c7ba2037751fa81993d413c81bf932810aae65",
+    "lines": 88,
+    "docstring": "S00 invariants, including an actual fresh Jupyter kernel.",
+    "definitions": [
+      {
+        "name": "test_identical_bytes_have_stable_sha256_and_changed_bytes_do_not",
+        "line": 21,
+        "end_line": 23
+      },
+      {
+        "name": "test_bootstrap_config_rejects_invalid_or_research_stage",
+        "line": 26,
+        "end_line": 35
+      },
+      {
+        "name": "test_manifest_required_fields_and_research_boundary",
+        "line": 38,
+        "end_line": 51
+      },
+      {
+        "name": "test_missing_provenance_rejected_before_file_write",
+        "line": 54,
+        "end_line": 57
+      },
+      {
+        "name": "test_fresh_kernel_from_repository_without_previous_state",
+        "line": 60,
+        "end_line": 75
+      },
+      {
+        "name": "test_import_has_no_research_or_download_side_effect",
+        "line": 78,
+        "end_line": 88
+      }
+    ],
+    "imports": [
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import subprocess",
+      "import sys",
+      "import nbformat",
+      "import pytest",
+      "from valid_point.provenance import CONFIG_FIELDS, MANIFEST_FIELDS, execute_notebook, export_table, load_config, sha256_bytes, validate_manifest"
+    ]
+  },
+  {
+    "path": "tests/test_calibration.py",
+    "sha256": "3d3c41bb684c80932324faea34d4b9ce81f713b4a5e531dea896465d4ef53c74",
+    "lines": 26,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "rows",
+        "line": 5,
+        "end_line": 7
+      },
+      {
+        "name": "test_order_statistic_ties_and_unknowns",
+        "line": 10,
+        "end_line": 20
+      },
+      {
+        "name": "test_separate_calibration_and_insufficient_support",
+        "line": 23,
+        "end_line": 26
+      }
+    ],
+    "imports": [
+      "import pytest",
+      "from valid_point.calibration import calibrate, alarm"
+    ]
+  },
+  {
+    "path": "tests/test_causal_factors.py",
+    "sha256": "240e317fb5d7d9ce0d6db44f41462beecd80191f7d3dfded455ec2a6ebaaa516",
+    "lines": 33,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "test_half_open_cells_and_full_coverage",
+        "line": 6,
+        "end_line": 15
+      },
+      {
+        "name": "test_static_translation_and_moving_confounder",
+        "line": 18,
+        "end_line": 33
+      }
+    ],
+    "imports": [
+      "import numpy as np",
+      "from valid_point.evidence.density import CELL_IDS, count_cells, occupancy_change",
+      "from valid_point.evidence.temporal_geometry import directed_novelty"
+    ]
+  },
+  {
+    "path": "tests/test_contracts.py",
+    "sha256": "3d3c08009958e2bfffcc93970244ab87f9ec331a1c8912910a22bec2eff5e29c",
+    "lines": 39,
+    "docstring": "Causal boundaries and distinct unknown values.",
+    "definitions": [
+      {
+        "name": "test_exact_deadline_inclusive_and_one_nanosecond_late",
+        "line": 16,
+        "end_line": 25
+      },
+      {
+        "name": "test_duplicate_decision_keys_rejected",
+        "line": 28,
+        "end_line": 31
+      },
+      {
+        "name": "test_unknown_is_never_numeric_zero_and_static_is_not_applicable",
+        "line": 34,
+        "end_line": 39
+      }
+    ],
+    "imports": [
+      "from dataclasses import replace",
+      "import pytest",
+      "from valid_point.contracts import CausalSample, DecisionKey, EvidenceStatus, RawMeasurement, assert_unique_keys",
+      "from valid_point.synthetic import generate_scene, load_synthetic_config",
+      "from pathlib import Path"
+    ]
+  },
+  {
+    "path": "tests/test_evaluation.py",
+    "sha256": "a99b117e4ca49e9e4ccd13414c10c396d36fa04d8c7829ba4bc945cc4159bf36",
+    "lines": 256,
+    "docstring": "R05 invariants: no expected favorable scientific outcome.",
+    "definitions": [
+      {
+        "name": "training",
+        "line": 19,
+        "end_line": 25
+      },
+      {
+        "name": "test_grouped_fit_actual_quantiles_and_distinct_pooled_support",
+        "line": 28,
+        "end_line": 38
+      },
+      {
+        "name": "test_lineage_missing_segment_duplicate_and_no_mini7",
+        "line": 41,
+        "end_line": 45
+      },
+      {
+        "name": "test_all_frozen_attempts_and_benign_identity_separation",
+        "line": 48,
+        "end_line": 55
+      },
+      {
+        "name": "test_thresholds_independent_actual_scores_ties_and_no_power",
+        "line": 58,
+        "end_line": 73
+      },
+      {
+        "name": "fixture_pipeline",
+        "line": 76,
+        "end_line": 85
+      },
+      {
+        "name": "test_production_future_prefix_companions_and_per_episode_reset",
+        "line": 88,
+        "end_line": 100
+      },
+      {
+        "name": "test_evaluator_withheld_changed_and_leaky_positive_control",
+        "line": 103,
+        "end_line": 119
+      },
+      {
+        "name": "test_prediction_seal_requires_all_folds_and_detects_extra_or_mutated_file",
+        "line": 122,
+        "end_line": 130
+      },
+      {
+        "name": "test_deterministic_record_serialization_and_no_overwrite",
+        "line": 133,
+        "end_line": 137
+      },
+      {
+        "name": "test_partial_inventory_is_redundant_without_reading_H",
+        "line": 140,
+        "end_line": 146
+      },
+      {
+        "name": "test_grouped_macro_micro_undefined_and_leave_one",
+        "line": 149,
+        "end_line": 158
+      },
+      {
+        "name": "test_schedule_join_preserves_failed_attempt_and_honest_companion",
+        "line": 161,
+        "end_line": 167
+      },
+      {
+        "name": "test_final_recovery_after_last_burst_includes_earlier_alarm",
+        "line": 170,
+        "end_line": 177
+      },
+      {
+        "name": "test_common_support_retains_all_attempt_and_unknown_time",
+        "line": 180,
+        "end_line": 190
+      },
+      {
+        "name": "test_negative_pose_clock_skew_cannot_advance_availability",
+        "line": 193,
+        "end_line": 202
+      },
+      {
+        "name": "test_causal_raw_memo_matches_production_and_checks_changed_history",
+        "line": 205,
+        "end_line": 223
+      },
+      {
+        "name": "test_raw_memo_does_not_read_future_event",
+        "line": 226,
+        "end_line": 233
+      },
+      {
+        "name": "test_seal_ignores_only_finder_metadata_and_still_rejects_study_changes",
+        "line": 236,
+        "end_line": 244
+      },
+      {
+        "name": "test_reporting_recovers_original_ids_after_sorted_protocol_serialization",
+        "line": 247,
+        "end_line": 256
+      },
+      {
+        "name": "rows",
+        "line": 20,
+        "end_line": 24
+      },
+      {
+        "name": "run",
+        "line": 80,
+        "end_line": 84
+      },
+      {
+        "name": "deliberately_leaky_pipeline",
+        "line": 108,
+        "end_line": 108
+      },
+      {
+        "name": "guarded",
+        "line": 114,
+        "end_line": 116
+      },
+      {
+        "name": "r",
+        "line": 172,
+        "end_line": 173
+      }
+    ],
+    "imports": [
+      "from dataclasses import replace",
+      "import json",
+      "from pathlib import Path",
+      "from types import SimpleNamespace",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.evaluation.real import ARMS, VERSIONS, Reference, calibrate, digest, episode_grid, fit_references, normalize, require_prediction_seal, score_records, write_json, write_records, read_records, raw_from_dict, local_inventory",
+      "from valid_point.evaluation.splits import Fold",
+      "from valid_point.evidence.density import CELL_IDS, DensityRaw",
+      "from valid_point.evidence.temporal_geometry import GeometryRaw",
+      "from valid_point.replay import AllowedSource, replay",
+      "from test_replay_isolation import fixture",
+      "from valid_point.io.mixed_signals import write_pcd",
+      "from valid_point.evaluation.real import read_values",
+      "from valid_point.evaluation.statistics import grouped_rates",
+      "from valid_point.evaluation.statistics import join_episode",
+      "from valid_point.evaluation.statistics import final_recovery",
+      "from valid_point.evaluation.statistics import exposure_and_common_support",
+      "from valid_point.replay import PoseEvent, _select_pose",
+      "from valid_point.evaluation.real import alignment_poses",
+      "from test_replay_isolation import fixture",
+      "from valid_point.evaluation.real import CausalRawMemo, read_values",
+      "from valid_point.replay import PoseEvent",
+      "from valid_point.io.mixed_signals import write_pcd",
+      "from test_replay_isolation import fixture",
+      "from valid_point.evaluation.real import CausalRawMemo",
+      "from valid_point.evaluation.statistics import recorded_episode_grid"
+    ]
+  },
+  {
+    "path": "tests/test_gt_isolation.py",
+    "sha256": "8ec6dea4ce24ec34e9fcdb085588e5ab3a01bd2bb39735b132de17ccb57fcfd2",
+    "lines": 92,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "_config",
+        "line": 20,
+        "end_line": 21
+      },
+      {
+        "name": "_operational_scores",
+        "line": 24,
+        "end_line": 38
+      },
+      {
+        "name": "test_withholding_and_permuting_evaluator_labels_leaves_gt_free_scores_identical",
+        "line": 41,
+        "end_line": 47
+      },
+      {
+        "name": "test_operational_api_cannot_accept_gt_or_evaluator_labels",
+        "line": 50,
+        "end_line": 53
+      },
+      {
+        "name": "test_added_suspicious_points_cannot_improve_T_at_fixed_context",
+        "line": 56,
+        "end_line": 77
+      },
+      {
+        "name": "test_count_preserving_blind_spot_and_required_gap_inventory_are_visible",
+        "line": 80,
+        "end_line": 92
+      }
+    ],
+    "imports": [
+      "import inspect",
+      "import json",
+      "from pathlib import Path",
+      "import numpy as np",
+      "from valid_point.evaluation.gap import fit_track_calibration, fit_track_reference, run_spatial_experiment, spatial_case_fixtures",
+      "from valid_point.gt_free import score_clouds",
+      "from valid_point.regions import make_fixed_grid"
+    ]
+  },
+  {
+    "path": "tests/test_kinematics.py",
+    "sha256": "e08f3364dd03d4973aba9fe196075b5e99875845acde4c4cb5c82f98f672da69",
+    "lines": 92,
+    "docstring": "Hand calculations and causal selection; no fitted scale or penalty.",
+    "definitions": [
+      {
+        "name": "measure",
+        "line": 16,
+        "end_line": 18
+      },
+      {
+        "name": "test_hand_residual_vector_norm_actual_dt_and_prior_velocity",
+        "line": 21,
+        "end_line": 28
+      },
+      {
+        "name": "test_acceleration_and_consistent_spoof_are_identifiability_limits",
+        "line": 31,
+        "end_line": 34
+      },
+      {
+        "name": "test_body_rotation_and_explicit_receiver_velocity",
+        "line": 37,
+        "end_line": 40
+      },
+      {
+        "name": "test_latest_causal_pair_ignores_future_late_stale_and_order",
+        "line": 43,
+        "end_line": 49
+      },
+      {
+        "name": "test_missing_selected_velocity_never_falls_back_or_becomes_zero",
+        "line": 52,
+        "end_line": 57
+      },
+      {
+        "name": "test_missing_malformed_and_units_are_not_measurements",
+        "line": 70,
+        "end_line": 72
+      },
+      {
+        "name": "test_zero_or_below_minimum_dt_invalid",
+        "line": 76,
+        "end_line": 78
+      },
+      {
+        "name": "test_large_gap_invalid_and_stale_missing_unknown",
+        "line": 81,
+        "end_line": 87
+      },
+      {
+        "name": "test_bad_clock_and_duplicate_samples_rejected",
+        "line": 90,
+        "end_line": 92
+      }
+    ],
+    "imports": [
+      "from dataclasses import replace",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.contracts import DecisionKey, EvidenceStatus as S",
+      "from valid_point.evidence.kinematics import MotionSample, measure_motion"
+    ]
+  },
+  {
+    "path": "tests/test_metrics.py",
+    "sha256": "8ddb5e0bdcacd72cfd2c8993b04f1a1e03d98b77c44579eac5da593d8f205923",
+    "lines": 75,
+    "docstring": "Hand-checked arithmetic fixtures, never empirical observations.",
+    "definitions": [
+      {
+        "name": "event",
+        "line": 8,
+        "end_line": 12
+      },
+      {
+        "name": "test_attempt_eligible_realized_denominators_and_failure",
+        "line": 15,
+        "end_line": 26
+      },
+      {
+        "name": "test_preexisting_censor_recovery_and_empty_exposure",
+        "line": 29,
+        "end_line": 43
+      },
+      {
+        "name": "test_clean_alarm_episode_rate_is_time_based",
+        "line": 46,
+        "end_line": 52
+      },
+      {
+        "name": "test_grouped_pairing_not_frame_iid",
+        "line": 55,
+        "end_line": 75
+      }
+    ],
+    "imports": [
+      "import pytest",
+      "from valid_point.evaluation.metrics import event_metrics, false_alarm_metrics, episode_metrics, episode_recall, clean_alarm_runs, grouped_summary, paired_group_resample"
+    ]
+  },
+  {
+    "path": "tests/test_mixed_signals.py",
+    "sha256": "3f957eee3934d60e4367735c78f64e015004e60cb01622227240100f573ba1a5",
+    "lines": 139,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "test_short_subsecond_legacy_exact_ns",
+        "line": 17,
+        "end_line": 23
+      },
+      {
+        "name": "test_explicit_ids_and_earliest_two_principal_window",
+        "line": 26,
+        "end_line": 34
+      },
+      {
+        "name": "test_duplicate_and_missing_ids",
+        "line": 37,
+        "end_line": 39
+      },
+      {
+        "name": "test_malformed_headers_rejected",
+        "line": 47,
+        "end_line": 49
+      },
+      {
+        "name": "test_pcd_count_and_finite_values",
+        "line": 52,
+        "end_line": 58
+      },
+      {
+        "name": "make_tar",
+        "line": 61,
+        "end_line": 67
+      },
+      {
+        "name": "test_unsafe_tar_rejected",
+        "line": 77,
+        "end_line": 81
+      },
+      {
+        "name": "test_safe_bounded_extraction",
+        "line": 84,
+        "end_line": 91
+      },
+      {
+        "name": "test_quaternion_frame_composition_and_inverse",
+        "line": 94,
+        "end_line": 108
+      },
+      {
+        "name": "test_causal_past_rejects_future_nearest",
+        "line": 111,
+        "end_line": 117
+      },
+      {
+        "name": "test_missing_or_invalid_velocity_stays_unavailable",
+        "line": 120,
+        "end_line": 126
+      },
+      {
+        "name": "test_observed_local_header_if_intake_data_available",
+        "line": 129,
+        "end_line": 139
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import io",
+      "from pathlib import Path",
+      "import tarfile",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.io.mixed_signals import extract_selected, id_coverage, latest_past, nearest_reference, optional_twist, parse_cloud_name, parse_stamp, pose_matrix, raw_to_top, read_pcd, read_pcd_header, safe_members, select_window, transform_xyz"
+    ]
+  },
+  {
+    "path": "tests/test_overlays.py",
+    "sha256": "ac6a396144fa8dd98f1f2466d152d36cb3e56d76592b7403522ccde7fda63ee0",
+    "lines": 73,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "cloud",
+        "line": 9,
+        "end_line": 12
+      },
+      {
+        "name": "key",
+        "line": 15,
+        "end_line": 15
+      },
+      {
+        "name": "test_row_counts_and_retained_fields",
+        "line": 18,
+        "end_line": 28
+      },
+      {
+        "name": "test_rearrangement_preserves_each_cell_count_and_failure_ids",
+        "line": 31,
+        "end_line": 41
+      },
+      {
+        "name": "test_selection_independent_of_traversal_and_zero_controls",
+        "line": 44,
+        "end_line": 54
+      },
+      {
+        "name": "test_identity_pcd_roundtrip_and_malformed_rejected",
+        "line": 57,
+        "end_line": 66
+      },
+      {
+        "name": "test_zero_target_is_failed_attempt_not_resampled",
+        "line": 69,
+        "end_line": 73
+      },
+      {
+        "name": "selections",
+        "line": 49,
+        "end_line": 50
+      }
+    ],
+    "imports": [
+      "from io import BytesIO",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.attacks.overlays import apply_overlay, cell_index, freeze_target, seed_key, selected_ids",
+      "from valid_point.io.mixed_signals import read_pcd, write_pcd"
+    ]
+  },
+  {
+    "path": "tests/test_pointcloud_io.py",
+    "sha256": "9ddff5e626cb4ad090051832e7397f049e944556ded80c9a5b809c3d001eb3e7",
+    "lines": 36,
+    "docstring": "The canonical reader preserves fields, counts and coordinates.",
+    "definitions": [
+      {
+        "name": "test_roundtrip_nonempty_and_empty",
+        "line": 15,
+        "end_line": 25
+      },
+      {
+        "name": "test_reader_rejects_count_and_field_corruption",
+        "line": 28,
+        "end_line": 36
+      }
+    ],
+    "imports": [
+      "import json",
+      "from pathlib import Path",
+      "import pytest",
+      "from valid_point.io.pointcloud import PointCloud, read_pointcloud, write_pointcloud",
+      "from valid_point.synthetic import generate_scene, load_synthetic_config"
+    ]
+  },
+  {
+    "path": "tests/test_references.py",
+    "sha256": "e486610e39136d9c63ccd3389bd8f0874f2ba3a73dbcc1ac9f5b757a089d1054",
+    "lines": 31,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "test_training_only_and_split_lineage",
+        "line": 6,
+        "end_line": 23
+      },
+      {
+        "name": "test_support_across_segments_and_pooled_opt_in",
+        "line": 26,
+        "end_line": 31
+      }
+    ],
+    "imports": [
+      "import pytest",
+      "from valid_point.ablations import clean_fixture_rows",
+      "from valid_point.references import fit_references, select_reference, normalize"
+    ]
+  },
+  {
+    "path": "tests/test_regions.py",
+    "sha256": "3a3da5d4590cce3d709c44bfed086dc538bdf8574f12355baa57a603a30c4f28",
+    "lines": 66,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "_config",
+        "line": 13,
+        "end_line": 14
+      },
+      {
+        "name": "_grid",
+        "line": 17,
+        "end_line": 23
+      },
+      {
+        "name": "test_receiver_grid_is_complete_frozen_and_includes_empty_regions",
+        "line": 26,
+        "end_line": 32
+      },
+      {
+        "name": "test_half_open_boundaries_and_outside_roi_are_explicit",
+        "line": 35,
+        "end_line": 43
+      },
+      {
+        "name": "test_sender_points_cannot_change_region_definition",
+        "line": 46,
+        "end_line": 52
+      },
+      {
+        "name": "test_receiver_context_has_only_trusted_range_or_documented_broad_fallback",
+        "line": 55,
+        "end_line": 66
+      }
+    ],
+    "imports": [
+      "import json",
+      "from pathlib import Path",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.regions import count_fixed_tiles, make_fixed_grid, receiver_context"
+    ]
+  },
+  {
+    "path": "tests/test_replay.py",
+    "sha256": "33fa48c6302ff4fffa5c5a29a013e7198d509660417efad53691f8c61a2552c0",
+    "lines": 137,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "fixture",
+        "line": 11,
+        "end_line": 25
+      },
+      {
+        "name": "test_actual_entrypoint_causality_and_unknowns",
+        "line": 28,
+        "end_line": 53
+      },
+      {
+        "name": "test_present_empty_and_future_prefix",
+        "line": 56,
+        "end_line": 66
+      },
+      {
+        "name": "test_forbidden_evaluator_isolation_and_positive_control",
+        "line": 69,
+        "end_line": 95
+      },
+      {
+        "name": "test_static_native_frame_and_invalid_origin",
+        "line": 98,
+        "end_line": 111
+      },
+      {
+        "name": "test_wrapper_zero_support_and_every_required_cell",
+        "line": 114,
+        "end_line": 126
+      },
+      {
+        "name": "test_overlap_diagnostic_never_selects_future_top",
+        "line": 129,
+        "end_line": 137
+      },
+      {
+        "name": "guarded_read",
+        "line": 76,
+        "end_line": 78
+      },
+      {
+        "name": "guarded_open",
+        "line": 79,
+        "end_line": 82
+      }
+    ],
+    "imports": [
+      "from dataclasses import replace",
+      "from io import BytesIO",
+      "from pathlib import Path",
+      "import json",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.replay import AllowedSource, CloudEvent, PoseEvent, ReplayConfig, replay",
+      "from valid_point.io.mixed_signals import STREAM_PRINCIPAL",
+      "from valid_point.replay import _frame",
+      "from valid_point.operational import DCellReference, measure_operational",
+      "from valid_point.evidence.density import CELL_IDS",
+      "from scripts.inspect_causal_factors import overlap_diagnostic"
+    ]
+  },
+  {
+    "path": "tests/test_replay_isolation.py",
+    "sha256": "69cb2b028972093d3a4aa65f74c7cc16f36011c95421bd8a2e5187b5a2bf0455",
+    "lines": 125,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "fixture",
+        "line": 15,
+        "end_line": 31
+      },
+      {
+        "name": "decisions",
+        "line": 34,
+        "end_line": 49
+      },
+      {
+        "name": "test_changed_withheld_evaluator_and_positive_leakage_control",
+        "line": 52,
+        "end_line": 71
+      },
+      {
+        "name": "test_original_companions_and_prefix_invariant",
+        "line": 74,
+        "end_line": 90
+      },
+      {
+        "name": "test_exploratory_pooled_support_counts_distinct_cloud_rows",
+        "line": 93,
+        "end_line": 101
+      },
+      {
+        "name": "test_attacked_geometry_uses_attacked_prior_cloud",
+        "line": 104,
+        "end_line": 125
+      },
+      {
+        "name": "leaky",
+        "line": 67,
+        "end_line": 67
+      },
+      {
+        "name": "require_invariant",
+        "line": 68,
+        "end_line": 68
+      }
+    ],
+    "imports": [
+      "import hashlib",
+      "from pathlib import Path",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.attacks.overlays import apply_overlay, seed_key",
+      "from valid_point.io.mixed_signals import write_pcd",
+      "from valid_point.replay import AllowedSource, ReplayConfig, replay",
+      "from valid_point.development_scores import ExploratoryReference, fit_exploratory, normalize_raw, decide",
+      "from valid_point.evidence.density import CELL_IDS",
+      "from valid_point.temporal import TemporalEWMA",
+      "from valid_point.replay import CloudEvent",
+      "from valid_point.io.mixed_signals import parse_cloud_name",
+      "from valid_point.io.mixed_signals import read_pcd",
+      "from dataclasses import replace",
+      "from types import SimpleNamespace",
+      "from dataclasses import replace",
+      "from valid_point.io.mixed_signals import parse_cloud_name",
+      "from valid_point.replay import CloudEvent, PoseEvent"
+    ]
+  },
+  {
+    "path": "tests/test_scoring.py",
+    "sha256": "7e4ae08b2163a75f0f9c07bba880daaaab058555794d09bb657a2439d82860b9",
+    "lines": 34,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "test_hand_contract_and_strict_unknowns",
+        "line": 7,
+        "end_line": 20
+      },
+      {
+        "name": "test_fixed_region_full_coverage_and_monotonic_addition",
+        "line": 23,
+        "end_line": 34
+      }
+    ],
+    "imports": [
+      "import pytest",
+      "from valid_point.scoring import score, spatial_penalty, spatial_diagnostic",
+      "from valid_point.references import Reference",
+      "from valid_point.ablations import point_count_sweep"
+    ]
+  },
+  {
+    "path": "tests/test_spatial.py",
+    "sha256": "3a92af67750bd042cf29ee4664cc58e6f9b1386e51a68449b6cff6e2ac5e09e4",
+    "lines": 91,
+    "docstring": "Exact half-open geometry, literal additions, unknown states and namespaces.",
+    "definitions": [
+      {
+        "name": "counts",
+        "line": 15,
+        "end_line": 17
+      },
+      {
+        "name": "test_hand_counts_boundaries_and_volume",
+        "line": 20,
+        "end_line": 26
+      },
+      {
+        "name": "test_literal_added_points_are_monotone_per_region_without_share_reward",
+        "line": 29,
+        "end_line": 38
+      },
+      {
+        "name": "test_empty_absent_and_unknown_visibility_are_distinct",
+        "line": 41,
+        "end_line": 47
+      },
+      {
+        "name": "test_dense_legitimate_rearrangement_and_removal_limits",
+        "line": 50,
+        "end_line": 54
+      },
+      {
+        "name": "test_unavailable_counts_null",
+        "line": 61,
+        "end_line": 63
+      },
+      {
+        "name": "test_causal_frozen_regions_no_region_and_separate_namespaces",
+        "line": 66,
+        "end_line": 76
+      },
+      {
+        "name": "test_supported_translation_and_receiver_frame_not_sender_geometry",
+        "line": 79,
+        "end_line": 83
+      },
+      {
+        "name": "test_malformed_cloud_fields_rejected_before_measurement",
+        "line": 86,
+        "end_line": 91
+      }
+    ],
+    "imports": [
+      "from dataclasses import replace",
+      "from pathlib import Path",
+      "import pytest",
+      "from valid_point.contracts import EvidenceStatus as S",
+      "from valid_point.evidence import cloud_fixture, fixed_regions, load_raw_config",
+      "from valid_point.evidence.spatial import FixedRegion, RegionSet, count_regions",
+      "from valid_point.io.pointcloud import PointCloud"
+    ]
+  },
+  {
+    "path": "tests/test_splits.py",
+    "sha256": "e525e22efc4af1bcba06b6048d3ab5c76e119f709346f56577ccf10f814ad9d5",
+    "lines": 67,
+    "docstring": "R04 arithmetic/identity fixtures only; no empirical calibration.",
+    "definitions": [
+      {
+        "name": "roles",
+        "line": 12,
+        "end_line": 13
+      },
+      {
+        "name": "test_exact_folds_and_disjointness",
+        "line": 16,
+        "end_line": 22
+      },
+      {
+        "name": "test_segment_variant_leakage_rejected",
+        "line": 25,
+        "end_line": 33
+      },
+      {
+        "name": "test_actual_path_sensor_threshold_lineage",
+        "line": 36,
+        "end_line": 49
+      },
+      {
+        "name": "test_temporal_warmup_and_sensor_calibration_power",
+        "line": 52,
+        "end_line": 67
+      },
+      {
+        "name": "row",
+        "line": 38,
+        "end_line": 40
+      }
+    ],
+    "imports": [
+      "import json",
+      "from pathlib import Path",
+      "import pytest",
+      "from valid_point.evaluation.splits import validate_roles, validate_membership, validate_lineage, validate_threshold_use",
+      "from valid_point.temporal import TemporalEWMA",
+      "from valid_point.calibration import calibrate",
+      "from valid_point.evaluation.metrics import threshold_power"
+    ]
+  },
+  {
+    "path": "tests/test_synthetic.py",
+    "sha256": "c8261717c7d00d7b16668b79d53830a0541f3a72e41f4fef08ad128c3008292f",
+    "lines": 60,
+    "docstring": "Whole-scene determinism, geometry and split isolation.",
+    "definitions": [
+      {
+        "name": "test_scene_order_independence_and_seed_role_disjointness",
+        "line": 18,
+        "end_line": 28
+      },
+      {
+        "name": "test_overlapping_seed_families_rejected_and_truth_not_in_decision_input",
+        "line": 31,
+        "end_line": 37
+      },
+      {
+        "name": "test_inverse_transform_and_unique_view_geometry",
+        "line": 40,
+        "end_line": 49
+      },
+      {
+        "name": "test_empty_absent_and_unavailable_kinematics",
+        "line": 52,
+        "end_line": 60
+      }
+    ],
+    "imports": [
+      "from dataclasses import fields",
+      "import json",
+      "from pathlib import Path",
+      "import numpy as np",
+      "import pytest",
+      "from valid_point.contracts import DecisionInput",
+      "from valid_point.synthetic import availability_measurement, generate_scene, load_synthetic_config, seed_role"
+    ]
+  },
+  {
+    "path": "tests/test_temporal.py",
+    "sha256": "ee58012ca6d8bd05b8066ae2b8a03c7b7a063d1cfb94d875893ef7721319837c",
+    "lines": 89,
+    "docstring": null,
+    "definitions": [
+      {
+        "name": "put",
+        "line": 10,
+        "end_line": 14
+      },
+      {
+        "name": "test_irregular_recurrence_and_boundedness",
+        "line": 17,
+        "end_line": 24
+      },
+      {
+        "name": "test_initialization_warmup_missing_hold_short_and_long_gap",
+        "line": 27,
+        "end_line": 39
+      },
+      {
+        "name": "test_duplicate_reverse_no_mutation_checkpoint_resume",
+        "line": 42,
+        "end_line": 51
+      },
+      {
+        "name": "test_no_cross_agent_arm_episode_or_reference_and_prefix",
+        "line": 54,
+        "end_line": 67
+      },
+      {
+        "name": "test_deterministic_geometry_work_exhaustion_is_unknown",
+        "line": 70,
+        "end_line": 73
+      },
+      {
+        "name": "test_constant_dense_and_sparse_updates_share_elapsed_time_result",
+        "line": 76,
+        "end_line": 82
+      },
+      {
+        "name": "test_uncalibrated_alarm_is_a_distinct_unknown_record",
+        "line": 85,
+        "end_line": 89
+      }
+    ],
+    "imports": [
+      "import math",
+      "import pytest",
+      "from valid_point.temporal import TemporalEWMA",
+      "from valid_point.evidence.temporal_geometry import _directed_distances",
+      "from valid_point.development_scores import AlarmDecision",
+      "import numpy as np"
+    ]
+  }
+]

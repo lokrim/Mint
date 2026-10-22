@@ -1,0 +1,16 @@
+dataset,unit,planned_role,exposure_date,exposed_by,what_was_seen,outcome_exposure,notes
+mixed_signals,mini_7,T (train/dev only),2026-10-08..10,Valid Point R01-R03,clouds; D/G statistics; attack overlays,old statistics only (no detector),exposed development
+mixed_signals,mini_7,T (train/dev only),2026-10-22,MINT pilot P1/P2,"5 clouds (sync 125); RSU clouds at sync 37-233 sampled; label TXT ids 37-233 sampled; points-in-box counts",label geometry seen (no detector outcomes),pilot only
+mixed_signals,mini_10,T,2026-10-12..17,Valid Point R05,clouds; D/G statistics; attacks,old statistics only,exposed
+mixed_signals,mini_11,T,2026-10-12..17,Valid Point R05,clouds; D/G statistics; attacks,old statistics only,exposed
+mixed_signals,mini_12,T,2026-10-12..17,Valid Point R05,clouds; D/G statistics; attacks,old statistics only,exposed
+mixed_signals,mini_13,T,2026-10-12..17,Valid Point R05,clouds; D/G statistics; attacks,old statistics only,exposed
+mixed_signals,all 33 public segments,various,2026-10-22,MINT pilot P3,tar headers + first odometry row (timestamps),none,metadata only
+mixed_signals,mini_14,T,never (MINT),-,P3 metadata only,none,old R07 holdout candidate; not opened by Valid Point (findings ST-04)
+mixed_signals,mini_20 mini_22 mini_23 mini_24,C (proposed),-,-,P3 metadata only,none,
+mixed_signals,mini_26 mini_28-35 mini_37,E (proposed),-,-,P3 metadata only,none,must stay unopened until Stage 6 except metadata
+mixed_signals,mini_9 mini_18 mini_27 mini_36,HF val (no labels),-,-,P3 metadata only,none,unlabelled diagnostics only
+mixed_signals,mini_4 mini_5 mini_17 mini_21,HF test (no labels),-,-,none,none,not used
+opv2v,all,T/C=validate; E=test+Culver,-,-,none,none,
+v2v4real,all,see evaluation_protocol §2.3,-,-,none,none,
+opv2v,test/2021_08_23_12_58_19,moved from E to development,2026-10-22,MINT Stage-1 spike,clean detector outputs; AP@0.3/0.5/0.7; locality tests,clean detector AP seen,exclude from MINT E set

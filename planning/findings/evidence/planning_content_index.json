@@ -1,0 +1,1681 @@
+[
+  {
+    "path": "planning/01_research_contract.md",
+    "bytes": 5422,
+    "sha256": "456f7c8bb10c83b71afc8c82ff086846c68dd7f81dff212dd4693e9d272ecd82",
+    "headings": [
+      "1: # Research question and claim contract — revision 2026-10-08",
+      "7: ## Experiment and threat boundary",
+      "19: ## Allowed conclusions"
+    ],
+    "decision_excerpt": [
+      "5: H1: clean recorded observations remain relatively conforming under clean-fitted references. H2: some interventions lower conformity relative to matched clean replay; effects depend on geometry, magnitude and evidence availability. H3: temporal accumulation changes persistence, false alarms and delay relative to a memoryless baseline. H4: benign viewpoint/scene changes and information limitations explain important false alarms and non-identifiability. None is hard-coded or required to pass a technical gate. A high score means the available checks found little deviation from their reference, not a probability of honesty or a certificate of point integrity.",
+      "15: **GT-free operational boundary:** scorer, reference-context lookup and temporal state receive no labels, GT boxes, object counts from labels, attack flags, schedules, masks, clean counterpart clouds, injection success or evaluator outcomes. The offline fitting harness selects clean training observations, but passes operational raw inputs through the same reader and scoring path; the inference API never takes a `clean` flag. Evaluator data is joined only after decisions and state histories have been sealed and hashed. Synthetic arrival generation is upstream of the scorer and recorded as an assumption, not real network telemetry.",
+      "23: | Existing unit fixtures | Exact arithmetic, geometry, explicit counterexamples | Dataset detection, scene independence, boundary completeness |",
+      "29: Removal can be indistinguishable from occlusion, sparse sampling or sensor failure. Missing packets, empty clouds and absent peer support cannot establish maliciousness. Jointly consistent spoofing may pass all self-consistency checks; plausible fake structure may resemble real moving objects. Attacked history can become a misleading reference. Expose these failures without inventing unobserved visibility.",
+      "31: Bandwidth policy, transmission savings, detectors/AP, learned combiners, mandatory oracle-box studies, peer voting, collusion/Sybil and broad adaptive attacks are secondary and deferred. H003's quota objective and mandatory K/S/oracle architecture are superseded by H011 in [history](history.md). No publication, deployment or favorable scientific result is promised."
+    ]
+  },
+  {
+    "path": "planning/02_data_protocol.md",
+    "bytes": 5582,
+    "sha256": "995bf866dddc1158f2b5b928465a007a47e9e67d85ff66ea3d0c01428d56364b",
+    "headings": [
+      "1: # Dataset, time and split protocol — revision 2026-10-08",
+      "5: ## Candidate roles and freeze",
+      "22: ## Source and availability clocks",
+      "30: ## Frame and principal contract"
+    ],
+    "decision_excerpt": [
+      "9: Only metadata access/packaging/agent coverage/timing/calibration can justify a candidate replacement before outcomes. Record the amendment and original candidate. Unfavorable results never justify replacement. Determine acquisition adjacency from stamps/session metadata; sequential IDs are not independent scenes. If selected segments share a session, group and qualify uncertainty accordingly. At least four valid comparison segments remain the target; fewer yields an explicitly incomplete comparison study, but does not block development or a limitations report.",
+      "36: The intake matrix and failure log are authoritative for actually available fields. Geometry overlap does not establish common visibility; absent support is never a maliciousness label. Preserve raw intensity; do not pool across sensors or import detector-specific clipping as evidence normalization."
+    ]
+  },
+  {
+    "path": "planning/03_phase1_evidence.md",
+    "bytes": 10619,
+    "sha256": "e715df5a30e06882ec0f48a67f8235074ee3aab0c255201f9ddcb2715b4470d6",
+    "headings": [
+      "1: # Minimum feasible method — revision 2026-10-08",
+      "5: ## Candidate comparison and initial choice",
+      "21: ## D: contextual positive count surplus",
+      "31: ## G: causal geometric novelty",
+      "43: ## Score and fitting boundary"
+    ],
+    "decision_excerpt": [
+      "17: Choose D as the implementation baseline because it needs the fewest verified quantities and reuses valid counting code. Compare G alone and max(D,G) only for sensor roles whose compensation is validated. If G is unavailable on a frame, its predeclared arm abstains; D-only remains a separately named arm with its own threshold. If D itself has no valid support, return unknown and report feasibility failure. This choice permits a narrow or negative result rather than manufacturing a detector for every attack.",
+      "23: Input: finite current XYZ from the same production reader, sensor identity and its frozen coordinate adapter, fixed range/azimuth cells in a validated sensor-relative frame. Context is stream ID × cell ID; range is cell geometry in metres, not sender-claimed pose or current-cloud range extrema. No dynamic region resizing, point-share normalization or context pooling across devices. If sensor origin is not validated, sensor-range D is blocked; a separately documented raw-coordinate count diagnostic remains uncalibrated.",
+      "29: Likely sensitivity: sufficiently large additions/density concentration. Evasions: additions below reference tails, removal, rearrangement preserving counts per cell, attacks outside crop and realistic structure. Confounders: traffic density, view/range changes, surfaces/reflectivity, sampling variation, rain/noise, crop crossings. D=0 means no excess detected; it says nothing about absence, honesty or completeness. Present empty is raw zero and can give no surplus where references exist; absence/malformed input is unknown. Reference data, not current sender content, determines normalization. Runtime O(N+cells) with indexed counts, memory one cloud plus small counts; old O(N×400) loops are illustrative, not a real runtime guarantee.",
+      "37: Normalize this scalar using the same upper-tail q95/scale rule, fitted per sensor × elapsed-gap bin ([0,.15], (.15,.3], (.3,.5] seconds initially); fallback sensor-only across supported gaps if clean fit permits, otherwise unknown. Gap bins are experimental assumptions to confirm against recording cadence, not measured delay. Minimum 200 clean pairs across >=2 training segments; zero-scale handling as for D. Reference fit uses actual causal pairs from clean training replay; calibration passes new clean pairs through the identical pipeline.",
+      "41: Use a spatial index (CPU nearest-neighbor or bounded voxel-neighborhood search with documented approximation); avoid N×N matrices. Target one previous voxel cloud per sensor, <=4 GiB RSS, <=1 s/event initially. Measure actual runtime and cap the development diagnostic at 50,000 deterministic spatially selected centroids per cloud, reporting downsampling and approximation. If budget is exceeded, mark blocked/limited and amend before comparison rather than silently change resolution per scene.",
+      "51: Separate instantaneous records from [temporal state](temporal_spec.md). No onset schedule, labels or masks enter either. Retain all factor failures, partial support, invalid readings and no-power outcomes; they are technical dispositions, not evidence of maliciousness."
+    ]
+  },
+  {
+    "path": "planning/04_consensus.md",
+    "bytes": 1726,
+    "sha256": "6eaac883e1a28ccb48a68d97ab81b7e5d36b830682e6a43784e85c47f79cbc56",
+    "headings": [
+      "1: # Cross-agent geometry and consensus disposition — 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "3: Receiver geometry may be useful independent information, but consensus is not a required factor. S05 peer voting is superseded and deferred. The archive has three vehicles plus one RSU principal; top and dome are two sensors under that same principal. Agreement does not establish truth, common visibility or independence of localization errors."
+    ]
+  },
+  {
+    "path": "planning/05_bandwidth.md",
+    "bytes": 1346,
+    "sha256": "4289772205bcd4508558f20c0f910f7af46c34fd3456a6c44e4effc54088c9d7",
+    "headings": [
+      "1: # Bandwidth and downstream tasks: deferred — 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "3: The primary deliverable is causal real-cloud replay evidence and score trajectories. Bandwidth allocation, next-frame quotas, transmission-saving claims, payload selection and task-quality proxies are deferred; no primary stage depends on them. This replaces the earlier H003/H009 quota objective and old S06/S08/S09 policy requirements. The complete earlier specification remains in the dated planning snapshot for historical review, not automatic execution."
+    ]
+  },
+  {
+    "path": "planning/06_attack_simulation.md",
+    "bytes": 7722,
+    "sha256": "7640ddee13803ce79a9ca4115383f980e923b4f8da996cecbcd014d2981e2bc8",
+    "headings": [
+      "1: # Replay and deterministic interventions — revision 2026-10-08",
+      "5: ## Small initial grid",
+      "21: ## Overlay and event ledger",
+      "33: ## Benign controls and deferred attacks"
+    ],
+    "decision_excerpt": [
+      "14: | Count-preserving rearrangement | Stronger count evasion: move 25% of rows by attempted {.2,1,3} m seeded horizontal offsets, constrained to remain in each row's original frozen D cell | Preserve total **and per-D-cell** counts. Fixed bounded proposal budget of 10 directions per point; no valid offset => unchanged row and recorded failed move. Report actual moved fraction/norm distribution; no resampling until score changes. |",
+      "15: | Addition | Add floor(f*N) points, f={.01,.05,.2}, uniformly in a 2 m-side cube centered at the centroid of the sender's target cell during first 3 s; freeze center before onset | Added and reread counts, in/out crop fractions, density and realized geometry. Intensity copied by seeded sampling from current sender intensities, explicitly synthetic, never an intensity detection claim. N=0 or no center => zero/failed injection retained. |",
+      "26: 2. **Injected:** actual selected/added/removed/moved row IDs, assigned attributes, bytes written, failed constraints and serialization differences.",
+      "29: Reload every derived file with the **same production PCD reader and frame adapter** as its clean counterpart. Read→write→read identity controls establish precision tolerance. Rejected files/failed injections remain attempts, never detection successes. Check original and honest companion hashes before/after; retain selection/manifests and derived hashes so overlays are regenerable. Derived filenames must not encode evaluator flags into scorer features. Operational loader receives only a replay-root/event manifest without attack schedule/masks; evaluator join is separately sealed.",
+      "39: Storage: keep one clean archive/extraction and one active derived episode; cache compact raw/score records, regenerate other overlays from hashes/manifests, and declare retention before deleting expendable derived scratch. Keep all failures and exact regeneration recipes; never delete original evidence. Bound CPU/RSS/peak disk in each run and record deviations before increasing scope."
+    ]
+  },
+  {
+    "path": "planning/07_validation.md",
+    "bytes": 7250,
+    "sha256": "17ae2cca28fcaf412e957bc6758e38c0c0ea64b688212c693f9e9fc5e1d327ab",
+    "headings": [
+      "1: # Frozen evaluation and denominators — revision 2026-10-08",
+      "5: ## Predictions before evaluator joins",
+      "11: ## Required outputs",
+      "17: ## Metrics",
+      "35: ## Ablations and uncertainty"
+    ],
+    "decision_excerpt": [
+      "9: Seal prediction/state/eligibility files and hashes before evaluator loads labels, clean counterparts, masks or windows. The evaluation layer alone joins those inputs. Inference must remain invariant when evaluator files are inaccessible or replaced; tests must actually invoke this boundary with those changed inputs. Future-event perturbation must not alter any prefix decision. A leakage-positive control must fail the test so an unexercised test cannot pass vacuously.",
+      "13: - Geometry: matched clean/attacked native and common-frame views, metre axes, crop/target/changed rows (evaluator only), same display bounds. Show a failure as well as any visible change.",
+      "15: - Tables: per-family/severity outcomes, clean and benign-stress false alarms, honest-companion effects, all-attempt coverage, abstention reasons, detection/recovery, component/temporal ablations, and failure gallery. Include every selected segment plus aggregate; final H separate.",
+      "25: | Event recall | Alarms during a scheduled nonzero-severity intervention / all scheduled attacked event attempts, including failed injections/rejection/abstention as undetected. Also eligible-only recall and realized-nonzero reader-valid recall, each with explicit counts |",
+      "27: | Delay | Seconds from first attempted onset (also first realized change as separate field) to first new eligible alarm within window. Preexisting alarm, failed injection/no exposure, no eligible coverage, and no detection have distinct statuses; non-detections are right-censored at offset/end, not dropped or assigned zero |",
+      "37: Required: D-only, retained G-only, max(D,G), and memoryless versus EWMA for each feasible arm, with separately calibrated thresholds and all-attempt/common-support results. If G is infeasible, show blocked cells instead of silently removing the comparison. Signed density/occupancy change is diagnostic; optional X/intensity/K factors need pre-freeze amendments. Changing history policy or tau is a named, recalibrated ablation, never a replacement selected after tests.",
+      "41: For mini_7: raw trajectories and counts only, no empirical generalization/FPR guarantee. For final mini_14: a single final check, no independent-scene confidence interval. No favorable hypothesis is required for technical completion. Preserve negative effects, tied/constant scores, no-power thresholds, calibration failure and all-abstain methods."
+    ]
+  },
+  {
+    "path": "planning/08_notebooks.md",
+    "bytes": 3260,
+    "sha256": "dbefe588765412a90d824580c274a859d1823078632cfe493f0e725b0c7a157e",
+    "headings": [
+      "1: # Visible evidence and reproducibility — revision 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "5: Every implemented stage has an executed notebook in a fresh kernel: question/claim boundary; complete bounded input example and units; exact source/clock/frame/config; importable computation; raw/normalized/state records; failures and unknowns; meaningful checks; visible technical gate and separate scientific interpretation. Display actual plots inline, not only filenames. Export full tables alongside readable completeness summaries. No hidden algorithm in display code, no notebook with cached cells standing in for execution.",
+      "13: | R05 | `R05_segment_timelines.ipynb` per C segment and `R05_grouped_evaluation.ipynb` | F_R05_timelines, F_R05_geometry, F_R05_ablations; T_R05_metrics, T_R05_coverage, T_R05_failures, T_R05_clean_support |",
+      "17: Each `artifacts/<new_run>/` includes manifest, exact config/seeds, acquisition/source/member/derived SHA-256, code snapshot + dirty status, runtime/library environment, event clock/transform provenance, split/fold and fit/calibration IDs, raw/decision/state/attempt ledgers, execution logs, test reports, output hashes, executed notebooks, `gate.md` and failures. No fabricated code revision; record source snapshot if dirty. Threshold and reference lineage must resolve to actual row/cloud IDs. Keep label/attack evaluation artifacts separate from operational inputs.",
+      "19: Exports: figures PDF/SVG and PNG; tables CSV and readable Markdown. Names include R stage, method, segment, fold and run ID; no overwritten result. Save immutable outcomes even on execution failure. If data/artifacts remain local and Git-ignored, provide a manifest and resolvable local links; external publishing is not authorized by evidence requirements. Regeneration commands are explicit and never chain later stages.",
+      "21: Run only tests appropriate to changed implementation, retaining existing arithmetic tests. Planning-only revision used byte/link/consistency checks and did not rerun scientific notebooks. Future implementation must inspect every rendered figure for units, clipping, scales, failure visibility and readable legends; avoid selecting demonstration views by favorable outcomes."
+    ]
+  },
+  {
+    "path": "planning/09_decisions_and_gates.md",
+    "bytes": 5958,
+    "sha256": "36f72151d2318cb25748b82b41c588d0efc57b973cde69f8c0f3bcb3be825ee6",
+    "headings": [
+      "1: # Decisions, risks and gates — revision 2026-10-08",
+      "5: ## Defaults settled by feasibility reasoning",
+      "9: ## Gates: technical correctness independent of scientific favorability",
+      "22: ## Risks to track",
+      "36: ## Genuinely unresolved researcher decisions"
+    ],
+    "decision_excerpt": [
+      "3: Authorized direction is real-cloud causal replay and explainable temporal trajectories. Historical gates remain in immutable artifacts at their audited scope. They are not prerequisites to execute the new bounded feasibility stage; old G3 failure is preserved, not overturned by replanning.",
+      "11: | Gate / stage | Visible proof required | Failure and stopping behavior |",
+      "13: | GR0 planning | Audit, pinned source contract, preserved history, coherent prompts | Complete in this revision; no execution implied |",
+      "14: | GR1 / R01 intake | Authorized archive hash/safe members; actual PCD/CSV fields; bounded multi-agent geometry/times; component disposition | Stop acquisition on resource/hash/safety failure. Unsupported components may be documented as infeasible; unresolved timing/frames block dependent factors. No scores/attacks yet. |",
+      "15: | GR2 / R02 causal factors | Integrated reader/availability/transform/factor path; real raw traces; exercised evaluator-boundary and prefix tests | Technical failure blocks scored replay; unavailable G does not block a correctly scoped D-only study. No empirical FPR claim. |",
+      "16: | GR3 / R03 overlays + temporal | Immutable originals; same-reader reloads; all-attempt ledger; causal state checks; clean/attacked and companion timelines | Invalid injections retained as failures. Temporal/boundary bugs block temporal claims. No detection benefit required. |",
+      "18: | GR5 / R05 comparisons | Every frozen comparison cell or explicit failed cell, actual clean fit/calibration, sealed predictions before evaluation, per-segment and grouped results | Unsupported hypotheses/no-power/all-abstain can technically complete; missing selected segments => incomplete comparison, never success by deletion |",
+      "19: | GR6 / R06 final | Authorization and pre-exposure freeze; H untouched log; final predictions/evaluator separation | Preserve exposed status if execution fails; no retuning or rerun called untouched |",
+      "29: | Density confuses legitimate dense scenes; removal indistinguishable | Clean sensor/range reference, no deficit inference, matched benign controls and failure gallery |",
+      "38: **Now:** authorize one mini_7 download (7,894,272,000 bytes) and reserve 25 GB free disk in Valid Point, or provide an authorized existing copy *within this project*. No algorithm selection is requested. R01 leaves download blocked until this resource decision is supplied.",
+      "42: Field semantics, timing accuracy, overlap, physical sensor origins and usable velocity are unresolved **evidence questions** for R01, not choices the researcher must guess. Publication suitability is currently unestablished: there is no real-data validation or demonstrated algorithmic novelty; R07 must assess the completed evidence against related primary literature."
+    ]
+  },
+  {
+    "path": "planning/README.md",
+    "bytes": 3272,
+    "sha256": "bdf1e426b6d8ed2fea2603a878439464461e6a73c720ea21c6107d35fc3b3f3e",
+    "headings": [
+      "1: # Valid Point: real-cloud replay research plan"
+    ],
+    "decision_excerpt": [
+      "3: Revised **2026-10-08** under the researcher's authorized planning revision. This is the current planning authority for package `valid_point`. R01 completed at [GR1](../artifacts/20261008T192922Z-R01/gate.md), R02 at [GR2](../artifacts/20261009T085704Z-R02/gate.md), and the mini_7 development replay R03 at [GR3](../artifacts/20261010T155346Z-R03/gate.md). GR3 is technical only: diagnostic thresholds are unavailable and no independent-scene calibration or detection claim follows. Start with [the plain-language overview](overview.md), [evidence audit](evidence_audit.md), [R01 results](../notebooks/R01_development_intake.ipynb), the [R02 notebook](../artifacts/20261009T085704Z-R02/R02_causal_factors.executed.ipynb), and the [R03 notebook](../artifacts/20261010T155346Z-R03/R03_replay_temporal.executed.ipynb).",
+      "17: | [09 Gates and risks](09_decisions_and_gates.md) | Technical acceptance, failure behavior and genuine decisions |",
+      "22: S00–S04 remain historical work. Old S00–S10 prompts are marked superseded; do not execute them as the current sequence. Their original bytes and the previous canonical documents are retained in [the dated snapshot](archive/2026-10-08-pre-replan/snapshot_manifest.json). Historical setup/context documents describe their original date, not today's readiness. If an old README or runner conflicts with this plan, this plan governs future work. R01–R03 added new code and evidence without rewriting historical artifacts or source notebooks."
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/01_research_contract.md",
+    "bytes": 6058,
+    "sha256": "53f72af4a24cf66fc28f1727b7820cafc8ae26c2c3d7c2a176b2d2326b4d0cf5",
+    "headings": [
+      "1: # Research question, threat model, and claim contract",
+      "3: ## Question and falsifiable hypotheses",
+      "22: ## Decision and information boundary",
+      "47: ## Attacker and protected assumptions",
+      "80: ## Allowed and unsupported claims"
+    ],
+    "decision_excerpt": [
+      "19: All can fail. Record null, adverse, ineffective-attack, and unidentifiable",
+      "76: | Noise, miscalibration, legitimate acceleration, occlusion, sensor failure | Benign stress strata; quantify false alarms and honest-view loss separately. |",
+      "93: saving. A GT-free failure must be a recorded negative result and blocks any"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/02_data_protocol.md",
+    "bytes": 7128,
+    "sha256": "f00f785088a604f01060c4759590a6367e940d7749d02c51e1eff534f997d0cb",
+    "headings": [
+      "1: # Dataset packaging, roles, time, frames, and splits",
+      "3: ## Verified boundary and acquisition plan",
+      "20: ## Proposed roles, chosen before outcomes",
+      "52: ## Frozen outer evaluation with minimum four comparisons",
+      "88: ## Time and coordinate contracts"
+    ],
+    "decision_excerpt": [
+      "45: If a candidate fails access/label/transform checks, record the failure before",
+      "48: unfavorable or missing selected segments; label the planned study incomplete.",
+      "49: Fewer than four valid distinct labeled comparison segments means no completed",
+      "83: an explicitly new study. Report every segment and aggregate, including failed"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/03_phase1_evidence.md",
+    "bytes": 13703,
+    "sha256": "b2271bd6c2397d5a89e4a18ce18a30f6a7ed7b4d1a3284d29d727e7ac787ebbc",
+    "headings": [
+      "1: # Phase 1: evidence, tracks, score, fitting, calibration",
+      "6: ## Schemas and separation",
+      "26: ## Factor contracts",
+      "40: ## Two required tracks",
+      "75: ## Raw formulas and clean references",
+      "110: ## Weight-free combiner and strict unknowns",
+      "154: ## Four parameter layers and operating calibration"
+    ],
+    "decision_excerpt": [
+      "3: This is a proposed mathematical contract, not implemented research. Defaults",
+      "30: | Vehicle kinematic self-consistency: displacement residual m; supporting dt s, speed m/s, acceleration m/s² | Two causal positions, prior reported velocity and orientation with known conventions. Same-sender inputs are not independent verification; receiver timing is independent. An external motion observation would be a new factor. | Inconsistent velocity spike/drift or pose jump | Real turns/acceleration, delayed odometry, integration error; jointly spoofed pose/velocity can pass | Missing/nonfinite pose/velocity/orientation, nonpositive/out-of-range dt, unsupported frame/unit conversion, future/late/stale samples, no supported clean reference; static sensor is not_applicable |",
+      "67: be discarded to improve metrics. Show maps for all such failures.",
+      "108: known subset cannot masquerade as a complete high S/T assessment.",
+      "175: is a separately named experiment. Calibration failure or insufficient support"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/04_consensus.md",
+    "bytes": 4316,
+    "sha256": "8b50dab23636c560b08baaeb0405fb3c22ad85085f2019824b02b5dc39f962a2",
+    "headings": [
+      "1: # Gated cross-agent consensus",
+      "6: ## Eligibility and computation",
+      "48: ## Required failures and synthetic scenes"
+    ],
+    "decision_excerpt": [
+      "48: ## Required failures and synthetic scenes"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/05_bandwidth.md",
+    "bytes": 8179,
+    "sha256": "8ca8d9ef848e9fd1d6036fdd0ff0e1afa0c238efa219ebc38c48001d0119bcbe",
+    "headings": [
+      "1: # Phase 2: quotas, exact bytes, payloads and task value",
+      "3: ## Timing and enforcement",
+      "33: ## Byte ledger and payload units",
+      "60: ## Equal-budget policies",
+      "99: ## Selection and adversarial packing",
+      "111: ## Usefulness and proxy outcomes"
+    ],
+    "decision_excerpt": [
+      "47: - **Attempted:** bytes the sender offers, including blocked excess and relevant",
+      "73: | Hard gate | 1 if T>=tau, else 0 | Explicit unknown reserve; unknown is not a failing threshold |",
+      "81: vanish, leave that remainder unused; do not secretly admit failed senders.",
+      "133: annotation incompleteness caveats, but these are not AP. Genuine detector AP,"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/06_attack_simulation.md",
+    "bytes": 6315,
+    "sha256": "2138319a076d7f61759b32088a84783105626fa40d0a9210f55a5b0a821d74ee",
+    "headings": [
+      "1: # Future deterministic overlays and simulation",
+      "6: ## Immutable overlay contract",
+      "29: ## Planned attack and benign matrix",
+      "52: ## Simulation episodes and leakage",
+      "70: ## Reader and real-overlay gates"
+    ],
+    "decision_excerpt": [
+      "24: Retain failed and ineffective attempts with reasons, not just successful attacks.",
+      "34: | Count-preserving rearrangement/replacement | Move 10%,25%,50%,100% of selected points; fixed offset/shape grid | Same global and where possible same per-tile counts; expected count-detector failure |",
+      "47: Retain out-of-range/invalid interventions as failed attempts. Full compromised",
+      "77: detected mismatch as a failed run. Reader rejection is not detection success.",
+      "82: If timing or transforms are unresolved, affected real results are blocked,",
+      "83: while synthetic experiments may remain valid. Do not bypass the gate with"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/07_validation.md",
+    "bytes": 8803,
+    "sha256": "56f4e6920ffebb8f2976efe107662a98d0f5f0d78d67cf5eed97cd74ece3d463",
+    "headings": [
+      "1: # Validation matrix, statistics, and paper artifacts",
+      "7: ## Comprehensive comparison matrix",
+      "27: ## Metric targets, coverage, and denominators",
+      "57: ## Statistical reporting",
+      "84: ## Paper narrative and exports"
+    ],
+    "decision_excerpt": [
+      "14: | Intensity, compromised fraction, collusion and threshold-aware sweeps | Full declared grid | Supported bounded sequences; explicit failures | Adaptive attacker knowledge fixed | F08_sweeps; T08_coverage |",
+      "22: | Per-segment clean/attacked timelines and failure gallery | Synthetic per episode | All four C segments, plus final H only after lock | Include blocked/unknown cases | F09_segment_timelines; T09_failures |",
+      "41: failure tables even when unsupported; absence of a supported detector is not",
+      "81: - Log numerical instability, zero-support bins, missing strata and failed",
+      "82:   injections. No fabricated curves for blocked, unrun, or undefined cells.",
+      "88: consensus failures, per-segment timelines, threshold/ablation comparisons,",
+      "89: exact-byte timelines and bandwidth–quality curves. Include a dedicated failure",
+      "98: with provenance sidecars. Archive failures and final holdout exposure history.",
+      "99: Gated studies stay explicitly “not run”; never fill their table cells with"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/08_notebooks.md",
+    "bytes": 6457,
+    "sha256": "7cf64fdb327f713411cf51b4d57bb75a8cce400270f46fc219792658a8b70f0b",
+    "headings": [
+      "1: # Notebook deliverables and acceptance",
+      "8: ## Common visible structure",
+      "29: ## Stage inventory",
+      "52: ## Provenance and export"
+    ],
+    "decision_excerpt": [
+      "10: 1. Question, stage, track and explicit claim boundary; pass/fail criterion.",
+      "18:    source/run IDs. Show negative/failed cases alongside successful cases.",
+      "20:    where applicable, limitations, and an explicit pass/fail/blocked gate.",
+      "23: Tables cannot be only a `head()` preview that hides unknowns/failures. Show the",
+      "24: full small example and aggregate completeness plus the downloadable full table",
+      "27: as failed evidence and is never presented as a passed notebook.",
+      "33: | S00 | `00_bootstrap.ipynb` | T00_environment and T00_scaffold plus a simple dependency/file diagram F00_structure; package import/provenance conventions work; science not run |",
+      "35: | S02 | `02_kinematics.ipynb`, `02_spatial_surplus.ipynb`, `02_availability.ipynb` | T02_kinematic_raw/F02_motion; T02_region_counts/F02_regions; T02_eligibility/F02_deadlines; each shows units, inputs, unknowns, benign/evasion failures |",
+      "40: | S07 | `07_overlay_roundtrip.ipynb` | T07_overlay_effects/F07_overlay_geometry; intended/injected/realized comparison, immutable hashes, production-reader round trips and failed attempts |",
+      "42: | S09 | `09_real_intake.ipynb`, `09_segment_timelines.ipynb`, `09_grouped_evaluation.ipynb` | T09_inventory/F09_geometry; T09_clean_strata, T09_attack_metrics, T09_ablations, T09_oracle_gap, T09_policies, T09_failures; F09_segment_timelines/F09_bandwidth_quality; every C segment and final H separately when authorized |",
+      "59: input/output hashes, failures and execution times. `config.json`, `seeds.json`,",
+      "74: A completed checklist row requires a link to the executed notebook, named",
+      "77: not count. Keep pending links labeled “planned” until files exist. Publish no"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/09_decisions_and_gates.md",
+    "bytes": 5821,
+    "sha256": "23dc1bd81c6a7eba85ab9ba3ab0517cc7fcff87184ce133966a179b0424f4248",
+    "headings": [
+      "1: # Decisions, defaults and explicit gates",
+      "3: ## Decisions fixed by the current brief",
+      "12: ## Proposed defaults ready for review",
+      "26: ## Genuine researcher decisions",
+      "45: ## Gates and failure behavior"
+    ],
+    "decision_excerpt": [
+      "10: stage; failed hypotheses are legitimate findings.",
+      "45: ## Gates and failure behavior",
+      "52: | G3 — GT-free viability | S04 GT-isolation and oracle-gap/failure evidence | Record negative result, block operational/real policy claim; oracle study may remain descriptive |",
+      "56: | G7 — synthetic evaluation | S08 complete preregistered grid, failures, coverage and paired uncertainty | Repair validation, or record a negative scientific outcome |",
+      "57: | G8 — real intake | S09 archive/time/label/transform preflight, four valid labeled comparison segments and frozen split | Real comparison incomplete; synthetic-only reporting allowed |",
+      "58: | G9 — held-out comparisons | Per-segment/aggregate evidence, no leakage, GT-free policies, exposed-holdout log | No completed real-data policy claim; show failed/blocked cells |",
+      "65: A gate can be “technically passed; hypothesis unsupported.” Preserve that"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/ARCHIVE_NOTICE.md",
+    "bytes": 478,
+    "sha256": "3f01cc6f223ee0358be8e0a617351a97a8fdd9cf62721f500d7583b1198c6d46",
+    "headings": [
+      "1: # Historical snapshot — not active instructions"
+    ],
+    "decision_excerpt": [
+      "3: These files preserve the exact pre-revision bytes listed in snapshot_manifest.json. Their relative links retain their original planning-folder context. They are historical evidence, not a parallel plan or executable work orders. Read the current planning/README.md, planning/evidence_audit.md and H011 in planning/history.md for current authority and corrections. Do not modify the snapshot to repair obsolete claims or links."
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/README.md",
+    "bytes": 2192,
+    "sha256": "0bdf21f0d17d1d646a0ffcbb59d58e00691b5c7196c6ac5cbd94b3a6b79f4bfe",
+    "headings": [
+      "1: # Planning index"
+    ],
+    "decision_excerpt": [
+      "12: | [04 — Consensus](04_consensus.md) | Independent identities, comparability, quorum, failures |",
+      "28: revised method as frozen. A failed scientific hypothesis can complete a stage",
+      "29: with honest evidence; it cannot unlock a claim whose prerequisites failed."
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/checklist.md",
+    "bytes": 16645,
+    "sha256": "2180e6eb77109c7ff4b1303d14550b0d9fb2aed8d783f659898ef90a774ad1d4",
+    "headings": [
+      "1: # Evidence-based acceptance checklist"
+    ],
+    "decision_excerpt": [
+      "7: **Verified S04 negative** = technically complete constructed comparison whose G3 scientific gate failed;",
+      "8: **Pending** = not implemented or run; **Blocked** = unmet prerequisite;",
+      "9: **Failed** = observed technical failure; **Negative result** = completed valid",
+      "10: experiment without claimed benefit. No score or validation item is complete.",
+      "15: results, code alone and unexecuted notebooks never complete scientific rows.",
+      "23: | P05 | Researcher reviews proposed method/resource choices before implementation | Verified setup for S00 | S00 invocation after scaffold review; [H005](history.md). The three future dependent choices remain open. |",
+      "24: | B00 | Fresh bootstrap notebook visibly proves environment, package origin and export convention | Verified S00 | [executed NB00](../artifacts/20261005T094948Z-b2d74f78/00_bootstrap.executed.ipynb); [T00_environment](../reports/tables/T00_environment_S00_infrastructure_none_20261005T094948Z-b2d74f78.md), [T00_scaffold](../reports/tables/T00_scaffold_S00_infrastructure_none_20261005T094948Z-b2d74f78.md), [F00_structure](../reports/figures/F00_structure_S00_infrastructure_none_20261005T094948Z-b2d74f78.png); [six-test report](../artifacts/20261005T094948Z-b2d74f78/test_results.json), [manifest](../artifacts/20261005T094948Z-b2d74f78/manifest.json), [gate](../artifacts/20261005T094948Z-b2d74f78/gate.md). Science not run. |",
+      "35: | G02 | Oracle gap includes missed, extra-alarm, proposal and empty-region failures | Verified S04 negative | [F04_oracle_gap](../reports/figures/F04_oracle_gap_S04_paired_constructed_gap_cases_20261008T103246Z-cbed4e64.png), [T04_gap_cases](../reports/tables/T04_gap_cases_S04_paired_constructed_gap_cases_20261008T103246Z-cbed4e64.md), [result](../artifacts/20261008T103246Z-cbed4e64/spatial_gap_result.json), [executed NB04](../artifacts/20261008T103246Z-cbed4e64/04_gt_free_oracle_gap.executed.ipynb). Twelve attempts include split-across-tile/object miss, empty-region ghost, unique honest view, changing content, outside-ROI addition, count-preserving rearrangement, present-empty and absent cases. Deferred proposal states missed/extra/merged/split and association ambiguity remain evaluator-visible and never affect GT-free scores. |",
+      "36: | G03 | Failed GT-free viability explicitly blocks operational claim | Negative result; G3 failed and operational/real-policy claims blocked | [G3 gate](../artifacts/20261008T103246Z-cbed4e64/gate.md), [manifest](../artifacts/20261008T103246Z-cbed4e64/manifest.json), [history H010](history.md). All attempts: GT-free 3/7 attack alarms, oracle 5/7; each abstained 1/12 and false-alarmed 2/5 benign cases. Common support: 3/6 versus 5/6 attack alarms. Constructed fixtures do not establish empirical sensor validity. |",
+      "37: | Q01 | Leave-one-out independent quorum/comparability; conflict/insufficiency unknown | Pending | NB05; T05_consensus_eligibility; `test_consensus.py` |",
+      "38: | Q02 | One attacker, two colluders, honest conflict, missing/membership, unique honest and Sybil/correlation cases | Pending | NB05; F05_peer_cases; scenario-completeness test/report |",
+      "39: | Q03 | Point addition cannot improve fixed-peer penalty; colluder-shift evasion visible | Pending | NB05; monotonic sweep and counterexample; `test_consensus.py` |",
+      "40: | W01 | Next-frame effective quotas and no retroactive transmission credit | Pending | NB06; F06_byte_timeline/T06_byte_ledger; `test_bandwidth.py` |",
+      "41: | W02 | Five byte counters reconcile with actual serialization and trusted-hop assumptions | Pending | NB06; T06_byte_ledger; `test_serialization.py` |",
+      "42: | W03 | Uniform/hard/linear/smooth/unknown compared at equal actual bytes; unused budget explicit | Pending | NB06/NB08; T08_tradeoffs; `test_bandwidth.py`, `test_evaluation.py` |",
+      "43: | W04 | Partial-cloud unknowns, audit cost, score expiry, reserve abuse and harmful packing visible | Pending | NB06/NB08; F06_byte_timeline/F08_bandwidth_quality; closed-loop tests |",
+      "44: | W05 | Proxy utility and hindsight policy bound distinguished from AP | Pending | NB08; T08_policy_bound/F08_proxy_utility; `test_proxy.py` |",
+      "45: | A01 | Original hashes unchanged; seeded overlay replay order-independent | Pending | NB07; T07_overlay_effects; `test_overlays.py` |",
+      "46: | A02 | Production-reader reload validates fields, coordinates, counts and hashes | Pending | NB07; F07_overlay_geometry; `test_pointcloud_io.py`, `test_overlays.py` |",
+      "47: | A03 | Intended/injected/realized ledger retains failed attempts and honest companions | Pending | NB07/NB08; T08_coverage; `test_evaluation.py` |",
+      "48: | V01 | All attack/benign/intensity/fraction/adaptive cases reported with abstention denominators | Pending | NB08; T08_attack_metrics/T08_benign_false_alarms/T08_coverage; completeness report |",
+      "49: | V02 | AUROC/AUPRC/recall/frozen FPR/precision at stated prevalence, undefined cases visible | Pending | NB08; F08_attack_curves; `test_metrics.py` |",
+      "50: | V03 | Paired seed and grouped segment uncertainty without frame pseudoreplication | Pending | NB08/NB09; intervals/counts in metric tables; `test_metrics.py` |",
+      "51: | D01 | Archive/time/labels/transforms verified for a bounded real sequence | Pending | NB09 intake; T09_inventory/F09_geometry; `test_mixed_signals.py` |",
+      "52: | D02 | >=4 distinct labeled comparison segments beyond development; additional final reserved | Pending | NB09; frozen `configs/segment_roles.json`, T09_inventory; `test_splits.py` |",
+      "53: | D03 | Four outer folds fit only clean other segments; no agent/frame/variant leakage | Pending | NB09 grouped; fold manifests/T09_ablations; `test_splits.py` |",
+      "54: | D04 | Every segment clean/attacked timelines plus aggregate and wide uncertainty caveat | Pending | Executed NB09 timelines per C0–C3; F09_segment_timelines/T09_failures |",
+      "55: | D05 | Real policies use GT-free score and exact bytes; no oracle/GT policy leakage | Pending | NB09 grouped; T09_policies/F09_bandwidth_quality; `test_gt_isolation.py` |",
+      "56: | D06 | Final H opened only after freeze; no outcome-driven scene replacements | Pending | Exposure log, final manifest, executed final NB09 outputs |",
+      "57: | N01 | Every implemented stage runs fresh kernel, displays failures, exports provenance and gate | Verified through S04; S04 scientific gate negative | S04: [executed NB04](../artifacts/20261008T103246Z-cbed4e64/04_gt_free_oracle_gap.executed.ipynb), [execution log](../artifacts/20261008T103246Z-cbed4e64/execution.log), [67-test report](../artifacts/20261008T103246Z-cbed4e64/test_results.json), [manifest](../artifacts/20261008T103246Z-cbed4e64/manifest.json), [gate](../artifacts/20261008T103246Z-cbed4e64/gate.md). Five code cells executed sequentially with no error output; config/seeds/source/input/output hashes, independent track lineage, PDF/SVG/PNG and CSV/Markdown exports are sealed and Git-ignored. Earlier S00–S03 evidence remains linked in their stage rows and history H005–H009. |",
+      "58: | P10 | Paper claims linked to artifacts, all pending gates and limitations visible | Pending | NB10; T10_claim_evidence/T10_protocol; `test_reporting.py` |",
+      "59: | X01 | Temporal/probability/detector/transfer claims remain gated until independent evidence | Blocked/unrun by scope | [S02 gate](../artifacts/20261005T135710Z-6e4710d8/gate.md) explicitly produces no probability, score or temporal alarm. New independent spec/notebook remains required; S02 is raw-contract evidence only. |",
+      "62: and this checklist. Preserve failed/negative evidence links when a later run",
+      "63: passes; do not overwrite the research record."
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/context_review.md",
+    "bytes": 2031,
+    "sha256": "21cf91739b680b6fdf6f3d77a601800dae682215e6d742f7e4b61de399e5fb3b",
+    "headings": [
+      "1: # Historical context reviewed, not inherited"
+    ],
+    "decision_excerpt": [
+      "15: | Existing scorer/state/policy pipeline and completed milestones | Start with an empty package. Define semantics and evidence contracts before implementation; no historical completion credit. |"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/history.md",
+    "bytes": 17410,
+    "sha256": "e4f89390b3b1ed4d8f0d7daf8ffd827192dd9a364e6f6d7254a14bcbd0b8fc02",
+    "headings": [
+      "1: # Append-only research history",
+      "7: ## 2026-10-05 — H001: independent project boundary",
+      "15: ## 2026-10-05 — H002: release packaging and scene roles",
+      "25: ## 2026-10-05 — H003: score, GT-free and bandwidth contracts",
+      "35: ## 2026-10-05 — H004: evidence and stop boundary",
+      "43: ## 2026-10-05 — H005: S00 invoked and bootstrap choices",
+      "70: ## 2026-10-05 — H006: S01 invoked; causal synthetic scene contract",
+      "95: ## 2026-10-05 — H007: S02 invoked; raw contracts pass with identifiability limits",
+      "151: ## 2026-10-05 — H008: correction to H007 final-bundle packaging verification",
+      "177: ## 2026-10-08 — H009: S03 clean reference and score semantics",
+      "214: ## 2026-10-08 — H010: S04 GT-free path completed; G3 negative result"
+    ],
+    "decision_excerpt": [
+      "5: reason, scope and affected artifacts/gates; do not invent completed experiments.",
+      "7: ## 2026-10-05 — H001: independent project boundary",
+      "15: ## 2026-10-05 — H002: release packaging and scene roles",
+      "25: ## 2026-10-05 — H003: score, GT-free and bandwidth contracts",
+      "35: ## 2026-10-05 — H004: evidence and stop boundary",
+      "38: stage. All scientific acceptance items remain pending; hand calculations are",
+      "43: ## 2026-10-05 — H005: S00 invoked and bootstrap choices",
+      "53: the sandbox; resolution and install were completed with network access limited",
+      "56: The first local test attempt was blocked by the sandbox's localhost socket",
+      "57: restriction; a test path issue was also repaired. The tests then passed with",
+      "64: [gate](../artifacts/20261005T094948Z-b2d74f78/gate.md) record six passing tests,",
+      "66: G1's infrastructure portion passed; its S01 scientific contract portion remains",
+      "67: pending. Research measurements/results are **not run**. The three separate",
+      "68: researcher choices in H003/decision notes remain open for later dependent work.",
+      "70: ## 2026-10-05 — H006: S01 invoked; causal synthetic scene contract",
+      "83: The first [S01 run](../artifacts/20261005T102854Z-d974bbaf/gate.md) was blocked",
+      "85: intermediate passing run exposed a legend covering the north viewpoint label,",
+      "90: and [gate](../artifacts/20261005T103202Z-d2f4b72b/gate.md) support **G1 pass**",
+      "95: ## 2026-10-05 — H007: S02 invoked; raw contracts pass with identifiability limits",
+      "131: The first [passing run](../artifacts/20261005T135122Z-f8a4238c/gate.md)",
+      "138: notebook execution failed. Jupyter emitted its local TCP encryption warning;",
+      "139: execution and tests completed successfully with local sockets permitted.",
+      "143: record **53 passing tests**, three fresh-kernel notebooks and 36 visible hand",
+      "147: source notebooks contain no generated outputs. S02 raw-contract gate **PASS**;",
+      "148: full G2 is **blocked pending separately invoked S03 fitting/calibration/score**.",
+      "151: ## 2026-10-05 — H008: correction to H007 final-bundle packaging verification",
+      "153: The post-run audit of H007's second bundle failed its assertion that all generated",
+      "156: The raw notebook/test gates still passed; this was a failed packaging acceptance",
+      "157: check, not a scientific failure. H007's statement that that bundle was final and",
+      "158: fully ignored is superseded here. Both preliminary bundles remain unchanged.",
+      "167: 53 passing tests and three fresh-kernel notebooks. The post-run audit verified",
+      "170: and no generated artifacts/reports exposed to Git. This audit passed.",
+      "172: The raw-contract gate remains PASS, with the consistent-spoof, legitimate",
+      "173: acceleration, rearrangement/removal and unknown-visibility limitations in H007.",
+      "174: Full G2, fitted/scored evidence and detection/probability claims remain blocked",
+      "175: pending separately invoked S03. No later stage was run or externally published.",
+      "177: ## 2026-10-08 — H009: S03 clean reference and score semantics",
+      "200: The first [S03 run](../artifacts/20261008T091106Z-2b73f795/gate.md) failed because",
+      "201: sandboxed Jupyter could not bind a local socket. A later passing run was",
+      "202: superseded after review found spatial bins shared between tiles. A subsequent pass was superseded by a figure title-layout repair. Another",
+      "203: [failed run](../artifacts/20261008T091349Z-79149ae5/gate.md) caught a tie-key",
+      "207: [score](../artifacts/20261008T091758Z-d1642764/03_score_and_ablations.executed.ipynb) notebooks show 59 passing",
+      "208: tests, fresh execution from two kernels, 12 passing hand cases and a",
+      "209: nonincreasing literal point-addition sweep. G2 passes only for reproducible",
+      "211: operating validity and attack detection remain blocked by absent real/replayed",
+      "212: clean measurements. S04 and later gates were not run.",
+      "214: ## 2026-10-08 — H010: S04 GT-free path completed; G3 negative result",
+      "216: The researcher invoked S04 after the S03 technical G2 pass. Added a receiver-owned",
+      "252: PASS and G3 FAIL_NEGATIVE_RESULT**. Therefore the GT-free score is not defensible",
+      "254: claims are blocked. No detector was imported, no external data was acquired, and"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/progressplan.md",
+    "bytes": 7270,
+    "sha256": "064801fc008947156aea7ffe962764bfa3b791ea4341fd131e304936f254b326",
+    "headings": [
+      "1: # Ordered progress plan"
+    ],
+    "decision_excerpt": [
+      "4: unstarted. G1 and the S03 G2 reproducible score/calibration-semantics gate passed on illustrative fixtures. S04 passed technical execution but **G3 failed as a negative result**, so operational readiness and real-policy claims are blocked. Stage numbers are new Valid Point",
+      "10: | [S00 bootstrap](prompts/00_bootstrap.md) | Researcher review of G0 | Minimal chosen environment, provenance/execution helpers, NB00 | Local Jupyter kernel needs localhost sockets; installed dependency lock is CPython 3.14/macOS arm64 resolved | Fresh notebook structural evidence, no unrequested research | **G1 infrastructure passed**: [run gate](../artifacts/20261005T094948Z-b2d74f78/gate.md), [manifest](../artifacts/20261005T094948Z-b2d74f78/manifest.json); six tests passed. Science not run. |",
+      "11: | [S01 scenes](prompts/01_synthetic_scenes.md) | S00 | Contracts, small synthetic geometry/reader, NB01 | GT leakage, empty/absent confusion; synthetic visibility is evaluator-only | G1 causal/unknown fixtures visibly correct | **G1 passed**: [gate](../artifacts/20261005T103202Z-d2f4b72b/gate.md), [manifest](../artifacts/20261005T103202Z-d2f4b72b/manifest.json), [executed NB01](../artifacts/20261005T103202Z-d2f4b72b/01_synthetic_scenes.executed.ipynb); nine tests. No score or GT-free result. |",
+      "12: | [S02 raw evidence](prompts/02_raw_evidence.md) | S01 G1 passed | Kinematics, fixed-region counts and independent eligibility; three NB02 notebooks | Consistent spoof has zero residual; acceleration is nonzero; removal/rearrangement evade counts; visibility unknown | Raw units, confounders/evasions/unknowns tested; no scores yet | **Raw-contract PASS**: [gate](../artifacts/20261005T135710Z-6e4710d8/gate.md), [manifest](../artifacts/20261005T135710Z-6e4710d8/manifest.json), [tests](../artifacts/20261005T135710Z-6e4710d8/test_results.json); 53 tests, three fresh kernels and 36 hand checks. Full G2 remains blocked pending uninvoked S03. |",
+      "13: | [S03 references/score](prompts/03_references_score.md) | S02 | Clean fitting, calibration, weight-free score/ablations; two NB03 notebooks | All 1,200 test scores tie at A=0 on deterministic fixtures; no empirical sensor FPR/power; frame clustering | G2 monotonicity, lineage, separate calibration; negative results accepted | **G2 semantic PASS**: [gate](../artifacts/20261008T091758Z-d1642764/gate.md), [manifest](../artifacts/20261008T091758Z-d1642764/manifest.json), [tests](../artifacts/20261008T091758Z-d1642764/test_results.json), [reference notebook](../artifacts/20261008T091758Z-d1642764/03_clean_references.executed.ipynb), [score notebook](../artifacts/20261008T091758Z-d1642764/03_score_and_ablations.executed.ipynb). 59 tests, two fresh kernels, 12 hand cases. Threshold c=0 with 0/400 clean calibration alarms; a separate c=1 no-power fixture is recorded. No empirical detection claim. |",
+      "14: | [S04 GT-free](prompts/04_gt_free.md) | S03 | Fixed tiles, optional ego proposal comparison, oracle gap, NB04 | 3/7 GT-free attack alarms versus 5/7 oracle on all attempts; 2/5 benign false alarms in both; constructed-only evidence | G3; failure blocks operational claim, not recording results | **Technical PASS; G3 FAIL negative result**: [gate](../artifacts/20261008T103246Z-cbed4e64/gate.md), [manifest](../artifacts/20261008T103246Z-cbed4e64/manifest.json), [67 tests](../artifacts/20261008T103246Z-cbed4e64/test_results.json), [NB04](../artifacts/20261008T103246Z-cbed4e64/04_gt_free_oracle_gap.executed.ipynb), [T04](../reports/tables/T04_gap_cases_S04_paired_constructed_gap_cases_20261008T103246Z-cbed4e64.md), [F04](../reports/figures/F04_oracle_gap_S04_paired_constructed_gap_cases_20261008T103246Z-cbed4e64.png). Optional proposal scorer deferred; failure annotations retained. Operational/real-policy claims blocked. |",
+      "15: | [S05 consensus](prompts/05_consensus.md) | S04 | Leave-one-out diagnostic and gated ablation, NB05 | Correlated peers/collusion/unique honest view | G4 or documented unknown consensus; baseline can continue | Pending |",
+      "16: | [S06 byte policies](prompts/06_bandwidth.md) | S04; S05 disposition recorded | Serialization, causal quotas, proxies, NB06 | Retrospective savings, hidden full clouds, harmful packing | G5 exact ledgers/equal actual-byte controls | Pending |",
+      "17: | [S07 overlays](prompts/07_overlays.md) | S02, S04, S06 | Immutable seeded overlay registry/round trips, NB07 | Source mutation, silently failed attacks | G6 full intended/injected/realized ledger | Pending |",
+      "18: | [S08 synthetic evaluation](prompts/08_synthetic_evaluation.md) | S03–S07 and consensus disposition | Preregistered sweeps, metrics, uncertainty, NB08 | Cherry-picking, abstention inflation, proxy overclaim | G7 complete case inventory; hypothesis may fail | Pending |",
+      "19: | [S09 real data](prompts/09_real_data.md) | S08, resource decision, frozen protocol | One-archive intake; four outer folds; final H gate; three NB09 templates | Fewer than four labels, invalid geometry, leakage, scene correlation | G8/G9; do not replace scenes based on results | Pending |",
+      "20: | [S10 paper](prompts/10_paper.md) | S08 and explicit S09 completion/blocked disposition | Paper exports, claim ledger, reproducibility bundle, NB10 | Turning toy/oracle results into operational claims | G10; scope paper to evidence actually obtained | Pending |",
+      "24: requirements, not just code paths. If S09 is incomplete, S10 can prepare a",
+      "26: real comparison complete. Optional temporal/learned/detector/probability/",
+      "29: S04 is complete and stops for review. Its [run gate](../artifacts/20261008T103246Z-cbed4e64/gate.md)",
+      "30: records a technical pass and explicit G3 failure. Receiver-owned 400-tile geometry,",
+      "32: passed, but the constructed comparison exposed misses, false alarms, an abstention",
+      "33: and the count-preserving blind spot. S05 was not launched. Because G3 failed,",
+      "34: dependent operational/real-policy claims remain blocked unless the researcher",
+      "41: next prompt. Failed prerequisites stop dependent work but need not erase"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/00_bootstrap.md",
+    "bytes": 4604,
+    "sha256": "540dec4f050872eebfc7c03695b5ed6bae4699a55565128457484efc23b00d3a",
+    "headings": [
+      "1: # S00 — Bootstrap and notebook conventions",
+      "5: ## Prerequisites and scope",
+      "14: ## Exact deliverables",
+      "23: ## Visible results and meaningful tests",
+      "33: ## Stop/go",
+      "39: ## Boundaries and working rules",
+      "57: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "27: “not run”; never fabricate a scientific smoke result. Demonstrate a tiny",
+      "28: non-scientific export round trip and missing-provenance failure. Test manifest",
+      "35: G1 infrastructure portion passes only with an independently rerunnable notebook,",
+      "46: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "47: never invent favorable results or hide failed attempts.",
+      "61: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "63: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "80: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/01_synthetic_scenes.md",
+    "bytes": 4754,
+    "sha256": "9575051003b3d21581af7b7f33ce115734a0e586e57eb577806cdccd1527658a",
+    "headings": [
+      "1: # S01 — Synthetic scene contracts and first visualization",
+      "5: ## Prerequisites and scope",
+      "12: ## Exact deliverables",
+      "22: ## Visible results and meaningful tests",
+      "35: ## Stop/go",
+      "40: ## Boundaries and working rules",
+      "58: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "29: Partition generator seeds by complete scene (development 0–9, reference 100–109,",
+      "37: G1 passes when geometry and contracts are visibly auditable and reproducible.",
+      "38: Do not pass a future GT-free or score claim merely because scene truth exists.",
+      "47: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "48: never invent favorable results or hide failed attempts.",
+      "62: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "64: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "81: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/02_raw_evidence.md",
+    "bytes": 4780,
+    "sha256": "edf4b86c4c709bd64a2bbad2545203e24f2e674580df58eb9a9a5b5cf89f9cae",
+    "headings": [
+      "1: # S02 — Phase 1 raw evidence",
+      "5: ## Prerequisites and scope",
+      "11: ## Exact deliverables",
+      "22: ## Visible results and meaningful tests",
+      "38: ## Stop/go",
+      "44: ## Boundaries and working rules",
+      "62: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "7: S01 contracts/reader/scenes passed G1. Read `planning/03_phase1_evidence.md`.",
+      "40: Proceed to fitting only if the raw contracts and unknown states pass. Record",
+      "51: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "52: never invent favorable results or hide failed attempts.",
+      "66: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "68: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "85: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/03_references_score.md",
+    "bytes": 4899,
+    "sha256": "c5b94cc2710679094824e1c2cbd908450318106f5a9161dd424a046434ac8465",
+    "headings": [
+      "1: # S03 — Clean references, score combination and ablations",
+      "5: ## Prerequisites and scope",
+      "12: ## Exact deliverables",
+      "21: ## Visible results and meaningful tests",
+      "38: ## Stop/go",
+      "43: ## Boundaries and working rules",
+      "61: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "50: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "51: never invent favorable results or hide failed attempts.",
+      "65: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "67: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "84: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/04_gt_free.md",
+    "bytes": 4825,
+    "sha256": "c6a3823d42608ecd21b67459e77108b8823b81cb3bbb21e801f750cad64c804a",
+    "headings": [
+      "1: # S04 — GT-free spatial evidence and oracle gap",
+      "5: ## Prerequisites and scope",
+      "12: ## Exact deliverables",
+      "20: ## Visible results and meaningful tests",
+      "37: ## Stop/go",
+      "43: ## Boundaries and working rules",
+      "61: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "7: S03 passed technical G2 and has frozen synthetic reference/calibration bundles.",
+      "40: A failure is an explicit negative result and blocks operational readiness/real",
+      "41: policy claims. Do not import a detector to conceal the failure. Stop for review.",
+      "50: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "51: never invent favorable results or hide failed attempts.",
+      "65: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "67: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "84: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/05_consensus.md",
+    "bytes": 4770,
+    "sha256": "2bb76e3539ab5641d7bbed06ff8e247a5464b8ec25ca5598b2f7aac72002a58e",
+    "headings": [
+      "1: # S05 — Gated leave-one-sender-out consensus",
+      "5: ## Prerequisites and scope",
+      "11: ## Exact deliverables",
+      "18: ## Visible results and meaningful tests",
+      "38: ## Stop/go",
+      "44: ## Boundaries and working rules",
+      "62: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "35: monotonic fixed-peer penalty. Test that failure to form consensus cannot quietly",
+      "41: is not defensible, retain P=unknown/diagnostic, document the failure and permit",
+      "51: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "52: never invent favorable results or hide failed attempts.",
+      "66: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "68: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "85: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/06_bandwidth.md",
+    "bytes": 5002,
+    "sha256": "520a842d54e558149c219066f7fa6313c56d6b03567e2e30b3838b720d5942d9",
+    "headings": [
+      "1: # S06 — Byte accounting and next-frame quota policies",
+      "5: ## Prerequisites and scope",
+      "12: ## Exact deliverables",
+      "20: ## Visible results and meaningful tests",
+      "40: ## Stop/go",
+      "46: ## Boundaries and working rules",
+      "64: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "7: S04 has an explicit viability disposition, and S05 status (passed or unavailable)",
+      "10: remain blocked if GT-free viability failed.",
+      "43: pass a network-saving claim. Freeze proposed policy parameters only after",
+      "53: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "54: never invent favorable results or hide failed attempts.",
+      "68: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "70: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "87: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/07_overlays.md",
+    "bytes": 4861,
+    "sha256": "a891e54ff61868a846942aa02debc4b9c44835060ea5fb86ba79362d58a7a1e5",
+    "headings": [
+      "1: # S07 — Immutable deterministic attack overlays",
+      "5: ## Prerequisites and scope",
+      "11: ## Exact deliverables",
+      "20: ## Visible results and meaningful tests",
+      "41: ## Stop/go",
+      "47: ## Boundaries and working rules",
+      "65: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "32: IDs and hashes. Preserve failed/ineffective attempts and honest companions.",
+      "43: G6 passes only with the full effect/attempt ledger and reader checks. Invalid",
+      "44: derived cases stay failed; real data remains untouched and full evaluation waits",
+      "54: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "55: never invent favorable results or hide failed attempts.",
+      "69: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "71: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "88: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/08_synthetic_evaluation.md",
+    "bytes": 5106,
+    "sha256": "428107b3ab82f01dbd16fa0da647973cae7f03c1848838e43c371fac6084be07",
+    "headings": [
+      "1: # S08 — Synthetic attack and policy evaluation",
+      "5: ## Prerequisites and scope",
+      "12: ## Exact deliverables",
+      "23: ## Visible results and meaningful tests",
+      "43: ## Stop/go",
+      "49: ## Boundaries and working rules",
+      "67: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "40: scenario completeness, causal censored-observation replay, exact-byte matching,",
+      "45: G7 requires complete reproducible evaluation and negative results, not favorable",
+      "56: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "57: never invent favorable results or hide failed attempts.",
+      "71: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "73: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "90: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/09_real_data.md",
+    "bytes": 5975,
+    "sha256": "b63726f6e3aa4d994cd1dee97daa66f523b15fb4d598a54969d7bfac49038cda",
+    "headings": [
+      "1: # S09 — Four-or-more-segment intake and grouped evaluation",
+      "5: ## Prerequisites and scope",
+      "12: ## Exact deliverables",
+      "25: ## Intake and frozen evaluation",
+      "45: ## Visible results and meaningful tests",
+      "55: ## Stop/go",
+      "61: ## Boundaries and working rules",
+      "79: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "22:   T09_ablations, T09_oracle_gap, T09_policies, T09_failures;",
+      "36: before real overlays. If labels/timing/geometry fail, report the blocked segment.",
+      "38: the real study is incomplete. Keep every agent/frame/clean/attack variant in its",
+      "48: attacked measurements, unknowns, failed attacks, thresholds and quotas. Report",
+      "58: per-segment evidence. Retain incomplete/negative outcomes and block unsupported",
+      "68: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "69: never invent favorable results or hide failed attempts.",
+      "83: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "85: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "102: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/10_paper.md",
+    "bytes": 5241,
+    "sha256": "e8fa7b44351c2c4d9e4f94340fb75cd0d7e49900ee5d6087d136fc50c8db2f1e",
+    "headings": [
+      "1: # S10 — Paper figures, tables and limitations",
+      "5: ## Prerequisites and scope",
+      "13: ## Exact deliverables",
+      "23: ## Visible results and meaningful tests",
+      "44: ## Stop/go",
+      "50: ## Boundaries and working rules",
+      "68: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "7: S08 complete evidence and an explicit S09 status exist. Read",
+      "9: If real comparisons are incomplete, prepare a clearly scoped synthetic-only",
+      "10: report with incomplete real work visible. This stage must not tune methods or",
+      "28: curves, consensus failures, oracle gap, threshold/ablation comparisons, byte",
+      "30: negative/failed-case table, all-attempt coverage and honest-view loss.",
+      "46: G10 passes when every supported claim is traceable and every unsupported claim",
+      "57: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "58: never invent favorable results or hide failed attempts.",
+      "72: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "74: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "91: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/prompts/README.md",
+    "bytes": 1779,
+    "sha256": "359f682c19cd95127733a0c1be7383bfa34dd18aa6de657cfbdb8f0af3f60c98",
+    "headings": [
+      "1: # Future stage prompts"
+    ],
+    "decision_excerpt": [
+      "7: prompt. If a prerequisite is unmet, record it rather than silently bypassing it.",
+      "15: | S04 | [GT-free path](04_gt_free.md) | Tile/proposal failures and oracle-gap comparison |",
+      "19: | S08 | [Synthetic evaluation](08_synthetic_evaluation.md) | Full case grid, uncertainty, failures and trade-offs |"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/requirements_coverage.md",
+    "bytes": 8858,
+    "sha256": "dc509116203d9d44d0e62b8ccf2873ee770a18167a8a93add472d8760d4548d0",
+    "headings": [
+      "1: # Requirement-to-plan coverage audit"
+    ],
+    "decision_excerpt": [
+      "4: work remains pending in [checklist](checklist.md). Numbered categories follow",
+      "24: | DATA6 | <4 real segments incomplete, no result-based replacement, wide generalization uncertainty | [data protocol](02_data_protocol.md), [gates](09_decisions_and_gates.md) | D02, D04, P10 |",
+      "38: | CON3 | One attacker/two colluders/conflicting/missing/changing peers; unknown failures and point-addition test | [consensus](04_consensus.md) | Q02–Q03 |",
+      "45: | AT2 | Oracle and GT-free targets; intended/injected/realized effects, failed attempts and honest companions | [overlay contract](06_attack_simulation.md) | A03 |",
+      "52: | VAL6 | Per-segment results, grouped uncertainty, failed cases, reproducible figures/tables | [statistics/paper exports](07_validation.md), [notebook contract](08_notebooks.md) | V03, D04, P10 |",
+      "54: | NB1 | Every stage fresh kernel, visible inputs/measurements/unknowns/outputs/failures/conclusions, importable computation | [common contract and stage inventory](08_notebooks.md) | N01, all prompts |",
+      "58: | STOP | Summary, genuine decisions, stop at review before implementation | [decisions](09_decisions_and_gates.md), [progressplan](progressplan.md) | P05 remains pending |"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/setup_verification.md",
+    "bytes": 2780,
+    "sha256": "4bf4c1734f172af33983375ea5e326e6ae2ff925abb0126b56aa2ab36f8f5e8b",
+    "headings": [
+      "1: # Setup verification — 2026-10-05"
+    ],
+    "decision_excerpt": [
+      "21: | Research status | All scientific checklist rows pending; only setup/documentation rows verified. G0 awaits researcher review. |"
+    ]
+  },
+  {
+    "path": "planning/archive/2026-10-08-pre-replan/sources.md",
+    "bytes": 3132,
+    "sha256": "1563064d4b30b2c4ec9e12f283260f08e88aaf5ea6723a8e2755ae8be733f0e6",
+    "headings": [
+      "1: # Source verification — 2026-10-05",
+      "6: ## Official release trail",
+      "39: ## Required future checks"
+    ],
+    "decision_excerpt": [
+      "35: arrival times are not established. Browser opening of the tree failed; the"
+    ]
+  },
+  {
+    "path": "planning/checklist.md",
+    "bytes": 7227,
+    "sha256": "3d3a209265ad676163e7e6a9aa060956ec421c951368abb073e4a804c02ad51c",
+    "headings": [
+      "1: # Evidence checklist — revision 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "3: Old checklist bytes are preserved in [the snapshot](archive/2026-10-08-pre-replan/checklist.md). Historical G01 “GT isolation verified” is retracted at that scope; see [audit](evidence_audit.md). R-stage IDs below are not the old checklist's R01/R02 reference-fit rows.",
+      "7: | PLAN | Coherent authorized replan, append-only correction, superseded prompts and preserved prior bytes | Complete documentary work; [history](history.md), [snapshot manifest](archive/2026-10-08-pre-replan/snapshot_manifest.json) |",
+      "8: | AUDIT | Computation vs fixtures vs empirical validation; input/calibration/boundary/gate scrutiny | Complete; [audit](evidence_audit.md), [22-bundle hash check](audit/2026-10-08-artifact-verification.json) |",
+      "9: | SOURCE | Primary sources pinned, source hashes, exact public archive metadata, unavailable fields | Complete documentation-only; [sources](sources.md), [matrix](dataset_field_matrix.md) |",
+      "10: | DATA | Authorized mini_7 hash, safe inventory, real headers/columns, time/transform checks, geometry | **Complete for R01 intake:** [GR1](../artifacts/20261008T192922Z-R01/gate.md), [executed notebook](../notebooks/R01_development_intake.ipynb), [schema](../artifacts/20261008T192922Z-R01/T_R01_schema.json), [timing](../artifacts/20261008T192922Z-R01/T_R01_timing.json), [figure](../artifacts/20261008T192922Z-R01/F_R01_geometry.png), [84-test report](../artifacts/20261008T192922Z-R01/test_results.xml). Temporal/cross-agent/K limits remain conditional. |",
+      "11: | FACTOR | Raw causal D/G feasible dispositions, real sensor context and full-region support | **Complete for R02 raw scope:** [GR2](../artifacts/20261009T085704Z-R02/gate.md), [full input/eligibility/component tables](../artifacts/20261009T085704Z-R02/T_R02_components.md), [raw timeline](../artifacts/20261009T085704Z-R02/F_R02_raw_timelines.png), [method freeze](../artifacts/20261009T085704Z-R02/method_freeze.json). D 250/250; G 163/250 with explicit unknowns. No final reference support yet. |",
+      "12: | BOUNDARY | Actual changed/withheld evaluator files and future events; identical prefix scores/state plus leakage-positive control | **R03 score and full-state boundary verified:** [real mini_7 isolation](../artifacts/20261010T155346Z-R03/boundary_isolation.json), [validation](../artifacts/20261010T155346Z-R03/validation.json), [108-test report](../artifacts/20261010T155346Z-R03/test_results_full.xml). Changed/withheld evaluator files left 180 real-data decisions and complete state identical; positive control trapped, 0 evaluator reads, malicious-arm prefixes invariant. R02 raw [isolation](../artifacts/20261009T085704Z-R02/boundary_isolation.json) retained. |",
+      "14: | OVERLAY | Same-reader reload, intended/injected/realized ledger, failures and unchanged originals/companions | **Complete for bounded R03 development:** [attempt ledger](../artifacts/20261010T155346Z-R03/T_R03_attempts.md), [identity round trips](../artifacts/20261010T155346Z-R03/T_R03_roundtrip.md), [movement](../artifacts/20261010T155346Z-R03/T_R03_movement.md), [immutability](../artifacts/20261010T155346Z-R03/immutability.json), [protocol deviation](../artifacts/20261010T155346Z-R03/protocol_deviation/reason.md). 641 accepted derived PCDs, 5 identity controls, 5,785 constrained rearrangement failures retained. Full R05 grid pending. |",
+      "15: | TEMPORAL | Irregular-time recurrence, warm-up/missing/reset/recovery and contamination evidence | **Complete for R03 demonstration:** [timelines](../artifacts/20261010T155346Z-R03/F_R03_timelines.png), [post-offset history](../artifacts/20261010T155346Z-R03/T_R03_history.md), [distinct temporal state records](../artifacts/20261010T155346Z-R03/T_R03_temporal_states.md), [tau/cadence](../artifacts/20261010T155346Z-R03/tau_choice.json), [state validation](../artifacts/20261010T155346Z-R03/T_R03_validation.md), [108-test report](../artifacts/20261010T155346Z-R03/test_results_full.xml). No calibrated temporal alarms or recovery assertion. |",
+      "16: | FREEZE | Exact roles/folds/arms/parameters/grid/metrics, disjoint fit/calibration, content hash, prediction seal rule, exposure and resource disposition | **Complete for R04:** [GR4](../artifacts/20261010T211551Z-R04-80694538e854/gate.md), [freeze manifest](../artifacts/20261010T211551Z-R04-80694538e854/manifest.json), [split](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_splits.md), [parameters](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_parameters.md), [lineage](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_lineage.md), [exposure ledger](../artifacts/20261010T211551Z-R04-80694538e854/exposure_ledger.json), [executed notebook](../artifacts/20261010T211551Z-R04-80694538e854/R04_protocol_freeze.executed.ipynb), [116 tests](../artifacts/20261010T211551Z-R04-80694538e854/test_results.xml). No comparison/final outcomes. Acquisition requires new authorization and actual retention budget. |",
+      "17: | COMPARE | Four segment-grouped folds, all outcomes, ablations, support/coverage and uncertainty | **R05 predictions complete / GR5 pending.** [2026-10-18 audit](../artifacts/20261017T190338Z-R05-review/README.md): 248 episodes, all scientific hashes, complete raw companions and exact saved-measurement fitting/calibration checks pass. Named reports/figures, executed notebooks and final manifest/gate remain absent. [Read-only local inventory](../artifacts/20261012T134149Z-R05/local_inventory.json), [55 frozen source/config and 23 GR4 output checks](../artifacts/20261012T134149Z-R05/freeze_verification.json), [execution log](../artifacts/20261012T134149Z-R05/execution.log). All four existing TAR hashes and 5,008 extracted-file hashes match; safe inventories and intake schema/frame/time checks pass. [Full suite: 125 passes](../artifacts/20261012T134149Z-R05/test_results_permitted.xml); [R05 focused tests](../artifacts/20261012T134149Z-R05/test_results_evaluation.xml). Real fit/calibration and grid predictions are present and verified; evaluator reports and fresh notebooks remain pending. No outcomes inspected; H untouched. |",
+      "22: Completing a future row requires executed notebook, visible figure/table, appropriate test report, manifest and gate links. Failed/blocked/no-power outcomes remain explicit. A test count or checksum pass cannot certify research validity."
+    ]
+  },
+  {
+    "path": "planning/context_review.md",
+    "bytes": 2441,
+    "sha256": "f0b8d3d0af60db7d8eedaf1ce27c7bbc9558e6b8b5fcb488bdf3b75c22ea210f",
+    "headings": [
+      "1: # Historical context reviewed, not inherited",
+      "24: ## 2026-10-08 correction of current authority"
+    ],
+    "decision_excerpt": [
+      "15: | Existing scorer/state/policy pipeline and completed milestones | Start with an empty package. Define semantics and evidence contracts before implementation; no historical completion credit. |",
+      "26: The table above is a historical account of the 2026-10-05 setup, not the active plan. H011 now makes bounded real-data intake early, temporal behavior core, oracle/consensus/bandwidth secondary, and independent field feasibility mandatory. This revision did not access any sibling project. See [current index](README.md) and [evidence audit](evidence_audit.md)."
+    ]
+  },
+  {
+    "path": "planning/dataset_field_matrix.md",
+    "bytes": 13325,
+    "sha256": "73bfad1d6f60822660cb5e4cc92e2a5ea4ee29c8c931e268587e4f9ce96462f4",
+    "headings": [
+      "1: # Dataset field-feasibility matrix — 2026-10-08",
+      "28: ## R01 local evidence — 2026-10-09"
+    ],
+    "decision_excerpt": [
+      "3: Source IDs link to exact revisions in [sources](sources.md). **D** = documented/reader-inspected only; **L** = actual local content verified; **R** = derived; **S** = simulated; **U** = unavailable/unestablished in verified contract. The source-level table below was written before R01; the local evidence and revised statuses at the end of this file supersede its pending-intake wording. Synthetic files in older artifacts are not dataset samples.",
+      "7: | XYZ | `PointClouds/mini_N/{top,dome,003,004,laser}_k_ts.pcd`; fields `x y z`; HF, DK-reader | D; metres per reader geometry; raw RSU in map, vehicles in reader's raw vehicle convention; exact header types pending | Primary attacker can change its XYZ; not independent of sender | Geometry/counts; validate FIELDS/SIZE/TYPE/COUNT/WIDTH/HEIGHT/POINTS/DATA, finite rows and frame adapter. Reject malformed records; retain attempted decision and abstain affected factors. |",
+      "15: | Orientation | same CSV, `field.pose.pose.orientation.w/x/y/z`; DK-reader + geometry | D; unit quaternion, reader constructs wxyz; code's own contracts use xyzw and require explicit conversion | Fixed primary; spoofable later; pose-dependent evidence | Check norm/order and rotation/inverse; exact source/body frame pending intake. Invalid => compensation unknown. |",
+      "24: | Point IDs, masks, attack windows | No published persistent point identity assumed; base file SHA + row index; evaluator overlay manifest | R/S; row lineage and elapsed seconds | Attacker selects own rows in generator; evaluator retains masks | Used for overlay validation only. Never enter scorer/state. Failed selection is a retained failed attempt. |"
+    ]
+  },
+  {
+    "path": "planning/development_intake.md",
+    "bytes": 5447,
+    "sha256": "7768db9851a592ce7cee1186ad268a3d958eba8ec3c0523010722fbc47ac2bfd",
+    "headings": [
+      "1: # R01 development intake specification — 2026-10-08",
+      "5: ## Exact acquisition and resources",
+      "17: ## Bounded content inspection",
+      "27: ## Completion and failure"
+    ],
+    "decision_excerpt": [
+      "3: **Status (2026-10-09):** R01 completed on the project-local pinned mini_7 archive; see [GR1](../artifacts/20261008T192922Z-R01/gate.md), [executed notebook](../notebooks/R01_development_intake.ipynb) and the [updated field matrix](dataset_field_matrix.md). The resource and intake text below remains the original R01 specification. No sibling data, comparison/final archive or old S prompt was used.",
+      "9: - 7,894,272,000 bytes (7.894 GB; about 7.352 GiB). Published LFS SHA-256 `46e9dbe9f6e952be9186a6271abbcaaf11c965a5589d785fc278afd3eb235663`; compute locally after complete download. Metadata SHA is not local verification.",
+      "15: **Resource decision recorded:** the user performed the specified download and said to continue. Local size/hash verification passed; the user's predownload disk output and curl redirect chain were not retained. The [acquisition record](../artifacts/20261008T192922Z-R01/acquisition.json) distinguishes observed facts from those missing logs. The full work order is [R01](prompts/R01_development_intake.md).",
+      "25: 7. Produce a component decision table: density feasible or blocked, motion-compensated temporal geometry feasible or blocked, cross-agent comparison diagnostic or blocked, K unavailable/conditional, intensity excluded. Record exact unavailable inputs, coverage, timing/geometry ambiguity and performance/resource measurements.",
+      "27: ## Completion and failure",
+      "29: Deliver `notebooks/R01_development_intake.ipynb`, importable `io/mixed_signals.py`, intake script/config/tests, immutable run manifest, `T_R01_schema`, `T_R01_timing`, `T_R01_component_feasibility`, `F_R01_geometry`, and an updated field matrix with links. R01 succeeds technically when observations and checks are reproducible and each component has an evidence-backed disposition; it can conclude a component is infeasible. Unresolved time/frame conventions block their dependent factors, not honest documentation. Fewer than two physical agents means the intended multi-agent feasibility milestone is blocked. No scores, overlays, reference fitting, detector, comparison data or final holdout in R01. Stop after reporting the bounded gate."
+    ]
+  },
+  {
+    "path": "planning/evidence_audit.md",
+    "bytes": 10619,
+    "sha256": "8d1d14d51a2544ecd22caa182b7ef78c00c01c4c60d45b8f1cfed340a66d368b",
+    "headings": [
+      "1: # Evidence audit and corrections — 2026-10-08",
+      "7: ## What exists and what it proves",
+      "24: ## Corrections to H009/H010 and prior acceptance rows",
+      "32: ## Kinematic feasibility",
+      "38: ## Module disposition"
+    ],
+    "decision_excerpt": [
+      "5: Read-only verification checked **22 existing manifests and 1,172 listed output hashes: zero mismatches**; this verifies byte integrity, not scientific validity. Parsed stored notebook code/output records and execution counts, including failed runs; did not rerun stages or tests during this planning revision. [Verification details](audit/2026-10-08-artifact-verification.json) include failures and notebook counts. Prior bundle failures (socket permissions, S03 KeyError) and H008's packaging correction remain intact. Additional S00/S02 reruns do not add independent scientific observations.",
+      "15: | S04 | 400 fixed tiles, counts and 12 constructed oracle/GT-free comparisons; [67-test gate](../artifacts/20261008T103246Z-cbed4e64/gate.md) | Limited function execution and fixture behavior; incomplete isolation/eligibility tests and constructed calibration |",
+      "20: S04 `_reference_rows` in [evaluation/gap.py](../src/valid_point/evaluation/gap.py) cycles small literal count patterns. `fit_track_calibration` emits `reference.u` or `reference.u+1`, normalizes those directly, and does not run calibration clouds through the operational measurement path. Separate bundles and integer seed ranges are separate objects/IDs, not independently processed clean observations. `kinematic_penalty=0.0` is supplied for every constructed case; K is not measured.",
+      "22: Stored S04 arithmetic is supported: 3/7 attack alarms for tiles versus 5/7 for boxes, 2/5 benign alarms each, one abstention each; common-known attacks 3/6 versus 5/6. [Result ledger](../artifacts/20261008T103246Z-cbed4e64/spatial_gap_result.json) records these **constructed-case counts**, not estimated dataset rates. They demonstrate count blind spots and benign counterexamples, not a universal failure of all GT-free methods.",
+      "24: ## Corrections to H009/H010 and prior acceptance rows",
+      "26: 1. **GT isolation was overclaimed.** [test_gt_isolation.py](../tests/test_gt_isolation.py) assigns local `withheld=None` and reversed labels, then calls `_operational_scores()` again with unchanged inputs. Neither alteration is passed across an evaluator/inference boundary. Signature inspection excludes a few top-level argument names but `cases` is a generic mapping and this is not an end-to-end access test. Source separation is encouraging; invariance under withheld/changed GT, attack schedules and evaluator data is **not demonstrated**. Previous checklist G01 and H010's “tests prove” sentence are corrected here and in H011. R02 requires actual boundary tests and a leakage-positive control.",
+      "27: 2. **S04 does not enforce the S02 operational contract.** [gt_free.py](../src/valid_point/gt_free.py) accepts already transformed arrays, availability and caller-supplied K. It checks receipt versus deadline and grid freeze versus deadline, but receives no source time/anchor, transform validity, pose age or transform provenance. S02 `measure_availability` is not called. Context is computed but not used to choose/verify the supplied reference. `decide` applies one broad reference to every count without the S03 `required_regions` eligibility function. Default counting emits all 400 tiles, but that is not full contextual reference/eligibility validation; caller-constructed partial measurements can bypass the intended universe. The vehicle role is hard-coded. No production replay path joins these contracts yet.",
+      "28: 3. **Proposal/association failures are annotations.** There is no proposal generator or association algorithm whose miss/merge/split rate was measured. `proposal_state`/`association_state` strings are fixture labels; oracle passes association state through. Measured tile/box count differences are valid; measured proposal/association performance is not. Do not carry those labels into a failure-rate claim.",
+      "29: 4. **Gate labels exceed their scope.** S04 `run_spatial_experiment` returns constant `technical='PASS'` and `G3='FAIL_NEGATIVE_RESULT'`; runner/test require this exact failure marker. Preserve that artifact as a constructed negative finding and a justified block on readiness, but not a learned/estimated scientific viability test. Technical execution succeeded; complete operational eligibility, empirical calibration and adversarial GT-boundary claims remain incomplete. New gates compute technical checks separately from scientific outcomes; no expected sign of effect is required.",
+      "30: 5. **Old status documents are stale.** Root README says no scientific algorithms and offers “run all stages”; package already includes S01–S04. The earlier empty-package and synthetic-first descriptions remain historically true only at setup. Current canonical plan supersedes them; do not follow the old runner chain automatically. R02 will align execution documentation as implementation changes occur.",
+      "54: Existing artifacts and code were not repaired or rewritten in this planning turn. The audit makes missing integration explicit instead of retrospectively awarding a broader pass."
+    ]
+  },
+  {
+    "path": "planning/history.md",
+    "bytes": 50065,
+    "sha256": "e2ec6a341303ea566d80f8c0880baf3be5cdc3fd1a78dc32d108cfbe1782c9f5",
+    "headings": [
+      "1: # Append-only research history",
+      "7: ## 2026-10-05 — H001: independent project boundary",
+      "15: ## 2026-10-05 — H002: release packaging and scene roles",
+      "25: ## 2026-10-05 — H003: score, GT-free and bandwidth contracts",
+      "35: ## 2026-10-05 — H004: evidence and stop boundary",
+      "43: ## 2026-10-05 — H005: S00 invoked and bootstrap choices",
+      "70: ## 2026-10-05 — H006: S01 invoked; causal synthetic scene contract",
+      "95: ## 2026-10-05 — H007: S02 invoked; raw contracts pass with identifiability limits",
+      "151: ## 2026-10-05 — H008: correction to H007 final-bundle packaging verification",
+      "177: ## 2026-10-08 — H009: S03 clean reference and score semantics",
+      "214: ## 2026-10-08 — H010: S04 GT-free path completed; G3 negative result",
+      "257: ## 2026-10-08 — H011: authorized real-data replay replan and evidence corrections",
+      "285: ## 2026-10-09 — H012: planning revision completion check (Asia/Kolkata)",
+      "289: ## 2026-10-09 — H013: R01 bounded mini_7 development intake",
+      "297: ## 2026-10-09 — H014: R02 causal reader and raw-factor integration",
+      "309: ## 2026-10-10 — H015: R03 real-cloud overlays and temporal development replay",
+      "323: ## 2026-10-11 — H016: R04 comparison protocol sealed without outcome exposure",
+      "335: ## 2026-10-11 — H017: exact lineage and grouped-resample correction before handoff",
+      "339: ## 2026-10-12 — H018: R05 prerequisite audit; comparison execution blocked (Asia/Kolkata)",
+      "349: ## 2026-10-12 — H019: R05 local-data continuation and verified intake (Asia/Kolkata)",
+      "355: ## 2026-10-18 — H020: completed R05 prediction audit; reporting and GR5 pending (Asia/Kolkata)"
+    ],
+    "decision_excerpt": [
+      "5: reason, scope and affected artifacts/gates; do not invent completed experiments.",
+      "7: ## 2026-10-05 — H001: independent project boundary",
+      "15: ## 2026-10-05 — H002: release packaging and scene roles",
+      "25: ## 2026-10-05 — H003: score, GT-free and bandwidth contracts",
+      "35: ## 2026-10-05 — H004: evidence and stop boundary",
+      "38: stage. All scientific acceptance items remain pending; hand calculations are",
+      "43: ## 2026-10-05 — H005: S00 invoked and bootstrap choices",
+      "53: the sandbox; resolution and install were completed with network access limited",
+      "56: The first local test attempt was blocked by the sandbox's localhost socket",
+      "57: restriction; a test path issue was also repaired. The tests then passed with",
+      "64: [gate](../artifacts/20261005T094948Z-b2d74f78/gate.md) record six passing tests,",
+      "66: G1's infrastructure portion passed; its S01 scientific contract portion remains",
+      "67: pending. Research measurements/results are **not run**. The three separate",
+      "68: researcher choices in H003/decision notes remain open for later dependent work.",
+      "70: ## 2026-10-05 — H006: S01 invoked; causal synthetic scene contract",
+      "83: The first [S01 run](../artifacts/20261005T102854Z-d974bbaf/gate.md) was blocked",
+      "85: intermediate passing run exposed a legend covering the north viewpoint label,",
+      "90: and [gate](../artifacts/20261005T103202Z-d2f4b72b/gate.md) support **G1 pass**",
+      "95: ## 2026-10-05 — H007: S02 invoked; raw contracts pass with identifiability limits",
+      "131: The first [passing run](../artifacts/20261005T135122Z-f8a4238c/gate.md)",
+      "138: notebook execution failed. Jupyter emitted its local TCP encryption warning;",
+      "139: execution and tests completed successfully with local sockets permitted.",
+      "143: record **53 passing tests**, three fresh-kernel notebooks and 36 visible hand",
+      "147: source notebooks contain no generated outputs. S02 raw-contract gate **PASS**;",
+      "148: full G2 is **blocked pending separately invoked S03 fitting/calibration/score**.",
+      "151: ## 2026-10-05 — H008: correction to H007 final-bundle packaging verification",
+      "153: The post-run audit of H007's second bundle failed its assertion that all generated",
+      "156: The raw notebook/test gates still passed; this was a failed packaging acceptance",
+      "157: check, not a scientific failure. H007's statement that that bundle was final and",
+      "158: fully ignored is superseded here. Both preliminary bundles remain unchanged.",
+      "167: 53 passing tests and three fresh-kernel notebooks. The post-run audit verified",
+      "170: and no generated artifacts/reports exposed to Git. This audit passed.",
+      "172: The raw-contract gate remains PASS, with the consistent-spoof, legitimate",
+      "173: acceleration, rearrangement/removal and unknown-visibility limitations in H007.",
+      "174: Full G2, fitted/scored evidence and detection/probability claims remain blocked",
+      "175: pending separately invoked S03. No later stage was run or externally published.",
+      "177: ## 2026-10-08 — H009: S03 clean reference and score semantics",
+      "200: The first [S03 run](../artifacts/20261008T091106Z-2b73f795/gate.md) failed because",
+      "201: sandboxed Jupyter could not bind a local socket. A later passing run was",
+      "202: superseded after review found spatial bins shared between tiles. A subsequent pass was superseded by a figure title-layout repair. Another",
+      "203: [failed run](../artifacts/20261008T091349Z-79149ae5/gate.md) caught a tie-key",
+      "207: [score](../artifacts/20261008T091758Z-d1642764/03_score_and_ablations.executed.ipynb) notebooks show 59 passing",
+      "208: tests, fresh execution from two kernels, 12 passing hand cases and a",
+      "209: nonincreasing literal point-addition sweep. G2 passes only for reproducible",
+      "211: operating validity and attack detection remain blocked by absent real/replayed",
+      "212: clean measurements. S04 and later gates were not run.",
+      "214: ## 2026-10-08 — H010: S04 GT-free path completed; G3 negative result",
+      "216: The researcher invoked S04 after the S03 technical G2 pass. Added a receiver-owned",
+      "252: PASS and G3 FAIL_NEGATIVE_RESULT**. Therefore the GT-free score is not defensible",
+      "254: claims are blocked. No detector was imported, no external data was acquired, and",
+      "257: ## 2026-10-08 — H011: authorized real-data replay replan and evidence corrections",
+      "261: Read source/modules/tests/runners/notebooks and stored manifests/gates critically. Read-only verification of 22 manifests checked 1,172 listed output hashes with zero mismatches; execution counts/errors and prior failed runs remain recorded in `audit/2026-10-08-artifact-verification.json`. Hash validity proves preservation, not research validity. See [evidence audit](evidence_audit.md) for credited computation, illustrative evidence and missing integration.",
+      "263: Corrections to **H009/H010, former checklist G01/G02, and former progress claims**:",
+      "265: - S03 residual/count rows are deterministic arithmetic rather than independently processed scene observations. Numbered scene/seed IDs do not establish independence. G2 remains a semantic fixture pass, not empirical calibration or dataset leakage assurance.",
+      "267: - S04's “withholding/reversing labels” test changes unused local variables, then reruns unchanged inputs. H010's claim that this proves GT-boundary isolation is retracted at that scope. Source API separation exists, but meaningful changed/withheld evaluator integration tests remain required.",
+      "268: - S04 does not call S02 availability checks or enforce source-time/pose/transform/context/full-reference eligibility end-to-end. A complete fixed grid alone is not full operational eligibility. Current `gt_free.decide` hard-codes vehicle K/S and receives supplied K=0 in the fixtures.",
+      "269: - Proposal/association failure states are annotations, not measured algorithm outputs. Tile/box count differences and the stored 3/7 versus 5/7 attack alarms, 2/5 benign alarms and abstentions are retained as constructed-case arithmetic only.",
+      "270: - S04's G3 failure marker is constant in code and expected by its runner/test. The negative constructed counterexamples and readiness block remain valid at that scope; this is not empirical proof that all GT-free methods fail. Technical execution passed but broader boundary/eligibility/calibration claims were incomplete.",
+      "272: Verified public metadata revision `1a61aea747aa6bc45da2c2f085a1f1d3abc41f91`, devkit commit `4f1f259e0d0fdc9ccfaf9f22b9627c02e263fe3d`, and ACFR commit `8b670c80e248a25924fb1e72dc649992292064db`. Direct official-site retrieval failed; indexed official pages confirmed provenance links, with freshness limitation recorded. Source inspection found documented pose/orientation/timestamps, but no consumed/verified measured velocity. The existing K residual is motion self-consistency, has no cloud input, and cannot respond to point-only edits with metadata held fixed. Pose-derived velocity is dependent and same-interval derivation is tautological. Raw RSU map coordinates, paired vehicle z offsets, legacy timestamp parsing and nearest-pose lookup require local compatibility validation; nearest future poses cannot feed causal inference. No real inputs were found in Valid Point.",
+      "278: 3. Promote a small elapsed-time EWMA, distinct instantaneous/state/alarm records, warm-up/missing/reset/contamination behavior and memoryless comparison to the core. This supersedes H003's temporal deferral. No attack flag controls state.",
+      "279: 4. Move deterministic real-cloud removal/displacement/count-preserving/addition overlays and bursts into development R03, then frozen grouped evaluation R05. Preserve intended/injected/realized effects, failures and companions. These are interventions on recordings, not a physical laser simulator.",
+      "280: 5. Defer consensus, bandwidth policies/savings, detector/AP, learned combinations and broad adaptive/collusion/Sybil studies. This supersedes H003's bandwidth hypothesis and old S05/S06/S08 dependencies; it narrows the objective rather than claiming those studies succeeded.",
+      "281: 6. New GR gates separate technical completion from scientific support. Correctly recorded infeasibility, no-power or negative results may complete a technical stage. No old failed result is erased and no favorable detection/publication result is required.",
+      "283: Next action is R01 only after authorization for the exact 7,894,272,000-byte mini_7 archive and 25 GB free-space reservation. No algorithm choice is requested from the researcher before feasibility. Later comparison/final acquisition has its own resource decision. Publication suitability and novelty remain unestablished with current evidence and must be assessed from completed results and related primary literature.",
+      "285: ## 2026-10-09 — H012: planning revision completion check (Asia/Kolkata)",
+      "287: The H011 revision began on 2026-10-08 and completed after local midnight. Its dated snapshot/source-audit IDs remain unchanged. Final planning checks passed: all 29 original document hashes preserved, prior history retained as an exact prefix, all 11 old prompt bodies preserved behind supersession banners, seven R prompts with required sections, no broken current-document file links, and audited code/config/test/notebook bytes unchanged. Only planning files changed. See `audit/2026-10-08-planning-checks.json`. This is a planning/document-preservation check, not a scientific test or GR1 pass. Stop at the reviewable plan; R01 still requires the explicit archive/storage resource decision.",
+      "289: ## 2026-10-09 — H013: R01 bounded mini_7 development intake",
+      "291: After the user completed the explicit project-local mini_7 setup and said to continue, locally reverified the archive's 7,894,272,000 bytes and published SHA-256, then inventoried all 1,788 TAR members for safe types/paths before extracting. Selected the earliest five-second interval with at least two physical agents from filenames alone; it contained all five streams/four principals. Extracted 250 consecutive selected cloud bodies (50 per stream) and all three odometry CSVs, 1,312,497,280 bytes in total, keeping the archive and selected raw files read-only. Label filenames were inventoried; bodies were not opened. No sibling, comparison or final archive was used.",
+      "295: GR1 [technical gate](../artifacts/20261008T192922Z-R01/gate.md) passes with 84 tests and a fresh five-code-cell [executed notebook](../notebooks/R01_development_intake.ipynb). Density is feasible as an input; temporal and cross-agent geometry and kinematics are conditional; intensity is excluded. This is not a detection result. The user's curl redirect chain and predownload disk output were not retained, so the [acquisition record](../artifacts/20261008T192922Z-R01/acquisition.json) leaves them unknown. Stop at GR1; R02 and later stages were not run.",
+      "297: ## 2026-10-09 — H014: R02 causal reader and raw-factor integration",
+      "301: [GR2](../artifacts/20261009T085704Z-R02/gate.md) is a **technical PASS**, separate from scientific efficacy. D is known for all 250 events with every one of 32 required cells retained. G is known for 163/250; five first-history records are unknown and 82 pairs are unknown because the bounded spatial search cannot certify a nearest distance. These are abstentions, not numeric penalties. The raw crop totals are nearly constant for several sensors (e.g. `003` 261,908–261,947 points across 50 frames), while per-cell counts and occupancy change can vary; no fitted surplus anomaly or attack sensitivity is claimed. Vehicle pose age is 0 s on this exact-stamp window. CPU measurement was 86.33 s for 250 events, wall 88.18 s, peak RSS 209,420,288 bytes. The [input](../artifacts/20261009T085704Z-R02/T_R02_inputs.md), [eligibility](../artifacts/20261009T085704Z-R02/T_R02_eligibility.md), [component](../artifacts/20261009T085704Z-R02/T_R02_components.md), [raw timeline](../artifacts/20261009T085704Z-R02/F_R02_raw_timelines.png), [alignment](../artifacts/20261009T085704Z-R02/F_R02_alignment.png), and [executed notebook](../artifacts/20261009T085704Z-R02/R02_causal_factors.executed.ipynb) show records and plots with units.",
+      "303: A bounded diagnostic compares top against each vehicle at four preselected sync IDs using a fixed map crop and 1 m voxels. After correcting the published top map-origin sign, 12 preselected attempts yield nine causal top–vehicle pairs with 44–77 ms source skew and potential voxel Jaccard roughly .05–.14; three first-index attempts are unknown because top had not yet arrived. This is neither visibility truth nor an X score. The first interrupted run at `artifacts/20261009T085343Z-R02/` retains raw tables and a failure note: review found vehicle D was unnecessarily tied to pose validity, and plotting hit a font-cache delay. The second run's initial test/notebook attempt was blocked by sandbox loopback socket permission; complete tests and the notebook were rerun in a fresh kernel with local socket permission. Figure/table review caught and corrected the optional X crop sign before sealing the final manifest. The [repair log](../artifacts/20261009T085704Z-R02/execution_repair.log) and [92-test report](../artifacts/20261009T085704Z-R02/test_results.xml) preserve the sequence.",
+      "309: ## 2026-10-10 — H015: R03 real-cloud overlays and temporal development replay",
+      "317: The [attempt ledger](../artifacts/20261010T155346Z-R03/T_R03_attempts.md) retains intended/injected/reader-realized fields and compact exact selected/changed/failed ID files. All 641 written development derivatives reloaded through the same production reader; no reader rejection or zero-realized file occurred in this run, and 5,785 selected rearrangement rows remained unchanged under the within-D-cell constraint. Signed development-only paired effects include D-only `003` conformity changes of differing directions and zeros across families; favorable decline was never required. [Post-offset G differences](../artifacts/20261010T155346Z-R03/T_R03_history.md) show attacked-arm geometric history can affect later records, while missing G remains unknown and no recovery is asserted. The [native/common-frame geometry](../artifacts/20261010T155346Z-R03/F_R03_geometry.png) and [timelines](../artifacts/20261010T155346Z-R03/F_R03_timelines.png) display these bounded examples with metre/second axes and evaluator intervals joined after prediction sealing.",
+      "319: Two development execution problems remain visible. The first [interrupted run](../artifacts/20261010T152207Z-R03/gate.md) exposed excessive G search cost; a deterministic 10,000,000 pair-evaluation guard now returns G unknown on exhaustion, without inserting a score. No clean event hit that guard. The initial rearrangement execution incorrectly moved selected rows outside all D cells while leaving their outside status unchanged. Its [invalid prediction and selection ledgers](../artifacts/20261010T155346Z-R03/protocol_deviation/reason.md) are retained; the same seed/window/severity was replayed with the declared original-cell constraint and every corrected derived PCD was reread. No outcome-based resampling occurred. A sandboxed notebook launch failed on local loopback permission; the failure was preserved and the final notebook was executed top-to-bottom in a fresh permitted kernel. Its geometry layout was inspected and repaired before sealing.",
+      "321: The [real-data score/state boundary check](../artifacts/20261010T155346Z-R03/boundary_isolation.json) changed and withheld evaluator labels, boxes, masks, schedules, clean counterparts and outcomes while allowed inputs remained fixed. All 180 decisions and the complete temporal checkpoint matched, with identical access logs and zero evaluator reads; a deliberately leaky control failed invariance. Actual malicious-arm prefixes, original/companion hashes, per-cell counts, selection ledgers, null alarms and exported figures pass the [technical validation](../artifacts/20261010T155346Z-R03/validation.json). A final visual/record review added the common top-frame panel and separate record exports without changing predictions; the prior manifest and gate were retained in `review_snapshot/` before resealing. The [108-test report](../artifacts/20261010T155346Z-R03/test_results_full.xml), [fresh executed notebook](../artifacts/20261010T155346Z-R03/R03_replay_temporal.executed.ipynb), [manifest](../artifacts/20261010T155346Z-R03/manifest.json) and [GR3 gate](../artifacts/20261010T155346Z-R03/gate.md) document a **technical PASS** only. mini_7 is one contiguous development scene with no calibrated alarm power or independent generalization claim. Stop at GR3; R04 and later stages were not invoked.",
+      "323: ## 2026-10-11 — H016: R04 comparison protocol sealed without outcome exposure",
+      "325: The researcher invoked R04 after the [GR3 technical pass](../artifacts/20261010T155346Z-R03/gate.md). Read the current planning authority, source/method/replay/evaluation/split contracts, audit and history. No sibling project, comparison/final cloud or label body was read. The final [GR4 gate](../artifacts/20261010T211459Z-R04-0536947a1f9f/gate.md) is a **technical PASS** with no scientific outcome. Its canonical content hash is `0536947a1f9f47ef0012701c4718a5d2377753da37d658d96dfd19253810290b`; see the [freeze payload](../artifacts/20261010T211459Z-R04-0536947a1f9f/freeze_payload.json), [manifest](../artifacts/20261010T211459Z-R04-0536947a1f9f/manifest.json) and [exposure ledger](../artifacts/20261010T211459Z-R04-0536947a1f9f/exposure_ledger.json).",
+      "327: Kept mini_7 as development, C0–C3 as mini_10–13 and H as mini_14, without substitutions. The four comparison folds fit on two distinct clean reference segments, calibrate on a third and test on the fourth; final H fits C0–C2 and calibrates C3. [T_R04_splits](../artifacts/20261010T211459Z-R04-0536947a1f9f/T_R04_splits.md), [T_R04_parameters](../artifacts/20261010T211459Z-R04-0536947a1f9f/T_R04_parameters.md) and [T_R04_lineage](../artifacts/20261010T211459Z-R04-0536947a1f9f/T_R04_lineage.md) fix the complete sensor × arm × temporal × fold keys and the actual-reader fit/calibration requirements. Actual row IDs and thresholds do not yet exist and must be generated only during R05/R06. D-only, G-only and max(D,G), each memoryless and EWMA, are all frozen; unsupported G and no-power calibration remain reported outcomes rather than tuning triggers. The [attack grid](../artifacts/20261010T211459Z-R04-0536947a1f9f/T_R04_attack_grid.md) has 30 nonzero episodes per comparison segment plus zero controls and the declared benign grid. The +10 ms R03 timing demonstration altered modeled pose availability only; the R04 clock-skew benign stress is explicitly a future modeled alignment scenario, not a measured clock error.",
+      "329: The new metric fixtures exposed an initially incorrect interpretation that counted an alarm on a failed or zero-realized injection as attack detection. The final metric numerator requires reader-valid nonzero realized change and no injection failure; every scheduled attempt still remains in the all-attempt denominator. Tests hand-check eligible/realized denominators, empty support, preexisting alarm, censored delay, undefined recovery and intact grouped pairing. The final [116-test report](../artifacts/20261010T211459Z-R04-0536947a1f9f/test_results.xml) and [fresh notebook](../artifacts/20261010T211459Z-R04-0536947a1f9f/R04_protocol_freeze.executed.ipynb) passed; [split topology](../artifacts/20261010T211459Z-R04-0536947a1f9f/F_R04_split_topology.png) and [schedule](../artifacts/20261010T211459Z-R04-0536947a1f9f/F_R04_schedule.png) were visually reviewed. All 23 final run output hashes matched the manifest.",
+      "331: Two earlier immutable R04 attempts remain visible: [first blocked run](../artifacts/20261010T211351Z-R04-fc80d089ba48/gate.md) found a mistaken fixture assertion and sandbox loopback denial; [second blocked run](../artifacts/20261010T211405Z-R04-8f389a0e2db8/gate.md) passed focused tests but showed that the fresh notebook kernel lacked pandas. These were execution/fixture repairs before the final content hash, with no comparison exposure. A broad `pytest` invocation without `tests/` briefly collected historical artifact snapshots and failed on duplicate module names; the final scoped full project suite passed 116 tests.",
+      "335: ## 2026-10-11 — H017: exact lineage and grouped-resample correction before handoff",
+      "337: After H016's successful R04 seal, a final review found that the lineage guard accepted a subset of the two declared reference segments, and the grouped summary could not consume a bootstrap draw containing two copies of the same acquisition group. The new guard requires every frozen reference segment; grouped calculations key paired variants by resample copy as well as episode/cloud ID. These are technical corrections to R04 only, made without comparison/final exposure or outcome inspection. The earlier H016 run remains immutable and is superseded by the [authoritative GR4 seal](../artifacts/20261010T211551Z-R04-80694538e854/gate.md) with content hash `80694538e8549256934b3a314301cc8ca821efe0bf36ff4071eab9681f2c039c`. Its [116-test report](../artifacts/20261010T211551Z-R04-80694538e854/test_results.xml), [fresh executed notebook](../artifacts/20261010T211551Z-R04-80694538e854/R04_protocol_freeze.executed.ipynb), [manifest](../artifacts/20261010T211551Z-R04-80694538e854/manifest.json), [split](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_splits.md), [parameters](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_parameters.md), [lineage](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_lineage.md) and [exposure ledger](../artifacts/20261010T211551Z-R04-80694538e854/exposure_ledger.json) are the R05 inputs. All 23 output hashes matched. The resource block and scientific limits are unchanged.",
+      "339: ## 2026-10-12 — H018: R05 prerequisite audit; comparison execution blocked (Asia/Kolkata)",
+      "343: Preexisting C0–C3 intake manifests describe 4,996 selected clouds plus 12 odometry CSVs, totaling 26,117,294,301 extracted bytes. File presence and sizes match all 5,008 manifest entries. All four original TARs are absent at their recorded paths. Their reported archive hashes match the pins, but were not recomputed on archive bodies and cannot substitute for fresh local archive verification. No raw body, label body or H body was opened; no dataset hash/schema/frame/time validation or empirical work was performed. The circumstances/authorization of the prior acquisition and archive removal are unknown; this audit did not remove any archive. An initial shell probe used an unavailable `python` alias and was corrected to `python3`; the initial failed archive stat was followed by explicit checks of all four paths. These execution details are retained in the log.",
+      "347: R05 execution is **BLOCKED at prerequisites**; GR5 is **not evaluated / incomplete**, with zero comparison segments completing R05 intake validation. Required implementation, real grouped fitting/calibration, full replay grid, scientific tables/figures, tests and fresh notebooks remain pending; none are claimed by this metadata audit. No comparison predictions or evaluator outcomes exist from this run. H remains unopened by this run, and no later stage was invoked. This changes the assumption that originals are locally available, not any scientific hypothesis or frozen method.",
+      "349: ## 2026-10-12 — H019: R05 local-data continuation and verified intake (Asia/Kolkata)",
+      "351: The researcher explicitly instructed reuse of the existing pinned local TARs/extracts, with no downloading, reacquisition, extraction, replacement or deletion of source data and no H access. The [new immutable-run workspace](../artifacts/20261012T134149Z-R05/execution.log) inventories mini_7 and C0–C3 metadata first; all five TARs are present and no `.tar.partial` exists. The [accepted preparation resource amendment](../artifacts/20261012T134149Z-R05/resource_amendment.json) reserves 4 GB for the run and one active regenerable derived episode. The missing-archive/resource assumption in H018 is superseded by these observed local files and the accepted amendment, not by a new acquisition.",
+      "353: All 55 frozen source/config hashes and 23 GR4 output hashes match. C0–C3 archive bodies were sequentially rehashed against pinned SHA-256; 5,008 extracted-file hashes and sizes were rechecked in place. Safe TAR inventory, PCD headers, stream timing, pose schema and frame inverse checks passed for all four selected segments; physical calibration and real online availability remain assumptions. No label body, mini_7 raw body or H body was opened. The [125-test report](../artifacts/20261012T134149Z-R05/test_results_permitted.xml) passed after preserving the sandbox loopback denial from the first fresh-kernel test. R05 prediction work has begun; GR5 remains pending and no evaluator outcomes have been joined. Scientific conclusions are not available from this intake.",
+      "355: ## 2026-10-18 — H020: completed R05 prediction audit; reporting and GR5 pending (Asia/Kolkata)",
+      "357: The researcher reported completing the processor and requested a short inspection, plain-language explanation and notebook commands, explicitly excluding another long process. Reviewed the existing `20261012T134149Z-R05` run without running intake, prediction, report or finalization. The [review](../artifacts/20261017T190338Z-R05-review/README.md), [audit](../artifacts/20261017T190338Z-R05-review/audit.json) and [fit/calibration check](../artifacts/20261017T190338Z-R05-review/fit_calibration_checks.json) preserve current findings. All 55 frozen source/config and 23 GR4 output hashes match. All 748 scientific prediction file hashes match the original seal, all 248 episodes and 244 non-clean evaluator-ledger sets exist, and all 309,752 raw rows have complete companions, unchanged companion/pre-onset inputs and no selected original pose timestamp after its deadline. Attempt flows reconcile. Recomputed scalar references, calibration records/state and thresholds from existing saved measurements match every fold exactly; no new raw-cloud replay was performed.",
+      "359: The literal seal validator failed only on two mutable Finder `.DS_Store` hashes. Its reader now ignores only those non-study files, preserving every scientific hash check and the original seal. Reporting also regenerated wrong episode IDs because the stored protocol sorts mapping keys while original IDs contain an enumeration index. Reporting/finalization now recover the original pinned config order after canonical content equality checks. The 18 focused tests pass; no reporting or notebook execution was started. These changes affect new evaluation/reporting code only; frozen sources/configs remain intact.",
+      "361: No `T_R05_*` scientific exports, named figures, executed R05 notebooks, final manifest or GR5 gate exists yet. The run's sealed predictions are a completed computational checkpoint, not R05 acceptance or a favorable detection result. Calibration has 156/240 insufficient-support cells, 31 tagged no-power (including ten constant-zero calibrations), and 53 available cells. Preserve the interrupted resource/restart attempts and mixed implementation snapshots. The earlier clock correction note must not be read as proof that every episode used the corrected helper; the full actual raw-record inspection found no future original pose use. Historical peak storage/RSS remains unverified by this short review. Next actions are explicit `report`, then `finalize`, visual review and a GR5 disposition. H remains untouched; no later stage was invoked."
+    ]
+  },
+  {
+    "path": "planning/overview.md",
+    "bytes": 2338,
+    "sha256": "5a164535cf64648491f350f2819ed0971fbac672b0ed06f6ba78fd7f63e76447",
+    "headings": [
+      "1: # Researcher and professor overview"
+    ],
+    "decision_excerpt": []
+  },
+  {
+    "path": "planning/paper_evidence.md",
+    "bytes": 3528,
+    "sha256": "a2a1e0f49e0f9ee939cceb4545ed2e772d92397c17be499c22357d09590f517c",
+    "headings": [
+      "1: # Paper and demonstration evidence outline — 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "13: | F7 Failure gallery | Removal/occlusion equivalence, within-cell evasion, sparse/unique views, moving content, pose uncertainty, contaminated history | Robust intent attribution |",
+      "18: Paper sections: question and threat scope; dataset/release/coordinate contract; causal method and temporal state; preregistered splits/overlays/metrics; complete findings and ablations; identifiability and benign failures; reproducibility/limitations. Construction-only S02–S04 cases belong in method checks or supplementary history, never in the dataset evaluation table.",
+      "20: R07 must perform a current primary-literature comparison (papers and official implementations) for closely related LiDAR integrity/anomaly, cooperative geometric consistency and temporal change methods. Record what this study adds or does not add: dataset-specific evidence, causal isolation, failure analysis and reproducibility can be useful without constituting a novel algorithm. Do not assert novelty based only on the project plan. Assess venue fit, scene independence, power, threat realism and baseline fairness; recommend a report/negative-results scope when stronger claims are unsupported.",
+      "22: The claim ledger maps each proposed sentence to a frozen run, notebook section, figure/table, units, numerator/denominator, assumptions and limitations. Verify values and links, list not-run experiments, and keep calibration/no-power and injection failures. No AP, bandwidth-saving, probability calibration, transfer or deployment claim is licensed by this core experiment. No external submission/publication happens in R07."
+    ]
+  },
+  {
+    "path": "planning/progressplan.md",
+    "bytes": 6291,
+    "sha256": "6ef169bff3ac5de05251535c2b7326b0d9dcdf8d004293db764ffa4addf5e776",
+    "headings": [
+      "1: # Ordered progress — revision 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "3: Planning revision complete; **R01/GR1 and R02/GR2 completed on 2026-10-09, R03/GR3 completed on 2026-10-10, and R04/GR4 completed on 2026-10-11**. R05 prediction computation has completed against the existing verified local data in [the new R05 run](../artifacts/20261012T134149Z-R05/execution.log). The earlier [prerequisite audit](../artifacts/20261012T121716Z-R05-prerequisites/gate.md) remains historical: all four TARs are now present and reverified, the accepted resource amendment is retained, and all four intakes are usable. GR5 remains pending; R06–R07 have not run. S00–S04 results remain qualified by [evidence audit](evidence_audit.md); old S05–S10 are superseded. GR0 was a documentary pass only.",
+      "11: | S04 [gate](../artifacts/20261008T103246Z-cbed4e64/gate.md) | Constructed arithmetic, 67 tests; G3 negative retained; isolation/eligibility claims incomplete |",
+      "15: | [R01 Development intake](prompts/R01_development_intake.md) | Current plan, single-archive resource authorization | Actual schema, time/frame geometry and component feasibility; older reader may differ | **Complete; [GR1 technical PASS](../artifacts/20261008T192922Z-R01/gate.md), [notebook](../notebooks/R01_development_intake.ipynb), 84 tests.** Density feasible; temporal/cross-agent geometry and K conditional; intensity excluded. Stop before scores/attacks. |",
+      "16: | [R02 Causal factors](prompts/R02_causal_factors.md) | GR1 dispositions and usable raw inputs | Integrated production reader, eligibility, D/G diagnostics and real GT isolation; unknowns must not become measurements | **Complete; [GR2 technical PASS](../artifacts/20261009T085704Z-R02/gate.md), [executed notebook](../artifacts/20261009T085704Z-R02/R02_causal_factors.executed.ipynb), [method freeze](../artifacts/20261009T085704Z-R02/method_freeze.json), 92 tests.** D raw coverage 250/250; G 163/250, 82 bounded-search unknowns plus 5 first-history unknowns. Stop before interventions/references/calibration. |",
+      "17: | [R03 Replay and temporal demonstration](prompts/R03_replay_temporal.md) | GR2, development-only factor freeze | Deterministic small overlays, EWMA, real-cloud matched trajectories; history contamination and exploratory normalization | **Complete at [GR3 technical PASS](../artifacts/20261010T155346Z-R03/gate.md)**; [executed notebook](../artifacts/20261010T155346Z-R03/R03_replay_temporal.executed.ipynb), [attempts](../artifacts/20261010T155346Z-R03/T_R03_attempts.md), [native/common-frame geometry](../artifacts/20261010T155346Z-R03/F_R03_geometry.png), [timelines](../artifacts/20261010T155346Z-R03/F_R03_timelines.png), [108-test report](../artifacts/20261010T155346Z-R03/test_results_full.xml). One mini_7 development segment; diagnostic thresholds unavailable and alarms null. Stop before R04/comparisons. |",
+      "18: | [R04 Protocol freeze](prompts/R04_protocol_freeze.md) | GR3 complete/limited disposition | Lock split/fit/calibration, full grid, parameters, metrics and resources; leakage/underpowered support | **Complete at [GR4 technical PASS](../artifacts/20261010T211551Z-R04-80694538e854/gate.md)**; [freeze manifest](../artifacts/20261010T211551Z-R04-80694538e854/manifest.json), [split table](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_splits.md), [parameter table](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_parameters.md), [lineage table](../artifacts/20261010T211551Z-R04-80694538e854/T_R04_lineage.md), [fresh notebook](../artifacts/20261010T211551Z-R04-80694538e854/R04_protocol_freeze.executed.ipynb), 116 tests. No held-out outcomes exposed. R05/R06 acquisition resource-blocked pending authorization and actual retention budget. Stop GR4. |",
+      "19: | [R05 Comparison experiment](prompts/R05_comparison_evaluation.md) | GR4 and authorized C0–C3 resources | Actual grouped fit/calibration/replay/evaluation, all cells; scene correlation | **Predictions complete; reporting/notebooks and GR5 pending.** [2026-10-18 audit and next commands](../artifacts/20261017T190338Z-R05-review/README.md), [verification](../artifacts/20261017T190338Z-R05-review/audit.json). All 248 episodes and scientific prediction hashes verified; final exports, executed notebooks and final manifest/gate are absent. [Local inventory](../artifacts/20261012T134149Z-R05/local_inventory.json), [freeze verification](../artifacts/20261012T134149Z-R05/freeze_verification.json), [accepted resource amendment](../artifacts/20261012T134149Z-R05/resource_amendment.json), [C0](../artifacts/20261012T134149Z-R05/intake/C0.json), [C1](../artifacts/20261012T134149Z-R05/intake/C1.json), [C2](../artifacts/20261012T134149Z-R05/intake/C2.json), [C3](../artifacts/20261012T134149Z-R05/intake/C3.json), [125-test report](../artifacts/20261012T134149Z-R05/test_results_permitted.xml). No download/extraction/deletion of source data; no partial present. Predictions sealed on 2026-10-13; reporting has not run. H untouched. |",
+      "20: | [R06 Final holdout](prompts/R06_final_holdout.md) | Frozen method, R05 disposition, H authorization/exposure check | Single untouched final check; no outcome-driven repairs | Pending. Stop GR6 and record exposure even on failure. |",
+      "21: | [R07 Paper evidence](prompts/R07_paper_evidence.md) | Explicit R05/R06 completion or blocked disposition | Frozen exports/claim ledger, failure gallery and novelty assessment | Pending. Stop GR7 before external publication. |",
+      "23: A technical stage can pass while a hypothesis fails or a component is unavailable. Report both dimensions. After each separately invoked stage append history, update progress/checklist and provide actual notebook/table/test/manifest links; never advance on code presence alone."
+    ]
+  },
+  {
+    "path": "planning/prompts/00_bootstrap.md",
+    "bytes": 4875,
+    "sha256": "3fa95cea06051d8e78a8e5dbb305f62d0b3583c1158dbf4871a4b7840f56558f",
+    "headings": [
+      "4: # S00 — Bootstrap and notebook conventions",
+      "8: ## Prerequisites and scope",
+      "17: ## Exact deliverables",
+      "26: ## Visible results and meaningful tests",
+      "36: ## Stop/go",
+      "42: ## Boundaries and working rules",
+      "60: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "30: “not run”; never fabricate a scientific smoke result. Demonstrate a tiny",
+      "31: non-scientific export round trip and missing-provenance failure. Test manifest",
+      "38: G1 infrastructure portion passes only with an independently rerunnable notebook,",
+      "49: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "50: never invent favorable results or hide failed attempts.",
+      "64: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "66: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "83: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/01_synthetic_scenes.md",
+    "bytes": 5025,
+    "sha256": "2aeca2155c27f1bf888b4b785733637c0a4153d7fdc8357adcbd3a60a8d23cdd",
+    "headings": [
+      "4: # S01 — Synthetic scene contracts and first visualization",
+      "8: ## Prerequisites and scope",
+      "15: ## Exact deliverables",
+      "25: ## Visible results and meaningful tests",
+      "38: ## Stop/go",
+      "43: ## Boundaries and working rules",
+      "61: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "32: Partition generator seeds by complete scene (development 0–9, reference 100–109,",
+      "40: G1 passes when geometry and contracts are visibly auditable and reproducible.",
+      "41: Do not pass a future GT-free or score claim merely because scene truth exists.",
+      "50: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "51: never invent favorable results or hide failed attempts.",
+      "65: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "67: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "84: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/02_raw_evidence.md",
+    "bytes": 5051,
+    "sha256": "fec89f22cced8ce29952c04f24b56a954722ce3804ba0ce93af7e30bde4597f4",
+    "headings": [
+      "4: # S02 — Phase 1 raw evidence",
+      "8: ## Prerequisites and scope",
+      "14: ## Exact deliverables",
+      "25: ## Visible results and meaningful tests",
+      "41: ## Stop/go",
+      "47: ## Boundaries and working rules",
+      "65: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "10: S01 contracts/reader/scenes passed G1. Read `planning/03_phase1_evidence.md`.",
+      "43: Proceed to fitting only if the raw contracts and unknown states pass. Record",
+      "54: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "55: never invent favorable results or hide failed attempts.",
+      "69: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "71: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "88: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/03_references_score.md",
+    "bytes": 5170,
+    "sha256": "e1eb1573e3bd0e61ffe8531a1352cfbcde426ffce8f5d928818b028775c1f159",
+    "headings": [
+      "4: # S03 — Clean references, score combination and ablations",
+      "8: ## Prerequisites and scope",
+      "15: ## Exact deliverables",
+      "24: ## Visible results and meaningful tests",
+      "41: ## Stop/go",
+      "46: ## Boundaries and working rules",
+      "64: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "53: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "54: never invent favorable results or hide failed attempts.",
+      "68: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "70: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "87: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/04_gt_free.md",
+    "bytes": 5096,
+    "sha256": "bf8e6f97b210497f9703f634bb64427903abd7248d1c3056209b32c777f38f82",
+    "headings": [
+      "4: # S04 — GT-free spatial evidence and oracle gap",
+      "8: ## Prerequisites and scope",
+      "15: ## Exact deliverables",
+      "23: ## Visible results and meaningful tests",
+      "40: ## Stop/go",
+      "46: ## Boundaries and working rules",
+      "64: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "10: S03 passed technical G2 and has frozen synthetic reference/calibration bundles.",
+      "43: A failure is an explicit negative result and blocks operational readiness/real",
+      "44: policy claims. Do not import a detector to conceal the failure. Stop for review.",
+      "53: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "54: never invent favorable results or hide failed attempts.",
+      "68: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "70: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "87: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/05_consensus.md",
+    "bytes": 5041,
+    "sha256": "e9412c39228a63f3b6a79dd4b7a9efb3d238a5d8f4d34b16879aa22d8c5d51b8",
+    "headings": [
+      "4: # S05 — Gated leave-one-sender-out consensus",
+      "8: ## Prerequisites and scope",
+      "14: ## Exact deliverables",
+      "21: ## Visible results and meaningful tests",
+      "41: ## Stop/go",
+      "47: ## Boundaries and working rules",
+      "65: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "38: monotonic fixed-peer penalty. Test that failure to form consensus cannot quietly",
+      "44: is not defensible, retain P=unknown/diagnostic, document the failure and permit",
+      "54: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "55: never invent favorable results or hide failed attempts.",
+      "69: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "71: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "88: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/06_bandwidth.md",
+    "bytes": 5273,
+    "sha256": "3e32118b2d16b03e00c78f3074f5bd90fd5b9e478f89d90394d61c3cc47ba8ce",
+    "headings": [
+      "4: # S06 — Byte accounting and next-frame quota policies",
+      "8: ## Prerequisites and scope",
+      "15: ## Exact deliverables",
+      "23: ## Visible results and meaningful tests",
+      "43: ## Stop/go",
+      "49: ## Boundaries and working rules",
+      "67: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "10: S04 has an explicit viability disposition, and S05 status (passed or unavailable)",
+      "13: remain blocked if GT-free viability failed.",
+      "46: pass a network-saving claim. Freeze proposed policy parameters only after",
+      "56: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "57: never invent favorable results or hide failed attempts.",
+      "71: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "73: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "90: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/07_overlays.md",
+    "bytes": 5132,
+    "sha256": "281b967dcefb5358b4c4f048a0e3e95d421f1f63cf55c2ac0bb2e063d1fd3c8f",
+    "headings": [
+      "4: # S07 — Immutable deterministic attack overlays",
+      "8: ## Prerequisites and scope",
+      "14: ## Exact deliverables",
+      "23: ## Visible results and meaningful tests",
+      "44: ## Stop/go",
+      "50: ## Boundaries and working rules",
+      "68: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "35: IDs and hashes. Preserve failed/ineffective attempts and honest companions.",
+      "46: G6 passes only with the full effect/attempt ledger and reader checks. Invalid",
+      "47: derived cases stay failed; real data remains untouched and full evaluation waits",
+      "57: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "58: never invent favorable results or hide failed attempts.",
+      "72: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "74: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "91: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/08_synthetic_evaluation.md",
+    "bytes": 5377,
+    "sha256": "386b6b58936e690c97d97a325dcc7a3b54a9ef59ce53be72d2f18f26fdc29356",
+    "headings": [
+      "4: # S08 — Synthetic attack and policy evaluation",
+      "8: ## Prerequisites and scope",
+      "15: ## Exact deliverables",
+      "26: ## Visible results and meaningful tests",
+      "46: ## Stop/go",
+      "52: ## Boundaries and working rules",
+      "70: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "43: scenario completeness, causal censored-observation replay, exact-byte matching,",
+      "48: G7 requires complete reproducible evaluation and negative results, not favorable",
+      "59: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "60: never invent favorable results or hide failed attempts.",
+      "74: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "76: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "93: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/09_real_data.md",
+    "bytes": 6246,
+    "sha256": "3e232e6872bc41ec7569d418fe8f5d5f88cb74e03f2885b19aca76108fa25a17",
+    "headings": [
+      "4: # S09 — Four-or-more-segment intake and grouped evaluation",
+      "8: ## Prerequisites and scope",
+      "15: ## Exact deliverables",
+      "28: ## Intake and frozen evaluation",
+      "48: ## Visible results and meaningful tests",
+      "58: ## Stop/go",
+      "64: ## Boundaries and working rules",
+      "82: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "25:   T09_ablations, T09_oracle_gap, T09_policies, T09_failures;",
+      "39: before real overlays. If labels/timing/geometry fail, report the blocked segment.",
+      "41: the real study is incomplete. Keep every agent/frame/clean/attack variant in its",
+      "51: attacked measurements, unknowns, failed attacks, thresholds and quotas. Report",
+      "61: per-segment evidence. Retain incomplete/negative outcomes and block unsupported",
+      "71: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "72: never invent favorable results or hide failed attempts.",
+      "86: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "88: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "105: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/10_paper.md",
+    "bytes": 5512,
+    "sha256": "cf520e4a123156a2a305a9498400d969ed169f9493f7b34d7cb0f59e512d3b92",
+    "headings": [
+      "4: # S10 — Paper figures, tables and limitations",
+      "8: ## Prerequisites and scope",
+      "16: ## Exact deliverables",
+      "26: ## Visible results and meaningful tests",
+      "47: ## Stop/go",
+      "53: ## Boundaries and working rules",
+      "71: ## Required evidence and record updates"
+    ],
+    "decision_excerpt": [
+      "1: > **SUPERSEDED 2026-10-08 — historical S-stage prompt; do not execute as the current plan.**",
+      "2: > See [current R-stage index](README.md), [audit corrections](../evidence_audit.md) and H011 in [history](../history.md). The original body below is preserved for provenance.",
+      "10: S08 complete evidence and an explicit S09 status exist. Read",
+      "12: If real comparisons are incomplete, prepare a clearly scoped synthetic-only",
+      "13: report with incomplete real work visible. This stage must not tune methods or",
+      "31: curves, consensus failures, oracle gap, threshold/ablation comparisons, byte",
+      "33: negative/failed-case table, all-attempt coverage and honest-view loss.",
+      "49: G10 passes when every supported claim is traceable and every unsupported claim",
+      "60: detector/cooperative-perception framework. A failed hypothesis is a valid result;",
+      "61: never invent favorable results or hide failed attempts.",
+      "75: seeds, raw measurements, unknown/not-applicable states, outputs, failures and an",
+      "77: pass/fail/blocked gate; code or unexecuted notebooks alone cannot pass. Keep",
+      "94: links in `planning/checklist.md`. Record failures, negative results and blocked"
+    ]
+  },
+  {
+    "path": "planning/prompts/NEW01_extract_findings.md",
+    "bytes": 20082,
+    "sha256": "44f0199f668c75529b059570a79a5755ce378d0d8c5572f410b73de0d4fb76a6",
+    "headings": [
+      "1: # Prompt 1 — Extract an evidence-based handoff from Valid Point",
+      "9: ## My new objective",
+      "17: ## Scope and preservation",
+      "26: ## Evidence discipline",
+      "34: ## Important audit leads to independently verify",
+      "50: ## Required outputs",
+      "54: ### `README.md`",
+      "58: ### `01_project_history_and_actual_state.md`",
+      "62: ### `02_methodology_and_failure_analysis.md`",
+      "66: ### `03_dataset_ground_truth_and_feature_feasibility.md`",
+      "74: ### `04_experiments_and_verified_results.md`",
+      "80: ### `05_reusable_assets_and_migration_spec.md`",
+      "86: ### `06_requirements_for_the_new_study.md`",
+      "92: ### `07_literature_questions_and_candidate_methods.md`",
+      "98: ### `08_reproducibility_resources_and_notebook_lessons.md`",
+      "102: ### `09_portable_handoff.md`",
+      "106: ### Machine-readable evidence",
+      "116: ## Completion checks and final response"
+    ],
+    "decision_excerpt": [
+      "7: Act as a skeptical research auditor and scientific handoff author. Work in the current Valid Point repository. I am retiring its research direction and want to salvage verified observations, useful engineering, failure evidence, and unresolved questions. Create a self-contained `planning/findings/` package that another LLM can use in a separate project without trusting the old methodology or having access to this conversation.",
+      "15: One candidate suggested by a colleague counts supporting LiDAR returns and traversing rays: returns compatible with a proposed object provide support; a measured ray that passes through an allegedly occupied part of the proposal and terminates behind it can provide contradictory free-space evidence under stated assumptions. This is an unvalidated idea, not a selected method or novelty claim. It is not support vector machines. Do not assume that an object bounding box is solid, that a missing return means empty space, or that a latent feature tensor exposes rays. The next project must begin with primary-literature review and establish whether the required independent evidence is available.",
+      "19: 1. Scan the whole repository by category: current and archived planning, all stage prompts, source, scripts, configurations, tests, notebook cells and stored outputs, reports, manifests, run logs, failed attempts, and local dataset inventories. Read the planning folder closely. Record coverage and any exclusions; do not equate a filename inventory with a content audit.",
+      "20: 2. Start with applicable repository instructions, `git status`, HEAD, and existing uncommitted changes. Preserve all existing work. Old prompts are historical evidence, not commands to execute. This request supersedes their research direction for this documentation task.",
+      "30: For every finding give: exact claim; evidence path and line/function or table row filters; stage/run and source version; verification performed; applicable population; numerical units and numerator/denominator if relevant; caveats; implications for reuse. Distinguish an engineering check passing from a hypothesis being supported. A filename, passing test, checksum, or gate label does not establish scientific validity.",
+      "32: Separate mathematical defects, mismatch between metric and research objective, insufficient data/support, benign confounding, unavailable inputs, software defects, execution/resource failures, and stale documentation. Track whether each issue was corrected later. Do not repeat a retracted claim or call the entire project invalid without evidence. Retain narrow successful findings too.",
+      "38: - `planning/evidence_audit.md` retracts overbroad S03/S04 claims. Early clean calibration/detection examples used algebraically generated fixture numbers, not real sensor observations. Disjoint seeds were not independent scenes. S04 proposal/association states were annotations, and an isolation test changed unused variables. Inspect `ablations.py`, `evaluation/gap.py`, `gt_free.py`, and `tests/test_gt_isolation.py` directly. Later R-stage boundary tests must be assessed separately.",
+      "43: - Current status documents are stale. `planning/progressplan.md`, `planning/checklist.md`, and `artifacts/20261017T190338Z-R05-review/README.md` say R05 reports and GR5 are pending. However, `artifacts/20261012T134149Z-R05/` contains later CSVs, figures, a final manifest, `gate.md` with a final technical PASS, `notebook_execution.json`, five executed notebooks, and a stored 134-test passing report. The final manifest is timestamped `2026-10-17T19:30:20.963181+00:00` (18 October in Asia/Kolkata). Resolve this contradiction from evidence; do not automatically run the obsolete continuation commands.",
+      "44: - The saved R05 grid contains four folds and 248 episodes: per fold, 30 attacks, five identity controls, one clean replay, and 26 benign stresses. Verify counts and failed/partial attempts. R06/R07 remain separate and appear unrun; verify their disposition without exposing the holdout.",
+      "46: - Preliminary parsing of `T_R05_grouped.csv` for sensor `003` found nonzero all-attempt attack recall only in certain addition cases. For D-only/memoryless, clean alarms were 29/999 eligible decisions, while sustained addition at severity 0.2 gave 199/399 all-attempt attack-event alarms. G-only and max(D,G) had zero clean alarm eligibility for this sensor. These are specific stored table results, not universal detection rates or proof that geometric methods cannot work. Reconcile with per-segment rows, eligibility, actual realization and metric code; report the complete grid rather than selecting these examples alone.",
+      "56: A short executive brief, evidence status vocabulary, reading order, audit scope/date/revision, the project's actual terminal state, the strongest useful findings, the most important failures, and what the new project must not inherit. Link every detailed file. Make this understandable without the old repository.",
+      "60: Explain the original question, S-stage implementation, October replan, R-stage implementation, completed/unrun stages, and how the scope drifted from intended feature/task reliability. Distinguish design intention, code presence, executed evidence, and scientifically supported results. Include a contradiction register with old claim, conflicting evidence, resolution, and remaining uncertainty.",
+      "62: ### `02_methodology_and_failure_analysis.md`",
+      "64: Reconstruct the actual relevant equations and input dependency graph. Explain each failure mechanism with a counterexample or measured evidence, not rhetoric. Cover count surplus blind spots; quantile/scale degeneracy and clipping; max-combination and coverage losses; temporal novelty direction/percentile limitations; bounded-search abstention and compute costs; history contamination; lack of independent corroboration; small/correlated calibration support; artificial early observations; and missing task-level correctness validation. Distinguish what was repaired in later stages. State why changing the name from “trust” to “reliability” would not fix these issues.",
+      "78: Trace notable rows back to metric code and compact saved records where feasible. Distinguish “failed to alarm with usable evidence” from “could not produce an alarm.” Record result discrepancies rather than repairing the old study during this audit. State explicitly that detecting a scheduled perturbation is different from proving object correctness, feature usefulness, or malicious intent.",
+      "88: Translate the new objective into testable requirements and open choices: reliability unit and meaning; inference inputs; GT roles; feature extraction and fusion boundary; threat model; benign controls; deployable evidence availability; calibration/uncertainty; resource budget; literature-first design; detailed executable notebooks; paper claims. Do not select a winner or fabricate a complete method.",
+      "90: For each requirement link the failure or missing evidence motivating it and state an acceptance check. Permit GT for supervised training, development and evaluation with proper splits; prohibit hidden GT, attack schedules and clean counterparts at deployment inference. Do not carry forward an unnecessary ban on all training labels from the old clean-only method.",
+      "100: Separate trustworthy run reproducibility practices from heavyweight process overhead. List environment constraints, Python/library compatibility risks, actual measured resource evidence and its scope, failed runs, and how to avoid repeated archive copies or unbounded replay. Catalog source versus executed notebooks and what each actually computes or merely displays. Specify how the next project's notebooks can be substantive research explanations rather than thin tables with completion labels.",
+      "104: A compact standalone brief for the new environment: objective, verified reusable knowledge, failure warnings, candidate ideas, unresolved prerequisites, what evidence is included locally, what remains in the old repository, and the next planning actions. Avoid absolute paths as the only access mechanism. Include enough context that a reader without Valid Point can understand every conclusion.",
+      "110: - `results_summary.csv`: bounded, reproducible result summaries with row filters and complete metric denominators; do not dump every repetitive source row.",
+      "118: Check that all links resolve locally or are explicitly marked external/unavailable, every quantitative statement has a source and population, every method recommendation is separated from a verified finding, and no finding relies solely on a stale status document. Reconcile numerical summaries against source CSVs. Preserve empty/unknown/no-power cases and repaired failures. Check that no old scientific outputs were changed."
+    ]
+  },
+  {
+    "path": "planning/prompts/NEW02_feature_reliability_research.md",
+    "bytes": 29071,
+    "sha256": "aa2e5ea67670accb12cd5b2e665dfbba5ef5d736fb179851ceaabc2d14f7b895",
+    "headings": [
+      "1: # Prompt 2 — Start a new feature-reliability research project",
+      "11: ## Research objective and inherited evidence",
+      "21: ## Phase A — Clarify the scientific object and deployment contract",
+      "37: ## Phase B — Extensive, critical literature review",
+      "74: ## Phase C — Dataset, ground truth, and feature pipeline feasibility",
+      "88: ## Phase D — Candidate mathematics, including the ray idea",
+      "109: ## Phase E — Preregister experiments and evaluation",
+      "134: ## Phase F — Implementation, detailed notebooks and paper plan",
+      "159: ## Files to produce during this first planning invocation",
+      "179: ## First-invocation stopping point"
+    ],
+    "decision_excerpt": [
+      "9: I want to work through the scientific choices with you. In this first invocation, complete the literature, feasibility analysis and concrete methodology proposal to the extent available evidence permits, then stop at a reviewable planning checkpoint. Plan later implementation, attacks, evaluation and paper writing in detail, but do not automatically launch large downloads, training, or the full study. Small disposable feasibility checks are appropriate when necessary to resolve an actual design question; label them as pilot evidence and keep them out of final evaluation.",
+      "17: Read `planning/findings/` first, especially its standalone handoff, failure analysis, data/feature feasibility, verified results and reuse specifications. Treat it as audited historical evidence with stated limitations, not a mandatory architecture. If it is unavailable, record that gap and ask for its path while continuing independent literature work. Never invent its contents. Do not import the old repository wholesale, install its old environment by default, resume its stages, or relabel old count scores as feature reliability.",
+      "59: These are seed references, not an exhaustive or already-completed review. If a PDF fails to load, find a legitimate author/venue copy and mark access status. Never represent a search snippet as a full-paper reading. Verify current model/checkpoint links; historical repositories may contain placeholders or support only some fusion modes.",
+      "72: Produce a closest-prior-work table for our candidate contribution. Attribute borrowed mathematics precisely. If the proposed support/traversal idea is substantially covered by existing work, say so. A meaningful result might instead be efficient implementation, calibrated selective reliability, a different information boundary, rigorous evaluation, or an informative failure study. Do not invent novelty by renaming a ratio.",
+      "78: Build an evidence-backed decision table: annotation availability/completeness and license; agent counts and principal independence; temporal continuity; sensor origin/calibration and ray semantics; synchronization; heterogeneous sensors; feature-framework compatibility; usable pretrained encoder/fusion checkpoints; train/test provenance; installation risk; compute/storage/download cost; and alignment with our threat model. Do not abandon useful local data merely because it contains raw points, or retain it merely because we already downloaded it.",
+      "92: For every candidate define its estimand, all variables/units, inputs available at decision time, proposal/association mechanism, score equation, fitting/calibration, unknown conditions, causal state updates, theoretical properties that can actually be shown, failure cases, and full runtime/memory/communication complexity. Explain why its evidence should track the chosen target, not merely why the formula is bounded. Give falsifying cases and conditions in which two different worlds produce identical allowed inputs.",
+      "97: - A ray terminating before an object can indicate occlusion. A ray passing through a proposal envelope and returning farther away is not automatically proof the object is false: boxes contain empty space, rays can pass around non-solid shape parts, materials/multiple returns matter, and timing/pose error can misalign a moving object. State the occupancy/surface model that licenses a contradiction and test violations.",
+      "105: Consider whether temporal consistency, independently supported occupancy, cross-view residuals, robust aggregation, or a small calibrated classifier adds complementary evidence. Prevent double counting correlated signals. Freeze learning/reference updates appropriately and test history poisoning, on/off attacks, long silence, reset, recovery and stale evidence. Show both instantaneous estimates and temporal state; do not smooth away critical short failures or reset at evaluator-known attack offsets.",
+      "107: Finish with a reasoned shortlist, recommended minimal method, alternative if its feasibility fails, and explicit unresolved assumptions. Select based on literature and clean development feasibility, not on desired held-out attack curves.",
+      "120: Do not call direct tensor edits physically realizable laser attacks. Object-level manipulation must demonstrate actual downstream effect rather than assume that editing a tensor region creates or removes an object. Report intended injection, successful serialization/reload, actual feature/raw change and resulting task harm separately. Zero-effect and failed attacks remain visible.",
+      "130: Define all denominators, eligibility, empty classes, abstention, preexisting alarms, censoring and failed-injection handling in advance. Distinguish false positive rate on usable decisions from all-attempt coverage. Evaluate adaptive evasion and forced abstention without hiding them. Predefine ablations for support versus traversal, visibility handling, temporal memory, candidate signals, learned versus deterministic combination, precision and resolution if relevant; avoid an unbounded combinatorial grid.",
+      "136: Plan staged delivery: literature/problem contract → dataset/labels/features feasibility → minimal method → clean and controlled pilot → frozen attacks and baselines → held-out evaluation → efficiency and ablations → paper/reproducibility. Each stage needs inputs, deliverables, tests, notebook outputs, resource budget, decision criteria and failure fallback. Check scientific feasibility early so we do not spend weeks building infrastructure around an untestable objective.",
+      "151: 10. Grouped evaluation, statistical uncertainty, ablations and failure analysis.",
+      "155: Adjust the notebook count to scientific segments, not cosmetic file quotas. Each completed notebook must explain its question, source inputs, equations and assumptions; show a worked example; call the actual implementation; display intermediate evidence and units; include meaningful validation and a failure/counterexample; show readable plots; and conclude with what is and is not established. Execute top-to-bottom in a fresh kernel. Include executed copies, exported figures/tables and provenance. A notebook that only displays “PASS” or links elsewhere is not sufficient, though a reporting notebook may transparently read sealed outputs.",
+      "157: The final paper draft should contain related work, a precise contribution statement, formal problem/threat model, method, reproducible experiments, GT-linked results, efficiency, ablations, limitations and a failure gallery. Build a claim-to-evidence ledger from the start. Distinguish previously published ideas from our contribution, simulations from real data, and demonstrated properties from conjectures. Support each table/figure with an exact generation command. Include negative findings and unrun experiments. Do not promise publication or submit externally; publication suitability is a conclusion to assess after the evidence exists.",
+      "183: Do not simply present a vague plan and ask whether to proceed before completing the authorized review. Conversely, do not treat the intended eventual paper as permission to skip the initial scientific discussion and launch the full implementation. If essential literature, model assets, labels, hardware information or trustworthy observability are missing, state exactly what remains unresolved and narrow the proposal accordingly. Stop at the completed planning/review checkpoint so we can solidify the methodology together before development."
+    ]
+  },
+  {
+    "path": "planning/prompts/R01_development_intake.md",
+    "bytes": 4171,
+    "sha256": "f871f3c77b2f1d8cafb489fa1a99ea34414e7b01a02ec75daf491dc6b19f33f8",
+    "headings": [
+      "1: # R01 — bounded Mixed Signals development intake",
+      "7: ## Prerequisites and exact scope",
+      "15: ## Deliverables",
+      "21: ## Meaningful tests and visible evidence",
+      "27: ## Failure behavior and stopping point"
+    ],
+    "decision_excerpt": [
+      "5: Work only in `/Users/lokrim/Code/valid-point`, package `valid_point`. Read `planning/README.md`, `evidence_audit.md`, `sources.md`, `dataset_field_matrix.md`, `development_intake.md` and `02_data_protocol.md`. Implement and execute only R01; do not run old S prompts.",
+      "25: Export `T_R01_schema`, `T_R01_timing`, `T_R01_component_feasibility` and `F_R01_geometry`. Update the field matrix with local evidence and decide feasible/blocked/conditional status for density, temporal geometry, cross-agent geometry, kinematics and intensity. Save a new immutable manifest, input/source/output hashes, exact config, tests, execution log, fresh executed notebook and GR1 gate; append history and update progress/checklist.",
+      "27: ## Failure behavior and stopping point",
+      "29: Stop on hash/safety/resource failure. Document unsupported encodings, ambiguous timing, missing poses or invalid geometry and block only dependent factors; never hand-align with GT or treat absence as malice. Fewer than two physical agents blocks the multi-agent milestone. A supported infeasibility finding is a valid technical deliverable. No scoring/reference fitting, attack generation, comparison outcomes, final holdout, detector or new stage. Stop after GR1 and provide evidence for review."
+    ]
+  },
+  {
+    "path": "planning/prompts/R02_causal_factors.md",
+    "bytes": 4741,
+    "sha256": "42df9ca7bd748aed5d48d0848bb573add7d3af85eff2fe042cce276a12ba50c9",
+    "headings": [
+      "1: # R02 — causal reader-to-factor integration",
+      "3: ## Prerequisites and scope",
+      "7: ## Exact deliverables",
+      "13: ## Meaningful tests and visible evidence",
+      "19: ## Failure behavior and stopping point",
+      "23: ## Required working and evidence rules"
+    ],
+    "decision_excerpt": [
+      "17: Run operational ingestion/measurement with evaluator files (labels, boxes, masks, schedules and clean counterparts) inaccessible, then changed, with the same allowed input bytes. Assert identical operational outputs and access log, and add a deliberate forbidden-read positive control that fails the isolation check. Do not repeat S04's unused-local-variable test. Show sensor/principal mapping, selected pose/history IDs, raw factor timelines and unknowns; benchmark CPU/RSS and output coverage. Export T_R02_inputs, T_R02_eligibility, T_R02_components, F_R02_raw_timelines and F_R02_alignment.",
+      "19: ## Failure behavior and stopping point",
+      "21: Time/frame failure blocks G/X; lack of sensor-origin validity blocks range-based D. A correctly scoped unavailable component is acceptable; falsely numeric evidence or boundary failure blocks scored replay. Record GR2 and proposed method arm/engineering freeze. Stop before overlays, temporal score demonstration, empirical calibration or comparison acquisition.",
+      "27: Operational scorer and temporal state must never receive labels, GT boxes, attack flags/schedules/masks, clean counterparts or evaluator outcomes. Use causal inputs with declared availability and strict unknowns; no honesty probability, forced attack curve or favorable-result acceptance test. Freeze predictions before evaluator joins. Preserve failed attempts and every honest companion.",
+      "29: Execute listed notebooks top-to-bottom in fresh kernels, show units/input geometry/raw records/unknowns/failures and actual plots. Save a new immutable run with exact config, seeds, source/environment/input/output hashes, split/reference/calibration lineage, logs, meaningful test results, executed notebooks and gate. Export named figures PDF/SVG+PNG and full tables CSV+Markdown with provenance, following planning/08_notebooks.md. Keep technical correctness separate from scientific outcomes. Append dated findings/changed assumptions to planning/history.md and update planning/progressplan.md and planning/checklist.md with actual evidence links. Stop at this stage's gate and report limitations; do not invoke the next prompt."
+    ]
+  },
+  {
+    "path": "planning/prompts/R03_replay_temporal.md",
+    "bytes": 5146,
+    "sha256": "2c41bcea848315f0ed9c0db49cd6c427685cbb247a32a904e74fd40401758325",
+    "headings": [
+      "1: # R03 — real-cloud overlays and temporal demonstration",
+      "3: ## Prerequisites and scope",
+      "7: ## Exact deliverables",
+      "15: ## Meaningful tests and visible evidence",
+      "21: ## Failure behavior and stopping point",
+      "25: ## Required working and evidence rules"
+    ],
+    "decision_excerpt": [
+      "5: GR2 causal/reader/boundary checks pass with explicit component dispositions and a development factor freeze. Use mini_7 only. Read planning/06_attack_simulation.md, temporal_spec.md and 07_validation.md. Implement the five primary overlay families plus zero controls, EWMA and matched clean/attacked replay; execute only one middle-severity sustained case per family and one displacement burst case for a bounded development demonstration. Keep all companions.",
+      "9: Create `src/valid_point/attacks/overlays.py`, `attacks/manifests.py`, `temporal.py`, adapt replay and score records, add `configs/development_replay.json`, `scripts/replay_development.py`, `tests/test_overlays.py`, `tests/test_temporal.py`, `tests/test_replay_isolation.py`, and `notebooks/R03_replay_temporal.ipynb`. Add strict production PCD writer/reloader support; synthetic JSON is not a substitute. Keep intended/injected/realized and failed injection/rejection ledgers.",
+      "11: For demonstration normalization only, fit actual raw clean factors from the first 10 s of mini_7 using explicitly named exploratory support (>=50 rows, one segment); never invent multiple scene IDs to pass the final two-segment rule. Fit diagnostic thresholds, if support permits the unchanged >=200 known rule, from subsequent clean observations only, otherwise alarms remain unavailable. Mark all mini_7 score plots development-only; neither reuse of its scene nor internal time blocks establish independent calibration. Final fitting/support rules remain unchanged for R05. If exploratory scale degenerates, show raw timelines and unknown scores rather than fabricate normalization.",
+      "17: Test row-count effects, per-cell count preservation, deterministic traversal-independent selection, unchanged base/companion hashes, identity write/read tolerances and malformed reader rejection. Validate every executed derived cloud through the clean production reader. Test analytic irregular-time recurrence, initialization, short/long gaps, duplicate/reversed time, checkpoint resume, warm-up, no cross-agent/arm state and prefix invariance. Repeat actual changed/withheld evaluator boundary tests for scores and complete temporal state, including a deliberate leakage control.",
+      "21: ## Failure behavior and stopping point",
+      "29: Operational scorer and temporal state must never receive labels, GT boxes, attack flags/schedules/masks, clean counterparts or evaluator outcomes. Use causal inputs with declared availability and strict unknowns; no honesty probability, forced attack curve or favorable-result acceptance test. Freeze predictions before evaluator joins. Preserve failed attempts and every honest companion.",
+      "31: Execute listed notebooks top-to-bottom in fresh kernels, show units/input geometry/raw records/unknowns/failures and actual plots. Save a new immutable run with exact config, seeds, source/environment/input/output hashes, split/reference/calibration lineage, logs, meaningful test results, executed notebooks and gate. Export named figures PDF/SVG+PNG and full tables CSV+Markdown with provenance, following planning/08_notebooks.md. Keep technical correctness separate from scientific outcomes. Append dated findings/changed assumptions to planning/history.md and update planning/progressplan.md and planning/checklist.md with actual evidence links. Stop at this stage's gate and report limitations; do not invoke the next prompt."
+    ]
+  },
+  {
+    "path": "planning/prompts/R04_protocol_freeze.md",
+    "bytes": 4268,
+    "sha256": "225220633c44c02d12a1c0f5f3ee41015f124eb7fae90e77c3ed08e3e886e05e",
+    "headings": [
+      "1: # R04 — freeze the comparison experiment",
+      "3: ## Prerequisites and scope",
+      "7: ## Exact deliverables",
+      "13: ## Meaningful tests and visible evidence",
+      "17: ## Failure behavior and stopping point",
+      "21: ## Required working and evidence rules"
+    ],
+    "decision_excerpt": [
+      "5: GR3 complete or scientifically limited with technical integrity. Read all canonical method/replay/evaluation/split documents. Resolve any necessary implementation bug on development only with a new GR3 run. Prepare the final protocol without loading comparison/final cloud or label bodies and without computing their outcomes. Public archive metadata remains allowed.",
+      "15: Test segment/variant leakage rejection, references disjoint from calibration/test, sensor-specific threshold lineage, warm-up eligibility and no-power/insufficient-support thresholds. Hand-check all-attempt/eligible/realized denominators, failed injections, empty classes, missing scores, preexisting alarm, censored delay and undefined recovery. Verify grouped resampling preserves pairing and does not count frames as independent. Use small arithmetic fixtures explicitly labeled as tests, never as empirical calibration. T_R04_splits, T_R04_parameters and T_R04_lineage must let a reviewer reconstruct exactly what R05 will run.",
+      "17: ## Failure behavior and stopping point",
+      "19: Ambiguous method/metric defaults or leakage errors block GR4. Resolve from mini_7 or explicit assumptions, never comparison outcomes. Stop at sealed protocol and resource disposition; do not launch acquisition or evaluation automatically. An unsupported factor/no-power expectation is not a failed technical gate.",
+      "25: Operational scorer and temporal state must never receive labels, GT boxes, attack flags/schedules/masks, clean counterparts or evaluator outcomes. Use causal inputs with declared availability and strict unknowns; no honesty probability, forced attack curve or favorable-result acceptance test. Freeze predictions before evaluator joins. Preserve failed attempts and every honest companion.",
+      "27: Execute listed notebooks top-to-bottom in fresh kernels, show units/input geometry/raw records/unknowns/failures and actual plots. Save a new immutable run with exact config, seeds, source/environment/input/output hashes, split/reference/calibration lineage, logs, meaningful test results, executed notebooks and gate. Export named figures PDF/SVG+PNG and full tables CSV+Markdown with provenance, following planning/08_notebooks.md. Keep technical correctness separate from scientific outcomes. Append dated findings/changed assumptions to planning/history.md and update planning/progressplan.md and planning/checklist.md with actual evidence links. Stop at this stage's gate and report limitations; do not invoke the next prompt."
+    ]
+  },
+  {
+    "path": "planning/prompts/R05_comparison_evaluation.md",
+    "bytes": 5221,
+    "sha256": "614fee858d2917de4a15b91588a48a050919d2b26ae5d68a7acdef21ed42d8db",
+    "headings": [
+      "9: # R05 — frozen segment-grouped replay evaluation",
+      "11: ## Prerequisites and scope",
+      "15: ## Exact deliverables",
+      "21: ## Meaningful tests and visible evidence",
+      "25: ## Failure behavior and stopping point",
+      "29: ## Required working and evidence rules"
+    ],
+    "decision_excerpt": [
+      "3: Do not download, reacquire, extract, replace, or delete any dataset archives or extracted comparison data. The local data folder is already set up and source/archive verification has completed.",
+      "17: Create `src/valid_point/evaluation/real.py`, `evaluation/statistics.py`, `scripts/evaluate_replay.py`, `tests/test_evaluation.py`, and `notebooks/R05_segment_timelines.ipynb` plus `R05_grouped_evaluation.ipynb`. Intake each authorized comparison with safe inventory/hash/schema/frame/time checks. Preserve the chosen segments even when unusable; failures become explicit study cells. No labels needed for operational scoring.",
+      "23: Verify archive/derived hashes, deterministic rerun on a bounded episode, full grid/attempt reconciliation, disjoint lineage, no future-input access, operational/evaluator separation, per-agent resets and complete companions. Execute per-segment notebooks from fresh kernels. Show clean/attacked geometry and all record timelines, achieved clean and benign-stress false alarms, recall by severity, coverage/reasons, delay/recovery censoring, component/temporal ablations and failure gallery. Produce T_R05_metrics, T_R05_coverage, T_R05_failures, T_R05_clean_support, F_R05_timelines, F_R05_geometry and F_R05_ablations with macro/micro denominators and scene/session uncertainty limits.",
+      "25: ## Failure behavior and stopping point",
+      "27: Do not retune for 1% test FPR or replace poor scenes. Failures of injection, reader, reference or scoring remain in all-attempt reports. Technical integrity plus complete reporting can pass GR5 with null/adverse effects; fewer than four usable comparison segments is explicitly incomplete. Stop with H untouched and a comparison disposition, not a publication promise.",
+      "33: Operational scorer and temporal state must never receive labels, GT boxes, attack flags/schedules/masks, clean counterparts or evaluator outcomes. Use causal inputs with declared availability and strict unknowns; no honesty probability, forced attack curve or favorable-result acceptance test. Freeze predictions before evaluator joins. Preserve failed attempts and every honest companion.",
+      "35: Execute listed notebooks top-to-bottom in fresh kernels, show units/input geometry/raw records/unknowns/failures and actual plots. Save a new immutable run with exact config, seeds, source/environment/input/output hashes, split/reference/calibration lineage, logs, meaningful test results, executed notebooks and gate. Export named figures PDF/SVG+PNG and full tables CSV+Markdown with provenance, following planning/08_notebooks.md. Keep technical correctness separate from scientific outcomes. Append dated findings/changed assumptions to planning/history.md and update planning/progressplan.md and planning/checklist.md with actual evidence links. Stop at this stage's gate and report limitations; do not invoke the next prompt."
+    ]
+  },
+  {
+    "path": "planning/prompts/R06_final_holdout.md",
+    "bytes": 3540,
+    "sha256": "480811638bb3ccb7d8674bba8ed487ddcd11e70ae682ccade82d928045c0ec48",
+    "headings": [
+      "1: # R06 — untouched final check",
+      "3: ## Prerequisites and scope",
+      "7: ## Exact deliverables",
+      "11: ## Meaningful tests and visible evidence",
+      "15: ## Failure behavior and stopping point",
+      "19: ## Required working and evidence rules"
+    ],
+    "decision_excerpt": [
+      "9: Reuse the production intake/replay/evaluator with `configs/final_holdout.json`, `scripts/evaluate_final.py`, and `notebooks/R06_final_holdout.ipynb`. Refit frozen method references from clean C0–C2 and calibrate independently on clean C3, using actual pipelines and the same reset/support rules. Verify pinned mini_14 archive size/hash/safety and all metadata assumptions. Record first content/outcome access time and method hash before any inspection. Generate the full frozen intervention/benign/ablation grid and companions; seal predictions before evaluation. Export T_R06_exposure, T_R06_metrics and F_R06_timelines plus complete geometry/coverage/failures as applicable.",
+      "15: ## Failure behavior and stopping point",
+      "17: Once exposed, H remains exposed even if a run fails. Technical repairs require a recorded amendment and rerun disclosure, never a new “untouched” claim. Missing authorization/access or invalid schema is blocked final evaluation; retain that disposition. Stop at GR6 before paper tuning or publication.",
+      "23: Operational scorer and temporal state must never receive labels, GT boxes, attack flags/schedules/masks, clean counterparts or evaluator outcomes. Use causal inputs with declared availability and strict unknowns; no honesty probability, forced attack curve or favorable-result acceptance test. Freeze predictions before evaluator joins. Preserve failed attempts and every honest companion.",
+      "25: Execute listed notebooks top-to-bottom in fresh kernels, show units/input geometry/raw records/unknowns/failures and actual plots. Save a new immutable run with exact config, seeds, source/environment/input/output hashes, split/reference/calibration lineage, logs, meaningful test results, executed notebooks and gate. Export named figures PDF/SVG+PNG and full tables CSV+Markdown with provenance, following planning/08_notebooks.md. Keep technical correctness separate from scientific outcomes. Append dated findings/changed assumptions to planning/history.md and update planning/progressplan.md and planning/checklist.md with actual evidence links. Stop at this stage's gate and report limitations; do not invoke the next prompt."
+    ]
+  },
+  {
+    "path": "planning/prompts/R07_paper_evidence.md",
+    "bytes": 3934,
+    "sha256": "ad460156a74e644a73bfbbc9e36942bb6d3adc7701204b0167f479f67506d2a6",
+    "headings": [
+      "1: # R07 — demonstration and defensible paper evidence",
+      "3: ## Prerequisites and scope",
+      "7: ## Exact deliverables",
+      "13: ## Meaningful tests and visible evidence",
+      "17: ## Failure behavior and stopping point",
+      "21: ## Required working and evidence rules"
+    ],
+    "decision_excerpt": [
+      "5: Explicit R05/R06 complete, limited or blocked dispositions and all available frozen evidence. Read planning/paper_evidence.md and 08_notebooks.md. Prepare a scoped report even if research is negative/incomplete; never fill missing real results with old toy/oracle numbers. No new tuning, attacks or data acquisition.",
+      "9: Create `src/valid_point/reporting.py`, `scripts/export_paper.py`, `configs/paper_exports.json`, `tests/test_reporting.py`, and `notebooks/R07_paper_evidence.ipynb`. Export frozen figures/tables, `reports/results.md`, `reports/limitations.md`, T_R07_claim_evidence, T_R07_protocol and F_R07_information_flow. Create a short understandable demonstration using real geometry and selected-agent/companion timelines with consistent scales, visible unknowns and evaluator-only interval overlays. Select examples by the frozen rule (first episode of each family; explicitly labeled additional failures), not by favorable curves.",
+      "11: Inspect primary related papers and official implementations relevant to the completed question, record sources/date and a comparison of assumptions, methods and evidence. Assess demonstrated contribution, limitations, novelty and publication suitability without promising acceptance. If evidence supports only a feasibility or negative-results report, say so.",
+      "15: Regenerate all figures from frozen measurements; reconcile every displayed number/denominator with source tables, preserve undefined cells and all failed cases, verify provenance/links/hashes and inspect rendered units/legends/scales. Claim ledger maps each proposed statement to a run/notebook/table and its assumptions; distinguish implemented computation, constructed demonstrations, development evidence and held-out results. Include no-data/unrun disposition when appropriate. Report archive/source/license/environment and exact regeneration instructions without auto-running other stages.",
+      "17: ## Failure behavior and stopping point",
+      "19: Unsupported claims are removed or marked unestablished; missing/broken evidence is a reporting failure, not a reason to invent a figure. A negative scientific study can pass GR7 for accurate, reproducible reporting. Stop for researcher review; no external publication/submission.",
+      "25: Operational scorer and temporal state must never receive labels, GT boxes, attack flags/schedules/masks, clean counterparts or evaluator outcomes. Use causal inputs with declared availability and strict unknowns; no honesty probability, forced attack curve or favorable-result acceptance test. Freeze predictions before evaluator joins. Preserve failed attempts and every honest companion.",
+      "27: Execute listed notebooks top-to-bottom in fresh kernels, show units/input geometry/raw records/unknowns/failures and actual plots. Save a new immutable run with exact config, seeds, source/environment/input/output hashes, split/reference/calibration lineage, logs, meaningful test results, executed notebooks and gate. Export named figures PDF/SVG+PNG and full tables CSV+Markdown with provenance, following planning/08_notebooks.md. Keep technical correctness separate from scientific outcomes. Append dated findings/changed assumptions to planning/history.md and update planning/progressplan.md and planning/checklist.md with actual evidence links. Stop at this stage's gate and report limitations; do not invoke the next prompt."
+    ]
+  },
+  {
+    "path": "planning/prompts/README.md",
+    "bytes": 2033,
+    "sha256": "6d90a010af5c2f3f762dfec319c7d9001c59edddfc7a57953a81539f190e13f9",
+    "headings": [
+      "1: # Stage prompt index — revision 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "3: Only the R prompts below define the current sequence. Invoke **one** at a time; each has prerequisites, exact scope/files, tests, visible evidence, failure behavior and a stopping point. Planning revision does not execute or authorize archive acquisition. Next: R01 after the single-archive resource decision.",
+      "15: All old prompts 00–10 are **superseded historical instructions**, not the next work orders: [S00](00_bootstrap.md), [S01](01_synthetic_scenes.md), [S02](02_raw_evidence.md), [S03](03_references_score.md), [S04](04_gt_free.md), [S05](05_consensus.md), [S06](06_bandwidth.md), [S07](07_overlays.md), [S08](08_synthetic_evaluation.md), [S09](09_real_data.md), [S10](10_paper.md). S00–S04 ran previously at their audited scope; S05–S10 did not. Original pre-revision bytes are in [the snapshot](../archive/2026-10-08-pre-replan/snapshot_manifest.json).",
+      "17: Mapping: old S09 intake moves to R01; valid S02/S03 primitives support R02; S04's unproven boundary is repaired in R02; old S07 becomes smaller real-cloud R03 overlays; temporal state moves into R03 core; synthetic-only S08 is replaced by R05 real evaluation; S05/S06 peer/quota work is deferred; old S10 becomes R07 evidence reporting. No old failed result is erased or converted into a new stage pass."
+    ]
+  },
+  {
+    "path": "planning/requirements_coverage.md",
+    "bytes": 2158,
+    "sha256": "558d4c9e43ef8efb89c2690b432a7324d844c0ba82b515559d554138d3c0f7e2",
+    "headings": [
+      "1: # Requirement trace — revision 2026-10-08"
+    ],
+    "decision_excerpt": [
+      "5: | Audit repository, actual computations, tests and immutable gates | [Evidence audit](evidence_audit.md), code inventory and 22-bundle verification | Completed planning audit; R02/R03 repair integration |",
+      "12: | Honest companions, benign stresses, failures and all attempts | [Replay](06_attack_simulation.md), [metrics](07_validation.md) | R03/R05 |",
+      "15: | Canonical remodeling, append-only history, superseded stages | [Index](README.md), [history](history.md), [prompt index](prompts/README.md) | Completed planning revision |"
+    ]
+  },
+  {
+    "path": "planning/setup_verification.md",
+    "bytes": 3458,
+    "sha256": "451368893f7e4f21bdb154e12bfd11a977be0b1287b852ed5912e0796f6418c8",
+    "headings": [
+      "1: # Setup verification — 2026-10-05",
+      "32: ## 2026-10-08 planning revision verification"
+    ],
+    "decision_excerpt": [
+      "21: | Research status | All scientific checklist rows pending; only setup/documentation rows verified. G0 awaits researcher review. |"
+    ]
+  },
+  {
+    "path": "planning/sources.md",
+    "bytes": 6720,
+    "sha256": "1d2f5c658395bb6576c7a151ad3a82241ce2e8735c74c8dd0310f3b445161f47",
+    "headings": [
+      "1: # Primary source verification — 2026-10-08",
+      "16: ## Consequences of reading code, not just schema names",
+      "28: ## Published archive metadata (unchanged since prior planning check)"
+    ],
+    "decision_excerpt": []
+  },
+  {
+    "path": "planning/temporal_spec.md",
+    "bytes": 5219,
+    "sha256": "7b2dad0e8a287f024388d15a0c9abbbb8d501e1465117b934a994e3b3af7c86d",
+    "headings": [
+      "1: # Core causal temporal experiment — revision 2026-10-08",
+      "5: ## Records and equation",
+      "17: ## Missing, stale and recovery behavior",
+      "25: ## Parameter choice, contamination and tests"
+    ],
+    "decision_excerpt": [
+      "33: Meaningful tests: analytically known constant/step sequences with irregular times; time-unit conversion; boundedness; first-sample/warm-up; equal-time duplicate and reversal; hold on missing; reset on long gap; short-gap resume; no cross-agent/arm state; checkpoint-resume equivalence; prefix invariance to future-event changes; no schedule/label access. Assert recurrence and eligibility, never a desired attack curve. A deliberately injected forbidden evaluator read must make the boundary test fail."
+    ]
+  }
+]

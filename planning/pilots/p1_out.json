@@ -1,0 +1,170 @@
+{
+ "pilot": "P1",
+ "segment": "mini_7",
+ "status": "pilot evidence on exposed development data",
+ "grid": [
+  {
+   "stream": "003",
+   "k": 125,
+   "H": 128,
+   "W": 2048,
+   "placeholder_xyz": [
+    0.0,
+    0.0,
+    1.63
+   ],
+   "placeholder_frac": 0.2492,
+   "valid_frac": 0.7508,
+   "row_elev_std_deg_median": 9.924,
+   "row_elev_std_deg_p90": 10.43,
+   "row_elev_median_range_deg": [
+    -33.35,
+    15.13
+   ],
+   "row_order_monotone_frac": 0.874,
+   "col_azimuth_step_sign_consistency": 0.969,
+   "col_azimuth_median_step_deg": -0.1772,
+   "placeholder_frac_rows_above_0deg": 0.192,
+   "placeholder_frac_rows_below_minus5deg": 0.383,
+   "rows_without_elevation_estimate": 0
+  },
+  {
+   "stream": "004",
+   "k": 125,
+   "H": 128,
+   "W": 2048,
+   "placeholder_xyz": [
+    0.0,
+    0.0,
+    1.9
+   ],
+   "placeholder_frac": 0.2273,
+   "valid_frac": 0.7727,
+   "row_elev_std_deg_median": 10.118,
+   "row_elev_std_deg_p90": 10.522,
+   "row_elev_median_range_deg": [
+    -34.61,
+    16.43
+   ],
+   "row_order_monotone_frac": 0.89,
+   "col_azimuth_step_sign_consistency": 0.987,
+   "col_azimuth_median_step_deg": -0.1781,
+   "placeholder_frac_rows_above_0deg": 0.095,
+   "placeholder_frac_rows_below_minus5deg": 0.457,
+   "rows_without_elevation_estimate": 0
+  },
+  {
+   "stream": "laser",
+   "k": 125,
+   "H": 128,
+   "W": 1024,
+   "placeholder_xyz": [
+    0.0,
+    0.0,
+    1.9
+   ],
+   "placeholder_frac": 0.0418,
+   "valid_frac": 0.9582,
+   "row_elev_std_deg_median": 0.078,
+   "row_elev_std_deg_p90": 0.089,
+   "row_elev_median_range_deg": [
+    -21.06,
+    20.97
+   ],
+   "row_order_monotone_frac": 1.0,
+   "col_azimuth_step_sign_consistency": 0.901,
+   "col_azimuth_median_step_deg": -0.3516,
+   "placeholder_frac_rows_above_0deg": 0.068,
+   "placeholder_frac_rows_below_minus5deg": 0.014,
+   "rows_without_elevation_estimate": 0
+  },
+  {
+   "stream": "top",
+   "k": 125,
+   "H": 64,
+   "W": 1024,
+   "placeholder_xyz": [
+    -41.551,
+    -51.878,
+    -1.077
+   ],
+   "placeholder_frac": 0.3657,
+   "valid_frac": 0.6342,
+   "row_elev_std_deg_median": 13.715,
+   "row_elev_std_deg_p90": 15.513,
+   "row_elev_median_range_deg": [
+    -28.23,
+    5.39
+   ],
+   "row_order_monotone_frac": 0.651,
+   "col_azimuth_step_sign_consistency": 0.885,
+   "col_azimuth_median_step_deg": -0.3358,
+   "placeholder_frac_rows_above_0deg": 0.606,
+   "placeholder_frac_rows_below_minus5deg": 0.251,
+   "rows_without_elevation_estimate": 0
+  },
+  {
+   "stream": "dome",
+   "k": 125,
+   "H": 128,
+   "W": 1024,
+   "placeholder_xyz": [
+    -41.507,
+    -51.864,
+    -1.34
+   ],
+   "placeholder_frac": 0.1086,
+   "valid_frac": 0.8914,
+   "row_elev_std_deg_median": 1.205,
+   "row_elev_std_deg_p90": 1.245,
+   "row_elev_median_range_deg": [
+    -86.92,
+    -0.25
+   ],
+   "row_order_monotone_frac": 0.102,
+   "col_azimuth_step_sign_consistency": 0.996,
+   "col_azimuth_median_step_deg": 0.3523,
+   "placeholder_frac_rows_above_0deg": null,
+   "placeholder_frac_rows_below_minus5deg": 0.089,
+   "rows_without_elevation_estimate": 0
+  }
+ ],
+ "label_members": {
+  "count": 290,
+  "min": 1,
+  "max": 290,
+  "missing_between": []
+ },
+ "label_sync_check": [
+  {
+   "label_k": 61,
+   "n_boxes": 14,
+   "cloud_k-1_sum_pts_in_boxes": 3244,
+   "cloud_k-1_boxes_with_gt5": 14,
+   "cloud_k+0_sum_pts_in_boxes": 3250,
+   "cloud_k+0_boxes_with_gt5": 14,
+   "cloud_k+1_sum_pts_in_boxes": 3230,
+   "cloud_k+1_boxes_with_gt5": 13
+  },
+  {
+   "label_k": 126,
+   "n_boxes": 13,
+   "cloud_k-1_sum_pts_in_boxes": 3693,
+   "cloud_k-1_boxes_with_gt5": 13,
+   "cloud_k+0_sum_pts_in_boxes": 3704,
+   "cloud_k+0_boxes_with_gt5": 13,
+   "cloud_k+1_sum_pts_in_boxes": 3699,
+   "cloud_k+1_boxes_with_gt5": 13
+  },
+  {
+   "label_k": 201,
+   "n_boxes": 12,
+   "cloud_k-1_sum_pts_in_boxes": 3090,
+   "cloud_k-1_boxes_with_gt5": 12,
+   "cloud_k+0_sum_pts_in_boxes": 3091,
+   "cloud_k+0_boxes_with_gt5": 12,
+   "cloud_k+1_sum_pts_in_boxes": 3070,
+   "cloud_k+1_boxes_with_gt5": 12
+  }
+ ]
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_7/003_0_1712121167.80167605.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_7/004_0_1712121167.98507153.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_7/laser_0_1712121167.109581066.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_7/top_0_1712121167.138003505.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 64\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 65536\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_7/dome_0_1712121167.122638611.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_10/003_0_1712121325.181700629.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_10/004_0_1712121325.199097837.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_10/laser_0_1712121325.211361076.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_10/top_0_1712121325.214915711.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 64\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 65536\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_10/dome_0_1712121325.225064296.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_11/003_0_1712121393.782345915.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_11/004_0_1712121393.799868895.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_11/laser_0_1712121393.811768435.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_11/top_0_1712121393.848799134.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 64\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 65536\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_11/dome_0_1712121393.820067239.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_12/003_0_1712121465.184416288.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_12/004_0_1712121465.200956714.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_12/laser_0_1712121465.212364012.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_12/top_0_1712121465.186831326.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 64\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 65536\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_12/dome_0_1712121465.218860807.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_13/003_0_1712121508.884920618.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_13/004_0_1712121508.902008259.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 2048\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 262144\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_13/laser_0_1712121508.912925103.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_13/top_0_1712121508.910002809.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 64\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 65536\nDATA ascii\n"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_13/dome_0_1712121508.919336177.pcd",
+    "inspection": "header only, body not opened/hash not recomputed",
+    "header": "# .PCD v0.7 - Point Cloud Data file format\nVERSION 0.7\nFIELDS x y z intensity\nSIZE 4 4 4 4\nTYPE F F F F\nCOUNT 1 1 1 1\nWIDTH 1024\nHEIGHT 128\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS 131072\nDATA ascii\n"
+  }
+]

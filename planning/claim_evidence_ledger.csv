@@ -1,0 +1,23 @@
+claim_id,claim_text,claim_type,hypothesis,evidence_required,notebook,stage,status,evidence_pointer,notes
+C-01,Ray support/traversal ratios for object verification are prior art (CARLO FSD/LPD; Shadow-Catcher; CAD free-space rules),literature,-,reading notes 01-03 with locators,01,0,SUPPORTED-LITERATURE,literature/reading_notes/01_carlo_sun2020.md; 03_cad_zhang2024.md,Do not claim novelty for the ratio
+C-02,No reviewed CP defense outputs a calibrated per-sender-per-region harm probability with explicit unknowns (search-limited),literature,-,search log Q6/Q10/Q11 + re-check before submission,01,0/8,PROVISIONAL,literature/search_log.md,Weak evidence of gap; must re-search
+C-03,Mixed Signals public segments span one ~35-minute session,data fact,-,pilot P3 range-read timestamps,02,0,PILOT-EVIDENCE,pilots/p3_segment_start_times.csv,Exact segment end times unknown
+C-04,MS organized grids are beam grids whose no-return slots have recoverable directions after mount rotation,data fact,H6 prerequisite,P1/P2 pilots then V-06 on block T,02/04,2,PILOT-EVIDENCE,pilots/p1_out.json; p2_out.json,One frame per stream so far
+C-05,AttFuse post-fusion computation is pixel-local so tile counterfactuals are exact before NMS,method fact,-,V-03 bit-identity test on the frozen checkpoint,03,1,PILOT-EVIDENCE,runs/20261022T165007Z-S1-spike/record.json (K3_K4_locality),16/16 bit-identical outside tile; 0 post-NMS changes outside; 1 OPV2V scenario with 2 agents; multi-sender and full test pending
+C-06,Frozen detector reproduces reported clean AP within tolerance,engineering,-,V-01,03,1,PARTIAL,runs/20261022T165007Z-S1-spike/record.json (K2),One test scenario only: AP@0.7 0.748 (not comparable to published 0.815); full reproduction needs ~21 GB download approval
+C-07,Receiver rays cover >=20% of effectful tiles (dev),feasibility,H6,coverage stats on block T,04,2,NOT-RUN,,Gate S2-G
+C-08,Treating no-return slots as free space produces false contradictions on genuine objects,method,H6,AB-3 on dev and E,04/10,2/7,NOT-RUN,,
+C-09,Beta-binomial models fit receiver-ray counts better than binomial (posterior predictive),method,H1,PPC per bin on T,05,3,NOT-RUN,,
+C-10,Isotonic-calibrated MINT-v0 output is calibrated on held-out block/scenarios,result,H1,ECE/reliability diagram on E,05/10,6,NOT-RUN,,
+C-11,Instantaneous outputs are invariant to sender-ID permutation and future frames,engineering,-,permutation + prefix tests,06,3,NOT-RUN,,
+C-12,Temporal state does not mask short failures and is vulnerable to history poisoning in measured ways,result,-,A-T2/A-T3 timelines,06/10,6,NOT-RUN,,
+C-13,Each attack family realizes its intended edit with measured harm distribution,engineering,-,realization ledgers,07/08,5,NOT-RUN,,Zero-effect events kept
+C-14,MINT-v0 ranks harmful contributions better than M1/B-LUCIA/B-CAD-local on held-out units,result,H1,paired AUROC with cluster bootstrap,10,6,NOT-RUN,,
+C-15,Inside receiver-unobserved tiles no method beats chance against A-F6/A-F7,result,H4,stratified AUROC + harm admitted,08/10,6,NOT-RUN,,Expected negative
+C-16,Per-unit results with worst-unit failure gallery,result,-,notebook 09,09,6,NOT-RUN,,
+C-17,MINT gating retains >=98% clean AP and improves attacked AP,result,H2,AP tables per unit,10,6,NOT-RUN,,
+C-18,Honest unique views are not rejected more than corroborated ones (+5pp),result,H3,UNIQUE stratum false rejection,10,6,NOT-RUN,,Likely hard
+C-19,Benign stresses do not trigger gating beyond clean rates (per stress),result,H2/H3,B-1..B-12 tables,06/10,6,NOT-RUN,,
+C-20,Ray evidence adds discrimination beyond feature-only channels in receiver-seen tiles,result,H6,AB-2/AB-5,10,7,NOT-RUN,,Only if v1 built
+C-21,Ablation results AB-1..AB-9,result,-,ablation tables,10,7,NOT-RUN,,
+C-22,Incremental MINT cost <=10% of end-to-end receiver perception at p95 on named device; 0 extra bytes,result,H5,benchmarks,11,7,NOT-RUN,,Dense estimate ~15%: sparsity required

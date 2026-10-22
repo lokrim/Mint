@@ -1,0 +1,32 @@
+[
+  {
+    "error": null,
+    "path": "R05_segment_timelines_C0.executed.ipynb",
+    "segment": "C0",
+    "status": "PASS"
+  },
+  {
+    "error": null,
+    "path": "R05_segment_timelines_C1.executed.ipynb",
+    "segment": "C1",
+    "status": "PASS"
+  },
+  {
+    "error": null,
+    "path": "R05_segment_timelines_C2.executed.ipynb",
+    "segment": "C2",
+    "status": "PASS"
+  },
+  {
+    "error": null,
+    "path": "R05_segment_timelines_C3.executed.ipynb",
+    "segment": "C3",
+    "status": "PASS"
+  },
+  {
+    "error": null,
+    "path": "R05_grouped_evaluation.executed.ipynb",
+    "segment": null,
+    "status": "PASS"
+  }
+]

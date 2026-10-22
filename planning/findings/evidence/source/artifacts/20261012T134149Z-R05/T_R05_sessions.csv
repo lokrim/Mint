@@ -1,0 +1,5 @@
+segment,first_source_ns,last_source_ns,events,group,independent_session_CI
+C0,1712121325181700629,1712121350128083126,1250,one conservatively grouped nearby acquisition; session identity unverified,NOT_SUPPORTED
+C1,1712121393782345915,1712121418761939578,1246,one conservatively grouped nearby acquisition; session identity unverified,NOT_SUPPORTED
+C2,1712121465184416288,1712121490117925545,1250,one conservatively grouped nearby acquisition; session identity unverified,NOT_SUPPORTED
+C3,1712121508884920618,1712121533826800721,1250,one conservatively grouped nearby acquisition; session identity unverified,NOT_SUPPORTED

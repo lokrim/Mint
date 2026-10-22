@@ -1,0 +1,27 @@
+{
+ "run_id": "20261022T165007Z-S1-spike",
+ "argv": [
+  "runners/stage1_spike.py",
+  "--ckpt_dir",
+  "data/opv2v/ckpt/pointpillar_attentive_fusion/pointpillar_attentive_fusion",
+  "--data_dir",
+  "data/opv2v/raw/test",
+  "--locality_frames",
+  "16"
+ ],
+ "python": "3.10.20 (main, Mar  3 2026, 00:49:35) [Clang 21.0.0 (clang-2100.0.123.102)]",
+ "platform": "macOS-27.0-arm64-arm-64bit",
+ "machine": "arm64",
+ "torch": "2.2.2",
+ "numpy": "1.26.4",
+ "torch_threads": 8,
+ "opencood_commit": "31ba16025da27ffe4e336f011290dfbc66f9a1f1",
+ "checkpoint_sha256": "f6df2f5434119392f0b3eb14dec8c2f99f15063a9058b625c06dc39de261a77c",
+ "config_sha256": "af55429fe765fb6b8038e7aac86386376f7d0e074841a3bad7551aaebca575ed",
+ "source_sha256": {
+  "runners/stage1_spike.py": "d9ec82cc7b854b05338310dd2ecf25ba68a22737291ef6edc1c73b0a981a5d96",
+  "src/mint/model/opencood_shims.py": "0e645dd80f08e833c1981c807d115991fe9bf8378c76221cbabf539bd1a7003d",
+  "src/mint/model/attfuse_parts.py": "0d4ad2b8ee2a1f48dc23e90e1f9602e807d06c67fa96416f1f2e0082bf2c52ea"
+ },
+ "data_dir": "data/opv2v/raw/test"
+}

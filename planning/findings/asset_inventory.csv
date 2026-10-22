@@ -1,0 +1,32 @@
+original_path,type_size,role,verification_status,dependency,exposure_split,migration_disposition,details_in
+src/valid_point/io/mixed_signals.py,source,strict PCD/odometry adapter,verified_current_code,numpy,none,adapt,05_reusable_assets_and_migration_spec.md
+src/valid_point/replay.py,source,causal replay loop,verified_current_code,numpy; io,none,adapt,05_reusable_assets_and_migration_spec.md
+src/valid_point/evidence/density.py,source,D count cells,verified_current_code,numpy,none,discard-as-research (negative baseline),05_reusable_assets_and_migration_spec.md
+src/valid_point/evidence/temporal_geometry.py,source,G novelty,verified_current_code,numpy,none,reimplement,05_reusable_assets_and_migration_spec.md
+src/valid_point/evidence/kinematics.py,source,K residual,verified_current_code,numpy,none,defer,05_reusable_assets_and_migration_spec.md
+src/valid_point/temporal.py,source,EWMA state machine,verified_current_code,stdlib,none,adapt,05_reusable_assets_and_migration_spec.md
+src/valid_point/attacks/overlays.py,source,deterministic point overlays,verified_current_code,numpy,none,adapt (fix targeting),05_reusable_assets_and_migration_spec.md
+src/valid_point/evaluation/real.py,source,"R05 orchestration, references, calibration",verified_current_code,numpy,none,reimplement,05_reusable_assets_and_migration_spec.md
+src/valid_point/evaluation/metrics.py,source,metrics with explicit empty denominators,verified_current_code,stdlib,none,adapt,05_reusable_assets_and_migration_spec.md
+src/valid_point/evaluation/statistics.py,source,"grouping, reporting, figures",verified_current_code,numpy; matplotlib,none,adapt,05_reusable_assets_and_migration_spec.md
+src/valid_point/evaluation/splits.py,source,"role lineage, canonical hash",verified_current_code,stdlib,none,adapt,05_reusable_assets_and_migration_spec.md
+src/valid_point/provenance.py,source,run provenance,verified_current_code,stdlib,none,adapt,05_reusable_assets_and_migration_spec.md
+src/valid_point/ablations.py;evaluation/gap.py;gt_free.py;oracle.py;synthetic.py,source,S-stage fixtures,verified_current_code,numpy,none,discard-as-research,05_reusable_assets_and_migration_spec.md
+tests/test_gt_isolation.py,test,vacuous S04 isolation,verified_current_code,pytest,none,discard-as-research,05_reusable_assets_and_migration_spec.md
+tests/test_replay_isolation.py;tests/test_evaluation.py,test,boundary/seal tests,verified_current_code,pytest,none,adapt,05_reusable_assets_and_migration_spec.md
+tests/test_mixed_signals.py;test_overlays.py;test_temporal.py;test_metrics.py,test,unit tests,reported_not_reverified (134 pass stored),pytest,none,adapt,05_reusable_assets_and_migration_spec.md
+configs/replay_evaluation.json,config,R05 grid,hash matches manifest,-,n/a,keep (historical),05_reusable_assets_and_migration_spec.md
+configs/segment_roles.json,config,roles and pins,read,-,records exposure,keep (historical),05_reusable_assets_and_migration_spec.md
+notebooks/,notebook,14 source notebooks,parsed,jupyter,n/a,discard-as-research (patterns only),05_reusable_assets_and_migration_spec.md
+artifacts/20261012T134149Z-R05/,artifact run (2.5 GB),final R05 evidence,verified_saved_result (re-hashed),-,C0-C3 exposed,keep (historical),05_reusable_assets_and_migration_spec.md
+artifacts/20261010T155346Z-R03/,artifact run,R03 development demo,reported_not_reverified,-,mini_7 exposed,keep (historical),05_reusable_assets_and_migration_spec.md
+artifacts/20261010T211551Z-R04-80694538e854/,artifact run,R04 freeze,reported_not_reverified,-,none,keep (historical),05_reusable_assets_and_migration_spec.md
+artifacts/2026100[5-8]T*/ (S runs),artifact runs,S00-S04 fixture evidence,reported_not_reverified,-,none,discard-as-research,05_reusable_assets_and_migration_spec.md
+reports/,figures/tables (8.7 MB),S-stage exports,listed only,-,none,discard-as-research,05_reusable_assets_and_migration_spec.md
+data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/archives/train/*.tar,dataset (39.15 GB),raw archives incl. labels,stat only; historic hashes,-,mini_7 dev; mini_10-13 exposed,keep in place,05_reusable_assets_and_migration_spec.md
+data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/,dataset extract (~32 GB),first ~25 s clouds + odometry,sampled reads,-,exposed,keep in place,05_reusable_assets_and_migration_spec.md
+pyproject.toml;requirements.lock;uv.lock,environment,Python 3.14 / NumPy 2.5,read,-,n/a,defer,05_reusable_assets_and_migration_spec.md
+"planning/ (old plans, prompts, archive, audit)",documentation,history,read,-,n/a,keep (historical; stale status docs),05_reusable_assets_and_migration_spec.md
+planning/prompts/NEW02_feature_reliability_research.md,prompt,next-project prompt,skimmed headings,-,n/a,"keep (context, not executed)",05_reusable_assets_and_migration_spec.md
+planning/findings/evidence/r2/audit_r2.py,script (new),reproduce r2 numbers,executed,python3 stdlib,reads R05 only,keep,05_reusable_assets_and_migration_spec.md
+planning/findings/evidence/r2/placeholder_probe.py,script (new),placeholder probe,executed,numpy,reads 25 exposed clouds,keep,05_reusable_assets_and_migration_spec.md

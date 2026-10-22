@@ -1,0 +1,61 @@
+{
+ "schema": "valid_point.findings.audit_scope.r2",
+ "audit_date": "2026-10-22 (Asia/Kolkata)",
+ "revision": "r2",
+ "repository": {
+  "head": "14371e6bee024544678481c0976641ba495dbda6",
+  "branch": "master",
+  "dirty_status_at_start": [" M src/.DS_Store", "?? planning/ (untracked, includes revision-1 findings)"],
+  "instructions_found": "no CLAUDE.md or AGENTS.md in the repository",
+  "writes_performed": "only inside planning/findings/ (r2 files, revisions/r1_2026-10-22 copies, evidence/r2/, evidence/README.md, audit_scope.json, evidence_manifest.json); scratch in session tmp"
+ },
+ "inspected": {
+  "planning_current": {"paths": ["planning/*.md (21 files)"], "depth": "close read of README, overview, 01-09, temporal_spec, progressplan, checklist, evidence_audit, history H013-H020; grep of dataset_field_matrix, sources"},
+  "planning_archive_and_audit": {"paths": ["planning/archive/2026-10-08-pre-replan/", "planning/audit/"], "depth": "contract and evidence audit read; other archived files inventoried by name (historical, superseded)"},
+  "prompts": {"paths": ["planning/prompts/*.md (21)", "planning/archive/.../prompts/*.md (12)"], "depth": "R05 and NEW01/NEW02 opening and headings read; S00-S10, R01-R04, R06-R07 treated as historical, not executed"},
+  "source": {"paths": ["src/valid_point (33 .py)"], "depth": "full read: density, temporal_geometry, temporal, development_scores (decide/normalize), evaluation/real (fit, normalize, score, calibrate, grid, replay_episode, memo), evaluation/metrics, statistics (grouped, summarize, final_recovery), replay (select_pose, frame, replay), io/mixed_signals (stamps, pose, frames), attacks/overlays; targeted read: ablations.clean_fixture_rows, gap._reference_rows/fit_track_calibration, kinematics.measure_motion signature"},
+  "tests": {"paths": ["tests/*.py (21)"], "depth": "test_gt_isolation, test_replay_isolation and test_evaluation bodies read for boundary claims; other tests by name only; no test executed"},
+  "scripts_configs": {"paths": ["scripts/ (18)", "configs/ (11)", "pyproject.toml"], "depth": "names; configs via R05 manifest hashes; pyproject dependencies read"},
+  "notebooks": {"paths": ["notebooks/*.ipynb (14 source)", "R05 executed notebooks (5)"], "depth": "all 14 source notebooks parsed by cell (counts, execution counts, outputs); R05_grouped_evaluation code read; 99 total .ipynb counted; none executed"},
+  "artifacts_R05": {"paths": ["artifacts/20261012T134149Z-R05/"], "depth": "all T_R05_*.csv parsed; calibration scores.jsonl.gz parsed; 244 evaluator attempts.jsonl.gz parsed; targets, manifest, gate, logs, environment, failure, correction records read; 15,561/15,565 outputs re-hashed"},
+  "artifacts_other": {"paths": ["artifacts/ (39 run dirs, 17,633 files)"], "depth": "R01 safe_member_inventory parsed; R03 attempts grep; other runs relied on history/r1 extracts (reported_not_reverified)"},
+  "dataset": {"paths": ["data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/"], "depth": "TAR stat sizes; extract file counts; 4 saved safe-member inventories + R01 inventory parsed; 15 odometry CSVs fully read; 25 PCD bodies read (1 per stream per segment) plus 5 mini_7 first-file bodies"},
+  "external": {"urls": ["huggingface.co/datasets/sberrio/Mixed-Signals-V2X", "arxiv.org/abs/2502.14156", "arxiv.org/abs/2109.07644", "arxiv.org/abs/2209.12836", "arxiv.org/abs/2101.06560", "usenix.org (CAD 2024, CARLO 2020)", "arxiv.org/abs/2309.12955", "proceedings.mlr.press/v306/zhang26cs.html", "arxiv.org/abs/2605.22122"], "depth": "landing/abstract pages only, 2026-10-22"}
+ },
+ "excluded": {
+  "mini_14 / holdout H": "absent locally; not searched for or opened",
+  "label bodies": "not extracted or read (inventory names only)",
+  "TAR and bulk PCD hashing": "historical hashes only; 25 sampled PCDs hashed",
+  "sibling repositories": "not inspected",
+  "test/notebook/replay/training execution": "not run by instruction",
+  "visual review of figures": "not performed (SVG/PNG not rendered)",
+  "4 R05 SVG outputs >12 MB": "not re-hashed",
+  "other artifact runs (S00-S04, R01-R04 contents)": "relied on old audit/history and r1 extracts",
+  ".venv, .cache, uv/requirements lock internals": "not audited"
+ },
+ "checks_performed": [
+  "git status/HEAD; instruction file search",
+  "preserved r1 files byte-for-byte (SHA-256 compared)",
+  "re-derived 240 calibration thresholds from saved scores (0 mismatches)",
+  "reconciled 12,240 grouped rows vs 48,960 metric rows (0 mismatches)",
+  "joined attack metrics with per-fold alarm capability",
+  "parsed realized change for 17,703 scheduled events",
+  "re-hashed R05 outputs and sources against manifest",
+  "checked for files modified after manifest (none except .DS_Store)",
+  "placeholder probe on 25 local clouds",
+  "label inventory id ranges",
+  "external lead verification (abstracts)",
+  "link and finding-ID resolution check of this package"
+ ],
+ "unverified_claims_carried": [
+  "TAR/extract hash matches (R05 intake, H019)",
+  "R01 timing statistics (147 short sub-second names; 50.6-59.9 ms skew)",
+  "R02/R03 resource figures and development results",
+  "R05 review claim: 309,752 raw rows with complete companions and no future pose",
+  "clock-correction record that no outputs were affected",
+  "stored 134-test pass",
+  "S04 constructed-case counts",
+  "placeholder = no-return semantics (hypothesis)",
+  "label index to sync index mapping"
+ ]
+}

@@ -1,0 +1,44 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+
+# Datasets and checkpoints (large, downloaded)
+data/
+
+# Run outputs (keep per-run record/manifest, drop bulky artifacts)
+runs/*/preds/
+runs/*/scenarios/
+runs/*/*.log
+runs/*/log.txt
+
+# Model weights / large binaries
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.zip
+
+# Vendored upstream checkout with its own git history
+third_party/OpenCOOD/
+
+# Editors / secrets
+.idea/
+.vscode/
+.env

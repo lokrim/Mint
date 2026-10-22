@@ -1,0 +1,112 @@
+[
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/archives/train/mini_7.tar",
+    "bytes": 7894272000,
+    "verification": "stat only; historical hash not recomputed"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_7",
+    "files": 1250,
+    "bytes": 6579185738,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/Odometry/mini_7",
+    "files": 3,
+    "bytes": 504842,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/labels/mini_7",
+    "exists": false,
+    "verification": "existence only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/archives/train/mini_10.tar",
+    "bytes": 7853803520,
+    "verification": "stat only; historical hash not recomputed"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_10",
+    "files": 1250,
+    "bytes": 6553645715,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/Odometry/mini_10",
+    "files": 3,
+    "bytes": 504331,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/labels/mini_10",
+    "exists": false,
+    "verification": "existence only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/archives/train/mini_11.tar",
+    "bytes": 7763056640,
+    "verification": "stat only; historical hash not recomputed"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_11",
+    "files": 1246,
+    "bytes": 6489308893,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/Odometry/mini_11",
+    "files": 3,
+    "bytes": 505692,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/labels/mini_11",
+    "exists": false,
+    "verification": "existence only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/archives/train/mini_12.tar",
+    "bytes": 7837788160,
+    "verification": "stat only; historical hash not recomputed"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_12",
+    "files": 1250,
+    "bytes": 6552436500,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/Odometry/mini_12",
+    "files": 3,
+    "bytes": 506375,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/labels/mini_12",
+    "exists": false,
+    "verification": "existence only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/archives/train/mini_13.tar",
+    "bytes": 7802398720,
+    "verification": "stat only; historical hash not recomputed"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/PointClouds/mini_13",
+    "files": 1250,
+    "bytes": 6519880825,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/Odometry/mini_13",
+    "files": 3,
+    "bytes": 505970,
+    "verification": "stat only"
+  },
+  {
+    "path": "data/mixed_signals/1a61aea747aa6bc45da2c2f085a1f1d3abc41f91/raw/labels/mini_13",
+    "exists": false,
+    "verification": "existence only"
+  }
+]

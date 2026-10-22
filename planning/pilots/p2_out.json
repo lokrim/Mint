@@ -1,0 +1,70 @@
+{
+ "pilot": "P2",
+ "segment": "mini_7",
+ "tilt_fit": [
+  {
+   "stream": "003",
+   "row_elev_std_before_deg": 9.924,
+   "row_elev_std_after_deg": 0.117,
+   "fitted_rx_deg": 0.0,
+   "fitted_ry_deg": -15.0
+  },
+  {
+   "stream": "top",
+   "row_elev_std_before_deg": 13.715,
+   "row_elev_std_after_deg": 0.109,
+   "fitted_rx_deg": -22.25,
+   "fitted_ry_deg": -6.75
+  }
+ ],
+ "moving_box_label_sync": [
+  {
+   "label_k": 40,
+   "n_moving": 1,
+   "off-3": 0,
+   "off-2": 0,
+   "off-1": 0,
+   "off+0": 16,
+   "off+1": 11,
+   "off+2": 9,
+   "off+3": 13,
+   "argmax_offset": 0
+  },
+  {
+   "label_k": 100,
+   "n_moving": 1,
+   "off-3": 33,
+   "off-2": 35,
+   "off-1": 49,
+   "off+0": 61,
+   "off+1": 80,
+   "off+2": 70,
+   "off+3": 35,
+   "argmax_offset": 1
+  },
+  {
+   "label_k": 130,
+   "n_moving": 2,
+   "off-3": 313,
+   "off-2": 322,
+   "off-1": 323,
+   "off+0": 383,
+   "off+1": 388,
+   "off+2": 356,
+   "off+3": 277,
+   "argmax_offset": 1
+  },
+  {
+   "label_k": 160,
+   "n_moving": 1,
+   "off-3": 404,
+   "off-2": 395,
+   "off-1": 449,
+   "off+0": 466,
+   "off+1": 574,
+   "off+2": 611,
+   "off+3": 614,
+   "argmax_offset": 3
+  }
+ ]
+}
