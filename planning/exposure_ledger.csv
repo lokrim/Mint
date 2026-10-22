@@ -14,3 +14,4 @@ mixed_signals,mini_4 mini_5 mini_17 mini_21,HF test (no labels),-,-,none,none,no
 opv2v,all,T/C=validate; E=test+Culver,-,-,none,none,
 v2v4real,all,see evaluation_protocol §2.3,-,-,none,none,
 opv2v,test/2021_08_23_12_58_19,moved from E to development,2026-10-22,MINT Stage-1 spike,clean detector outputs; AP@0.3/0.5/0.7; locality tests,clean detector AP seen,exclude from MINT E set
+opv2v,test (all 16 scenarios),E (MINT evaluation; detector-level exposure only),2026-10-23,MINT Stage-1 V-01 reproduction,clean AttFuse detector outputs and AP; locality tests,clean detector AP seen; no MINT/attack outcomes,planned V-01 exposure; predictions cached in runs/20261023-S1-reproduce/preds

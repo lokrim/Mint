@@ -1,31 +1,32 @@
 # Next-session brief
 
-Updated 2026-10-22, after the Stage-1 feasibility spike.
+Updated 2026-10-23, after the OPV2V Stage-1 reproduction.
 
 ## Where we are
 
-- **Path:** OPV2V-first. No GPU (decision D-10a). Ask before any download over 5 GB.
-- **Spike done:** [stage1_spike_report.md](stage1_spike_report.md).
-  - The released AttFuse checkpoint runs on CPU in `.venv` (Python 3.10, torch 2.2.2), with verified stand-ins for spconv, cumm and open3d.
-  - About 1 s per frame; 1.3 GB peak memory.
-  - V-03 locality: 16/16 tile tests bit-identical outside the tile.
-- **Data on disk:** one OPV2V test scenario (moved to development), plus the checkpoint. 17 GB of disk free.
+- **OPV2V-first, CPU only** (D-10a). Ask before any single download over 5 GB. The user approved streaming the test split, and that is now done.
+- **V-01 passed.** AP@0.7 = 0.8155 vs the published 0.815 on all 16 test scenarios.
+- **V-03 passed.** 93/93 tile tests bit-identical outside the tile (2–5 agents). 2/211 boxes crossed a tile border (D-22).
+- **Determinism.** Per-frame NumPy seeding (D-23).
+- **Cost.** About 0.25–1.2 s per frame, roughly linear in agent count. 1.3 GB peak RSS.
+- **Disk.** 41 GB free. Raw test data deleted; predictions cached in `runs/20261023-S1-reproduce/preds/`.
+- **Exposure.** All test scenarios have detector-level exposure only. They remain the MINT E set (D-21b).
+- Details: [stage1_spike_report.md](stage1_spike_report.md).
 
-## Waiting on you
+## Next bounded actions
 
-Approval to stream the full OPV2V test split: about 21 GB in total, fetched scenario by scenario, never more than about 3 GB on disk at once, raw PCDs deleted after caching. This is needed for V-01 (reproduce the published AP@0.7 0.815). Culver City (4.9 GB) and `validate` (≈ 40 GB, for MINT fit/calibration) follow later and need separate approval.
-
-## Next bounded actions after approval
-
-1. Add a `--keep-only` cache mode to the runner: store detector outputs plus multi-scale features at keyframe stride, then delete the raw scenario.
-2. Run the full test reproduction. Locality tests on scenarios with 3+ agents (multi-sender).
-3. V-02 (own-frame encoding, `proj_first=False`) on a few scenarios.
-4. Stage 2: ray geometry for OPV2V's simulated LiDAR. Measure receiver coverage of effectful tiles (gate S2-G).
+1. **V-02.** Own-frame encoding (`proj_first=False`) on 2–3 *validate* scenarios: report the AP change. Needs streaming from `validate-002.zip` (≈ 40 GB total; one scenario ≤ 3 GB at a time). **Ask before the full validate stream.**
+2. **V-05.** Measure the AttFuse message size: per-scale tensor bytes; dense vs non-zero.
+3. **Stage 2 on validate.**
+   - OPV2V LiDAR ray semantics: origin, organized or not, no-returns.
+   - Range-image or slab tests.
+   - Receiver coverage of effectful tiles (gate S2-G).
+4. **Decide on caching.** Re-streaming validate for each later stage costs about 40 GB of transfer. Caching multi-scale features at keyframe stride costs about 8 MB per agent-frame in fp16.
 
 ## Do not
 
 - Download over 5 GB without asking.
 - Modify `third_party/OpenCOOD` tracked files.
-- Import real open3d in a process that uses torch.
+- Import real open3d alongside torch.
 - Use OpenCOOD's `AttFusion` and ours in the same comparison.
-- Present the one-scenario AP as a reproduction.
+- Run MINT methods or attacks on test scenarios before the protocol freeze.

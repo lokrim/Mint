@@ -48,6 +48,51 @@ Run 2026-10-22. Record: [`runs/20261022T165007Z-S1-spike/`](../runs/20261022T165
 4. **Full test reproduction (V-01) needs about 21 GB** (test-012.zip, 16 scenarios), plus 4.9 GB for Culver City. That exceeds your 5 GB rule. **Disk has 17 GB free**, so the full test set can only be streamed scenario by scenario, deleting raw data after caching. Approval is needed.
 5. **Exposure.** This scenario's clean detector outputs and AP have now been seen. To keep the E set clean, **move `2021_08_23_12_58_19` to development** (exposure ledger updated).
 
+## Full test-split reproduction and multi-agent locality (run 2026-10-23, user-approved streaming)
+
+Record: [`runs/20261023-S1-reproduce/`](../runs/20261023-S1-reproduce/summary.md).
+- Per-scenario JSON plus cached per-frame predictions (`preds/*.npz`).
+- Runner [`runners/stage1_reproduce.py`](../runners/stage1_reproduce.py); summary [`runners/stage1_summarize.py`](../runners/stage1_summarize.py).
+
+**How the data was handled.**
+- All 16 OPV2V test scenarios were streamed one at a time from `test-012.zip`: **21.14 GB downloaded** in total.
+- Only `.pcd`/`.yaml` files were written; camera images were never written to disk.
+- Peak raw data on disk was **2.62 GB** (largest scenario), within the ≤ ~3 GB rule. Each scenario was deleted after inference.
+- Only the predictions cache remains.
+
+**Determinism fix.** OpenCOOD shuffles points at test time with an unseeded `np.random.permutation`. That changes which points survive the 32-points-per-pillar cap: about 4% of pillars are full. The runner seeds NumPy per frame from SHA-256(seed | scenario | frame).
+- Measured on one scenario with 4 seeds: class logits change by up to 0.92 and scores by ≤ 0.026, but no TP/FP outcome changed, so the scenario AP was identical.
+- An earlier unseeded run differed by 3 × 10⁻⁴ AP@0.5.
+
+**V-01 result: published AP reproduced** (OpenCOOD default AP, scenarios in OpenCOOD's sorted order, 2,170 frames, 33,003 predictions):
+
+| Metric | Ours | Published (README, Default Towns) |
+|---|---|---|
+| AP@0.3 / 0.5 / **0.7** | 0.914 / 0.906 / **0.8155** | — / — / **0.815** |
+| AP@0.3 / 0.5 / 0.7, global sort | 0.941 / 0.936 / 0.881 | not reported |
+
+- The difference at AP@0.7 is +0.0005, within the ±0.01 gate.
+- This also indirectly supports the voxelizer and PCD stand-ins.
+- Per-scenario AP@0.7 ranges **0.720–0.966** (table in the summary). Scenario-level variation is large, so scenario-grouped uncertainty is required.
+
+**Cost** (M1 CPU, 8 threads; median per scenario of the per-frame `inference_intermediate_fusion` time, which includes post-processing):
+- 0.25 s with 1.3 agents, 0.55–0.62 s with 2 agents, 0.82–0.92 s with 3 agents, 1.19 s with 4.6 agents.
+- Roughly linear in agent count. Data loading and voxelization come on top (≈ 0.4 s in the spike).
+
+**V-03 result: locality holds for multi-agent frames.**
+- 93 tile tests across all scenarios (single-agent frames skipped): 39 with 2 agents, 46 with 3, 2 with 4, 6 with 5.
+- **93/93 bit-identical head outputs outside the masked tile**, and every test changed outputs inside it.
+- After NMS, 209 changed boxes had centres inside their tile and **2 (≈ 1%) outside**. In both cases the head outputs outside the tile were bit-identical and the box count was unchanged: one box's regressed centre moved across the tile border. This is the anticipated straddling-box case, not a fusion leak. The effect-attribution rule must handle it (D-22).
+
+**Exposure.** Clean detector outputs and AP for all 16 test scenarios have now been seen (detector level only, for V-01, as the roadmap planned). No MINT method or attack has touched them. Recorded in the [exposure ledger](exposure_ledger.csv).
+
+**Gate S1-G (OPV2V part).**
+- Reproduction ✅.
+- Locality ✅ (cross-tile ≈ 1% < 5%).
+- Non-degenerate clean AP ✅.
+- Costs measured on the proxy ✅.
+- Still open: V-02 (own-frame encoding) and V-05 (message size).
+
 ## Not done or not established
 
 - V-01 full reproduction (blocked on download approval).

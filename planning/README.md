@@ -2,11 +2,11 @@
 
 **Status (2026-10-22):** Planning checkpoint 1 is done. Path chosen: no GPU, so OPV2V-first.
 
-The **Stage-1 feasibility spike is done**; see [stage1_spike_report.md](stage1_spike_report.md):
-- the released AttFuse checkpoint runs on CPU;
-- fusion locality held in 16/16 tile tests on one scenario.
+The **Stage-1 OPV2V feasibility work is done**; see [stage1_spike_report.md](stage1_spike_report.md):
+- The released AttFuse checkpoint reproduces the published test AP@0.7: **0.8155 vs 0.815** (16 scenarios, CPU).
+- Fusion locality held in **93/93** tile tests with 2–5 agents.
 
-Next: the full test reproduction, which needs approval for a ~21 GB streamed download. No MINT method results exist yet.
+Still open in Stage 1: V-02 (own-frame encoding) and V-05 (message size). No MINT method results exist yet.
 
 MINT asks whether a cooperative-perception receiver can estimate, per received feature contribution (sender × BEV tile × time), the calibrated probability that including it *harms* 3D detection. It then asks whether gating on that estimate preserves clean accuracy and limits attack harm, measured against ground truth.
 
