@@ -1,0 +1,289 @@
+{
+ "label": "DEVELOPMENT smoke test, block-T dev slice (1 scenario, n = 2), not an estimate",
+ "plan": "runs/20261024-AUDIT/plan.json",
+ "experiment": "X3",
+ "scenario": "2021_08_22_13_37_16",
+ "conditions": {
+  "nominal": {
+   "setting": {
+    "xyz_std_m": 0.0,
+    "yaw_std_deg": 0.0,
+    "delay_ms": 0
+   },
+   "AP": {
+    "undefended": {
+     "AP@0.7": 0.8811,
+     "AP@0.5": 0.9664,
+     "AP@0.7_global": 0.9235
+    },
+    "ego_only": {
+     "AP@0.7": 0.7043,
+     "AP@0.5": 0.8325,
+     "AP@0.7_global": 0.7801,
+     "dAP@0.7": -0.1768,
+     "dAP@0.7_global": -0.1434,
+     "dAP@0.5": -0.134
+    },
+    "B-RAY": {
+     "AP@0.7": 0.8811,
+     "AP@0.5": 0.9664,
+     "AP@0.7_global": 0.9235,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    },
+    "R1": {
+     "AP@0.7": 0.8768,
+     "AP@0.5": 0.9621,
+     "AP@0.7_global": 0.9214,
+     "dAP@0.7": -0.0043,
+     "dAP@0.7_global": -0.0021,
+     "dAP@0.5": -0.0044
+    },
+    "R1_noREMOVE": {
+     "AP@0.7": 0.8811,
+     "AP@0.5": 0.9664,
+     "AP@0.7_global": 0.9235,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    }
+   },
+   "bray_boxes": {
+    "boxes": 274,
+    "drop": 0,
+    "keep": 250,
+    "keep_unknown": 0,
+    "keep_self": 24,
+    "frac_KNOWN": 0.912,
+    "dropped_gt_matched": 0,
+    "dropped_unmatched": 0
+   }
+  },
+  "pose": {
+   "setting": {
+    "xyz_std_m": 0.2,
+    "yaw_std_deg": 0.2,
+    "delay_ms": 0
+   },
+   "AP": {
+    "undefended": {
+     "AP@0.7": 0.874,
+     "AP@0.5": 0.9632,
+     "AP@0.7_global": 0.9128
+    },
+    "ego_only": {
+     "AP@0.7": 0.7043,
+     "AP@0.5": 0.8325,
+     "AP@0.7_global": 0.7801,
+     "dAP@0.7": -0.1697,
+     "dAP@0.7_global": -0.1326,
+     "dAP@0.5": -0.1307
+    },
+    "B-RAY": {
+     "AP@0.7": 0.874,
+     "AP@0.5": 0.9632,
+     "AP@0.7_global": 0.9128,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    },
+    "R1": {
+     "AP@0.7": 0.8697,
+     "AP@0.5": 0.96,
+     "AP@0.7_global": 0.9127,
+     "dAP@0.7": -0.0043,
+     "dAP@0.7_global": -0.0001,
+     "dAP@0.5": -0.0032
+    },
+    "R1_noREMOVE": {
+     "AP@0.7": 0.874,
+     "AP@0.5": 0.9632,
+     "AP@0.7_global": 0.9128,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    }
+   },
+   "bray_boxes": {
+    "boxes": 273,
+    "drop": 0,
+    "keep": 249,
+    "keep_unknown": 0,
+    "keep_self": 24,
+    "frac_KNOWN": 0.912,
+    "dropped_gt_matched": 0,
+    "dropped_unmatched": 0
+   }
+  },
+  "pose_large": {
+   "setting": {
+    "xyz_std_m": 0.5,
+    "yaw_std_deg": 1.0,
+    "delay_ms": 0
+   },
+   "AP": {
+    "undefended": {
+     "AP@0.7": 0.716,
+     "AP@0.5": 0.9342,
+     "AP@0.7_global": 0.7958
+    },
+    "ego_only": {
+     "AP@0.7": 0.7043,
+     "AP@0.5": 0.8325,
+     "AP@0.7_global": 0.7801,
+     "dAP@0.7": -0.0117,
+     "dAP@0.7_global": -0.0156,
+     "dAP@0.5": -0.1017
+    },
+    "B-RAY": {
+     "AP@0.7": 0.7265,
+     "AP@0.5": 0.9349,
+     "AP@0.7_global": 0.7993,
+     "dAP@0.7": 0.0105,
+     "dAP@0.7_global": 0.0035,
+     "dAP@0.5": 0.0007
+    },
+    "R1": {
+     "AP@0.7": 0.7234,
+     "AP@0.5": 0.9416,
+     "AP@0.7_global": 0.8063,
+     "dAP@0.7": 0.0073,
+     "dAP@0.7_global": 0.0105,
+     "dAP@0.5": 0.0074
+    },
+    "R1_noREMOVE": {
+     "AP@0.7": 0.7309,
+     "AP@0.5": 0.9317,
+     "AP@0.7_global": 0.8028,
+     "dAP@0.7": 0.0149,
+     "dAP@0.7_global": 0.007,
+     "dAP@0.5": -0.0025
+    }
+   },
+   "bray_boxes": {
+    "boxes": 270,
+    "drop": 3,
+    "keep": 242,
+    "keep_unknown": 1,
+    "keep_self": 24,
+    "frac_KNOWN": 0.907,
+    "dropped_gt_matched": 1,
+    "dropped_unmatched": 2
+   }
+  },
+  "async": {
+   "setting": {
+    "xyz_std_m": 0.0,
+    "yaw_std_deg": 0.0,
+    "delay_ms": 100
+   },
+   "AP": {
+    "undefended": {
+     "AP@0.7": 0.8606,
+     "AP@0.5": 0.968,
+     "AP@0.7_global": 0.8813
+    },
+    "ego_only": {
+     "AP@0.7": 0.7043,
+     "AP@0.5": 0.8325,
+     "AP@0.7_global": 0.7801,
+     "dAP@0.7": -0.1563,
+     "dAP@0.7_global": -0.1011,
+     "dAP@0.5": -0.1355
+    },
+    "B-RAY": {
+     "AP@0.7": 0.8606,
+     "AP@0.5": 0.968,
+     "AP@0.7_global": 0.8813,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    },
+    "R1": {
+     "AP@0.7": 0.8559,
+     "AP@0.5": 0.9636,
+     "AP@0.7_global": 0.8775,
+     "dAP@0.7": -0.0047,
+     "dAP@0.7_global": -0.0038,
+     "dAP@0.5": -0.0044
+    },
+    "R1_noREMOVE": {
+     "AP@0.7": 0.8606,
+     "AP@0.5": 0.968,
+     "AP@0.7_global": 0.8813,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    }
+   },
+   "bray_boxes": {
+    "boxes": 273,
+    "drop": 0,
+    "keep": 249,
+    "keep_unknown": 0,
+    "keep_self": 24,
+    "frac_KNOWN": 0.912,
+    "dropped_gt_matched": 0,
+    "dropped_unmatched": 0
+   }
+  },
+  "pose_async": {
+   "setting": {
+    "xyz_std_m": 0.2,
+    "yaw_std_deg": 0.2,
+    "delay_ms": 100
+   },
+   "AP": {
+    "undefended": {
+     "AP@0.7": 0.7674,
+     "AP@0.5": 0.9625,
+     "AP@0.7_global": 0.7848
+    },
+    "ego_only": {
+     "AP@0.7": 0.7043,
+     "AP@0.5": 0.8325,
+     "AP@0.7_global": 0.7801,
+     "dAP@0.7": -0.0631,
+     "dAP@0.7_global": -0.0047,
+     "dAP@0.5": -0.1301
+    },
+    "B-RAY": {
+     "AP@0.7": 0.7674,
+     "AP@0.5": 0.9625,
+     "AP@0.7_global": 0.7848,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    },
+    "R1": {
+     "AP@0.7": 0.765,
+     "AP@0.5": 0.9593,
+     "AP@0.7_global": 0.7847,
+     "dAP@0.7": -0.0024,
+     "dAP@0.7_global": -0.0001,
+     "dAP@0.5": -0.0032
+    },
+    "R1_noREMOVE": {
+     "AP@0.7": 0.7674,
+     "AP@0.5": 0.9625,
+     "AP@0.7_global": 0.7848,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    }
+   },
+   "bray_boxes": {
+    "boxes": 273,
+    "drop": 0,
+    "keep": 249,
+    "keep_unknown": 0,
+    "keep_self": 24,
+    "frac_KNOWN": 0.912,
+    "dropped_gt_matched": 0,
+    "dropped_unmatched": 0
+   }
+  }
+ },
+ "runtime_s": 288
+}

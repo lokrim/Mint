@@ -1,0 +1,1576 @@
+{
+ "plan": "runs/20261024-AUDIT/plan.json (X0, X2 cache check)",
+ "T": {
+  "label": "DEVELOPMENT, block T, in-sample",
+  "frames": 404,
+  "summary": {
+   "all_frames": {
+    "clean": {
+     "undefended": {
+      "AP@0.7": 0.8737,
+      "AP@0.5": 0.9437,
+      "AP@0.7_global": 0.9083
+     },
+     "ego_only": {
+      "AP@0.7": 0.5808,
+      "AP@0.5": 0.7339,
+      "AP@0.7_global": 0.6674,
+      "dAP@0.7": -0.2929,
+      "dAP@0.7_global": -0.2409,
+      "dAP@0.5": -0.2098
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8736,
+      "AP@0.5": 0.9436,
+      "AP@0.7_global": 0.9074,
+      "dAP@0.7": -0.0001,
+      "dAP@0.7_global": -0.0009,
+      "dAP@0.5": -0.0001
+     },
+     "R1": {
+      "AP@0.7": 0.8741,
+      "AP@0.5": 0.9471,
+      "AP@0.7_global": 0.9101,
+      "dAP@0.7": 0.0003,
+      "dAP@0.7_global": 0.0018,
+      "dAP@0.5": 0.0033
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8745,
+      "AP@0.5": 0.9444,
+      "AP@0.7_global": 0.9083,
+      "dAP@0.7": 0.0008,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0006
+     }
+    },
+    "spoof_feat": {
+     "undefended": {
+      "AP@0.7": 0.8323,
+      "AP@0.5": 0.902,
+      "AP@0.7_global": 0.8919,
+      "attack_loss@0.7": 0.0414
+     },
+     "ego_only": {
+      "AP@0.7": 0.5808,
+      "AP@0.5": 0.7339,
+      "AP@0.7_global": 0.6674,
+      "dAP@0.7": -0.2514,
+      "dAP@0.7_global": -0.2245,
+      "dAP@0.5": -0.1681,
+      "recovery@0.7": -6.066
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8404,
+      "AP@0.5": 0.9104,
+      "AP@0.7_global": 0.8947,
+      "dAP@0.7": 0.0081,
+      "dAP@0.7_global": 0.0028,
+      "dAP@0.5": 0.0084,
+      "recovery@0.7": 0.195
+     },
+     "R1": {
+      "AP@0.7": 0.8392,
+      "AP@0.5": 0.9117,
+      "AP@0.7_global": 0.8967,
+      "dAP@0.7": 0.0069,
+      "dAP@0.7_global": 0.0048,
+      "dAP@0.5": 0.0096,
+      "recovery@0.7": 0.166
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8394,
+      "AP@0.5": 0.9091,
+      "AP@0.7_global": 0.895,
+      "dAP@0.7": 0.0071,
+      "dAP@0.7_global": 0.0031,
+      "dAP@0.5": 0.007,
+      "recovery@0.7": 0.171
+     }
+    },
+    "remove_feat": {
+     "undefended": {
+      "AP@0.7": 0.8631,
+      "AP@0.5": 0.936,
+      "AP@0.7_global": 0.8986,
+      "attack_loss@0.7": 0.0106
+     },
+     "ego_only": {
+      "AP@0.7": 0.5808,
+      "AP@0.5": 0.7339,
+      "AP@0.7_global": 0.6674,
+      "dAP@0.7": -0.2823,
+      "dAP@0.7_global": -0.2312,
+      "dAP@0.5": -0.2021,
+      "recovery@0.7": -26.67
+     },
+     "B-RAY": {
+      "AP@0.7": 0.863,
+      "AP@0.5": 0.9359,
+      "AP@0.7_global": 0.8977,
+      "dAP@0.7": -0.0001,
+      "dAP@0.7_global": -0.0009,
+      "dAP@0.5": -0.0001,
+      "recovery@0.7": -0.009
+     },
+     "R1": {
+      "AP@0.7": 0.8649,
+      "AP@0.5": 0.9409,
+      "AP@0.7_global": 0.9018,
+      "dAP@0.7": 0.0017,
+      "dAP@0.7_global": 0.0032,
+      "dAP@0.5": 0.0049,
+      "recovery@0.7": 0.161
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8639,
+      "AP@0.5": 0.9367,
+      "AP@0.7_global": 0.8986,
+      "dAP@0.7": 0.0008,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0006,
+      "recovery@0.7": 0.076
+     }
+    },
+    "shift_feat": {
+     "undefended": {
+      "AP@0.7": 0.8278,
+      "AP@0.5": 0.9034,
+      "AP@0.7_global": 0.8802,
+      "attack_loss@0.7": 0.046
+     },
+     "ego_only": {
+      "AP@0.7": 0.5808,
+      "AP@0.5": 0.7339,
+      "AP@0.7_global": 0.6674,
+      "dAP@0.7": -0.2469,
+      "dAP@0.7_global": -0.2128,
+      "dAP@0.5": -0.1695,
+      "recovery@0.7": -5.371
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8357,
+      "AP@0.5": 0.913,
+      "AP@0.7_global": 0.8829,
+      "dAP@0.7": 0.008,
+      "dAP@0.7_global": 0.0027,
+      "dAP@0.5": 0.0096,
+      "recovery@0.7": 0.174
+     },
+     "R1": {
+      "AP@0.7": 0.8358,
+      "AP@0.5": 0.9163,
+      "AP@0.7_global": 0.8868,
+      "dAP@0.7": 0.0081,
+      "dAP@0.7_global": 0.0066,
+      "dAP@0.5": 0.0129,
+      "recovery@0.7": 0.176
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8347,
+      "AP@0.5": 0.9115,
+      "AP@0.7_global": 0.8832,
+      "dAP@0.7": 0.0069,
+      "dAP@0.7_global": 0.0031,
+      "dAP@0.5": 0.0081,
+      "recovery@0.7": 0.15
+     }
+    },
+    "spoof_pts": {
+     "undefended": {
+      "AP@0.7": 0.8595,
+      "AP@0.5": 0.9291,
+      "AP@0.7_global": 0.9049,
+      "attack_loss@0.7": 0.0143
+     },
+     "ego_only": {
+      "AP@0.7": 0.5808,
+      "AP@0.5": 0.7339,
+      "AP@0.7_global": 0.6674,
+      "dAP@0.7": -0.2786,
+      "dAP@0.7_global": -0.2375,
+      "dAP@0.5": -0.1951,
+      "recovery@0.7": -19.543
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8631,
+      "AP@0.5": 0.933,
+      "AP@0.7_global": 0.9054,
+      "dAP@0.7": 0.0037,
+      "dAP@0.7_global": 0.0005,
+      "dAP@0.5": 0.004,
+      "recovery@0.7": 0.26
+     },
+     "R1": {
+      "AP@0.7": 0.8634,
+      "AP@0.5": 0.9364,
+      "AP@0.7_global": 0.908,
+      "dAP@0.7": 0.004,
+      "dAP@0.7_global": 0.0031,
+      "dAP@0.5": 0.0073,
+      "recovery@0.7": 0.281
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8639,
+      "AP@0.5": 0.9336,
+      "AP@0.7_global": 0.9062,
+      "dAP@0.7": 0.0044,
+      "dAP@0.7_global": 0.0013,
+      "dAP@0.5": 0.0046,
+      "recovery@0.7": 0.309
+     }
+    }
+   },
+   "frames": 404,
+   "realized_only": {
+    "spoof_feat": {
+     "frames": 261,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.879,
+       "AP@0.5": 0.9451,
+       "AP@0.7_global": 0.9094
+      },
+      "ego_only": {
+       "AP@0.7": 0.5933,
+       "AP@0.5": 0.734,
+       "AP@0.7_global": 0.6736,
+       "dAP@0.7": -0.2857,
+       "dAP@0.7_global": -0.2359,
+       "dAP@0.5": -0.2111
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8787,
+       "AP@0.5": 0.9448,
+       "AP@0.7_global": 0.908,
+       "dAP@0.7": -0.0003,
+       "dAP@0.7_global": -0.0014,
+       "dAP@0.5": -0.0003
+      },
+      "R1": {
+       "AP@0.7": 0.88,
+       "AP@0.5": 0.9492,
+       "AP@0.7_global": 0.9113,
+       "dAP@0.7": 0.001,
+       "dAP@0.7_global": 0.0019,
+       "dAP@0.5": 0.004
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.88,
+       "AP@0.5": 0.946,
+       "AP@0.7_global": 0.9094,
+       "dAP@0.7": 0.0011,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0009
+      }
+     },
+     "spoof_feat": {
+      "undefended": {
+       "AP@0.7": 0.8201,
+       "AP@0.5": 0.8825,
+       "AP@0.7_global": 0.8874,
+       "attack_loss@0.7": 0.0589
+      },
+      "ego_only": {
+       "AP@0.7": 0.5933,
+       "AP@0.5": 0.734,
+       "AP@0.7_global": 0.6736,
+       "dAP@0.7": -0.2267,
+       "dAP@0.7_global": -0.2139,
+       "dAP@0.5": -0.1485,
+       "recovery@0.7": -3.848
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8303,
+       "AP@0.5": 0.8941,
+       "AP@0.7_global": 0.8907,
+       "dAP@0.7": 0.0103,
+       "dAP@0.7_global": 0.0032,
+       "dAP@0.5": 0.0115,
+       "recovery@0.7": 0.175
+      },
+      "R1": {
+       "AP@0.7": 0.8292,
+       "AP@0.5": 0.895,
+       "AP@0.7_global": 0.893,
+       "dAP@0.7": 0.0091,
+       "dAP@0.7_global": 0.0056,
+       "dAP@0.5": 0.0125,
+       "recovery@0.7": 0.154
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.829,
+       "AP@0.5": 0.8921,
+       "AP@0.7_global": 0.8912,
+       "dAP@0.7": 0.009,
+       "dAP@0.7_global": 0.0038,
+       "dAP@0.5": 0.0096,
+       "recovery@0.7": 0.153
+      }
+     }
+    },
+    "remove_feat": {
+     "frames": 42,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.9003,
+       "AP@0.5": 0.9524,
+       "AP@0.7_global": 0.9256
+      },
+      "ego_only": {
+       "AP@0.7": 0.5882,
+       "AP@0.5": 0.7222,
+       "AP@0.7_global": 0.6649,
+       "dAP@0.7": -0.3122,
+       "dAP@0.7_global": -0.2607,
+       "dAP@0.5": -0.2302
+      },
+      "B-RAY": {
+       "AP@0.7": 0.9003,
+       "AP@0.5": 0.9524,
+       "AP@0.7_global": 0.9256,
+       "dAP@0.7": 0.0,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0
+      },
+      "R1": {
+       "AP@0.7": 0.8985,
+       "AP@0.5": 0.9533,
+       "AP@0.7_global": 0.9254,
+       "dAP@0.7": -0.0019,
+       "dAP@0.7_global": -0.0001,
+       "dAP@0.5": 0.001
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.9003,
+       "AP@0.5": 0.9524,
+       "AP@0.7_global": 0.9256,
+       "dAP@0.7": 0.0,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0
+      }
+     },
+     "remove_feat": {
+      "undefended": {
+       "AP@0.7": 0.8619,
+       "AP@0.5": 0.906,
+       "AP@0.7_global": 0.883,
+       "attack_loss@0.7": 0.0385
+      },
+      "ego_only": {
+       "AP@0.7": 0.5882,
+       "AP@0.5": 0.7222,
+       "AP@0.7_global": 0.6649,
+       "dAP@0.7": -0.2737,
+       "dAP@0.7_global": -0.218,
+       "dAP@0.5": -0.1838,
+       "recovery@0.7": -7.111
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8619,
+       "AP@0.5": 0.906,
+       "AP@0.7_global": 0.883,
+       "dAP@0.7": 0.0,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0,
+       "recovery@0.7": 0.0
+      },
+      "R1": {
+       "AP@0.7": 0.8708,
+       "AP@0.5": 0.9188,
+       "AP@0.7_global": 0.8935,
+       "dAP@0.7": 0.009,
+       "dAP@0.7_global": 0.0105,
+       "dAP@0.5": 0.0128,
+       "recovery@0.7": 0.234
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.8619,
+       "AP@0.5": 0.906,
+       "AP@0.7_global": 0.883,
+       "dAP@0.7": 0.0,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0,
+       "recovery@0.7": 0.0
+      }
+     }
+    },
+    "shift_feat": {
+     "frames": 66,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.9029,
+       "AP@0.5": 0.946,
+       "AP@0.7_global": 0.9235
+      },
+      "ego_only": {
+       "AP@0.7": 0.593,
+       "AP@0.5": 0.7145,
+       "AP@0.7_global": 0.6686,
+       "dAP@0.7": -0.3099,
+       "dAP@0.7_global": -0.2549,
+       "dAP@0.5": -0.2315
+      },
+      "B-RAY": {
+       "AP@0.7": 0.9029,
+       "AP@0.5": 0.946,
+       "AP@0.7_global": 0.9235,
+       "dAP@0.7": 0.0,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0
+      },
+      "R1": {
+       "AP@0.7": 0.9007,
+       "AP@0.5": 0.9487,
+       "AP@0.7_global": 0.9254,
+       "dAP@0.7": -0.0023,
+       "dAP@0.7_global": 0.0019,
+       "dAP@0.5": 0.0027
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.9029,
+       "AP@0.5": 0.946,
+       "AP@0.7_global": 0.9235,
+       "dAP@0.7": 0.0,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0
+      }
+     },
+     "shift_feat": {
+      "undefended": {
+       "AP@0.7": 0.8019,
+       "AP@0.5": 0.846,
+       "AP@0.7_global": 0.8494,
+       "attack_loss@0.7": 0.1011
+      },
+      "ego_only": {
+       "AP@0.7": 0.593,
+       "AP@0.5": 0.7145,
+       "AP@0.7_global": 0.6686,
+       "dAP@0.7": -0.2088,
+       "dAP@0.7_global": -0.1808,
+       "dAP@0.5": -0.1315,
+       "recovery@0.7": -2.066
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8111,
+       "AP@0.5": 0.8584,
+       "AP@0.7_global": 0.8552,
+       "dAP@0.7": 0.0093,
+       "dAP@0.7_global": 0.0058,
+       "dAP@0.5": 0.0124,
+       "recovery@0.7": 0.092
+      },
+      "R1": {
+       "AP@0.7": 0.8142,
+       "AP@0.5": 0.8676,
+       "AP@0.7_global": 0.8644,
+       "dAP@0.7": 0.0124,
+       "dAP@0.7_global": 0.0149,
+       "dAP@0.5": 0.0217,
+       "recovery@0.7": 0.123
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.8093,
+       "AP@0.5": 0.8547,
+       "AP@0.7_global": 0.8553,
+       "dAP@0.7": 0.0074,
+       "dAP@0.7_global": 0.0058,
+       "dAP@0.5": 0.0087,
+       "recovery@0.7": 0.073
+      }
+     }
+    },
+    "spoof_pts": {
+     "frames": 166,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.8858,
+       "AP@0.5": 0.9415,
+       "AP@0.7_global": 0.9115
+      },
+      "ego_only": {
+       "AP@0.7": 0.6012,
+       "AP@0.5": 0.7381,
+       "AP@0.7_global": 0.6784,
+       "dAP@0.7": -0.2846,
+       "dAP@0.7_global": -0.2332,
+       "dAP@0.5": -0.2035
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8847,
+       "AP@0.5": 0.9403,
+       "AP@0.7_global": 0.9102,
+       "dAP@0.7": -0.0012,
+       "dAP@0.7_global": -0.0013,
+       "dAP@0.5": -0.0012
+      },
+      "R1": {
+       "AP@0.7": 0.886,
+       "AP@0.5": 0.9433,
+       "AP@0.7_global": 0.9122,
+       "dAP@0.7": 0.0001,
+       "dAP@0.7_global": 0.0007,
+       "dAP@0.5": 0.0018
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.8859,
+       "AP@0.5": 0.9416,
+       "AP@0.7_global": 0.9115,
+       "dAP@0.7": 0.0001,
+       "dAP@0.7_global": 0.0,
+       "dAP@0.5": 0.0001
+      }
+     },
+     "spoof_pts": {
+      "undefended": {
+       "AP@0.7": 0.8485,
+       "AP@0.5": 0.9012,
+       "AP@0.7_global": 0.904,
+       "attack_loss@0.7": 0.0373
+      },
+      "ego_only": {
+       "AP@0.7": 0.6012,
+       "AP@0.5": 0.7381,
+       "AP@0.7_global": 0.6784,
+       "dAP@0.7": -0.2473,
+       "dAP@0.7_global": -0.2257,
+       "dAP@0.5": -0.1631,
+       "recovery@0.7": -6.628
+      },
+      "B-RAY": {
+       "AP@0.7": 0.857,
+       "AP@0.5": 0.9104,
+       "AP@0.7_global": 0.9058,
+       "dAP@0.7": 0.0084,
+       "dAP@0.7_global": 0.0018,
+       "dAP@0.5": 0.0092,
+       "recovery@0.7": 0.225
+      },
+      "R1": {
+       "AP@0.7": 0.8579,
+       "AP@0.5": 0.9128,
+       "AP@0.7_global": 0.9076,
+       "dAP@0.7": 0.0093,
+       "dAP@0.7_global": 0.0036,
+       "dAP@0.5": 0.0116,
+       "recovery@0.7": 0.249
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.8578,
+       "AP@0.5": 0.9111,
+       "AP@0.7_global": 0.907,
+       "dAP@0.7": 0.0092,
+       "dAP@0.7_global": 0.0029,
+       "dAP@0.5": 0.0099,
+       "recovery@0.7": 0.247
+      }
+     }
+    }
+   }
+  },
+  "bray_boxes": {
+   "clean": {
+    "boxes": 7432,
+    "drop": 12,
+    "keep": 6089,
+    "keep_unknown": 927,
+    "keep_self": 404,
+    "frac_KNOWN": 0.821,
+    "dropped_gt_matched": 7,
+    "dropped_unmatched": 5
+   },
+   "spoof_feat": {
+    "boxes": 7822,
+    "drop": 139,
+    "keep": 6095,
+    "keep_unknown": 1184,
+    "keep_self": 404,
+    "frac_KNOWN": 0.797,
+    "dropped_gt_matched": 7,
+    "dropped_unmatched": 132
+   },
+   "remove_feat": {
+    "boxes": 7376,
+    "drop": 12,
+    "keep": 6066,
+    "keep_unknown": 897,
+    "keep_self": 401,
+    "frac_KNOWN": 0.824,
+    "dropped_gt_matched": 7,
+    "dropped_unmatched": 5
+   },
+   "shift_feat": {
+    "boxes": 7569,
+    "drop": 137,
+    "keep": 6083,
+    "keep_unknown": 948,
+    "keep_self": 401,
+    "frac_KNOWN": 0.822,
+    "dropped_gt_matched": 7,
+    "dropped_unmatched": 130
+   },
+   "spoof_pts": {
+    "boxes": 7598,
+    "drop": 78,
+    "keep": 6093,
+    "keep_unknown": 1023,
+    "keep_self": 404,
+    "frac_KNOWN": 0.812,
+    "dropped_gt_matched": 7,
+    "dropped_unmatched": 71
+   }
+  },
+  "realized_frames": {
+   "spoof_feat": 261,
+   "remove_feat": 42,
+   "shift_feat": 66,
+   "spoof_pts": 166
+  },
+  "mean4_dAP@0.7|B-RAY": 0.00492,
+  "mean4_dAP@0.7_global|B-RAY": 0.00128,
+  "mean3_noremove_dAP@0.7|B-RAY": 0.0066,
+  "mean4_dAP@0.7|R1": 0.00517,
+  "mean4_dAP@0.7_global|R1": 0.00443,
+  "mean3_noremove_dAP@0.7|R1": 0.00633,
+  "mean4_dAP@0.7|ego_only": -0.2648,
+  "mean4_dAP@0.7_global|ego_only": -0.2265,
+  "mean3_noremove_dAP@0.7|ego_only": -0.25897,
+  "R1-BRAY_mean4_nonglobal": 0.00025,
+  "R1-BRAY_mean4_global": 0.00315,
+  "realized_only_dAP@0.7": {
+   "spoof_feat": {
+    "frames": 261,
+    "attack_loss": 0.0589,
+    "B-RAY": 0.0103,
+    "R1": 0.0091,
+    "ego_only": -0.2267
+   },
+   "remove_feat": {
+    "frames": 42,
+    "attack_loss": 0.0385,
+    "B-RAY": 0.0,
+    "R1": 0.009,
+    "ego_only": -0.2737
+   },
+   "shift_feat": {
+    "frames": 66,
+    "attack_loss": 0.1011,
+    "B-RAY": 0.0093,
+    "R1": 0.0124,
+    "ego_only": -0.2088
+   },
+   "spoof_pts": {
+    "frames": 166,
+    "attack_loss": 0.0373,
+    "B-RAY": 0.0084,
+    "R1": 0.0093,
+    "ego_only": -0.2473
+   }
+  },
+  "realized_spoof_boxes_near_dst": {
+   "spoof_feat": {
+    "boxes": 272,
+    "drop": 99,
+    "keep": 5,
+    "keep_unknown": 168,
+    "keep_self": 0,
+    "gt_iou_ge_0.5": 0
+   },
+   "spoof_pts": {
+    "boxes": 166,
+    "drop": 66,
+    "keep": 4,
+    "keep_unknown": 96,
+    "keep_self": 0,
+    "gt_iou_ge_0.5": 0
+   }
+  },
+  "null_boxes": {
+   "what": "E0 empty synthetic boxes in GT-free space (8/frame), B-RAY verdicts",
+   "boxes": 3232,
+   "drop": 1667,
+   "keep": 296,
+   "keep_unknown": 1269,
+   "keep_self": 0,
+   "kept_share_of_KNOWN": 0.1508
+  },
+  "per_scenario_mean4_dAP@0.7": {
+   "2021_08_20_21_48_35": {
+    "B-RAY": 0.00637,
+    "R1": 0.00677
+   },
+   "2021_08_21_17_30_41": {
+    "B-RAY": 0.00425,
+    "R1": 0.00425
+   },
+   "2021_08_22_13_37_16": {
+    "B-RAY": 0.01837,
+    "R1": 0.01345
+   }
+  },
+  "runtime_s": 1272
+ },
+ "H": {
+  "label": "DEVELOPMENT / exposed, block H (n = 2)",
+  "frames": 371,
+  "summary": {
+   "all_frames": {
+    "clean": {
+     "undefended": {
+      "AP@0.7": 0.8618,
+      "AP@0.5": 0.9101,
+      "AP@0.7_global": 0.8926
+     },
+     "ego_only": {
+      "AP@0.7": 0.6521,
+      "AP@0.5": 0.7371,
+      "AP@0.7_global": 0.7097,
+      "dAP@0.7": -0.2097,
+      "dAP@0.7_global": -0.1829,
+      "dAP@0.5": -0.173
+     },
+     "B-RAY": {
+      "AP@0.7": 0.861,
+      "AP@0.5": 0.9088,
+      "AP@0.7_global": 0.891,
+      "dAP@0.7": -0.0008,
+      "dAP@0.7_global": -0.0016,
+      "dAP@0.5": -0.0013
+     },
+     "R1": {
+      "AP@0.7": 0.8591,
+      "AP@0.5": 0.9089,
+      "AP@0.7_global": 0.8936,
+      "dAP@0.7": -0.0026,
+      "dAP@0.7_global": 0.001,
+      "dAP@0.5": -0.0013
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8616,
+      "AP@0.5": 0.91,
+      "AP@0.7_global": 0.8917,
+      "dAP@0.7": -0.0002,
+      "dAP@0.7_global": -0.0009,
+      "dAP@0.5": -0.0001
+     }
+    },
+    "spoof_feat": {
+     "undefended": {
+      "AP@0.7": 0.774,
+      "AP@0.5": 0.8213,
+      "AP@0.7_global": 0.8575,
+      "attack_loss@0.7": 0.0878
+     },
+     "ego_only": {
+      "AP@0.7": 0.6521,
+      "AP@0.5": 0.7371,
+      "AP@0.7_global": 0.7097,
+      "dAP@0.7": -0.1219,
+      "dAP@0.7_global": -0.1478,
+      "dAP@0.5": -0.0842,
+      "recovery@0.7": -1.389
+     },
+     "B-RAY": {
+      "AP@0.7": 0.823,
+      "AP@0.5": 0.8697,
+      "AP@0.7_global": 0.8725,
+      "dAP@0.7": 0.049,
+      "dAP@0.7_global": 0.015,
+      "dAP@0.5": 0.0484,
+      "recovery@0.7": 0.558
+     },
+     "R1": {
+      "AP@0.7": 0.8137,
+      "AP@0.5": 0.8616,
+      "AP@0.7_global": 0.874,
+      "dAP@0.7": 0.0397,
+      "dAP@0.7_global": 0.0165,
+      "dAP@0.5": 0.0404,
+      "recovery@0.7": 0.452
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8157,
+      "AP@0.5": 0.8625,
+      "AP@0.7_global": 0.8721,
+      "dAP@0.7": 0.0417,
+      "dAP@0.7_global": 0.0146,
+      "dAP@0.5": 0.0412,
+      "recovery@0.7": 0.475
+     }
+    },
+    "remove_feat": {
+     "undefended": {
+      "AP@0.7": 0.8274,
+      "AP@0.5": 0.8824,
+      "AP@0.7_global": 0.8632,
+      "attack_loss@0.7": 0.0344
+     },
+     "ego_only": {
+      "AP@0.7": 0.6521,
+      "AP@0.5": 0.7371,
+      "AP@0.7_global": 0.7097,
+      "dAP@0.7": -0.1753,
+      "dAP@0.7_global": -0.1535,
+      "dAP@0.5": -0.1453,
+      "recovery@0.7": -5.1
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8268,
+      "AP@0.5": 0.8814,
+      "AP@0.7_global": 0.8618,
+      "dAP@0.7": -0.0005,
+      "dAP@0.7_global": -0.0014,
+      "dAP@0.5": -0.001,
+      "recovery@0.7": -0.015
+     },
+     "R1": {
+      "AP@0.7": 0.8264,
+      "AP@0.5": 0.8832,
+      "AP@0.7_global": 0.8657,
+      "dAP@0.7": -0.0009,
+      "dAP@0.7_global": 0.0025,
+      "dAP@0.5": 0.0008,
+      "recovery@0.7": -0.026
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8285,
+      "AP@0.5": 0.8826,
+      "AP@0.7_global": 0.8629,
+      "dAP@0.7": 0.0011,
+      "dAP@0.7_global": -0.0002,
+      "dAP@0.5": 0.0001,
+      "recovery@0.7": 0.032
+     }
+    },
+    "shift_feat": {
+     "undefended": {
+      "AP@0.7": 0.7726,
+      "AP@0.5": 0.8246,
+      "AP@0.7_global": 0.8414,
+      "attack_loss@0.7": 0.0891
+     },
+     "ego_only": {
+      "AP@0.7": 0.6521,
+      "AP@0.5": 0.7371,
+      "AP@0.7_global": 0.7097,
+      "dAP@0.7": -0.1206,
+      "dAP@0.7_global": -0.1317,
+      "dAP@0.5": -0.0875,
+      "recovery@0.7": -1.353
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8119,
+      "AP@0.5": 0.8654,
+      "AP@0.7_global": 0.8483,
+      "dAP@0.7": 0.0393,
+      "dAP@0.7_global": 0.0068,
+      "dAP@0.5": 0.0408,
+      "recovery@0.7": 0.441
+     },
+     "R1": {
+      "AP@0.7": 0.8049,
+      "AP@0.5": 0.8616,
+      "AP@0.7_global": 0.8525,
+      "dAP@0.7": 0.0323,
+      "dAP@0.7_global": 0.011,
+      "dAP@0.5": 0.037,
+      "recovery@0.7": 0.362
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8069,
+      "AP@0.5": 0.8622,
+      "AP@0.7_global": 0.8504,
+      "dAP@0.7": 0.0343,
+      "dAP@0.7_global": 0.009,
+      "dAP@0.5": 0.0376,
+      "recovery@0.7": 0.385
+     }
+    },
+    "spoof_pts": {
+     "undefended": {
+      "AP@0.7": 0.8173,
+      "AP@0.5": 0.8647,
+      "AP@0.7_global": 0.8861,
+      "attack_loss@0.7": 0.0444
+     },
+     "ego_only": {
+      "AP@0.7": 0.6521,
+      "AP@0.5": 0.7371,
+      "AP@0.7_global": 0.7097,
+      "dAP@0.7": -0.1653,
+      "dAP@0.7_global": -0.1764,
+      "dAP@0.5": -0.1276,
+      "recovery@0.7": -3.721
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8412,
+      "AP@0.5": 0.8886,
+      "AP@0.7_global": 0.8882,
+      "dAP@0.7": 0.0238,
+      "dAP@0.7_global": 0.0021,
+      "dAP@0.5": 0.0239,
+      "recovery@0.7": 0.536
+     },
+     "R1": {
+      "AP@0.7": 0.8356,
+      "AP@0.5": 0.8848,
+      "AP@0.7_global": 0.8903,
+      "dAP@0.7": 0.0183,
+      "dAP@0.7_global": 0.0042,
+      "dAP@0.5": 0.0201,
+      "recovery@0.7": 0.412
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.838,
+      "AP@0.5": 0.8859,
+      "AP@0.7_global": 0.8885,
+      "dAP@0.7": 0.0207,
+      "dAP@0.7_global": 0.0024,
+      "dAP@0.5": 0.0212,
+      "recovery@0.7": 0.466
+     }
+    },
+    "spoof_blind": {
+     "undefended": {
+      "AP@0.7": 0.7643,
+      "AP@0.5": 0.8127,
+      "AP@0.7_global": 0.8446,
+      "attack_loss@0.7": 0.0975
+     },
+     "ego_only": {
+      "AP@0.7": 0.6521,
+      "AP@0.5": 0.7371,
+      "AP@0.7_global": 0.7097,
+      "dAP@0.7": -0.1122,
+      "dAP@0.7_global": -0.1349,
+      "dAP@0.5": -0.0756,
+      "recovery@0.7": -1.151
+     },
+     "B-RAY": {
+      "AP@0.7": 0.7675,
+      "AP@0.5": 0.8154,
+      "AP@0.7_global": 0.8459,
+      "dAP@0.7": 0.0032,
+      "dAP@0.7_global": 0.0012,
+      "dAP@0.5": 0.0027,
+      "recovery@0.7": 0.033
+     },
+     "R1": {
+      "AP@0.7": 0.7651,
+      "AP@0.5": 0.8146,
+      "AP@0.7_global": 0.8477,
+      "dAP@0.7": 0.0009,
+      "dAP@0.7_global": 0.0031,
+      "dAP@0.5": 0.0019,
+      "recovery@0.7": 0.009
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.7669,
+      "AP@0.5": 0.8153,
+      "AP@0.7_global": 0.8459,
+      "dAP@0.7": 0.0026,
+      "dAP@0.7_global": 0.0013,
+      "dAP@0.5": 0.0026,
+      "recovery@0.7": 0.027
+     }
+    }
+   },
+   "frames": 371,
+   "realized_only": {
+    "spoof_feat": {
+     "frames": 248,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.8604,
+       "AP@0.5": 0.9021,
+       "AP@0.7_global": 0.8901
+      },
+      "ego_only": {
+       "AP@0.7": 0.6547,
+       "AP@0.5": 0.7371,
+       "AP@0.7_global": 0.7106,
+       "dAP@0.7": -0.2057,
+       "dAP@0.7_global": -0.1795,
+       "dAP@0.5": -0.1651
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8596,
+       "AP@0.5": 0.9013,
+       "AP@0.7_global": 0.8891,
+       "dAP@0.7": -0.0008,
+       "dAP@0.7_global": -0.001,
+       "dAP@0.5": -0.0008
+      },
+      "R1": {
+       "AP@0.7": 0.8591,
+       "AP@0.5": 0.9033,
+       "AP@0.7_global": 0.892,
+       "dAP@0.7": -0.0013,
+       "dAP@0.7_global": 0.002,
+       "dAP@0.5": 0.0012
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.8598,
+       "AP@0.5": 0.9019,
+       "AP@0.7_global": 0.8894,
+       "dAP@0.7": -0.0006,
+       "dAP@0.7_global": -0.0007,
+       "dAP@0.5": -0.0002
+      }
+     },
+     "spoof_feat": {
+      "undefended": {
+       "AP@0.7": 0.7487,
+       "AP@0.5": 0.7897,
+       "AP@0.7_global": 0.8462,
+       "attack_loss@0.7": 0.1117
+      },
+      "ego_only": {
+       "AP@0.7": 0.6547,
+       "AP@0.5": 0.7371,
+       "AP@0.7_global": 0.7106,
+       "dAP@0.7": -0.094,
+       "dAP@0.7_global": -0.1357,
+       "dAP@0.5": -0.0527,
+       "recovery@0.7": -0.841
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8089,
+       "AP@0.5": 0.8495,
+       "AP@0.7_global": 0.8649,
+       "dAP@0.7": 0.0603,
+       "dAP@0.7_global": 0.0187,
+       "dAP@0.5": 0.0597,
+       "recovery@0.7": 0.54
+      },
+      "R1": {
+       "AP@0.7": 0.7983,
+       "AP@0.5": 0.8407,
+       "AP@0.7_global": 0.8664,
+       "dAP@0.7": 0.0497,
+       "dAP@0.7_global": 0.0201,
+       "dAP@0.5": 0.051,
+       "recovery@0.7": 0.445
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.7985,
+       "AP@0.5": 0.8391,
+       "AP@0.7_global": 0.8639,
+       "dAP@0.7": 0.0499,
+       "dAP@0.7_global": 0.0176,
+       "dAP@0.5": 0.0494,
+       "recovery@0.7": 0.447
+      }
+     }
+    },
+    "remove_feat": {
+     "frames": 38,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.759,
+       "AP@0.5": 0.8311,
+       "AP@0.7_global": 0.8051
+      },
+      "ego_only": {
+       "AP@0.7": 0.4993,
+       "AP@0.5": 0.6213,
+       "AP@0.7_global": 0.5646,
+       "dAP@0.7": -0.2598,
+       "dAP@0.7_global": -0.2405,
+       "dAP@0.5": -0.2098
+      },
+      "B-RAY": {
+       "AP@0.7": 0.7553,
+       "AP@0.5": 0.8259,
+       "AP@0.7_global": 0.8004,
+       "dAP@0.7": -0.0037,
+       "dAP@0.7_global": -0.0047,
+       "dAP@0.5": -0.0052
+      },
+      "R1": {
+       "AP@0.7": 0.7579,
+       "AP@0.5": 0.8365,
+       "AP@0.7_global": 0.8058,
+       "dAP@0.7": -0.0011,
+       "dAP@0.7_global": 0.0007,
+       "dAP@0.5": 0.0055
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.7565,
+       "AP@0.5": 0.829,
+       "AP@0.7_global": 0.8019,
+       "dAP@0.7": -0.0026,
+       "dAP@0.7_global": -0.0032,
+       "dAP@0.5": -0.0021
+      }
+     },
+     "remove_feat": {
+      "undefended": {
+       "AP@0.7": 0.6731,
+       "AP@0.5": 0.742,
+       "AP@0.7_global": 0.719,
+       "attack_loss@0.7": 0.0859
+      },
+      "ego_only": {
+       "AP@0.7": 0.4993,
+       "AP@0.5": 0.6213,
+       "AP@0.7_global": 0.5646,
+       "dAP@0.7": -0.1738,
+       "dAP@0.7_global": -0.1544,
+       "dAP@0.5": -0.1206,
+       "recovery@0.7": -2.023
+      },
+      "B-RAY": {
+       "AP@0.7": 0.671,
+       "AP@0.5": 0.7386,
+       "AP@0.7_global": 0.7159,
+       "dAP@0.7": -0.0021,
+       "dAP@0.7_global": -0.0031,
+       "dAP@0.5": -0.0034,
+       "recovery@0.7": -0.024
+      },
+      "R1": {
+       "AP@0.7": 0.6745,
+       "AP@0.5": 0.7578,
+       "AP@0.7_global": 0.7255,
+       "dAP@0.7": 0.0014,
+       "dAP@0.7_global": 0.0065,
+       "dAP@0.5": 0.0158,
+       "recovery@0.7": 0.016
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.6708,
+       "AP@0.5": 0.7401,
+       "AP@0.7_global": 0.7159,
+       "dAP@0.7": -0.0024,
+       "dAP@0.7_global": -0.0031,
+       "dAP@0.5": -0.0018,
+       "recovery@0.7": -0.028
+      }
+     }
+    },
+    "shift_feat": {
+     "frames": 46,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.759,
+       "AP@0.5": 0.8417,
+       "AP@0.7_global": 0.8142
+      },
+      "ego_only": {
+       "AP@0.7": 0.492,
+       "AP@0.5": 0.6057,
+       "AP@0.7_global": 0.5641,
+       "dAP@0.7": -0.267,
+       "dAP@0.7_global": -0.2502,
+       "dAP@0.5": -0.2359
+      },
+      "B-RAY": {
+       "AP@0.7": 0.7581,
+       "AP@0.5": 0.8407,
+       "AP@0.7_global": 0.8116,
+       "dAP@0.7": -0.0009,
+       "dAP@0.7_global": -0.0026,
+       "dAP@0.5": -0.001
+      },
+      "R1": {
+       "AP@0.7": 0.7557,
+       "AP@0.5": 0.8442,
+       "AP@0.7_global": 0.811,
+       "dAP@0.7": -0.0033,
+       "dAP@0.7_global": -0.0032,
+       "dAP@0.5": 0.0025
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.7564,
+       "AP@0.5": 0.8407,
+       "AP@0.7_global": 0.8103,
+       "dAP@0.7": -0.0026,
+       "dAP@0.7_global": -0.0039,
+       "dAP@0.5": -0.001
+      }
+     },
+     "shift_feat": {
+      "undefended": {
+       "AP@0.7": 0.6064,
+       "AP@0.5": 0.6821,
+       "AP@0.7_global": 0.6682,
+       "attack_loss@0.7": 0.1526
+      },
+      "ego_only": {
+       "AP@0.7": 0.492,
+       "AP@0.5": 0.6057,
+       "AP@0.7_global": 0.5641,
+       "dAP@0.7": -0.1144,
+       "dAP@0.7_global": -0.1042,
+       "dAP@0.5": -0.0764,
+       "recovery@0.7": -0.75
+      },
+      "B-RAY": {
+       "AP@0.7": 0.6171,
+       "AP@0.5": 0.694,
+       "AP@0.7_global": 0.671,
+       "dAP@0.7": 0.0106,
+       "dAP@0.7_global": 0.0028,
+       "dAP@0.5": 0.0119,
+       "recovery@0.7": 0.069
+      },
+      "R1": {
+       "AP@0.7": 0.6188,
+       "AP@0.5": 0.7113,
+       "AP@0.7_global": 0.6802,
+       "dAP@0.7": 0.0124,
+       "dAP@0.7_global": 0.012,
+       "dAP@0.5": 0.0291,
+       "recovery@0.7": 0.081
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.6206,
+       "AP@0.5": 0.7062,
+       "AP@0.7_global": 0.6786,
+       "dAP@0.7": 0.0141,
+       "dAP@0.7_global": 0.0104,
+       "dAP@0.5": 0.0241,
+       "recovery@0.7": 0.092
+      }
+     }
+    },
+    "spoof_pts": {
+     "frames": 187,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.8632,
+       "AP@0.5": 0.9075,
+       "AP@0.7_global": 0.8909
+      },
+      "ego_only": {
+       "AP@0.7": 0.6662,
+       "AP@0.5": 0.7474,
+       "AP@0.7_global": 0.7193,
+       "dAP@0.7": -0.1971,
+       "dAP@0.7_global": -0.1715,
+       "dAP@0.5": -0.1601
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8642,
+       "AP@0.5": 0.908,
+       "AP@0.7_global": 0.8905,
+       "dAP@0.7": 0.001,
+       "dAP@0.7_global": -0.0004,
+       "dAP@0.5": 0.0005
+      },
+      "R1": {
+       "AP@0.7": 0.8631,
+       "AP@0.5": 0.9096,
+       "AP@0.7_global": 0.8928,
+       "dAP@0.7": -0.0001,
+       "dAP@0.7_global": 0.002,
+       "dAP@0.5": 0.0021
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.864,
+       "AP@0.5": 0.9083,
+       "AP@0.7_global": 0.8905,
+       "dAP@0.7": 0.0008,
+       "dAP@0.7_global": -0.0004,
+       "dAP@0.5": 0.0008
+      }
+     },
+     "spoof_pts": {
+      "undefended": {
+       "AP@0.7": 0.7824,
+       "AP@0.5": 0.8286,
+       "AP@0.7_global": 0.8799,
+       "attack_loss@0.7": 0.0809
+      },
+      "ego_only": {
+       "AP@0.7": 0.6662,
+       "AP@0.5": 0.7474,
+       "AP@0.7_global": 0.7193,
+       "dAP@0.7": -0.1162,
+       "dAP@0.7_global": -0.1606,
+       "dAP@0.5": -0.0812,
+       "recovery@0.7": -1.437
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8262,
+       "AP@0.5": 0.8693,
+       "AP@0.7_global": 0.8857,
+       "dAP@0.7": 0.0438,
+       "dAP@0.7_global": 0.0059,
+       "dAP@0.5": 0.0407,
+       "recovery@0.7": 0.542
+      },
+      "R1": {
+       "AP@0.7": 0.8183,
+       "AP@0.5": 0.8638,
+       "AP@0.7_global": 0.887,
+       "dAP@0.7": 0.036,
+       "dAP@0.7_global": 0.0071,
+       "dAP@0.5": 0.0353,
+       "recovery@0.7": 0.445
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.8193,
+       "AP@0.5": 0.8629,
+       "AP@0.7_global": 0.8851,
+       "dAP@0.7": 0.0369,
+       "dAP@0.7_global": 0.0052,
+       "dAP@0.5": 0.0343,
+       "recovery@0.7": 0.456
+      }
+     }
+    },
+    "spoof_blind": {
+     "frames": 308,
+     "clean": {
+      "undefended": {
+       "AP@0.7": 0.8659,
+       "AP@0.5": 0.9119,
+       "AP@0.7_global": 0.8956
+      },
+      "ego_only": {
+       "AP@0.7": 0.6548,
+       "AP@0.5": 0.7338,
+       "AP@0.7_global": 0.712,
+       "dAP@0.7": -0.2111,
+       "dAP@0.7_global": -0.1836,
+       "dAP@0.5": -0.1781
+      },
+      "B-RAY": {
+       "AP@0.7": 0.8647,
+       "AP@0.5": 0.9104,
+       "AP@0.7_global": 0.8936,
+       "dAP@0.7": -0.0012,
+       "dAP@0.7_global": -0.002,
+       "dAP@0.5": -0.0015
+      },
+      "R1": {
+       "AP@0.7": 0.8629,
+       "AP@0.5": 0.9099,
+       "AP@0.7_global": 0.8956,
+       "dAP@0.7": -0.0031,
+       "dAP@0.7_global": -0.0001,
+       "dAP@0.5": -0.002
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.8655,
+       "AP@0.5": 0.9116,
+       "AP@0.7_global": 0.8945,
+       "dAP@0.7": -0.0004,
+       "dAP@0.7_global": -0.0011,
+       "dAP@0.5": -0.0003
+      }
+     },
+     "spoof_blind": {
+      "undefended": {
+       "AP@0.7": 0.7527,
+       "AP@0.5": 0.7978,
+       "AP@0.7_global": 0.84,
+       "attack_loss@0.7": 0.1132
+      },
+      "ego_only": {
+       "AP@0.7": 0.6548,
+       "AP@0.5": 0.7338,
+       "AP@0.7_global": 0.712,
+       "dAP@0.7": -0.0979,
+       "dAP@0.7_global": -0.1281,
+       "dAP@0.5": -0.0639,
+       "recovery@0.7": -0.865
+      },
+      "B-RAY": {
+       "AP@0.7": 0.7561,
+       "AP@0.5": 0.8007,
+       "AP@0.7_global": 0.8414,
+       "dAP@0.7": 0.0034,
+       "dAP@0.7_global": 0.0013,
+       "dAP@0.5": 0.003,
+       "recovery@0.7": 0.03
+      },
+      "R1": {
+       "AP@0.7": 0.7536,
+       "AP@0.5": 0.7995,
+       "AP@0.7_global": 0.8424,
+       "dAP@0.7": 0.001,
+       "dAP@0.7_global": 0.0024,
+       "dAP@0.5": 0.0018,
+       "recovery@0.7": 0.009
+      },
+      "R1_noREMOVE": {
+       "AP@0.7": 0.7554,
+       "AP@0.5": 0.8005,
+       "AP@0.7_global": 0.8414,
+       "dAP@0.7": 0.0027,
+       "dAP@0.7_global": 0.0014,
+       "dAP@0.5": 0.0027,
+       "recovery@0.7": 0.024
+      }
+     }
+    }
+   }
+  },
+  "bray_boxes": {
+   "clean": {
+    "boxes": 4164,
+    "drop": 16,
+    "keep": 3515,
+    "keep_unknown": 273,
+    "keep_self": 360,
+    "frac_KNOWN": 0.848,
+    "dropped_gt_matched": 9,
+    "dropped_unmatched": 7
+   },
+   "spoof_feat": {
+    "boxes": 4545,
+    "drop": 221,
+    "keep": 3539,
+    "keep_unknown": 425,
+    "keep_self": 360,
+    "frac_KNOWN": 0.827,
+    "dropped_gt_matched": 9,
+    "dropped_unmatched": 212
+   },
+   "remove_feat": {
+    "boxes": 4070,
+    "drop": 16,
+    "keep": 3493,
+    "keep_unknown": 238,
+    "keep_self": 323,
+    "frac_KNOWN": 0.862,
+    "dropped_gt_matched": 8,
+    "dropped_unmatched": 8
+   },
+   "shift_feat": {
+    "boxes": 4327,
+    "drop": 195,
+    "keep": 3519,
+    "keep_unknown": 276,
+    "keep_self": 337,
+    "frac_KNOWN": 0.858,
+    "dropped_gt_matched": 9,
+    "dropped_unmatched": 186
+   },
+   "spoof_pts": {
+    "boxes": 4354,
+    "drop": 121,
+    "keep": 3524,
+    "keep_unknown": 349,
+    "keep_self": 360,
+    "frac_KNOWN": 0.837,
+    "dropped_gt_matched": 9,
+    "dropped_unmatched": 112
+   },
+   "spoof_blind": {
+    "boxes": 4586,
+    "drop": 33,
+    "keep": 3526,
+    "keep_unknown": 667,
+    "keep_self": 360,
+    "frac_KNOWN": 0.776,
+    "dropped_gt_matched": 9,
+    "dropped_unmatched": 24
+   }
+  },
+  "realized_frames": {
+   "spoof_feat": 248,
+   "remove_feat": 38,
+   "shift_feat": 46,
+   "spoof_pts": 187,
+   "spoof_blind": 308
+  },
+  "mean4_dAP@0.7|B-RAY": 0.0279,
+  "mean4_dAP@0.7_global|B-RAY": 0.00563,
+  "mean3_noremove_dAP@0.7|B-RAY": 0.03737,
+  "mean4_dAP@0.7|R1": 0.02235,
+  "mean4_dAP@0.7_global|R1": 0.00855,
+  "mean3_noremove_dAP@0.7|R1": 0.0301,
+  "mean4_dAP@0.7|ego_only": -0.14577,
+  "mean4_dAP@0.7_global|ego_only": -0.15235,
+  "mean3_noremove_dAP@0.7|ego_only": -0.13593,
+  "R1-BRAY_mean4_nonglobal": -0.00555,
+  "R1-BRAY_mean4_global": 0.00292,
+  "realized_only_dAP@0.7": {
+   "spoof_feat": {
+    "frames": 248,
+    "attack_loss": 0.1117,
+    "B-RAY": 0.0603,
+    "R1": 0.0497,
+    "ego_only": -0.094
+   },
+   "remove_feat": {
+    "frames": 38,
+    "attack_loss": 0.0859,
+    "B-RAY": -0.0021,
+    "R1": 0.0014,
+    "ego_only": -0.1738
+   },
+   "shift_feat": {
+    "frames": 46,
+    "attack_loss": 0.1526,
+    "B-RAY": 0.0106,
+    "R1": 0.0124,
+    "ego_only": -0.1144
+   },
+   "spoof_pts": {
+    "frames": 187,
+    "attack_loss": 0.0809,
+    "B-RAY": 0.0438,
+    "R1": 0.036,
+    "ego_only": -0.1162
+   },
+   "spoof_blind": {
+    "frames": 308,
+    "attack_loss": 0.1132,
+    "B-RAY": 0.0034,
+    "R1": 0.001,
+    "ego_only": -0.0979
+   }
+  },
+  "realized_spoof_boxes_near_dst": {
+   "spoof_feat": {
+    "boxes": 257,
+    "drop": 136,
+    "keep": 13,
+    "keep_unknown": 108,
+    "keep_self": 0,
+    "gt_iou_ge_0.5": 0
+   },
+   "spoof_pts": {
+    "boxes": 187,
+    "drop": 104,
+    "keep": 7,
+    "keep_unknown": 76,
+    "keep_self": 0,
+    "gt_iou_ge_0.5": 0
+   },
+   "spoof_blind": {
+    "boxes": 316,
+    "drop": 2,
+    "keep": 7,
+    "keep_unknown": 307,
+    "keep_self": 0,
+    "gt_iou_ge_0.5": 0
+   }
+  },
+  "per_scenario_mean4_dAP@0.7": {
+   "2021_08_22_22_01_17": {
+    "B-RAY": 0.0404,
+    "R1": 0.0331
+   },
+   "2021_08_23_10_51_24": {
+    "B-RAY": 0.00765,
+    "R1": 0.01197
+   },
+   "2021_08_23_13_17_21": {
+    "B-RAY": 0.00667,
+    "R1": -0.00425
+   },
+   "2021_08_23_19_42_07": {
+    "B-RAY": 0.03043,
+    "R1": 0.00365
+   }
+  },
+  "runtime_s": 926
+ }
+}

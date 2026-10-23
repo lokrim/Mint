@@ -1,0 +1,282 @@
+{
+ "label": "DEVELOPMENT; T in-sample, H exposed",
+ "statistic": "mean over 4 original families of dAP@0.7 vs no defense",
+ "T": {
+  "label": "DEVELOPMENT, block T, in-sample",
+  "nonglobal_frozen": {
+   "point": {
+    "B-RAY": 0.00492,
+    "R1": 0.00517,
+    "R1-B-RAY": 0.00026,
+    "clean_rel_loss|B-RAY": 0.00012
+   },
+   "scenario": {
+    "B-RAY": {
+     "ci95": [
+      0.0044,
+      0.0187
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1": {
+     "ci95": [
+      0.0043,
+      0.0136
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      -0.0051,
+      0.0003
+     ],
+     "p_one_sided_le0": 0.3058
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      -0.0018,
+      0.0029
+     ],
+     "p_one_sided_le0": 0.4048
+    }
+   },
+   "block10": {
+    "B-RAY": {
+     "ci95": [
+      0.0027,
+      0.0081
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1": {
+     "ci95": [
+      0.0032,
+      0.0078
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      -0.0021,
+      0.0021
+     ],
+     "p_one_sided_le0": 0.4563
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      -0.0013,
+      0.002
+     ],
+     "p_one_sided_le0": 0.4473
+    }
+   }
+  },
+  "global_sort": {
+   "point": {
+    "B-RAY": 0.00129,
+    "R1": 0.00444,
+    "R1-B-RAY": 0.00316,
+    "clean_rel_loss|B-RAY": 0.00099
+   },
+   "scenario": {
+    "B-RAY": {
+     "ci95": [
+      0.001,
+      0.0039
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1": {
+     "ci95": [
+      0.0032,
+      0.0082
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      0.0022,
+      0.0043
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      -0.0,
+      0.0039
+     ],
+     "p_one_sided_le0": 0.0345
+    }
+   },
+   "block10": {
+    "B-RAY": {
+     "ci95": [
+      -0.0003,
+      0.0025
+     ],
+     "p_one_sided_le0": 0.0535
+    },
+    "R1": {
+     "ci95": [
+      0.0031,
+      0.0059
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      0.0016,
+      0.0051
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      -0.0,
+      0.0026
+     ],
+     "p_one_sided_le0": 0.0405
+    }
+   }
+  }
+ },
+ "H": {
+  "label": "DEVELOPMENT / exposed, block H (n = 2)",
+  "nonglobal_frozen": {
+   "point": {
+    "B-RAY": 0.02789,
+    "R1": 0.02233,
+    "R1-B-RAY": -0.00557,
+    "clean_rel_loss|B-RAY": 0.00092
+   },
+   "scenario": {
+    "B-RAY": {
+     "ci95": [
+      0.0071,
+      0.0403
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1": {
+     "ci95": [
+      -0.0035,
+      0.0315
+     ],
+     "p_one_sided_le0": 0.055
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      -0.0173,
+      0.0032
+     ],
+     "p_one_sided_le0": 0.8731
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      -0.0013,
+      0.0041
+     ],
+     "p_one_sided_le0": 0.2659
+    }
+   },
+   "block10": {
+    "B-RAY": {
+     "ci95": [
+      0.0234,
+      0.0324
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1": {
+     "ci95": [
+      0.0172,
+      0.0274
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      -0.009,
+      -0.0023
+     ],
+     "p_one_sided_le0": 1.0
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      -0.0009,
+      0.0026
+     ],
+     "p_one_sided_le0": 0.1544
+    }
+   }
+  },
+  "global_sort": {
+   "point": {
+    "B-RAY": 0.00564,
+    "R1": 0.00853,
+    "R1-B-RAY": 0.0029,
+    "clean_rel_loss|B-RAY": 0.00181
+   },
+   "scenario": {
+    "B-RAY": {
+     "ci95": [
+      0.0024,
+      0.0082
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1": {
+     "ci95": [
+      0.0055,
+      0.0098
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      0.0005,
+      0.0057
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      0.0003,
+      0.0049
+     ],
+     "p_one_sided_le0": 0.0035
+    }
+   },
+   "block10": {
+    "B-RAY": {
+     "ci95": [
+      0.0038,
+      0.0073
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1": {
+     "ci95": [
+      0.0065,
+      0.0104
+     ],
+     "p_one_sided_le0": 0.0005
+    },
+    "R1-B-RAY": {
+     "ci95": [
+      0.001,
+      0.0047
+     ],
+     "p_one_sided_le0": 0.0015
+    },
+    "clean_rel_loss|B-RAY": {
+     "ci95": [
+      0.0005,
+      0.0034
+     ],
+     "p_one_sided_le0": 0.0025
+    }
+   }
+  }
+ }
+}

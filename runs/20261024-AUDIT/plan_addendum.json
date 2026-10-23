@@ -1,0 +1,5 @@
+{
+ "written": "2026-10-24, AFTER the X0 point estimates were seen (post hoc, labelled as such)",
+ "added": "X0b: bootstrap CIs (scenario and 10-frame block, 2000 resamples, seed 0) of the mean-of-4 dAP@0.7 for B-RAY, R1 and R1 - B-RAY, and B-RAY clean relative loss, under both the frozen non-global AP and a global score-sorted AP, blocks T and H. Code: runners/audit_global_boot.py.",
+ "why": "X0 showed R1 - B-RAY changes sign on block H between the two AP definitions (plan.json X0 calls a sign change a metric-validity FAIL); CIs are needed to say whether B-RAY's gain survives the standard ranking AP."
+}

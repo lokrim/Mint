@@ -51,3 +51,6 @@ runs/*/*/cache/
 
 # nested caches (E5 dry run)
 runs/**/cache/
+
+# audit smoke-test caches (large)
+runs/20261024-AUDIT/*_cache.pkl.gz

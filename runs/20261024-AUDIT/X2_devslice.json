@@ -1,0 +1,837 @@
+{
+ "label": "DEVELOPMENT smoke test, block-T dev slice (1 scenario, n = 2), not an estimate",
+ "plan": "runs/20261024-AUDIT/plan.json",
+ "experiment": "X2",
+ "scenario": "2021_08_22_13_37_16",
+ "summary": {
+  "all_frames": {
+   "clean": {
+    "undefended": {
+     "AP@0.7": 0.8811,
+     "AP@0.5": 0.9664,
+     "AP@0.7_global": 0.9235
+    },
+    "ego_only": {
+     "AP@0.7": 0.7043,
+     "AP@0.5": 0.8325,
+     "AP@0.7_global": 0.7801,
+     "dAP@0.7": -0.1768,
+     "dAP@0.7_global": -0.1434,
+     "dAP@0.5": -0.134
+    },
+    "B-RAY": {
+     "AP@0.7": 0.8811,
+     "AP@0.5": 0.9664,
+     "AP@0.7_global": 0.9235,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    },
+    "R1": {
+     "AP@0.7": 0.8768,
+     "AP@0.5": 0.9621,
+     "AP@0.7_global": 0.9214,
+     "dAP@0.7": -0.0043,
+     "dAP@0.7_global": -0.0021,
+     "dAP@0.5": -0.0044
+    },
+    "R1_noREMOVE": {
+     "AP@0.7": 0.8811,
+     "AP@0.5": 0.9664,
+     "AP@0.7_global": 0.9235,
+     "dAP@0.7": 0.0,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0
+    }
+   },
+   "spoof_raycons": {
+    "undefended": {
+     "AP@0.7": 0.8613,
+     "AP@0.5": 0.9456,
+     "AP@0.7_global": 0.9185,
+     "attack_loss@0.7": 0.0198
+    },
+    "ego_only": {
+     "AP@0.7": 0.7043,
+     "AP@0.5": 0.8325,
+     "AP@0.7_global": 0.7801,
+     "dAP@0.7": -0.157,
+     "dAP@0.7_global": -0.1383,
+     "dAP@0.5": -0.1132,
+     "recovery@0.7": -7.93
+    },
+    "B-RAY": {
+     "AP@0.7": 0.8643,
+     "AP@0.5": 0.9487,
+     "AP@0.7_global": 0.9185,
+     "dAP@0.7": 0.003,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0031,
+     "recovery@0.7": 0.152
+    },
+    "R1": {
+     "AP@0.7": 0.8587,
+     "AP@0.5": 0.9444,
+     "AP@0.7_global": 0.9162,
+     "dAP@0.7": -0.0025,
+     "dAP@0.7_global": -0.0022,
+     "dAP@0.5": -0.0013,
+     "recovery@0.7": -0.126
+    },
+    "R1_noREMOVE": {
+     "AP@0.7": 0.8643,
+     "AP@0.5": 0.9487,
+     "AP@0.7_global": 0.9185,
+     "dAP@0.7": 0.003,
+     "dAP@0.7_global": 0.0,
+     "dAP@0.5": 0.0031,
+     "recovery@0.7": 0.152
+    }
+   }
+  },
+  "frames": 24,
+  "realized_only": {
+   "spoof_raycons": {
+    "frames": 6,
+    "clean": {
+     "undefended": {
+      "AP@0.7": 0.8988,
+      "AP@0.5": 0.9706,
+      "AP@0.7_global": 0.9253
+     },
+     "ego_only": {
+      "AP@0.7": 0.7583,
+      "AP@0.5": 0.8451,
+      "AP@0.7_global": 0.8073,
+      "dAP@0.7": -0.1406,
+      "dAP@0.7_global": -0.118,
+      "dAP@0.5": -0.1254
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8988,
+      "AP@0.5": 0.9706,
+      "AP@0.7_global": 0.9253,
+      "dAP@0.7": 0.0,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0
+     },
+     "R1": {
+      "AP@0.7": 0.8988,
+      "AP@0.5": 0.9706,
+      "AP@0.7_global": 0.9253,
+      "dAP@0.7": 0.0,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8988,
+      "AP@0.5": 0.9706,
+      "AP@0.7_global": 0.9253,
+      "dAP@0.7": 0.0,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0
+     }
+    },
+    "spoof_raycons": {
+     "undefended": {
+      "AP@0.7": 0.8435,
+      "AP@0.5": 0.9136,
+      "AP@0.7_global": 0.9081,
+      "attack_loss@0.7": 0.0554
+     },
+     "ego_only": {
+      "AP@0.7": 0.7583,
+      "AP@0.5": 0.8451,
+      "AP@0.7_global": 0.8073,
+      "dAP@0.7": -0.0852,
+      "dAP@0.7_global": -0.1008,
+      "dAP@0.5": -0.0684,
+      "recovery@0.7": -1.539
+     },
+     "B-RAY": {
+      "AP@0.7": 0.8498,
+      "AP@0.5": 0.921,
+      "AP@0.7_global": 0.9081,
+      "dAP@0.7": 0.0063,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0074,
+      "recovery@0.7": 0.114
+     },
+     "R1": {
+      "AP@0.7": 0.8498,
+      "AP@0.5": 0.921,
+      "AP@0.7_global": 0.9081,
+      "dAP@0.7": 0.0063,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0074,
+      "recovery@0.7": 0.114
+     },
+     "R1_noREMOVE": {
+      "AP@0.7": 0.8498,
+      "AP@0.5": 0.921,
+      "AP@0.7_global": 0.9081,
+      "dAP@0.7": 0.0063,
+      "dAP@0.7_global": 0.0,
+      "dAP@0.5": 0.0074,
+      "recovery@0.7": 0.114
+     }
+    }
+   }
+  }
+ },
+ "bray_boxes": {
+  "clean": {
+   "boxes": 274,
+   "drop": 0,
+   "keep": 250,
+   "keep_unknown": 0,
+   "keep_self": 24,
+   "frac_KNOWN": 0.912,
+   "dropped_gt_matched": 0,
+   "dropped_unmatched": 0
+  },
+  "spoof_raycons": {
+   "boxes": 280,
+   "drop": 1,
+   "keep": 255,
+   "keep_unknown": 0,
+   "keep_self": 24,
+   "frac_KNOWN": 0.914,
+   "dropped_gt_matched": 0,
+   "dropped_unmatched": 1
+  }
+ },
+ "frames": 24,
+ "spoof_records": [
+  {
+   "frame": 0,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 7,
+    "dst_center": [
+     -43.2,
+     -28.8
+    ],
+    "shift_m": [
+     16.0,
+     -19.2
+    ],
+    "predicted_box_rays": {
+     "SUP": 6,
+     "TRAV": 10
+    },
+    "dst_tries": 7
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 1,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 6,
+    "dst_center": [
+     -46.4,
+     -22.4
+    ],
+    "shift_m": [
+     -57.6,
+     -19.2
+    ],
+    "predicted_box_rays": {
+     "SUP": 0,
+     "TRAV": 3
+    },
+    "dst_tries": 5
+   },
+   "boxes_near_dst": [
+    {
+     "verdict": "keep",
+     "rays": 6,
+     "SUP": 1,
+     "gt_iou": 0.0
+    }
+   ]
+  },
+  {
+   "frame": 2,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 3,
+    "dst_center": [
+     -36.8,
+     -22.4
+    ],
+    "shift_m": [
+     -57.6,
+     -9.6
+    ],
+    "predicted_box_rays": {
+     "SUP": 15,
+     "TRAV": 17
+    },
+    "dst_tries": 9
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 3,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 4,
+    "dst_center": [
+     -20.8,
+     -30.4
+    ],
+    "shift_m": [
+     -54.4,
+     -38.4
+    ],
+    "predicted_box_rays": {
+     "SUP": 11,
+     "TRAV": 0
+    },
+    "dst_tries": 17
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 4,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 3,
+    "dst_center": [
+     -49.6,
+     -28.8
+    ],
+    "shift_m": [
+     -70.4,
+     -16.0
+    ],
+    "predicted_box_rays": {
+     "SUP": 8,
+     "TRAV": 0
+    },
+    "dst_tries": 3
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 5,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 1,
+    "dst_center": [
+     -28.8,
+     -25.6
+    ],
+    "shift_m": [
+     -38.4,
+     -12.8
+    ],
+    "predicted_box_rays": {
+     "SUP": 25,
+     "TRAV": 3
+    },
+    "dst_tries": 5
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 6,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 7,
+    "dst_center": [
+     -48.0,
+     32.0
+    ],
+    "shift_m": [
+     12.8,
+     38.4
+    ],
+    "predicted_box_rays": {
+     "SUP": 0,
+     "TRAV": 3
+    },
+    "dst_tries": 13
+   },
+   "boxes_near_dst": [
+    {
+     "verdict": "keep",
+     "rays": 3,
+     "SUP": 0,
+     "gt_iou": 0.0
+    }
+   ]
+  },
+  {
+   "frame": 7,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 1,
+    "dst_center": [
+     -33.6,
+     28.8
+    ],
+    "shift_m": [
+     -41.6,
+     41.6
+    ],
+    "predicted_box_rays": {
+     "SUP": 17,
+     "TRAV": 4
+    },
+    "dst_tries": 9
+   },
+   "boxes_near_dst": [
+    {
+     "verdict": "keep",
+     "rays": 31,
+     "SUP": 29,
+     "gt_iou": 0.0
+    }
+   ]
+  },
+  {
+   "frame": 8,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 3,
+    "dst_center": [
+     -30.4,
+     19.2
+    ],
+    "shift_m": [
+     -51.2,
+     32.0
+    ],
+    "predicted_box_rays": {
+     "SUP": 14,
+     "TRAV": 17
+    },
+    "dst_tries": 15
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 9,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 3,
+    "dst_center": [
+     -43.2,
+     22.4
+    ],
+    "shift_m": [
+     -64.0,
+     35.2
+    ],
+    "predicted_box_rays": {
+     "SUP": 0,
+     "TRAV": 3
+    },
+    "dst_tries": 6
+   },
+   "boxes_near_dst": [
+    {
+     "verdict": "drop",
+     "rays": 8,
+     "SUP": 0,
+     "gt_iou": 0.0
+    }
+   ]
+  },
+  {
+   "frame": 10,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 4,
+    "dst_center": [
+     -36.8,
+     19.2
+    ],
+    "shift_m": [
+     -67.2,
+     16.0
+    ],
+    "predicted_box_rays": {
+     "SUP": 16,
+     "TRAV": 19
+    },
+    "dst_tries": 3
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 11,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 6,
+    "dst_center": [
+     52.8,
+     22.4
+    ],
+    "shift_m": [
+     44.8,
+     25.6
+    ],
+    "predicted_box_rays": {
+     "SUP": 0,
+     "TRAV": 3
+    },
+    "dst_tries": 1
+   },
+   "boxes_near_dst": [
+    {
+     "verdict": "keep",
+     "rays": 3,
+     "SUP": 0,
+     "gt_iou": 0.0
+    }
+   ]
+  },
+  {
+   "frame": 12,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 3,
+    "dst_center": [
+     -59.2,
+     -25.6
+    ],
+    "shift_m": [
+     -76.8,
+     -9.6
+    ],
+    "predicted_box_rays": {
+     "SUP": 12,
+     "TRAV": 7
+    },
+    "dst_tries": 15
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 13,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 4,
+    "dst_center": [
+     -24.0,
+     -28.8
+    ],
+    "shift_m": [
+     -51.2,
+     -28.8
+    ],
+    "predicted_box_rays": {
+     "SUP": 12,
+     "TRAV": 0
+    },
+    "dst_tries": 18
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 14,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 7,
+    "dst_center": [
+     -36.8,
+     19.2
+    ],
+    "shift_m": [
+     25.6,
+     22.4
+    ],
+    "predicted_box_rays": {
+     "SUP": 16,
+     "TRAV": 5
+    },
+    "dst_tries": 9
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 15,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 4,
+    "dst_center": [
+     -4.8,
+     -19.2
+    ],
+    "shift_m": [
+     -32.0,
+     -19.2
+    ],
+    "predicted_box_rays": {
+     "SUP": 132,
+     "TRAV": 1
+    },
+    "dst_tries": 17
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 16,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 5,
+    "dst_center": [
+     3.2,
+     -25.6
+    ],
+    "shift_m": [
+     -22.4,
+     -25.6
+    ],
+    "predicted_box_rays": {
+     "SUP": 8,
+     "TRAV": 0
+    },
+    "dst_tries": 6
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 17,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 5,
+    "dst_center": [
+     -33.6,
+     -28.8
+    ],
+    "shift_m": [
+     -57.6,
+     -25.6
+    ],
+    "predicted_box_rays": {
+     "SUP": 10,
+     "TRAV": 0
+    },
+    "dst_tries": 2
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 18,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 5,
+    "applied": true,
+    "source_gt": 2,
+    "dst_center": [
+     -56.0,
+     -22.4
+    ],
+    "shift_m": [
+     -86.4,
+     -25.6
+    ],
+    "predicted_box_rays": {
+     "SUP": 4,
+     "TRAV": 9
+    },
+    "dst_tries": 25
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 19,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 5,
+    "dst_center": [
+     1.6,
+     -22.4
+    ],
+    "shift_m": [
+     -22.4,
+     -19.2
+    ],
+    "predicted_box_rays": {
+     "SUP": 78,
+     "TRAV": 5
+    },
+    "dst_tries": 18
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 20,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 1,
+    "dst_center": [
+     -36.8,
+     24.0
+    ],
+    "shift_m": [
+     -41.6,
+     38.4
+    ],
+    "predicted_box_rays": {
+     "SUP": 16,
+     "TRAV": 18
+    },
+    "dst_tries": 5
+   },
+   "boxes_near_dst": [
+    {
+     "verdict": "keep",
+     "rays": 34,
+     "SUP": 19,
+     "gt_iou": 0.0
+    }
+   ]
+  },
+  {
+   "frame": 21,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 4,
+    "dst_center": [
+     -33.6,
+     -22.4
+    ],
+    "shift_m": [
+     -48.0,
+     -3.2
+    ],
+    "predicted_box_rays": {
+     "SUP": 20,
+     "TRAV": 9
+    },
+    "dst_tries": 20
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 22,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 7,
+    "dst_center": [
+     1.6,
+     -25.6
+    ],
+    "shift_m": [
+     0.0,
+     -22.4
+    ],
+    "predicted_box_rays": {
+     "SUP": 22,
+     "TRAV": 0
+    },
+    "dst_tries": 4
+   },
+   "boxes_near_dst": []
+  },
+  {
+   "frame": 23,
+   "ledger": {
+    "family": "spoof_raycons",
+    "attacker": 1,
+    "eligible_targets": 6,
+    "applied": true,
+    "source_gt": 5,
+    "dst_center": [
+     -11.2,
+     -19.2
+    ],
+    "shift_m": [
+     -32.0,
+     -12.8
+    ],
+    "predicted_box_rays": {
+     "SUP": 94,
+     "TRAV": 75
+    },
+    "dst_tries": 1
+   },
+   "boxes_near_dst": []
+  }
+ ],
+ "spoof_box_verdicts": {
+  "applied": 24,
+  "realized_frames": 6,
+  "boxes_near_dst": 6,
+  "verdicts": {
+   "drop": 1,
+   "keep": 5,
+   "keep_unknown": 0,
+   "keep_self": 0
+  }
+ },
+ "runtime_s": 87
+}
