@@ -1,0 +1,35 @@
+{
+ "id": "Pre-final-test audit: bounded development smoke tests (written and committed BEFORE any of these runs)",
+ "written": "2026-10-24",
+ "label": "DEVELOPMENT only. Data: the on-disk 24-frame block-T dev slice (validate/2021_08_22_13_37_16, n = 2, agents 479/488) and the block-T (runs/20261023-E0/cache) and block-H (runs/20261023-E4/cache) caches. No download, no test scenario, no change to any frozen file. With 24 frames every dev-slice number is a smoke test, not an estimate.",
+ "frozen_code_untouched": "all files listed in runs/20261024-E5/preregistration_v2.json file_sha256 are imported read-only; new code only in runners/audit_*.py and src/mint/audit/*.py",
+ "common": {
+  "methods": "no defense (Y+), ego-only, B-RAY, R1, R1-noREMOVE: exactly e5_analyze.frame_methods on records built with the E4 record format (e0_stream.decode_all, effects + ray_rec on the float64 receiver scan)",
+  "metric": "AP@0.7 and AP@0.5, OpenCOOD non-global sort (frozen metric) AND global score sort (audit addition); dAP vs no defense; attack loss = AP_clean(no defense) - AP_attack(no defense); recovery = dAP / loss if loss >= 0.005",
+  "attacker": "sender 1 (as E0-E5), single attacker, white-box, may use GT and (worst case) the receiver's scan, as in spoof_blind"
+ },
+ "experiments": {
+  "X1_pgd": {
+   "definition": "L-inf PGD on all three fusion-scale feature maps of the attacker (agent 1) through the differentiable AttFuse fusion (same math as attfuse_parts.fuse_scale) and deblocks/heads. Budgets from the literature: eps = 0.1 (Tu et al. ICCV 2021, eps = 0.1) and eps = 0.5 (ROBOSAC ICCV 2023, magnitude 0.5, 15 iterations, step 0.1); 15 sign-gradient steps, step size eps/5, no random start, perturbed features clamped to >= 0 (post-ReLU range). Pseudo-labels y = 1[sigmoid(clean logit) >= 0.2] (the model's score_threshold), as Tu et al. use the victim's clean outputs. Variants: (a) pgd_untargeted: maximize mean_{y=1}[-log s] + mean_{y=0}[-log(1-s)] (suppress real detections and create false ones); (b) pgd_remove: maximize mean_{y=1}[-log s] (removal only). Whole-map perturbation (as Tu/ROBOSAC/MADE), not patch-masked.",
+   "hole_confirmed_if": "for some (variant, eps) with undefended attack loss >= 0.05 AP@0.7: B-RAY recovery < 0.3. Also reported: whether ego-only AP@0.7 exceeds B-RAY's under that attack (cooperation then worse than dropping all senders).",
+   "expected": "B-RAY cannot restore removed boxes (it only deletes), so pgd_remove recovery ~ 0; pgd_untargeted partly recoverable only for fake boxes in KNOWN regions; R1 may gate the attacker's units in KNOWN tiles."
+  },
+  "X2_ray_consistent_spoof": {
+   "definition": "spoof_feat (patches.copy_patch of the attacker's own patch around a real object) with the destination restricted to free patches where the translated source GT box has >= 3 receiver rays (SUP+TRAV, rays.classify_points) AND is NOT dropped by B-RAY (Wilson-95 upper bound of SUP/(SUP+TRAV) >= 0.5), i.e. the receiver has returns inside the box envelope from real structure (walls, vegetation, poles, ground near range). Up to 300 random draws (as spoof_blind); not applied if none. Attacker knows the receiver scan (worst case, as spoof_blind).",
+   "cache_check": "block-T caches: share of the E0 empty synthetic null boxes (8 per frame, GT-free space) that B-RAY would keep while KNOWN = how often a random free location is ray-consistent; and share of realized spoof_feat/spoof_pts boxes (blocks T and H) that are KNOWN and kept by B-RAY.",
+   "hole_confirmed_if": ">= 50% of realized ray-consistent spoof boxes are KNOWN and kept by B-RAY on the dev slice, with undefended loss >= 0.02 AP@0.7 and B-RAY recovery < 0.3; OR >= 10% of KNOWN null boxes on block T are kept by B-RAY (ample destinations).",
+   "expected": "B-RAY keeps most of them (recovery ~ 0), like spoof_blind but at KNOWN locations, so the 'UNKNOWN = keep' disclosure is not the only bypass."
+  },
+  "X3_pose_async": {
+   "definition": "Clean data (no attack) with benign sender pose error and latency, as in V2X-ViT's noisy setting (verified in the paper, arXiv 2203.10638 sec. 5: Gaussian sender position std 0.2 m and heading std 0.2 deg; time delay 100 ms). Conditions: nominal; pose (sigma_xyz 0.2 m on x, y, z; sigma_yaw 0.2 deg); pose_large (0.5 m, 1.0 deg; the top of V2X-ViT's sensitivity range); async (100 ms = 1 frame of sender data, OpenCOOD wild_setting async sim mode); pose+async. Noise per frame and sender from a SHA-256-keyed rng (OpenCOOD's add_loc_noise reseeds with a fixed seed every call, giving the same offset in every frame; we override the method on the dataset instance, OpenCOOD unchanged). The receiver scan and GT are unaffected.",
+   "hole_confirmed_if": "under pose or async, B-RAY's clean relative AP@0.7 loss vs no defense > 1% (the v2 clean bound), or B-RAY drops more GT-matched (BEV IoU >= 0.5) than unmatched boxes.",
+   "expected": "small: B-RAY tests boxes against the receiver's own current scan; misplaced sender-only boxes would be dropped, but these are mostly FPs at IoU 0.7 anyway."
+  },
+  "X0_metric_checks_on_caches": {
+   "definition": "Block T (404 frames, in-sample) and block H (371 frames, exposed): recompute the frozen methods with e5_analyze.frame_methods and report (i) dAP@0.7 per family with non-global vs global-sort AP; (ii) realized-only dAP (frames where the attack realized per e0_analyze.realization) vs all frames; (iii) the mean over 3 families excluding remove_feat; (iv) the share of realized spoof boxes KNOWN and kept by B-RAY.",
+   "hole_confirmed_if": "descriptive; a sign change of B-RAY's mean dAP or of R1 - B-RAY between the non-global and global AP is reported as a metric-validity FAIL",
+   "expected": "same sign; realized-only deltas several times larger than all-frame deltas"
+ }
+ },
+ "stop_rules": "No download. If any experiment would need more data for a meaningful estimate, stop and ask the user (e.g. re-stream block H, 2.77 GB). Runtime cap ~2 h CPU per experiment."
+}
