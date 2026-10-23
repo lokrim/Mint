@@ -44,5 +44,14 @@
   "step4_tile_fraction": "mean and p50/p95 of |T(f)| / 572 over the 24 slice frames (clean) and, from the re-stream, over the 404 block-T frames per condition and per n.",
   "step4_projection": "per-tile cost c_tile(f) = per-frame median of (tile gather + fusion + decode time of the trigger stage) / |T(f)| at n = 2, p50 over the 24 frames; c_sender(f) = per-sender candidates + finalize + effects p50; c_fixed(f) = trigger mask + evidence + compose p50. For each real block-T frame with n agents (n = 3: 157 frames, n = 4: 112, clean condition): projected extra = (n - 1) * (|T(f)| * c_tile + c_sender) + c_fixed; projected overhead = projected extra / baseline-only p50 at n agents, measured on the slice with n - 1 replicated sender features (timing only, as E1/E2; 3 reps). n = 5 has no real block-T frames: projected with the tile fractions of all 269 multi-agent frames (T depends only on Y+), labelled as such. Projections are not measurements; evidence and compose costs are held at their n = 2 values (caveat stated).",
   "no_changes": "R1, effects parameters, harm labels, the AP evaluation and decision_log.md are not changed; proposals go to planning/decision_log_proposed_appendix.md only"
+ },
+ "correction_2026-10-23": {
+  "written": "2026-10-23, after the E3 step-1 result (commit 9e1e173) and before any E3 step 2-4 result exists; the user's decision, given in chat",
+  "status": "post-hoc correction of the step-1 criterion only",
+  "reason": "The original absolute bound (max abs diff <= 1e-5 on psm/rm) was mis-specified: it is ~10 float32 ULP at logit magnitudes of 10-15, and the dense-equivalent all-572-tile path itself fails it on 17/24 frames. The deviation is accumulation-order rounding in deblocks/heads (fusion is bitwise equal).",
+  "revised_step1_criterion": "On 24/24 frames, for T(0.05) and T(0.10): (a) candidate anchor indices above score_threshold identical to the dense candidates restricted to T(f); (b) candidate score diff <= 1e-5 and corner diff <= 1e-4 m; (c) all psm/rm diffs <= 32 float32 ULP of the dense value. This uses no cost, recall or AP information.",
+  "ulp_definition": "ULP of the dense value v = numpy.spacing(abs(float32(v))); evaluated per element over every non-padded cell of every selected tile, both heads (psm, rm).",
+  "unchanged": "Everything else in this pre-registration (steps 2-4, f in {0.05, 0.10}, PASS/PARTIAL/FAIL bands, the approved block-T re-stream and its safeguards, implementation clarifications) is unchanged.",
+  "evaluation": "Re-evaluate step 1 from the existing step-1 outputs if they contain what is required; otherwise re-run step 1 only. If the revised criterion fails: stop."
  }
 }
