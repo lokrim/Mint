@@ -67,3 +67,13 @@ Open (needs the user, not proposed here):
 - **E3 exactness criterion.** Whether to replace the 1e-5 absolute bound with a ULP/relative bound or an identical-candidate-set test, and then run E3 steps 2–4 (with the approved block-T re-stream), is the user's decision and would be a post-hoc revision of the E3 pre-registration.
 - ~~**E3 step-1 criterion, second revision.** The D-46 per-element ULP bound is undefined in practice near zero (cancellation gives ~1e-8 absolute errors that are 10^5–10^6 ULP of the value). Whether to use a scale-referenced bound (e.g. ULP of max(|v|, 1) or of the per-head max), an absolute per-head bound taken from the all-tile reference, or (a)+(b) only, and then run steps 2–4, is the user's decision and would be a further post-hoc correction.~~ Resolved by D-48 (user's decision).
 - **After E3 (FAIL, D-49).** The open choices are the user's decision and are not proposed here. One is a trigger that also covers REMOVE candidates: Y+ score alone cannot, because the missed boxes appear only in Y-(i). Others are a different cost budget or hardware under D-17, or a pre-registered approximate (non-exact) REMOVE coverage.
+
+## Added 2026-10-23 (E4 setup; the user's decisions, given in chat); also proposed, not applied
+
+Recorded before any E4 code, download or result. `decision_log.md` was not edited.
+
+| ID | Decision | Alternatives | Rationale | Confidence |
+|---|---|---|---|---|
+| D-50 | **D-17 (≤ 10% p95 overhead) is not met by any variant tested in E1–E3. Post-hoc revision, labelled as such:** cost is reported as measured overhead (p50/p95, both D-42 denominators) against the number of agents, for the dense counterfactual and for the T(0.05) trigger. No pass/fail budget claim is made. | Keep D-17 as a pass/fail criterion (the method fails it); keep searching for an exact cheaper counterfactual | E1–E3: dense ≥ 21% p50 at n = 2; T(0.05) 25% p95 at n = 2 and not exact (D-49) | User decision (post hoc) |
+| D-51 | **Frozen method for E4** = MINT-v0 with rule R1 (D-40), dense counterfactual, composed output (D-39), UNKNOWN = keep. The T(0.05) trigger is reported as a cost variant only; it does not change any E4 accuracy number. | Use T(0.05) as the method (not exact: D-49) | Dense is the exact reference; the trigger failed E3's equivalence bands | User decision |
+| D-52 | **The 4 small remaining validate scenarios (D-31) are a held-out set (block H)**, not calibration. Nothing is fitted, tuned or chosen on them. | Use them as calibration block C (D-31) | R1 has no tunable parameter; an untouched held-out check of the frozen method is worth more than calibration now | User decision |
