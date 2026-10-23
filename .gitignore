@@ -54,3 +54,6 @@ runs/**/cache/
 
 # audit smoke-test caches (large)
 runs/20261024-AUDIT/*_cache.pkl.gz
+runs/**/extra/
+runs/**/pgd/
+runs/**/v3extra/

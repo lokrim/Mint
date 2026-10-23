@@ -8,6 +8,7 @@
 * PGD condition records (D-65).
 No method output depends on GT; GT enters only the attack placement of the E4 families (as before).
 """
+import dataclasses
 import os
 import sys
 import types
@@ -83,7 +84,10 @@ def same(a, b):
     if isinstance(a, (list, tuple)):
         return isinstance(b, (list, tuple)) and len(a) == len(b) and all(same(x, y) for x, y in zip(a, b))
     if torch.is_tensor(a) or isinstance(a, np.ndarray):
-        return np.array_equal(np.asarray(a), np.asarray(b))
+        return (torch.is_tensor(b) or isinstance(b, np.ndarray)) and np.asarray(a).dtype == np.asarray(b).dtype \
+            and np.array_equal(np.asarray(a), np.asarray(b))
+    if dataclasses.is_dataclass(a) and not isinstance(a, type):
+        return type(a) is type(b) and all(same(getattr(a, f.name), getattr(b, f.name)) for f in dataclasses.fields(a))
     if isinstance(a, float) and isinstance(b, float) and np.isnan(a) and np.isnan(b):
         return True
     return a == b

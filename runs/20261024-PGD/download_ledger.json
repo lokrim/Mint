@@ -1,0 +1,56 @@
+{
+ "note": "v3 block-H re-stream (user approval 2026-10-24); allowlist = 4 small validate scenarios",
+ "allowlist": [
+  "2021_08_22_22_01_17",
+  "2021_08_23_10_51_24",
+  "2021_08_23_13_17_21",
+  "2021_08_23_19_42_07"
+ ],
+ "byte_budget": 3200000000,
+ "downloads": [
+  {
+   "scenario": "2021_08_22_22_01_17",
+   "started": "2026-10-24T03:30:35",
+   "bytes_downloaded": 1488574325,
+   "status": "complete",
+   "bytes_written": 1261851133,
+   "seconds": 132
+  },
+  {
+   "scenario": "2021_08_23_10_51_24",
+   "started": "2026-10-24T03:56:00",
+   "bytes_downloaded": 476018405,
+   "status": "complete",
+   "bytes_written": 400268703,
+   "seconds": 51
+  },
+  {
+   "scenario": "2021_08_23_13_17_21",
+   "started": "2026-10-24T04:05:08",
+   "bytes_downloaded": 335001760,
+   "status": "complete",
+   "bytes_written": 301581324,
+   "seconds": 36
+  },
+  {
+   "scenario": "2021_08_23_19_42_07",
+   "started": "2026-10-24T04:11:26",
+   "bytes_downloaded": 465516952,
+   "status": "complete",
+   "bytes_written": 336553659,
+   "seconds": 45
+  }
+ ],
+ "precheck": {
+  "time": "2026-10-24T03:30:35",
+  "need_csize": {
+   "2021_08_22_22_01_17": 1488265060,
+   "2021_08_23_10_51_24": 475921049,
+   "2021_08_23_13_17_21": 334928115,
+   "2021_08_23_19_42_07": 465428852
+  },
+  "spent": 0,
+  "projected_with_1pct_headers": 2792188506,
+  "budget": 3200000000
+ }
+}

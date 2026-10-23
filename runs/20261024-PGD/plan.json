@@ -1,0 +1,195 @@
+{
+ "id": "v3-PGD-H",
+ "date": "2026-10-24",
+ "label": "DEVELOPMENT, block H (exposed, D-53); committed before any PGD run on block H",
+ "decisions": [
+  "D-64",
+  "D-65",
+  "D-66 (decision_log_proposed_appendix.md)"
+ ],
+ "data": {
+  "block": "H",
+  "scenarios": 4,
+  "frames_with_sender": 371,
+  "cache": "runs/20261024-PGD/cache (E4 format, reproduces E4/E5a-H exactly: reproduction_check.json)",
+  "side_records": "runs/20261024-PGD/extra (exact model inputs, float64 Y+ rays, feature moments, B-NORM magnitudes)"
+ },
+ "feature_scale_clean_H": {
+  "what": "pooled over all elements of sender (agent 1) maps, clean frames with n >= 2, per fusion scale k (scale shapes [64,100,352], [128,50,176], [256,25,88])",
+  "sigma_k": [
+   0.4932000681354975,
+   0.12256822968120293,
+   0.026635731178192228
+  ],
+  "mean_k": [
+   0.20653880644370007,
+   0.02586805041718647,
+   0.0019396341444789275
+  ],
+  "mean_abs_k": [
+   0.20653880644370007,
+   0.02586805041718647,
+   0.0019396341444789275
+  ],
+  "frames": 371,
+  "sender_maps": 371
+ },
+ "threat_model": {
+  "attacker": "white-box (model weights, receiver features, fusion and heads known), single attacker = sender 1, perturbs only its own intermediate features at all 3 fusion scales; n = 1 frames: no attack (scored as clean, as every family)",
+  "bound": "L-inf per scale: |delta_k| <= eps_k = r * sigma_k; perturbed features projected onto >= 0 (the backbone blocks end in ReLU)",
+  "levels_r": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "eps_k_by_r": {
+   "0.25": [
+    0.12330001703387437,
+    0.030642057420300732,
+    0.006658932794548057
+   ],
+   "0.5": [
+    0.24660003406774875,
+    0.061284114840601464,
+    0.013317865589096114
+   ],
+   "1.0": [
+    0.4932000681354975,
+    0.12256822968120293,
+    0.026635731178192228
+   ]
+  },
+  "pgd": {
+   "steps": 10,
+   "step_size": "eps_k / 4",
+   "random_start": "U(-eps_k, eps_k), then projected",
+   "update": "sign of the gradient, ascent, projection after every step",
+   "returned": "final iterate",
+   "seed": "numpy default_rng(sha256('V3PGD|family|r|scenario|frame')[:8], little endian)"
+  },
+  "pseudo_labels": "no ground truth. Positive anchors = anchors whose clean fused score >= the post-processor score threshold (0.2; the pre-NMS set Y+ is selected from); the clean regression map at those anchors is the regression target",
+  "objectives": {
+   "pgd_untargeted": "maximise mean BCE(score, 1) over positives + mean BCE(score, 0) over negatives + mean smooth-L1(reg - reg_clean) over positive anchors' 7 regression values",
+   "pgd_remove": "maximise mean BCE(score, 1) over positives (= minimise the scores of Y+ boxes)"
+  },
+  "code": "src/mint/attacks/pgd_v3.py (differentiable path asserted bitwise equal to the frozen decode on clean features)"
+ },
+ "selection_rule_for_test": {
+  "rule": "for each family, the smallest r in {0.25, 0.5, 1.0} whose all-frame attack loss AP@0.7(clean, no defense) - AP@0.7(attacked, no defense) under GLOBAL-ranking AP is >= 0.02 on block H; if no r reaches 0.02 the family is reported as 'too weak at realistic budgets' and run on the test at r = 1.0 anyway",
+  "fixed": "before any PGD run on block H"
+ },
+ "B-NORM": {
+  "rule": "drop sender i entirely in a frame iff, at any scale k, mean|feature_i,k| / mean|feature_receiver,k| > tau_k; output = candidates decoded without the dropped senders",
+  "tau_k": [
+   1.0198755663320025,
+   1.0345558073151098,
+   1.1952683405891051
+  ],
+  "tau_definition": "99.5th percentile (numpy linear) over clean block-H sender-frames",
+  "clean_ratio_quantiles": {
+   "0": [
+    0.9043,
+    0.8451,
+    0.9034
+   ],
+   "1": [
+    0.9093,
+    0.8714,
+    0.9153
+   ],
+   "50": [
+    0.9936,
+    0.9897,
+    1.0187
+   ],
+   "99": [
+    1.017,
+    1.0313,
+    1.1933
+   ],
+   "99.5": [
+    1.0199,
+    1.0346,
+    1.1953
+   ],
+   "100": [
+    1.0219,
+    1.0366,
+    1.2254
+   ]
+  },
+  "clean_flag_rate_at_tau": 0.016172506738544475,
+  "clean_flagged_sender_frames": 6,
+  "no_other_tuning": true,
+  "code": "src/mint/reliability/bnorm.py"
+ },
+ "development_run": {
+  "methods": [
+   "no defense",
+   "ego-only",
+   "B-NORM",
+   "B-RAY",
+   "R1",
+   "R1-noREMOVE"
+  ],
+  "conditions": [
+   "clean",
+   "spoof_feat",
+   "remove_feat",
+   "shift_feat",
+   "spoof_pts",
+   "spoof_blind",
+   "pgd_untargeted@r0.25",
+   "pgd_untargeted@r0.5",
+   "pgd_untargeted@r1.0",
+   "pgd_remove@r0.25",
+   "pgd_remove@r0.5",
+   "pgd_remove@r1.0"
+  ],
+  "AP": [
+   "frame-order (OpenCOOD global_sort_detections=False, frozen)",
+   "global score ranking"
+  ],
+  "iou": [
+   0.7,
+   0.5
+  ],
+  "CIs": "95% percentile bootstrap, 2000 resamples, seed 0: 10-frame blocks within scenario (stratified) and whole scenarios (4, coarse)",
+  "statistics": [
+   "per family dAP and recovery per method",
+   "mean of 4 original families (v2 primary statistic)",
+   "mean of 3 (excluding remove_feat)",
+   "R1 - B-RAY paired",
+   "clean relative loss",
+   "Holm co-test of B-RAY and R1 vs no defense per AP definition (scenario bootstrap)",
+   "B-NORM catch rate (sender 1 flagged) per condition and clean false-flag rate",
+   "realized-only tables"
+  ],
+  "realized": {
+   "spoof_feat/spoof_pts/spoof_blind/remove_feat/shift_feat": "as E0-E5 (e0_analyze.realization)",
+   "pgd_remove": "n >= 2 and some clean Y+ box has no attacked Y+ box at BEV IoU >= 0.5",
+   "pgd_untargeted": "n >= 2 and (some clean Y+ box has no attacked match, or some attacked Y+ box has no clean match) at BEV IoU >= 0.5"
+  },
+  "B-RAY_rays": "float64 receiver scan for every condition (as the final test); the E5a-H float16 numbers are reported alongside for the original families",
+  "label": "development, exposed block H"
+ },
+ "stop_conditions": [
+  "re-stream over budget",
+  "H not reproduced",
+  "PGD far outside realistic scale: B-NORM catches > 95% of attacked frames at every r (for a family) -> report it as a finding and stop before v3",
+  "any frozen method file (r1.py, baselines.py, pipeline.py) would need to change"
+ ],
+ "expected_outcomes_stated_before_development": {
+  "B-RAY": "recovery approximately 0 on pgd_untargeted and pgd_remove",
+  "R1": "recovery on pgd_remove > 0"
+ },
+ "code_sha256": {
+  "src/mint/attacks/pgd_v3.py": "800fcec5f7a95ba3bed2943d6450f3a81ade0dcd0868dcd04fa23b704c804a74",
+  "src/mint/reliability/bnorm.py": "6cb552b41399423c6ee46f169886d71c0fe9362fcd5ad58b42d0d3c8c18eb45f",
+  "runners/v3_common.py": "209998be1856e7c4d125b86d892a6f797948ab054b609543750265e685a74574",
+  "runners/pgd_h_stream.py": "8c8bfe7006e0d553a20376a7451e155691d631eff6092518b287587e51d05b95",
+  "runners/pgd_h_plan.py": "ab770e84d1b99f025e3a9dfbbc01468f21d98f3097ef448f01463eb8a27bb944",
+  "runners/pgd_h_run.py": "c6d82b05e71cbd0fe9b66b3f8400b63ad7128115026afe6a96c99bfd1e6bb5a7",
+  "runners/v3_analyze.py": "127e193b0b3ccd8ae578a11b05b42db8eb9b568121585afd2de247308e585049"
+ }
+}

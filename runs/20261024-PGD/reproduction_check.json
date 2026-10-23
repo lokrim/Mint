@@ -1,0 +1,76 @@
+{
+ "label": "v3 step 1: block-H re-stream reproduction check (development, exposed H)",
+ "record_level_identical": true,
+ "records": {
+  "2021_08_22_22_01_17": {
+   "frames": [
+    202,
+    202
+   ],
+   "mismatches": [],
+   "n_mismatch": 0,
+   "compose_checks_equal": true
+  },
+  "2021_08_23_10_51_24": {
+   "frames": [
+    64,
+    64
+   ],
+   "mismatches": [],
+   "n_mismatch": 0,
+   "compose_checks_equal": true
+  },
+  "2021_08_23_13_17_21": {
+   "frames": [
+    48,
+    48
+   ],
+   "mismatches": [],
+   "n_mismatch": 0,
+   "compose_checks_equal": true
+  },
+  "2021_08_23_19_42_07": {
+   "frames": [
+    57,
+    57
+   ],
+   "mismatches": [],
+   "n_mismatch": 0,
+   "compose_checks_equal": true
+  }
+ },
+ "numbers_identical": true,
+ "numbers": {
+  "e5a_H_fields_equal": {
+   "AP": true,
+   "B-RAY_boxes": true,
+   "bootstrap_block10": true,
+   "bootstrap_scenario": true,
+   "by_agents": true,
+   "frames": true,
+   "n1_frames": true,
+   "n_agents_hist": true,
+   "numpy_ap_vs_opencood_max_abs_diff": true,
+   "point": true,
+   "ray_count_check_dev": true,
+   "realization": true,
+   "scenarios": true,
+   "units": true
+  },
+  "e4_heldout_fields_equal": {
+   "AP": true,
+   "bootstrap_block10": true,
+   "bootstrap_scenario": true,
+   "criteria": true,
+   "frames": true,
+   "mode": true,
+   "n_agents_hist": true,
+   "numpy_ap_vs_opencood_max_abs_diff": true,
+   "point_AP@0.7": true,
+   "realization": true,
+   "units_R1": true,
+   "scenarios(frames, compose checks)": true
+  }
+ },
+ "reproduces_exactly": true
+}
