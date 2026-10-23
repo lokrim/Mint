@@ -1,0 +1,118 @@
+loaded 2021_08_22_22_01_17
+loaded 2021_08_23_10_51_24
+loaded 2021_08_23_13_17_21
+loaded 2021_08_23_19_42_07
+{
+ "reproduces_e5a_H_exactly": true,
+ "co_test": {
+  "B-RAY": {
+   "point": 0.02789,
+   "ci95_scenario": [
+    0.0071,
+    0.0403
+   ],
+   "ci95_block10": [
+    0.0234,
+    0.0324
+   ],
+   "lower_one_sided_95": 0.0076,
+   "lower_one_sided_97.5": 0.0071,
+   "k_le_0": 0,
+   "B": 2000,
+   "p_one_sided": 0.0004997501249375312,
+   "holm": {
+    "p": 0.0004997501249375312,
+    "rank": 1,
+    "threshold": 0.025,
+    "reject": true
+   }
+  },
+  "R1": {
+   "point": 0.02233,
+   "ci95_scenario": [
+    -0.0035,
+    0.0315
+   ],
+   "ci95_block10": [
+    0.0172,
+    0.0274
+   ],
+   "lower_one_sided_95": -0.0014,
+   "lower_one_sided_97.5": -0.0035,
+   "k_le_0": 109,
+   "B": 2000,
+   "p_one_sided": 0.054972513743128434,
+   "holm": {
+    "p": 0.054972513743128434,
+    "rank": 2,
+    "threshold": 0.05,
+    "reject": false
+   }
+  }
+ },
+ "success": true,
+ "R1_minus_BRAY": {
+  "point": -0.00557,
+  "ci95_scenario": [
+   -0.0173,
+   0.0032
+  ],
+  "ci95_block10": [
+   -0.009,
+   -0.0023
+  ],
+  "statement_basis": "scenario CI",
+  "statement": "the counterfactual's benefit over a box-level filter is not established",
+  "per_family": {
+   "clean": -0.00184,
+   "spoof_feat": -0.00926,
+   "remove_feat": -0.0004,
+   "shift_feat": -0.00704,
+   "spoof_pts": -0.00556,
+   "spoof_blind": -0.00237
+  }
+ },
+ "oracle": {
+  "note": "B-RAY oracle (context only, GT used offline): drop every KNOWN final Y+ box (>= 3 receiver rays, not the receiver's own box) with no GT match at BEV IoU >= 0.5. The attacker-unit oracles (oracle_attacker, vis_oracle_attacker) gate sender units, not final boxes; they are NOT upper bounds for B-RAY.",
+  "by_condition": {
+   "clean": {
+    "AP@0.7": 0.8787,
+    "AP@0.5": 0.9278,
+    "dAP@0.7": 0.017,
+    "dAP@0.5": 0.0177
+   },
+   "spoof_feat": {
+    "AP@0.7": 0.8451,
+    "AP@0.5": 0.8943,
+    "dAP@0.7": 0.0711,
+    "dAP@0.5": 0.073
+   },
+   "remove_feat": {
+    "AP@0.7": 0.8445,
+    "AP@0.5": 0.9008,
+    "dAP@0.7": 0.0172,
+    "dAP@0.5": 0.0184
+   },
+   "shift_feat": {
+    "AP@0.7": 0.8382,
+    "AP@0.5": 0.8936,
+    "dAP@0.7": 0.0656,
+    "dAP@0.5": 0.069
+   },
+   "spoof_pts": {
+    "AP@0.7": 0.8594,
+    "AP@0.5": 0.9088,
+    "dAP@0.7": 0.042,
+    "dAP@0.5": 0.0441
+   },
+   "spoof_blind": {
+    "AP@0.7": 0.7887,
+    "AP@0.5": 0.8392,
+    "dAP@0.7": 0.0245,
+    "dAP@0.5": 0.0265
+   }
+  },
+  "mean_dAP0.7_orig": 0.04897,
+  "clean_rel_loss@0.7": -0.01968
+ }
+}

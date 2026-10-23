@@ -1,0 +1,279 @@
+{
+ "id": "E5 v2 - one-time final test on the OPV2V test split: B-RAY primary (D-57/D-58), Holm co-test of B-RAY and R1 vs no defense, R1 key secondary",
+ "written": "2026-10-24, after the block-H comparison (E5a-H; D-57 applied, D-58) and before any test-scenario byte is downloaded for E5. NOT RUN: the stream needs the user's explicit approval.",
+ "frozen_code_commit": "5e06497007d8f3aa37bdcd0c9f42b8ee9a3078dd",
+ "frozen_code_note": "All code that produces the E5 numbers is at this commit. sha256 of the key files below. Nothing in them changes after this file is committed; if something must change, E5 stops and is reported. Relative to v1 (a9468e0) only runners/e5_analyze.py (criteria_v2 and helpers added; analyze(), bootstrap(), frame_methods(), metrics() unchanged) and runners/e5_stream.py (time_frame_e5: B-RAY timing in the shared D-42 repetitions; no method output depends on it) differ. src/mint/reliability/r1.py and src/mint/reliability/baselines.py are unchanged (sha256 equal to v1), as is everything under src/.",
+ "file_sha256": {
+  "src/mint/reliability/baselines.py": "6f3ec38fc300942f161cff23997834e4607b6f35f716aff863a95cf9c5a76df3",
+  "src/mint/reliability/r1.py": "031fc0dddf0d7183102088f5a1e3ae2f6d60b8f09c6dfd66b13dfd117583c0f8",
+  "src/mint/reliability/v0.py": "4897dde782211de3948770734c906ef1a78304114577b3aa33f7109fa25c445b",
+  "src/mint/reliability/pipeline.py": "4c2ccffec188bd02b189d9bc428ea44cbe4354d41590751950282ffb9dd2d5c6",
+  "src/mint/fusion/compose.py": "b332e9bc2fdfe1aed99a597a922cbf2783aa70dac7de38eecfd5d5aa19cf32ce",
+  "src/mint/effects/effects.py": "156fb7413f3a67b51db3ad887896af8397f8093562d787172924cfa3fc641c82",
+  "src/mint/geometry/rays.py": "b3e1c6a2db5fca3a6a3acf685d0922d9d58a0d9a410972e4c37a13f7dcd6fc1f",
+  "src/mint/geometry/ground.py": "6ecdd59f5847989bda84f81e11d7b227c9e87c83d57d5d0ca922f0faa52af257",
+  "src/mint/attacks/patches.py": "038bf6217b53ce1a4da191dad59c57cfd6dbf9cb6141dbeb84ab1d4cbc8dd241",
+  "src/mint/attacks/blind.py": "999d6847438093dad2658bf6bb6db412320b2392228bc05e2e00f860571b0630",
+  "src/mint/eval/harm_labels.py": "fcc349da08707b4fb183da6fb9a1cc6f8e64e7024a62394cd429ee33ecf41e3b",
+  "runners/e0_stream.py": "be5a4a497c7ac5a2b281b72dc6f061d928ee11185010dc3ffc92e3032258bb1f",
+  "runners/e0_analyze.py": "5e2aa7f4194944073cfe7ae606bdb8f44181a0172c6e06c4dc9ad756feabddd7",
+  "runners/e4_stream.py": "a6a9538f886a89f042d7141c54fb9cd28593af4eb1c0bb55a27ebb63867f92ea",
+  "runners/e4_analyze.py": "3a1d8a75f74e0b7295586ad04fc05b832b58b1b886df33b0484a50e2d2d21bf5",
+  "runners/e5_stream.py": "7a4f9283cbad48e352f10b9d9ab8707dc89f7015a005359031756dd76b15acaa",
+  "runners/e5_analyze.py": "60383936117d5ba0fdc8d67927a51b6cbd5e8555bd45a2fbf89f8590aebcb0fb",
+  "runners/stage1_reproduce.py": "9d6affef0643fadc578f1db9a9c4e1702aa375897a977e3b3f91d14db510f4fe",
+  "tools/ranged_zip.py": "abbc25a8a7469c5569ff1047e2456ff69809415b150dfc465a2a7e7113dd3fd3"
+ },
+ "user_decisions": "D-55 (final test set) and D-56 (comparison set), recorded as proposed entries in commit 03b512f before any E5a code ran; D-51 (frozen method), D-54 (scope statement); D-57 (headline selection rule), D-58 (outcome: B-RAY primary), D-59 (re-freeze for an analysis-only change; the user's approval in chat 2026-10-24)",
+ "data": {
+  "set": "OPV2V test split minus 2021_08_23_12_58_19 (development per the exposure ledger) = 15 scenarios (D-55); Culver City not used",
+  "allowlist": [
+   "2021_08_18_19_48_05",
+   "2021_08_20_21_10_24",
+   "2021_08_21_09_28_12",
+   "2021_08_22_07_52_02",
+   "2021_08_22_09_08_29",
+   "2021_08_22_21_41_24",
+   "2021_08_23_15_19_19",
+   "2021_08_23_16_06_26",
+   "2021_08_23_17_22_47",
+   "2021_08_23_21_07_10",
+   "2021_08_23_21_47_19",
+   "2021_08_24_07_45_41",
+   "2021_08_24_11_37_54",
+   "2021_08_24_20_09_18",
+   "2021_08_24_20_49_54"
+  ],
+  "excluded": [
+   "2021_08_23_12_58_19"
+  ],
+  "frames_expected": 2066,
+  "agents_per_scenario_stage1": {
+   "2021_08_18_19_48_05": {
+    "min": 1,
+    "max": 2,
+    "mean": 1.33
+   },
+   "2021_08_20_21_10_24": {
+    "min": 3,
+    "max": 3,
+    "mean": 3.0
+   },
+   "2021_08_21_09_28_12": {
+    "min": 2,
+    "max": 3,
+    "mean": 2.77
+   },
+   "2021_08_22_07_52_02": {
+    "min": 4,
+    "max": 5,
+    "mean": 4.6
+   },
+   "2021_08_22_09_08_29": {
+    "min": 2,
+    "max": 2,
+    "mean": 2.0
+   },
+   "2021_08_22_21_41_24": {
+    "min": 3,
+    "max": 3,
+    "mean": 3.0
+   },
+   "2021_08_23_15_19_19": {
+    "min": 2,
+    "max": 2,
+    "mean": 2.0
+   },
+   "2021_08_23_16_06_26": {
+    "min": 2,
+    "max": 3,
+    "mean": 2.99
+   },
+   "2021_08_23_17_22_47": {
+    "min": 3,
+    "max": 3,
+    "mean": 3.0
+   },
+   "2021_08_23_21_07_10": {
+    "min": 3,
+    "max": 3,
+    "mean": 3.0
+   },
+   "2021_08_23_21_47_19": {
+    "min": 3,
+    "max": 3,
+    "mean": 3.0
+   },
+   "2021_08_24_07_45_41": {
+    "min": 2,
+    "max": 4,
+    "mean": 3.32
+   },
+   "2021_08_24_11_37_54": {
+    "min": 2,
+    "max": 3,
+    "mean": 2.45
+   },
+   "2021_08_24_20_09_18": {
+    "min": 2,
+    "max": 2,
+    "mean": 2.0
+   },
+   "2021_08_24_20_49_54": {
+    "min": 2,
+    "max": 2,
+    "mean": 2.0
+   }
+  },
+  "prior_exposure": "detector-level only (Stage-1 V-01: clean AttFuse outputs and AP for all 16 test scenarios). No MINT, baseline, attack or oracle outcome has been computed on any test scenario.",
+  "archive": "the OPV2V test archive streamed in Stage-1 V-01: runners/stage1_reproduce.TEST_URL (box file id f_1621736219709), the request's 'test-012.zip'; members under test/<allowlisted scenario>/ only; read with HTTP ranged reads (tools/ranged_zip.py); the validate archive is never contacted"
+ },
+ "methods_D56": {
+  "no_defense": "undefended Y+ = finalize(cands[{}])",
+  "ego_only": "baselines.ego_only: finalize(cands[all senders excluded]) (= Y+ when n = 1)",
+  "B-RAY": "baselines.b_ray on the final Y+ (no counterfactual): per box, the receiver's std ray counts (rays.classify_points, the R1 code); drop iff KNOWN (>= 3 rays, not the receiver's own box) and Wilson-95 upper bound of s = SUP/(SUP+TRAV) < 0.5 (R1's ADD gate); counts from the float64 receiver scan in the stream (`yplus_rays`). Applied at every n, including n = 1. PRIMARY in v2 (D-57/D-58).",
+  "R1_headline": "KEY SECONDARY in v2 (D-58); otherwise as v1: MINT-v0 + R1 (D-40, D-51): r1.assess with v0.Params() (n_min 3, std), dense counterfactual, finalize(compose(cands, gating_choice)), UNKNOWN = keep; unchanged since E4 (r1.py / v0.py / pipeline.py sha256 equal to the E4 pre-registration)",
+  "R1_noREMOVE": "ablation, baselines.assess_noremove: R1 with REMOVE gate verdicts replaced by 'none'; mirror (useful) conditions unchanged",
+  "bounds": "e0_analyze.frame_policies: oracle_attacker (gate attacker units with D > 0.5) and vis_oracle_attacker (KNOWN attacker units only); bounds, not methods",
+  "tunable_parameters": "none in any method",
+  "T(0.05)": "cost variant of R1 only (D-51), timed, never used for an accuracy number",
+  "R1_headline_note": "key name kept from v1 for diffing; R1 is no longer the headline",
+  "B-RAY_oracle_reference": "context only, not a method and not a bound (e5_analyze.bray_oracle): drop every KNOWN final Y+ box (B-RAY verdict drop/keep: >= 3 receiver rays, not the receiver's own box) with no GT match at BEV IoU >= 0.5; GT used offline only. Reported per condition (AP@0.7/0.5, dAP) with its mean over the 4 families and clean loss. The output states that the attacker-unit oracles are not upper bounds for B-RAY."
+ },
+ "attacks": {
+  "as_E4": "attacker = sender 1; families spoof_feat, remove_feat, shift_feat, spoof_pts (the 4 original) + spoof_blind; implementation and seeds exactly as the E4 pre-registration (e4_stream.frame_record): np.random.seed(stage1_reproduce.frame_seed(scen, i, 0)); attack rng = e0_stream.rng_for(family, scen, frame, 0)",
+  "E4_attack_spec": {
+   "spoof_feat": "e0_stream.attack_features (A-F2a), unchanged",
+   "remove_feat": "e0_stream.attack_features (A-F2b), unchanged",
+   "shift_feat": "e0_stream.attack_features (A-F5), unchanged",
+   "spoof_pts": "e0_stream.attack_points (A-R2-lite), unchanged",
+   "spoof_blind": "src/mint/attacks/blind.py attack_spoof_blind (evaluation only, frozen after the block-T development run): spoof_feat with the destination restricted to free patches where the source GT box translated by the patch shift has < 3 receiver rays (SUP + TRAV, rays.classify_points on the receiver's scan) and is not the receiver's own box; up to 300 random destination draws; not applied if none found. The attacker is assumed to know the receiver's visibility (worst case). Expected R1 recovery ~ 0; it measures the known bypass."
+  },
+  "population": "every frame of the 15 scenarios under clean + 5 families; a family on a frame where the attack was not applied, or a frame with n = 1, is evaluated as clean (as E0-E4)"
+ },
+ "primary": {
+  "method": "B-RAY (D-57/D-58)",
+  "metric": "mean over the 4 original families of dAP@0.7 = AP@0.7(B-RAY) - AP@0.7(no defense); OpenCOOD AP (global_sort_detections = False, IoU 0.7), frames pooled in (scenario, frame) order",
+  "co_test": "B-RAY and R1 each vs no defense on that metric; scenario-block paired bootstrap (the 15 scenarios resampled with replacement, 2000 resamples, seed 0, exactly bootstrap kind 'scenario'); one-sided p = (k + 1) / (B + 1), k = resamples with mean dAP <= 0; Holm step-down over the two p-values at family-wise alpha = 0.05 (smaller p vs 0.025, then the other vs 0.05 only if the first is rejected). 95% and 97.5% one-sided lower bounds (5th / 2.5th percentiles) and the two-sided 95% scenario and 10-frame CIs are reported for both (e5_analyze.criteria_v2)",
+  "ci_secondary": "contiguous 10-frame blocks within each scenario, resampled within scenario (stratified), 2000 resamples, seed 0 (kind 'block10', as E4)",
+  "clean": "clean relative AP@0.7 loss 1 - AP_clean(m) / AP_clean(no defense) for B-RAY and R1, both CIs"
+ },
+ "success_criteria": {
+  "a": "B-RAY rejected under Holm (co_test above)",
+  "b": "scenario-bootstrap 95% CI upper bound of B-RAY's clean relative AP@0.7 loss <= 0.01",
+  "success": "(a) and (b); computed by e5_analyze.criteria_v2()",
+  "R1": "key secondary: its Holm result and clean loss with CIs are reported; no success criterion",
+  "not_criteria": "per-family deltas, spoof_blind, strata, bounds and cost are reported, not judged"
+ },
+ "key_secondary": {
+  "method": "R1 (D-58)",
+  "metric": "R1's Holm co-test result and clean loss (above); and R1 - B-RAY paired dAP@0.7 = AP@0.7(R1) - AP@0.7(B-RAY), mean over the 4 original families, scenario-bootstrap 95% CI (10-frame CI also reported); per family too",
+  "rule": "statement chosen by the scenario CI (e5_analyze.paired_statement): includes 0 -> 'the counterfactual's benefit over a box-level filter is not established'; entirely < 0 -> 'the counterfactual performs worse than the box-level filter'; entirely > 0 -> 'the counterfactual improves over the box-level filter'",
+  "stated_before_test": true
+ },
+ "other_secondary": "all methods x (clean + 5 families): AP@0.7, AP@0.5, dAP vs no defense, clean relative loss, recovery (None if attack loss < 0.005); R1 - R1_noREMOVE and R1 - ego_only paired deltas; oracle bounds; R1 / noREMOVE unit breakdown (KNOWN/UNKNOWN/self, gated, precision, false rejections of USEFUL units by effect type); B-RAY box outcomes (dropped, dropped boxes matching GT at BEV IoU >= 0.5); attack realization",
+ "stratification_by_agents": {
+  "strata": "n = 2, n = 3, n >= 4 (frame's agent count); n = 1 frames are in the pooled analysis and reported as a count, not a stratum",
+  "dAP": "per stratum: point mean dAP@0.7 (4 original families) and clean relative loss for every method, paired R1 - B-RAY, R1 per-family deltas; 10-frame-block bootstrap within the stratum; scenario bootstrap only if >= 5 scenarios contribute frames (expected from Stage-1 metadata: n = 2 about 9 scenarios, n = 3 about 9, n >= 4 two scenarios, so no scenario CI for 4+). Descriptive; no criterion",
+  "overhead": "per stratum (and n = 1): D-42 overhead p50/p95 with both denominators for dense R1, T(0.05) and B-RAY, all timed by e5_stream.time_frame_e5 in the same repetitions with one shared baseline per repetition (receiver encode + plain): isolated receiver encode (5 reps, median); per repetition baseline-only, then receiver encode + dense, receiver encode + T(0.05), receiver encode + B-RAY on the plain output Y+ (extra = ray count + filter). Every frame. At n = 1 MINT is not timed (no senders; overhead 0 by construction) and B-RAY is timed against the same baseline. Reported, no pass/fail (D-50). Apple M1 CPU, torch 8 intra-op / 1 inter-op threads, 3 repetitions, per-frame median"
+ },
+ "scope_limits_D54": "reported next to the headline: spoof_blind (visibility-aware spoofer) loss and recovery for every method, with its bounds; n-coverage: the held-out evidence before this test covered n = 2 only (block H), the test covers n = 1-5 with few n >= 4 frames from 2 scenarios",
+ "streaming": {
+  "runner": "runners/e5_stream.py --run_dir runs/20261024-E5 --user_approved (refuses without the flag; refuses any scenario outside the allowlist, incl. 2021_08_23_12_58_19 and every validate scenario)",
+  "byte_budget": 22000000000,
+  "budget_check": "after reading only the archive's central directory and before the first data byte: already-downloaded + 1.01 x sum of the member sizes of all scenarios still to fetch <= 22e9, else refuse (0 bytes); re-checked per scenario (counted at full size) and after each download",
+  "planning_size": {
+   "stage1_bytes_downloaded_per_scenario": {
+    "2021_08_18_19_48_05": 1128667845,
+    "2021_08_20_21_10_24": 965518536,
+    "2021_08_21_09_28_12": 1441449098,
+    "2021_08_22_07_52_02": 2823331043,
+    "2021_08_22_09_08_29": 1003805807,
+    "2021_08_22_21_41_24": 772348535,
+    "2021_08_23_15_19_19": 1209658110,
+    "2021_08_23_16_06_26": 1440724539,
+    "2021_08_23_17_22_47": 1003515899,
+    "2021_08_23_21_07_10": 1733096156,
+    "2021_08_23_21_47_19": 922696075,
+    "2021_08_24_07_45_41": 2209549795,
+    "2021_08_24_11_37_54": 1069740882,
+    "2021_08_24_20_09_18": 1533346217,
+    "2021_08_24_20_49_54": 1182109993
+   },
+   "total": 20439558530,
+   "total_x1.01": 20643954115,
+   "largest_raw_on_disk": 2623960316
+  },
+  "disk": "one scenario on disk at a time; raw <= 3e9 bytes (largest test scenario 2.62e9 raw in Stage 1); free disk >= member size + 5e9 before each download",
+  "deletion": "raw deleted after the scenario cache is written, re-read and its compose checks verified",
+  "ledger": "runs/20261024-E5/download_ledger.json",
+  "stop": "stop if the budget would be exceeded, a non-allowlisted scenario would be touched, or a compose check fails"
+ },
+ "estimated_runtime": {
+  "download": "about 0.5 h at the E4 rate (11.6 MB/s)",
+  "processing": "about 7.5 h (data pass ~4 s/frame at n = 2, ~7 s at n = 3, ~13 s at n = 4, ~25 s at n = 5 (extrapolated); timing pass ~5.6 s/frame at n = 2 rising to ~10 s at n = 5); 2021_08_22_07_52_02 (n = 4-5) alone ~1.4 h",
+  "total": "about 8 h (range 7-10 h); analysis (e5_analyze.py test, 2000-resample bootstraps) under 1 h",
+  "basis": "E0/E4 stream logs on the same machine; estimate only"
+ },
+ "analysis": "python runners/e5_analyze.py test --run_dir runs/20261024-E5 -> runs/20261024-E5/e5_test.json: 'criteria' = criteria_v2 (governing); 'criteria_v1_superseded' = v1 criteria() kept for transparency, not used for any claim",
+ "outcome": {
+  "success": "report B-RAY as the headline, R1 as key secondary with its Holm result and the R1 - B-RAY statement, and the D-54 scope limits",
+  "failure": "report the failure as the result; no rescue analysis is presented as confirmatory",
+  "no_rule_changes": "no change to any method, attack, metric or criterion after this file is committed, in either case"
+ },
+ "development_check_E5a": {
+  "label": "DEVELOPMENT, block T (3 scenarios, 404 frames, n = 2-4), in-sample; not a test",
+  "file": "runs/20261024-E5/dev/e5a_dev.json",
+  "summary_mean_dAP0.7_orig": {
+   "ego_only": -0.26483,
+   "B-RAY": 0.00492,
+   "R1": 0.00517,
+   "R1_noREMOVE": 0.00481
+  },
+  "summary_clean_rel_loss": {
+   "ego_only": 0.33523,
+   "B-RAY": 0.00012,
+   "R1": -0.00039,
+   "R1_noREMOVE": -0.00089
+  },
+  "R1_minus_BRAY_mean_orig": 0.00026,
+  "frozen_after": "no method changed after these numbers were seen"
+ },
+ "bug_fixes_before_freeze": [
+  "e5_stream: the T(0.05) timing path (pipeline.mint_frame cf_mode='trigger') crashes at n = 1 (no senders: empty torch.cat); found in a dev-slice smoke test with forced n = 1, before any dev-check number; fixed by not timing MINT at n = 1 (pipeline.py unchanged)",
+  "e5_stream: the timing progress print assumed a dense timing record (KeyError at n = 1); found by running run_scenario end-to-end on the 24-frame dev slice with forced n = 1; fixed. After both fixes run_scenario completed on the dev slice at n = 2 (24 frames, 3/3 compose checks identical) and forced n = 1 (24 frames)"
+ ],
+ "deviation_notes": [
+  "B-RAY ray counts in the dev check were computed from the cached float16 receiver scan (the block-T caches have no float64 scan); checked against the cached float64 counts on every clean ADD/SHIFT Y+ box (see e5a_dev.json ray_count_check_dev). In the test they come from the float64 scan in the stream.",
+  "The block-T caches have no per-frame baseline timing, so the dev B-RAY cost is reported in seconds only; the test measures B-RAY overhead with the D-42 protocol."
+ ],
+ "labelling": "Test numbers are the one-time final test. All E0-E5a numbers (blocks T and H) are development or held-out-but-exposed and are reported separately. v2 is the governing pre-registration.",
+ "no_changes": "decision_log.md is not edited; proposals go to planning/decision_log_proposed_appendix.md only",
+ "version": "v2 (supersedes v1 runs/20261024-E5/preregistration.json, which is kept unchanged)",
+ "block_H_comparison_E5a_H": {
+  "label": "DEVELOPMENT / quasi-held-out, block H (exposed, D-53; n = 2; 371 frames); not a test",
+  "files": [
+   "runs/20261024-E5/H/e5a_H.json",
+   "runs/20261024-E5/H/criteria_v2_H.json"
+  ],
+  "D57_statistic": "R1 - B-RAY mean dAP@0.7 -0.00557, 10-frame CI [-0.0090, -0.0023] -> B-RAY primary",
+  "criteria_v2_on_H": "B-RAY +0.02789, p = 0.0005 (Holm reject); R1 +0.02233, p = 0.055 (not rejected); B-RAY clean loss 0.09% [-0.13, 0.41]%; reproduces e5a_H.json point estimates and 95% CIs exactly",
+  "frozen_after": "no method changed after these numbers were seen"
+ },
+ "differences_from_v1": [
+  "primary method: B-RAY (v1: R1) per D-57/D-58",
+  "Holm-corrected one-sided co-test of B-RAY and R1 vs no defense (scenario bootstrap p-values); success = B-RAY Holm rejection and B-RAY clean-loss CI high <= 1%",
+  "R1 - B-RAY statement: three-way wording (v1: 'not established' only)",
+  "B-RAY oracle reference (context; attacker-unit oracles stated not to be upper bounds for B-RAY)",
+  "B-RAY timing: D-42 shared-baseline repetitions with dense and T(0.05) on every frame (v1: separate B-RAY repetitions with their own baseline)",
+  "frozen code commit and the sha256 of runners/e5_analyze.py and runners/e5_stream.py; everything else (data, allowlist, attacks, seeds, CIs, strata, budget, stream safeguards, runtime estimate) is identical to v1"
+ ],
+ "dry_run_D59": {
+  "label": "DRY RUN, development, block-T dev slice (2021_08_22_13_37_16, 24 frames), no network; not results",
+  "code": "frozen commit 5e06497 (runners/e5_dryrun.py drives e5_stream.run_scenario, then analyze(), criteria() v1 and analyze_v2())",
+  "file": "runs/20261024-E5/dryrun/dryrun.json",
+  "n2": "24 frames, 3/3 compose checks identical, yplus_rays on every condition, time_frame_e5 on 24/24 frames with B-RAY sharing the dense/T(0.05) baseline; D-42 overhead p50/p95 dense 23%/34%, T(0.05) 13%/28%, B-RAY 10%/24%; criteria_v2 ran (consistency checks true)",
+  "n1_forced": "OpenCOOD train_params.max_cav = 1: 24 frames at n = 1, B-RAY timed on 24/24 (MINT not timed by design), B-RAY overhead p50/p95 11%/31%; criteria_v2 ran",
+  "note": "1 scenario: the scenario bootstrap is degenerate here, so these p-values and CIs mean nothing; the run checks only that the pipeline runs end to end"
+ }
+}

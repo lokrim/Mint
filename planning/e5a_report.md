@@ -140,3 +140,36 @@ So v2 needs a code change, and under the task rule it stops here. v1 is unchange
 4. Report R1 − B-RAY as the key secondary, with the wording below.
 
 That would be a new frozen commit and new sha256 values in v2. Suggested key-secondary wording: "R1 − B-RAY paired ΔAP@0.7 (mean of 4 families; scenario CI). If the CI includes 0: 'the counterfactual's benefit over a box-level filter is not established'. If the CI upper bound < 0: 'the counterfactual underperforms a box-level filter'."
+
+## v2 freeze (D-59): Holm co-test, B-RAY primary
+
+Done 2026-10-24 with your approval. Nothing was downloaded and the final test was not run.
+- **Frozen code: `5e06497`.** It changes two files:
+  - `e5_analyze.py`: adds `criteria_v2` and its helpers. `analyze`, `bootstrap`, `frame_methods` and `metrics` are unchanged.
+  - `e5_stream.py`: timing only.
+  - Nothing under `src/` changed; `r1.py` and `baselines.py` have the same sha256 as in v1.
+- **Governing pre-registration:** [`preregistration_v2.json`](../runs/20261024-E5/preregistration_v2.json). v1 is kept unchanged.
+- **Tests:** the full suite passes, 73 tests (66 before). The new tests cover the Holm logic, the p-value formula, the wording rule, `bootstrap_draws` matching `bootstrap()`, `criteria_v2` on synthetic data, the B-RAY oracle, and B-RAY timing order and baseline sharing.
+
+**What v2 changes, and nothing else:**
+- **Primary is B-RAY.** Both B-RAY and R1 are tested against no defense, using one-sided scenario-bootstrap p-values, p = (k+1)/(B+1), with Holm correction at α = 0.05.
+- **Success:** B-RAY is rejected under Holm, *and* the upper bound of B-RAY's clean-loss scenario CI is ≤ 1%. R1 gets no success criterion.
+- **R1 − B-RAY wording** has three cases: not established / worse / improves. The scenario CI decides which applies.
+- **B-RAY oracle reference.** It drops every KNOWN box that has no GT match. The output states that the attacker-unit oracles are not upper bounds for B-RAY.
+- **B-RAY timing** now runs in the same D-42 repetitions as dense and T(0.05), with the same baseline. v1 gave B-RAY separate repetitions with their own baseline.
+
+**Check on block H (development; [`criteria_v2_H.json`](../runs/20261024-E5/H/criteria_v2_H.json)).** The point estimates and 95% CIs match `e5a_H.json` exactly.
+
+| Method | Mean ΔAP@0.7 | p | Holm |
+|---|---|---|---|
+| B-RAY | +0.0279 | 0.0005 | rejected |
+| R1 | +0.0223 | 0.055 | **not rejected** |
+
+- The scenario-CI statement on H is "not established", from the 4-block CI [−0.017, +0.003].
+- The B-RAY oracle gives a mean Δ of +0.049; on clean frames it gains +0.017.
+
+**Dry run** ([`dryrun.json`](../runs/20261024-E5/dryrun/dryrun.json)). It used the frozen code on the 24-frame dev slice, with no network access.
+- **n = 2:** all 3 compose checks were identical, `yplus_rays` was present, and B-RAY was timed on 24/24 frames against the shared baseline. D-42 overhead p50/p95: dense 23% / 34%, T(0.05) 13% / 28%, B-RAY 10% / 24%.
+- **Forced n = 1:** B-RAY was timed on 24/24 frames, at 11% / 31%.
+- **Analysis:** `analyze`, `criteria` (v1) and `criteria_v2` all ran on both caches.
+- These are smoke-test numbers. With 1 scenario, the p-values and CIs from the dry run mean nothing.
