@@ -1,0 +1,70 @@
+{
+ "id": "E4 - held-out validation of frozen MINT (R1, dense counterfactual) on block H",
+ "written": "2026-10-23, after the spoof_blind development run on block T and before any block-H byte is downloaded",
+ "frozen_code_commit": "0f6b3d0719260f56ae82063c6feac939efdd4cff",
+ "frozen_code_note": "All code that produces the E4 numbers is at this commit: src/mint (R1, v0, pipeline, compose, effects, rays, ground, attacks incl. attacks/blind.py), runners/e0_stream.py, e0_analyze.py, e4_stream.py, e4_analyze.py. sha256 of the key files below. Nothing in them changes after this file is committed; if something must change, E4 stops and is reported.",
+ "file_sha256": {"src/mint/reliability/r1.py": "031fc0dddf0d7183102088f5a1e3ae2f6d60b8f09c6dfd66b13dfd117583c0f8", "src/mint/reliability/v0.py": "4897dde782211de3948770734c906ef1a78304114577b3aa33f7109fa25c445b", "src/mint/reliability/pipeline.py": "4c2ccffec188bd02b189d9bc428ea44cbe4354d41590751950282ffb9dd2d5c6", "src/mint/fusion/compose.py": "b332e9bc2fdfe1aed99a597a922cbf2783aa70dac7de38eecfd5d5aa19cf32ce", "src/mint/effects/effects.py": "156fb7413f3a67b51db3ad887896af8397f8093562d787172924cfa3fc641c82", "src/mint/geometry/rays.py": "b3e1c6a2db5fca3a6a3acf685d0922d9d58a0d9a410972e4c37a13f7dcd6fc1f", "src/mint/geometry/ground.py": "6ecdd59f5847989bda84f81e11d7b227c9e87c83d57d5d0ca922f0faa52af257", "src/mint/attacks/patches.py": "038bf6217b53ce1a4da191dad59c57cfd6dbf9cb6141dbeb84ab1d4cbc8dd241", "src/mint/attacks/blind.py": "999d6847438093dad2658bf6bb6db412320b2392228bc05e2e00f860571b0630", "src/mint/eval/harm_labels.py": "fcc349da08707b4fb183da6fb9a1cc6f8e64e7024a62394cd429ee33ecf41e3b", "runners/e0_stream.py": "be5a4a497c7ac5a2b281b72dc6f061d928ee11185010dc3ffc92e3032258bb1f", "runners/e0_analyze.py": "5e2aa7f4194944073cfe7ae606bdb8f44181a0172c6e06c4dc9ad756feabddd7", "runners/e4_stream.py": "a6a9538f886a89f042d7141c54fb9cd28593af4eb1c0bb55a27ebb63867f92ea", "runners/e4_analyze.py": "3a1d8a75f74e0b7295586ad04fc05b832b58b1b886df33b0484a50e2d2d21bf5"},
+ "user_decisions": "D-50 (cost reported as measured overhead vs n, no D-17 pass/fail; post hoc), D-51 (frozen method), D-52 (block H held-out, nothing fitted), recorded as proposed entries in commit 160166e before any E4 code ran",
+ "method_frozen": {
+  "name": "MINT-v0 with rule R1 (D-40, D-51)",
+  "rule": "src/mint/reliability/r1.py assess() with v0.Params() (n_min = 3, variant 'std'); Wilson 95% resolvability margins; KNOWN unit gates iff >= 1 effect gates and no effect is resolvably useful; UNKNOWN (any effect box with < 3 receiver rays) and the receiver's own box = keep",
+  "counterfactual": "dense: one decode per excluded-sender subset (e0_stream.decode_all; equals pipeline.mint_frame cf_mode='sequential')",
+  "output": "finalize(compose(cands, gating_choice)) (D-39); no extra decode with n = 2",
+  "trigger_T005": "cost variant only (D-51): pipeline.mint_frame cf_mode='trigger', trigger_f = 0.05; timed, never used for any accuracy number"
+ },
+ "data": {
+  "block": "H (held-out, D-52)",
+  "allowlist": ["2021_08_22_22_01_17", "2021_08_23_10_51_24", "2021_08_23_13_17_21", "2021_08_23_19_42_07"],
+  "compressed_member_bytes_from_central_directory": {"2021_08_22_22_01_17": 1488265060, "2021_08_23_10_51_24": 475921049, "2021_08_23_13_17_21": 334928115, "2021_08_23_19_42_07": 465428852, "total": 2764543076},
+  "agents": "each block-H scenario has 2 CAV folders in the archive (central-directory metadata, read before this file): block H has n <= 2 only. Overhead vs n is therefore measured at n = 2 (and n = 1 if a frame has the second CAV out of range); there is no block-H measurement for n >= 3, and the E3 n = 3..5 projections are not repeated.",
+  "source": "OPV2V validate archive only (e0_stream.VAL_URL); members under validate/<allowlisted scenario>/ only; the test archive is never contacted",
+  "seen_before": "only archive metadata (names, member sizes) of these 4 scenarios; no point cloud, label or detector output"
+ },
+ "safeguards": {
+  "byte_budget": 3200000000,
+  "budget_check": "before the first byte: already-downloaded + 1.01 x sum of the member sizes of all scenarios still to fetch must be <= 3.2e9, else refuse (0 bytes); re-checked per scenario and after each download",
+  "ledger": "runs/20261023-E4/download_ledger.json (new; precheck recorded)",
+  "disk": "one scenario on disk at a time (stream dir emptied before each download; content checked to be exactly that scenario); raw <= 3e9 bytes",
+  "deletion": "raw deleted after the scenario cache is written and re-read",
+  "stop": "stop if the budget would be exceeded, any non-allowlisted scenario or any test scenario would be touched, or a compose check fails"
+ },
+ "attacks": {
+  "attacker": "sender 1 (as E0)",
+  "seeds": "frame randomness np.random.seed(stage1_reproduce.frame_seed(scen, i, 0)); attack rng = e0_stream.rng_for(family, scen, frame, 0) per family (independent streams); same keys for every scenario",
+  "families": {
+   "spoof_feat": "e0_stream.attack_features (A-F2a), unchanged",
+   "remove_feat": "e0_stream.attack_features (A-F2b), unchanged",
+   "shift_feat": "e0_stream.attack_features (A-F5), unchanged",
+   "spoof_pts": "e0_stream.attack_points (A-R2-lite), unchanged",
+   "spoof_blind": "src/mint/attacks/blind.py attack_spoof_blind (evaluation only, frozen after the block-T development run): spoof_feat with the destination restricted to free patches where the source GT box translated by the patch shift has < 3 receiver rays (SUP + TRAV, rays.classify_points on the receiver's scan) and is not the receiver's own box; up to 300 random destination draws; not applied if none found. The attacker is assumed to know the receiver's visibility (worst case). Expected R1 recovery ~ 0; it measures the known bypass."
+  },
+  "population": "as E0-E3: every frame of the 4 scenarios under clean + 5 families; a family on a frame where the attack was not applied, or a frame with n = 1, is evaluated as clean"
+ },
+ "primary_metrics": {
+  "metric": "absolute AP@0.7 change delta_c = AP@0.7(R1) - AP@0.7(undefended) for each of clean, spoof_feat, remove_feat, shift_feat, spoof_pts, spoof_blind; OpenCOOD AP (global_sort_detections = False, IoU 0.7), frames pooled in (scenario, frame) order",
+  "ci": "paired bootstrap 95% percentile CI, 2000 resamples, seed 0: (A, used for the criteria) contiguous blocks of 10 frames within each scenario, resampled within scenario (stratified); (B, reported, coarse) whole-scenario blocks (4 blocks). Resampled frames keep their original order (as E2). Implementation: runners/e4_analyze.py bootstrap()",
+  "secondary": "recovery = delta_f / (AP_clean_undef - AP_f_undef) (None if the attack loss < 0.005) per family and its mean over the 4 original families; AP@0.5 and its changes; clean relative loss; gated-unit precision and false rejections of USEFUL units by effect type; KNOWN/UNKNOWN/self fractions of units; attack realization; oracle and visibility-limited oracle bounds (e0_analyze.frame_policies: oracle_attacker, vis_oracle_attacker, oracle_all, vis_oracle_all) for context; overhead"
+ },
+ "success_criteria": {
+  "i": "mean over the 4 original families (spoof_feat, remove_feat, shift_feat, spoof_pts) of delta_f: lower bound of the 10-frame-block CI > 0",
+  "ii": "clean relative loss 1 - AP@0.7_clean(R1) / AP@0.7_clean(undefended): upper bound of the 10-frame-block CI <= 0.01",
+  "iii": "no original family with point delta_f < -0.002",
+  "success": "(i) and (ii) and (iii); spoof_blind is reported but is not part of any criterion"
+ },
+ "outcome": {
+  "success": "recommend the frozen method for the one-time final test (a separate decision, not part of E4)",
+  "failure": "recommend re-scoping to the observability study",
+  "no_rule_changes": "no change to R1, the attacks, the metrics or these criteria in either case"
+ },
+ "cost_D50": {
+  "protocol": "E3 step-4 / D-42 protocol on every block-H frame (clean, real n), after the data pass of the scenario while its raw data is on disk: isolated receiver encode (5 reps, per-frame median); then 3 interleaved repetitions of baseline-only (receiver encode + plain fusion/decode/post-process) and, for dense and T(0.05) each, receiver encode + MINT; MINT extra = counterfactual + evidence + compose; overhead = extra / baseline-only of the same repetition; isolated-encode overhead = extra / (isolated encode p50 over all block-H frames + plain of the same repetition); per-frame median over repetitions, then p50/p95 over frames, per n. Untimed warm-up on frame 0 of each scenario. Apple M1 CPU, torch 8 intra-op / 1 inter-op threads",
+  "claim": "reported as measured overhead vs n only; no pass/fail budget claim (D-50)"
+ },
+ "spoof_blind_development": {"label": "DEVELOPMENT, block T dev slice (24 frames x 4 seeds = 96 attacked evaluations, n = 2); smoke test, seeds repeat frames; not an estimate", "file": "runs/20261023-E4/dev_blind/spoof_blind_dev.json", "spoof_blind": {"applied": 96, "realized": 55, "realized_with_lt3_rays_or_self": 53, "realized_hit_unit_KNOWN": 2, "realized_hit_unit_gated_by_R1": 1, "attack_loss_AP@0.7": 0.0411, "R1_delta_AP@0.7": -0.0054, "R1_delta_ci95_block10": [-0.0106, -0.0005], "R1_recovery_AP@0.7": -0.132}, "spoof_feat_same_frames": {"realized": 54, "attack_loss_AP@0.7": 0.0438, "R1_delta_AP@0.7": 0.018, "R1_recovery_AP@0.7": 0.41}, "clean_same_frames": {"R1_delta_AP@0.7": -0.009, "R1_rel_loss": 0.0103}, "frozen": "spoof_blind is frozen at the frozen_code_commit; no change after this file is committed"},
+ "deviation_from_request": {
+  "what": "spoof_blind was developed and smoke-tested on the 24-frame block-T dev slice (data/opv2v/devslice, raw data already on disk, n = 2) with 4 attack seeds per frame, not on the block-T caches",
+  "why": "the E0/E3 block-T caches store decoded candidates, effects and receiver points but no agent features, so a new feature-level attack cannot be replayed from them; the dev slice is the only block-T raw data on disk. 0 bytes downloaded. 4 seeds per frame were needed to reach >= 50 realized attacks on 24 frames; the seeds repeat frames, so the development numbers are a smoke test, not an estimate"
+ },
+ "labelling": "Block-H numbers are held-out. spoof_blind development numbers (block T, dev slice) and all E0-E3 numbers are development / in-sample and are reported separately.",
+ "no_changes": "decision_log.md is not edited; proposals go to the appendix of planning/e4_report.md and planning/decision_log_proposed_appendix.md only"
+}
