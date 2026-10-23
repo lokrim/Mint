@@ -77,3 +77,14 @@ Recorded before any E4 code, download or result. `decision_log.md` was not edite
 | D-50 | **D-17 (≤ 10% p95 overhead) is not met by any variant tested in E1–E3. Post-hoc revision, labelled as such:** cost is reported as measured overhead (p50/p95, both D-42 denominators) against the number of agents, for the dense counterfactual and for the T(0.05) trigger. No pass/fail budget claim is made. | Keep D-17 as a pass/fail criterion (the method fails it); keep searching for an exact cheaper counterfactual | E1–E3: dense ≥ 21% p50 at n = 2; T(0.05) 25% p95 at n = 2 and not exact (D-49) | User decision (post hoc) |
 | D-51 | **Frozen method for E4** = MINT-v0 with rule R1 (D-40), dense counterfactual, composed output (D-39), UNKNOWN = keep. The T(0.05) trigger is reported as a cost variant only; it does not change any E4 accuracy number. | Use T(0.05) as the method (not exact: D-49) | Dense is the exact reference; the trigger failed E3's equivalence bands | User decision |
 | D-52 | **The 4 small remaining validate scenarios (D-31) are a held-out set (block H)**, not calibration. Nothing is fitted, tuned or chosen on them. | Use them as calibration block C (D-31) | R1 has no tunable parameter; an untouched held-out check of the frozen method is worth more than calibration now | User decision |
+
+## Added 2026-10-23 (E4, held-out block H); also proposed, not applied
+
+Source: [e4_report.md](e4_report.md). `decision_log.md` was not edited; R1, the attacks and the criteria are unchanged.
+
+| ID | Decision | Alternatives | Rationale | Confidence |
+|---|---|---|---|---|
+| D-53 | **Record the E4 outcome: success on block H.** Pre-registered criteria pass under the 10-frame-block bootstrap: (i) mean ΔAP@0.7 over the 4 original families +0.022 [0.017, 0.027]; (ii) clean relative loss 0.31% [0.01%, 0.68%]; (iii) min family Δ −0.0009. The coarse 4-scenario bootstrap includes 0 for (i): [−0.004, 0.032]. Block H (4 scenarios, 371 frames, n = 2 only) is now exposed and cannot be a test set. | — | Pre-registered rule | High |
+| D-54 | **Scope statement for any final-test report:** spoof_blind (visibility-aware spoofer) causes the largest loss (0.097 AP@0.7) with R1 recovery 0.01 and a visibility-limited oracle bound of 0.05; the held-out evidence covers n = 2 only. | Omit the bypass | Known, measured limit | High |
+
+Open (needs the user, not proposed here): whether to run the one-time final test with the frozen method (E4's recommendation; a separate decision), and whether its pre-registration adds an n-stratified analysis.
