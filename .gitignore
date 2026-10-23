@@ -45,3 +45,6 @@ third_party/OpenCOOD/
 
 # E0 caches (large)
 runs/*/cache/
+
+# E4 dev caches (large)
+runs/*/*/cache/

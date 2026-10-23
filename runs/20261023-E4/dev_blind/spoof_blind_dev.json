@@ -1,0 +1,425 @@
+{
+ "mode": "dev",
+ "files": [
+  "runs/20261023-E4/dev_blind/cache/devslice_blind.pkl.gz"
+ ],
+ "scenarios": [
+  {
+   "scenario": "2021_08_22_13_37_16",
+   "frames": 96,
+   "compose_checks": 0,
+   "compose_all_identical": true
+  }
+ ],
+ "frames": 96,
+ "n_agents_hist": {
+  "2": 96
+ },
+ "numpy_ap_vs_opencood_max_abs_diff": 1.7763568394002505e-14,
+ "AP": {
+  "clean": {
+   "undefended": {
+    "AP@0.5": 0.9596,
+    "AP@0.7": 0.8745
+   },
+   "R1": {
+    "AP@0.5": 0.9506,
+    "AP@0.7": 0.8655,
+    "delta_AP@0.7": -0.009,
+    "delta_AP@0.5": -0.009,
+    "rel_loss_AP@0.7": 0.0103
+   },
+   "oracle_attacker": {
+    "AP@0.5": 0.9657,
+    "AP@0.7": 0.8815,
+    "delta_AP@0.7": 0.007,
+    "delta_AP@0.5": 0.0061,
+    "rel_loss_AP@0.7": -0.008
+   },
+   "vis_oracle_attacker": {
+    "AP@0.5": 0.9657,
+    "AP@0.7": 0.8815,
+    "delta_AP@0.7": 0.007,
+    "delta_AP@0.5": 0.0061,
+    "rel_loss_AP@0.7": -0.008
+   },
+   "oracle_all": {
+    "AP@0.5": 0.9657,
+    "AP@0.7": 0.8815,
+    "delta_AP@0.7": 0.007,
+    "delta_AP@0.5": 0.0061,
+    "rel_loss_AP@0.7": -0.008
+   },
+   "vis_oracle_all": {
+    "AP@0.5": 0.9657,
+    "AP@0.7": 0.8815,
+    "delta_AP@0.7": 0.007,
+    "delta_AP@0.5": 0.0061,
+    "rel_loss_AP@0.7": -0.008
+   }
+  },
+  "spoof_feat": {
+   "undefended": {
+    "AP@0.5": 0.9115,
+    "AP@0.7": 0.8308,
+    "attack_loss_AP@0.7": 0.0438,
+    "attack_loss_AP@0.5": 0.0481
+   },
+   "R1": {
+    "AP@0.5": 0.9316,
+    "AP@0.7": 0.8487,
+    "delta_AP@0.7": 0.0179,
+    "delta_AP@0.5": 0.0201,
+    "recovery_AP@0.5": 0.417,
+    "recovery_AP@0.7": 0.41
+   },
+   "oracle_attacker": {
+    "AP@0.5": 0.9574,
+    "AP@0.7": 0.8747,
+    "delta_AP@0.7": 0.044,
+    "delta_AP@0.5": 0.0459,
+    "recovery_AP@0.5": 0.953,
+    "recovery_AP@0.7": 1.004
+   },
+   "vis_oracle_attacker": {
+    "AP@0.5": 0.9514,
+    "AP@0.7": 0.8693,
+    "delta_AP@0.7": 0.0386,
+    "delta_AP@0.5": 0.0399,
+    "recovery_AP@0.5": 0.829,
+    "recovery_AP@0.7": 0.881
+   },
+   "oracle_all": {
+    "AP@0.5": 0.9574,
+    "AP@0.7": 0.8747,
+    "delta_AP@0.7": 0.044,
+    "delta_AP@0.5": 0.0459,
+    "recovery_AP@0.5": 0.953,
+    "recovery_AP@0.7": 1.004
+   },
+   "vis_oracle_all": {
+    "AP@0.5": 0.9514,
+    "AP@0.7": 0.8693,
+    "delta_AP@0.7": 0.0386,
+    "delta_AP@0.5": 0.0399,
+    "recovery_AP@0.5": 0.829,
+    "recovery_AP@0.7": 0.881
+   }
+  },
+  "spoof_blind": {
+   "undefended": {
+    "AP@0.5": 0.9166,
+    "AP@0.7": 0.8335,
+    "attack_loss_AP@0.7": 0.0411,
+    "attack_loss_AP@0.5": 0.0431
+   },
+   "R1": {
+    "AP@0.5": 0.9111,
+    "AP@0.7": 0.8281,
+    "delta_AP@0.7": -0.0054,
+    "delta_AP@0.5": -0.0055,
+    "recovery_AP@0.5": -0.128,
+    "recovery_AP@0.7": -0.132
+   },
+   "oracle_attacker": {
+    "AP@0.5": 0.9595,
+    "AP@0.7": 0.8749,
+    "delta_AP@0.7": 0.0415,
+    "delta_AP@0.5": 0.043,
+    "recovery_AP@0.5": 0.998,
+    "recovery_AP@0.7": 1.01
+   },
+   "vis_oracle_attacker": {
+    "AP@0.5": 0.9263,
+    "AP@0.7": 0.8431,
+    "delta_AP@0.7": 0.0096,
+    "delta_AP@0.5": 0.0097,
+    "recovery_AP@0.5": 0.224,
+    "recovery_AP@0.7": 0.235
+   },
+   "oracle_all": {
+    "AP@0.5": 0.9595,
+    "AP@0.7": 0.8749,
+    "delta_AP@0.7": 0.0415,
+    "delta_AP@0.5": 0.043,
+    "recovery_AP@0.5": 0.998,
+    "recovery_AP@0.7": 1.01
+   },
+   "vis_oracle_all": {
+    "AP@0.5": 0.9263,
+    "AP@0.7": 0.8431,
+    "delta_AP@0.7": 0.0096,
+    "delta_AP@0.5": 0.0097,
+    "recovery_AP@0.5": 0.224,
+    "recovery_AP@0.7": 0.235
+   }
+  }
+ },
+ "point_AP@0.7": {
+  "clean_rel_loss": 0.0103,
+  "delta_clean": -0.00901,
+  "delta_spoof_feat": 0.01795,
+  "attack_loss_spoof_feat": 0.04378,
+  "recovery_spoof_feat": 0.40993,
+  "delta_spoof_blind": -0.00542,
+  "attack_loss_spoof_blind": 0.04106,
+  "recovery_spoof_blind": -0.1321,
+  "mean_delta_orig": 0.01795,
+  "mean_recovery_orig": 0.40993
+ },
+ "bootstrap_block10": {
+  "clean_rel_loss": {
+   "ci95": [
+    0.0014,
+    0.0187
+   ],
+   "dropped": 0
+  },
+  "delta_clean": {
+   "ci95": [
+    -0.0168,
+    -0.0012
+   ],
+   "dropped": 0
+  },
+  "delta_spoof_feat": {
+   "ci95": [
+    0.0086,
+    0.0319
+   ],
+   "dropped": 0
+  },
+  "attack_loss_spoof_feat": {
+   "ci95": [
+    0.0397,
+    0.0487
+   ],
+   "dropped": 0
+  },
+  "recovery_spoof_feat": {
+   "ci95": [
+    0.1928,
+    0.6876
+   ],
+   "dropped": 0
+  },
+  "delta_spoof_blind": {
+   "ci95": [
+    -0.0106,
+    -0.0005
+   ],
+   "dropped": 0
+  },
+  "attack_loss_spoof_blind": {
+   "ci95": [
+    0.0345,
+    0.0527
+   ],
+   "dropped": 0
+  },
+  "recovery_spoof_blind": {
+   "ci95": [
+    -0.2171,
+    -0.014
+   ],
+   "dropped": 0
+  },
+  "mean_delta_orig": {
+   "ci95": [
+    0.0086,
+    0.0319
+   ],
+   "dropped": 0
+  },
+  "mean_recovery_orig": {
+   "ci95": [
+    0.1928,
+    0.6876
+   ],
+   "dropped": 0
+  },
+  "_blocks": 12
+ },
+ "bootstrap_scenario": {
+  "clean_rel_loss": {
+   "ci95": [
+    0.0069,
+    0.0103
+   ],
+   "dropped": 0
+  },
+  "delta_clean": {
+   "ci95": [
+    -0.009,
+    -0.0061
+   ],
+   "dropped": 0
+  },
+  "delta_spoof_feat": {
+   "ci95": [
+    0.0114,
+    0.0236
+   ],
+   "dropped": 0
+  },
+  "attack_loss_spoof_feat": {
+   "ci95": [
+    0.0339,
+    0.0448
+   ],
+   "dropped": 0
+  },
+  "recovery_spoof_feat": {
+   "ci95": [
+    0.3034,
+    0.6322
+   ],
+   "dropped": 0
+  },
+  "delta_spoof_blind": {
+   "ci95": [
+    -0.0086,
+    -0.0004
+   ],
+   "dropped": 0
+  },
+  "attack_loss_spoof_blind": {
+   "ci95": [
+    0.0327,
+    0.0476
+   ],
+   "dropped": 0
+  },
+  "recovery_spoof_blind": {
+   "ci95": [
+    -0.1801,
+    -0.0117
+   ],
+   "dropped": 0
+  },
+  "mean_delta_orig": {
+   "ci95": [
+    0.0114,
+    0.0236
+   ],
+   "dropped": 0
+  },
+  "mean_recovery_orig": {
+   "ci95": [
+    0.3034,
+    0.6322
+   ],
+   "dropped": 0
+  },
+  "_blocks": 4,
+  "_caveat": "whole-scenario blocks; few blocks, coarse"
+ },
+ "units_R1": {
+  "clean": {
+   "units": 216,
+   "n_KNOWN": 108,
+   "n_UNKNOWN_NO_EVIDENCE": 12,
+   "n_NOT_APPLICABLE_SELF": 96,
+   "frac_KNOWN": 0.5,
+   "frac_UNKNOWN": 0.056,
+   "gated": 16,
+   "gated_harmful": 0,
+   "gated_neutral": 0,
+   "false_rejections_useful": 16,
+   "precision": 0.0,
+   "harmful_units": 8,
+   "harmful_KNOWN": 8,
+   "useful_units": 184,
+   "gated_by_ADD": 0,
+   "gated_harmful_by_ADD": 0,
+   "false_rej_by_ADD": 0,
+   "gated_by_REMOVE": 16,
+   "gated_harmful_by_REMOVE": 0,
+   "false_rej_by_REMOVE": 16,
+   "gated_by_SHIFT": 0,
+   "gated_harmful_by_SHIFT": 0,
+   "false_rej_by_SHIFT": 0,
+   "attacker_touched_harmful": 0,
+   "attacker_touched_harmful_KNOWN": 0,
+   "attacker_touched_harmful_gated": 0
+  },
+  "spoof_feat": {
+   "units": 273,
+   "n_KNOWN": 158,
+   "n_UNKNOWN_NO_EVIDENCE": 19,
+   "n_NOT_APPLICABLE_SELF": 96,
+   "frac_KNOWN": 0.579,
+   "frac_UNKNOWN": 0.07,
+   "gated": 59,
+   "gated_harmful": 43,
+   "gated_neutral": 0,
+   "false_rejections_useful": 16,
+   "precision": 0.729,
+   "harmful_units": 65,
+   "harmful_KNOWN": 58,
+   "useful_units": 184,
+   "gated_by_ADD": 43,
+   "gated_harmful_by_ADD": 43,
+   "false_rej_by_ADD": 0,
+   "gated_by_REMOVE": 16,
+   "gated_harmful_by_REMOVE": 0,
+   "false_rej_by_REMOVE": 16,
+   "gated_by_SHIFT": 0,
+   "gated_harmful_by_SHIFT": 0,
+   "false_rej_by_SHIFT": 0,
+   "attacker_touched_harmful": 57,
+   "attacker_touched_harmful_KNOWN": 50,
+   "attacker_touched_harmful_gated": 43
+  },
+  "spoof_blind": {
+   "units": 274,
+   "n_KNOWN": 113,
+   "n_UNKNOWN_NO_EVIDENCE": 65,
+   "n_NOT_APPLICABLE_SELF": 96,
+   "frac_KNOWN": 0.412,
+   "frac_UNKNOWN": 0.237,
+   "gated": 20,
+   "gated_harmful": 4,
+   "gated_neutral": 0,
+   "false_rejections_useful": 16,
+   "precision": 0.2,
+   "harmful_units": 66,
+   "harmful_KNOWN": 13,
+   "useful_units": 184,
+   "gated_by_ADD": 4,
+   "gated_harmful_by_ADD": 4,
+   "false_rej_by_ADD": 0,
+   "gated_by_REMOVE": 16,
+   "gated_harmful_by_REMOVE": 0,
+   "false_rej_by_REMOVE": 16,
+   "gated_by_SHIFT": 0,
+   "gated_harmful_by_SHIFT": 0,
+   "false_rej_by_SHIFT": 0,
+   "attacker_touched_harmful": 58,
+   "attacker_touched_harmful_KNOWN": 5,
+   "attacker_touched_harmful_gated": 4
+  }
+ },
+ "realization": {
+  "spoof_feat": {
+   "frames_with_sender": 96,
+   "applied": 96,
+   "realized": 54,
+   "realized_dst_rays_lt3_or_self": 7,
+   "realized_hit_unit_KNOWN": 47,
+   "realized_hit_unit_gated_by_R1": 40,
+   "not_applied_no_blind_dst": 0
+  },
+  "spoof_blind": {
+   "frames_with_sender": 96,
+   "applied": 96,
+   "realized": 55,
+   "realized_dst_rays_lt3_or_self": 53,
+   "realized_hit_unit_KNOWN": 2,
+   "realized_hit_unit_gated_by_R1": 1,
+   "predicted_box_rays_max": 2,
+   "dst_tries_median": 5.5,
+   "not_applied_no_blind_dst": 0
+  }
+ }
+}
