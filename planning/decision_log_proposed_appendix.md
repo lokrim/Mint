@@ -50,3 +50,14 @@ Source: [e2_report.md](e2_report.md). `decision_log.md` was not edited; D-17 is 
 Open (needs the user, not proposed here):
 - **D-17 or cost model.** Revising D-17 or the cost model (e.g. a cheaper trigger that limits counterfactuals to candidate tiles, a GPU budget, or a revised budget) is the user's decision and must be logged as a post-hoc revision.
 - **Harm-label artefact (E2 C).** 4/28 REMOVE "false rejections" are true-positive restorations whose GT centre lies in the neighbouring tile, which the tile-local D label scores as harm. Any label change (e.g. attributing a box to the tile of its matched GT) would need its own pre-registration and is not applied to E1/E2 numbers.
+
+## Added 2026-10-23 (E3, development block T); also proposed, not applied
+
+Source: [e3_report.md](e3_report.md). `decision_log.md` was not edited; D-17 and R1 are unchanged.
+
+| ID | Decision | Alternatives | Rationale | Confidence |
+|---|---|---|---|---|
+| D-45 | **Record the E3 step-1 outcome: stop.** The candidate-tile counterfactual (`cf_mode="trigger"`, T(f) = tiles with a Y+ anchor ≥ f, dilated by 1) did not meet the pre-registered max abs diff ≤ 1e-5 vs the dense counterfactual on 24/24 frames (22/24 at f = 0.05, 23/24 at f = 0.10; max 1.24e-5). Fusion on tiles is bitwise equal; the deviation is float rounding in the tile-sized deblock/head convolutions (≤ 13 ULP, relative 1.3e-6, on logits ≤ −9); candidate sets were identical on 24/24 frames. Steps 2–4 were not run; the approved block-T re-stream was not used (0 bytes downloaded). The trigger mode stays in the code as a non-default mode. | Run steps 2–4 anyway | Pre-registered stop rule | High |
+
+Open (needs the user, not proposed here):
+- **E3 exactness criterion.** Whether to replace the 1e-5 absolute bound with a ULP/relative bound or an identical-candidate-set test, and then run E3 steps 2–4 (with the approved block-T re-stream), is the user's decision and would be a post-hoc revision of the E3 pre-registration.

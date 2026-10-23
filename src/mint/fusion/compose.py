@@ -60,6 +60,44 @@ def candidates(post_processor, psm, rm, anchor_box, transformation_matrix):
                       (hh, ww), n_anchor)
 
 
+def tile_candidates(post_processor, psm_t, rm_t, sel, anchor_box, transformation_matrix, hw):
+    """candidates() for head outputs computed on tiles only (E3 trigger mode).
+
+    psm_t [T, A, 8, 8], rm_t [T, 7A, 8, 8]: head outputs of tiles sel [T, 2] (tile row, col) of the
+    head grid hw. Anchors outside the tiles are absent. Cells beyond the grid (padded last tile row)
+    are dropped. Same operations and anchor order (full-grid flat index) as candidates().
+    """
+    hh, ww = hw
+    t, n_anchor = psm_t.shape[0], psm_t.shape[1]
+    if t == 0:
+        return Candidates(np.zeros(0, np.int64), np.zeros((0, 8, 3), np.float32), np.zeros(0, np.float32), hw, n_anchor)
+    px = psm_t.shape[2]
+    prob = F.sigmoid(psm_t.permute(0, 2, 3, 1))                           # T, 8, 8, A
+    ys = sel[:, 0, None] * px + torch.arange(px)                           # T, 8
+    xs = sel[:, 1, None] * px + torch.arange(px)
+    idx = ((ys[:, :, None] * ww + xs[:, None, :])[..., None] * n_anchor + torch.arange(n_anchor))  # T, 8, 8, A
+    valid = (ys < hh)[:, :, None, None].expand_as(idx)
+    mask = torch.gt(prob, post_processor.params["target_args"]["score_threshold"]) & valid
+    sel_flat = torch.nonzero(mask.reshape(-1)).view(-1)
+    order = torch.argsort(idx.reshape(-1)[sel_flat])
+    sel_flat = sel_flat[order]
+    anc = F.pad(anchor_box.permute(2, 3, 0, 1).reshape(-1, hh, ww), (0, 0, 0, -(-hh // px) * px - hh))
+    c = anc.shape[0]
+    anc = anc.reshape(c, -1, px, ww // px, px)[:, sel[:, 0], :, sel[:, 1], :]      # T, C, 8, 8 (advanced idx first)
+    anc = anc.permute(0, 2, 3, 1).reshape(t * px, px, n_anchor, 7)
+    deltas = rm_t.permute(1, 0, 2, 3).reshape(1, rm_t.shape[1], t * px, px)
+    box3d = post_processor.delta_to_boxes3d(deltas, anc)
+    boxes3d = box3d[0][sel_flat]
+    scores = prob.reshape(-1)[sel_flat]
+    if len(boxes3d):
+        corners = box_utils.boxes_to_corners_3d(boxes3d, order=post_processor.params["order"])
+        corners = box_utils.project_box3d(corners, transformation_matrix)
+    else:
+        corners = torch.zeros((0, 8, 3))
+    return Candidates(idx.reshape(-1)[sel_flat].numpy().astype(np.int64), corners.float().numpy(),
+                      scores.float().numpy(), hw, n_anchor)
+
+
 def finalize(post_processor, c: Candidates):
     """Remaining post_process steps; returns (corners (M,8,3) np, scores (M,) np)."""
     if len(c.idx) == 0:
