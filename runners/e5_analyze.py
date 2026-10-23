@@ -15,6 +15,8 @@ Methods (D-56), per (frame, condition):
   R1_noREMOVE           baselines.assess_noremove, composed output
   oracle_attacker       E0 bound: gate attacker (sender 1) units with D > 0.5
   vis_oracle_attacker   E0 bound: as above, KNOWN units only
+Test-mode criteria are criteria_v2 (preregistration_v2.json: B-RAY primary, Holm co-test of B-RAY and R1
+vs no defense, R1 - B-RAY wording, B-RAY oracle reference); v1 criteria() is kept and labelled superseded.
 A family on a frame where the attack was not applied, or a frame with n = 1, is evaluated as clean
 (as E0-E4). AP is OpenCOOD's (non-global sort), frames concatenated in (scenario, frame) order; a
 bootstrap resample keeps that order (as E2/E4).
@@ -387,6 +389,166 @@ def criteria(out):
     return c
 
 
+# ------------------------------------------------------------------ v2 criteria (D-57 / D-58 / D-59)
+V2_PRIMARY = "B-RAY"
+V2_SECONDARY = "R1"
+ALPHA = 0.05
+KNOWN_VERDICTS = ("drop", "keep")
+ORACLE_NOTE = ("B-RAY oracle (context only, GT used offline): drop every KNOWN final Y+ box (>= 3 receiver rays, not "
+               "the receiver's own box) with no GT match at BEV IoU >= 0.5. The attacker-unit oracles "
+               "(oracle_attacker, vis_oracle_attacker) gate sender units, not final boxes; they are NOT upper bounds "
+               "for B-RAY.")
+
+
+def bray_oracle(yp, sp, verd, gt):
+    """Y+ minus every KNOWN box (B-RAY verdict drop/keep) without a GT match at BEV IoU >= 0.5."""
+    yp, sp = np.asarray(yp), np.asarray(sp)
+    if len(yp) == 0:
+        return yp, sp
+    m = bev_iou_matrix(yp, np.asarray(gt)).max(1) if len(gt) else np.zeros(len(yp))
+    keep = np.array([not (v in KNOWN_VERDICTS and x < 0.5) for v, x in zip(verd, m)], bool)
+    return yp[keep], sp[keep]
+
+
+def evaluate_v2(frame_iter, conds):
+    """Per-frame TP/FP of every D-56 method plus the B-RAY oracle, with frame_methods() unchanged."""
+    pp = A.post_processor()
+    meths = METHODS + ("B-RAY_oracle",)
+    F7 = {(c, m): [] for c in conds for m in meths}
+    F5 = {(c, m): [] for c in conds for m in meths}
+    keys = []
+    for scen, fr in frame_iter:
+        n = fr["n_agents"]
+        keys.append((scen, fr["frame"]))
+        memo = {}
+        for cond in conds:
+            out, side = frame_methods(pp, fr, cond, n, memo)
+            out["B-RAY_oracle"] = bray_oracle(side["yp"], out["undefended"][1], side["bray_verdicts"], fr["gt"])
+            for m in meths:
+                st = A.frame_stat(*out[m], fr["gt"])
+                F7[(cond, m)].append(tpfp(st, 0.7))
+                F5[(cond, m)].append(tpfp(st, 0.5))
+    return F7, F5, keys
+
+
+def bootstrap_draws(F, keys, conds, kind, want, subset=None, seed=0, n_boot=N_BOOT):
+    """The raw resample values of metrics() keys `want`, with exactly bootstrap()'s resampling (same units,
+    strata, rng and draw order), so percentiles of these draws equal bootstrap()'s CIs."""
+    use = list(range(len(keys))) if subset is None else list(subset)
+    scen = list(dict.fromkeys(keys[j][0] for j in use))
+    pos = {s: [j for j in use if keys[j][0] == s] for s in scen}
+    units, strata = [], []
+    if kind == "scenario":
+        units = [pos[s] for s in scen]
+        strata = [list(range(len(units)))]
+    else:
+        for s in scen:
+            p = pos[s]
+            first = len(units)
+            units += [p[k:k + Z.BLOCK] for k in range(0, len(p), Z.BLOCK)]
+            strata.append(list(range(first, len(units))))
+    rng = np.random.default_rng(seed)
+    vals = {k: [] for k in want}
+    for _ in range(n_boot):
+        pick = []
+        for st in strata:
+            pick += list(rng.choice(st, len(st)))
+        idx = sorted(j for u in pick for j in units[u])
+        m = metrics(F, idx, conds)
+        for k in want:
+            vals[k].append(m[k])
+    return {k: np.asarray(v, float) for k, v in vals.items()}, len(units)
+
+
+def ci95(v):
+    return [round(float(np.percentile(v, 2.5)), 4), round(float(np.percentile(v, 97.5)), 4)]
+
+
+def one_sided_p(draws):
+    """p = (k + 1) / (B + 1), k = resamples with value <= 0 (H0: mean dAP <= 0)."""
+    d = np.asarray(draws, float)
+    return float((np.sum(d <= 0) + 1) / (len(d) + 1))
+
+
+def holm(pvals, alpha=ALPHA):
+    """Holm step-down over {name: p}. Returns {name: {"p", "rank", "threshold", "reject"}}."""
+    order = sorted(pvals, key=lambda k: (pvals[k], k))
+    m = len(order)
+    out, go = {}, True
+    for r, k in enumerate(order):
+        thr = alpha / (m - r)
+        rej = go and pvals[k] <= thr
+        go = rej
+        out[k] = {"p": pvals[k], "rank": r + 1, "threshold": thr, "reject": bool(rej)}
+    return out
+
+
+def paired_statement(ci):
+    if ci[0] <= 0 <= ci[1]:
+        return "the counterfactual's benefit over a box-level filter is not established"
+    if ci[1] < 0:
+        return "the counterfactual performs worse than the box-level filter"
+    return "the counterfactual improves over the box-level filter"
+
+
+def criteria_v2(out, F7, F5, keys, conds, n_boot=N_BOOT, seed=0):
+    """Pre-registered v2 criteria (runs/20261024-E5/preregistration_v2.json; D-57, D-58, D-59).
+    out: analyze() output; F7/F5/keys: evaluate_v2() on the same files (same frame order)."""
+    assert len(keys) == out["frames"]
+    fam = [f for f in ORIG if f in conds]
+    want = [f"mean_delta_orig|{m}" for m in (V2_PRIMARY, V2_SECONDARY)]
+    draws, nb = bootstrap_draws(F7, keys, conds, "scenario", want, seed=seed, n_boot=n_boot)
+    idx = list(range(len(keys)))
+    pt = metrics(F7, idx, conds)
+    bs, b10 = out["bootstrap_scenario"], out["bootstrap_block10"]
+    tests = {}
+    for m, k in zip((V2_PRIMARY, V2_SECONDARY), want):
+        d = draws[k]
+        tests[m] = {"point": round(pt[k], 5), "ci95_scenario": ci95(d), "ci95_block10": b10[k]["ci95"],
+                    "lower_one_sided_95": round(float(np.percentile(d, 5)), 4),
+                    "lower_one_sided_97.5": round(float(np.percentile(d, 2.5)), 4),
+                    "k_le_0": int(np.sum(d <= 0)), "B": int(len(d)), "p_one_sided": one_sided_p(d)}
+    H = holm({m: tests[m]["p_one_sided"] for m in tests})
+    for m in tests:
+        tests[m]["holm"] = H[m]
+    rl = {}
+    for m in (V2_PRIMARY, V2_SECONDARY):
+        k = f"rel_loss|{m}"
+        rl[m] = {"point": round(pt[k], 5), "ci95_scenario": bs[k]["ci95"], "ci95_block10": b10[k]["ci95"]}
+    clean_ok = rl[V2_PRIMARY]["ci95_scenario"][1] <= 0.01
+    c = {"version": "v2", "alpha_familywise": ALPHA, "bootstrap": f"scenario blocks ({nb}), {n_boot} resamples, seed {seed}",
+         "co_test_vs_no_defense": tests,
+         "primary": {"method": V2_PRIMARY, "holm_reject": tests[V2_PRIMARY]["holm"]["reject"],
+                     "clean_rel_loss": rl[V2_PRIMARY], "clean_rel_loss_ci_hi_le_0.01": bool(clean_ok)},
+         "key_secondary": {"method": V2_SECONDARY, "holm_reject": tests[V2_SECONDARY]["holm"]["reject"],
+                           "clean_rel_loss": rl[V2_SECONDARY], "criterion": None}}
+    c["success"] = bool(tests[V2_PRIMARY]["holm"]["reject"] and clean_ok)
+    k = "paired_mean_orig|R1-B-RAY"
+    ci = bs[k]["ci95"]
+    c["R1_minus_BRAY"] = {"point": round(pt[k], 5), "ci95_scenario": ci, "ci95_block10": b10[k]["ci95"],
+                          "statement_basis": "scenario CI", "statement": paired_statement(ci),
+                          "per_family": {f: round(pt[f"paired|R1-B-RAY|{f}"], 5) for f in conds}}
+    ap7 = {kk: Z.ap_from(v) for kk, v in F7.items() if kk[1] in ("undefended", "B-RAY", "B-RAY_oracle")}
+    ap5 = {kk: Z.ap_from(v) for kk, v in F5.items() if kk[1] in ("undefended", "B-RAY", "B-RAY_oracle")}
+    orc = {cnd: {"AP@0.7": round(ap7[(cnd, "B-RAY_oracle")], 4), "AP@0.5": round(ap5[(cnd, "B-RAY_oracle")], 4),
+                 "dAP@0.7": round(ap7[(cnd, "B-RAY_oracle")] - ap7[(cnd, "undefended")], 4),
+                 "dAP@0.5": round(ap5[(cnd, "B-RAY_oracle")] - ap5[(cnd, "undefended")], 4)} for cnd in conds}
+    c["B-RAY_oracle_reference"] = {
+        "note": ORACLE_NOTE, "by_condition": orc,
+        "mean_dAP0.7_orig": round(float(np.mean([orc[f]["dAP@0.7"] for f in fam])), 5),
+        "clean_rel_loss@0.7": round(1 - ap7[("clean", "B-RAY_oracle")] / ap7[("clean", "undefended")], 5)}
+    c["consistency"] = {"point_equals_analyze": all(round(pt[kk], 5) == out["point"][kk] for kk in want + [k]),
+                        "ci95_scenario_equals_bootstrap": all(tests[m]["ci95_scenario"] == bs[kk]["ci95"]
+                                                              for m, kk in zip(tests, want))}
+    return c
+
+
+def analyze_v2(files, conds, out, n_boot=N_BOOT):
+    """Second pass over the same caches for criteria_v2 (frame_methods unchanged)."""
+    F7, F5, keys = evaluate_v2(frames_from(files, [], []), conds)
+    return criteria_v2(out, F7, F5, keys, conds, n_boot=n_boot)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=("dev", "test"))
@@ -409,7 +571,8 @@ def main():
     out = {"mode": a.mode, "label": "DEVELOPMENT, block T, in-sample" if a.mode == "dev" else "FINAL TEST (one-time)"}
     out.update(analyze(files, conds, a.mode == "dev", a.n_boot))
     if a.mode == "test":
-        out["criteria"] = criteria(out)
+        out["criteria_v1_superseded"] = criteria(out)       # v1 (R1 primary); superseded by v2 (D-57/D-58)
+        out["criteria"] = analyze_v2(files, conds, out, a.n_boot)
     json.dump(out, open(out_p, "w"), indent=1, default=str)
     show = {k: v for k, v in out.items() if not k.startswith("bootstrap") and k not in ("by_agents", "units")}
     print(json.dumps(show, indent=1, default=str))

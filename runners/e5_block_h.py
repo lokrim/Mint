@@ -33,13 +33,41 @@ def d57(out):
             "primary": "R1" if keep_r1 else "B-RAY", "key_secondary": "R1 - B-RAY" if keep_r1 else "R1"}
 
 
+def v2_check(files, conds, out_dir, n_boot):
+    """D-59 verification (development): criteria_v2 on the block-H caches against the stored e5a_H.json;
+    B-RAY / R1 point estimates and 95% CIs must be reproduced exactly."""
+    h = json.load(open(os.path.join(ROOT, out_dir, "e5a_H.json")))
+    c = E.analyze_v2(files, conds, h, n_boot)
+    t = c["co_test_vs_no_defense"]
+    chk = {}
+    for m in ("B-RAY", "R1"):
+        k = f"mean_delta_orig|{m}"
+        chk[k] = {"point": [t[m]["point"], h["point"][k]], "ci95_scenario": [t[m]["ci95_scenario"],
+                  h["bootstrap_scenario"][k]["ci95"]], "ci95_block10": [t[m]["ci95_block10"], h["bootstrap_block10"][k]["ci95"]]}
+        k = f"rel_loss|{m}"
+        r = (c["primary"] if m == "B-RAY" else c["key_secondary"])["clean_rel_loss"]
+        chk[k] = {"point": [r["point"], h["point"][k]], "ci95_scenario": [r["ci95_scenario"], h["bootstrap_scenario"][k]["ci95"]]}
+    k = "paired_mean_orig|R1-B-RAY"
+    chk[k] = {"point": [c["R1_minus_BRAY"]["point"], h["point"][k]],
+              "ci95_scenario": [c["R1_minus_BRAY"]["ci95_scenario"], h["bootstrap_scenario"][k]["ci95"]]}
+    exact = all(a == b for v in chk.values() for a, b in v.values())
+    res = {"label": "DEVELOPMENT, block H (exposed, D-53); verification of criteria_v2, not a test",
+           "reproduces_e5a_H_exactly": exact, "comparison_[criteria_v2, e5a_H]": chk, "criteria_v2": c}
+    json.dump(res, open(os.path.join(ROOT, out_dir, "criteria_v2_H.json"), "w"), indent=1, default=str)
+    print(json.dumps({"reproduces_e5a_H_exactly": exact, "co_test": t, "success": c["success"],
+                      "R1_minus_BRAY": c["R1_minus_BRAY"], "oracle": c["B-RAY_oracle_reference"]}, indent=1, default=str))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="runs/20261024-E5/H")
     ap.add_argument("--n_boot", type=int, default=E.N_BOOT)
+    ap.add_argument("--v2_check", action="store_true", help="criteria_v2 on H vs the stored e5a_H.json")
     a = ap.parse_args()
     files = sorted(glob.glob(os.path.join(H_CACHE, "20*_[0-9][0-9].pkl.gz")))
     conds = ("clean",) + E.ORIG + ("spoof_blind",)
+    if a.v2_check:
+        return v2_check(files, conds, a.out, a.n_boot)
     out = {"mode": "block_H", "label": "DEVELOPMENT / quasi-held-out, block H (exposed, D-53); not a test",
            "code": "runners/e5_analyze.analyze at a9468e0, unchanged"}
     out.update(E.analyze(files, conds, True, a.n_boot))

@@ -202,3 +202,146 @@ def test_stream_refuses_without_approval(monkeypatch):
     with pytest.raises(SystemExit, match="budget"):
         S.main()
     assert not os.path.exists(os.path.join(ROOT, "runs/_never"))
+
+
+# ------------------------------------------------------------------ v2 criteria (D-57 / D-58 / D-59)
+def test_one_sided_p():
+    assert X.one_sided_p(np.full(1999, 0.01)) == pytest.approx(1 / 2000)
+    d = np.r_[np.full(10, -0.01), np.zeros(5), np.full(1985, 0.02)]
+    assert X.one_sided_p(d) == pytest.approx(16 / 2001)
+    assert X.one_sided_p(np.full(9, -1.0)) == pytest.approx(1.0)
+
+
+def test_holm():
+    h = X.holm({"B-RAY": 0.01, "R1": 0.04})
+    assert h["B-RAY"]["reject"] and h["R1"]["reject"]
+    assert h["B-RAY"]["threshold"] == 0.025 and h["R1"]["threshold"] == 0.05
+    h = X.holm({"B-RAY": 0.03, "R1": 0.04})          # smallest p > alpha/2: nothing rejected
+    assert not h["B-RAY"]["reject"] and not h["R1"]["reject"]
+    h = X.holm({"B-RAY": 0.02, "R1": 0.06})
+    assert h["B-RAY"]["reject"] and not h["R1"]["reject"]
+    h = X.holm({"B-RAY": 0.2, "R1": 0.001})          # order by p, not by name
+    assert h["R1"]["reject"] and h["R1"]["rank"] == 1 and not h["B-RAY"]["reject"]
+    h = X.holm({"B-RAY": 0.025, "R1": 0.025})        # boundary: p <= threshold rejects
+    assert h["B-RAY"]["reject"] and h["R1"]["reject"]
+
+
+def test_paired_statement():
+    assert "not established" in X.paired_statement([-0.01, 0.01])
+    assert "not established" in X.paired_statement([0.0, 0.01])
+    assert X.paired_statement([-0.02, -0.001]) == "the counterfactual performs worse than the box-level filter"
+    assert X.paired_statement([0.001, 0.02]) == "the counterfactual improves over the box-level filter"
+
+
+def _keys():
+    return [("a", j) for j in range(25)] + [("b", j) for j in range(15)] + [("c", j) for j in range(12)]
+
+
+def test_bootstrap_draws_equal_bootstrap():
+    conds = ("clean",) + X.ORIG
+    keys = _keys()
+    F = _F(conds, X.METHODS, n_frames=len(keys))
+    want = ["mean_delta_orig|B-RAY", "mean_delta_orig|R1", "rel_loss|R1"]
+    for kind in ("scenario", "block10"):
+        bs = X.bootstrap(F, keys, conds, kind, n_boot=40)
+        d, nb = X.bootstrap_draws(F, keys, conds, kind, want, n_boot=40)
+        assert nb == bs["_blocks"]
+        for k in want:
+            assert X.ci95(d[k]) == bs[k]["ci95"]
+
+
+def _synthetic_out(F, keys, conds, n_boot):
+    idx = list(range(len(keys)))
+    return {"frames": len(keys),
+            "point": {k: None if v is None else round(v, 5) for k, v in X.metrics(F, idx, conds).items()},
+            "bootstrap_scenario": X.bootstrap(F, keys, conds, "scenario", n_boot=n_boot),
+            "bootstrap_block10": X.bootstrap(F, keys, conds, "block10", n_boot=n_boot)}
+
+
+def test_criteria_v2_synthetic():
+    conds = ("clean",) + X.ORIG
+    keys = _keys()
+    n = len(keys)
+    F = _F(conds, X.METHODS + ("B-RAY_oracle",), n_frames=n)
+    for c in conds:                       # B-RAY and R1 perfect under attack, clean equal to undefended
+        for m in ("B-RAY", "R1"):
+            F[(c, m)] = list(F[(c, "undefended")]) if c == "clean" else [(np.ones(5, int), np.zeros(5, int), 5)] * n
+    out = _synthetic_out(F, keys, conds, 100)
+    c = X.criteria_v2(out, F, F, keys, conds, n_boot=100)
+    t = c["co_test_vs_no_defense"]
+    assert set(t) == {"B-RAY", "R1"} and c["primary"]["method"] == "B-RAY" and c["key_secondary"]["method"] == "R1"
+    assert t["B-RAY"]["k_le_0"] == 0 and t["B-RAY"]["p_one_sided"] == pytest.approx(1 / 101)
+    assert t["B-RAY"]["holm"]["reject"] and t["R1"]["holm"]["reject"]
+    assert t["B-RAY"]["lower_one_sided_97.5"] <= t["B-RAY"]["lower_one_sided_95"]
+    assert c["primary"]["clean_rel_loss"]["point"] == 0.0 and c["success"]
+    assert c["key_secondary"]["criterion"] is None
+    assert c["consistency"]["point_equals_analyze"] and c["consistency"]["ci95_scenario_equals_bootstrap"]
+    assert c["R1_minus_BRAY"]["point"] == 0.0 and "not established" in c["R1_minus_BRAY"]["statement"]
+    assert "NOT upper bounds" in c["B-RAY_oracle_reference"]["note"]
+    # B-RAY no better than no defense -> Holm fails for B-RAY -> no success
+    G = dict(F)
+    for c_ in conds:
+        G[(c_, "B-RAY")] = list(F[(c_, "undefended")])
+    out = _synthetic_out(G, keys, conds, 30)
+    c2 = X.criteria_v2(out, G, G, keys, conds, n_boot=30)
+    assert not c2["co_test_vs_no_defense"]["B-RAY"]["holm"]["reject"] and not c2["success"]
+    assert c2["R1_minus_BRAY"]["statement"] == "the counterfactual improves over the box-level filter"
+
+
+def test_bray_oracle():
+    yp = np.stack([_box(10, 0), _box(20, 0), _box(30, 0), _box(40, 0)])
+    sp = np.array([0.9, 0.8, 0.7, 0.6])
+    gt = np.stack([_box(10, 0), _box(40, 0)])
+    verd = ["keep", "drop", "keep_unknown", "keep_self"]
+    bb, ss = X.bray_oracle(yp, sp, verd, gt)
+    assert list(ss) == [0.9, 0.7, 0.6]                # KNOWN and unmatched (box 2) dropped only
+    bb, ss = X.bray_oracle(yp, sp, ["keep"] * 4, np.zeros((0, 8, 3)))
+    assert len(bb) == 0
+    bb, ss = X.bray_oracle(np.zeros((0, 8, 3)), np.zeros(0), [], gt)
+    assert len(bb) == 0
+
+
+def test_time_frame_e5_shared_baseline(monkeypatch):
+    """B-RAY is timed in the same repetitions as dense / T(0.05) and shares their baseline."""
+    import torch
+    clock = {"t": 0.0}
+    calls = []
+
+    def fake_encode(model, b):
+        calls.append("enc")
+        return 0.1
+
+    def fake_plain(model, pp, b, feats):
+        calls.append("plain")
+        return 0.05
+
+    def fake_mint(model, pp, b, pts, pcr, feats, mode, f):
+        calls.append(mode)
+        return {"timing_s": {"counterfactual": 0.02, "evidence": 0.01, "compose": 0.0},
+                "trigger": None if f is None else np.ones(3, bool)}
+
+    def fake_bray(yp, sp, pts):
+        calls.append("bray")
+        return 0.003
+
+    for n in (2, 1):
+        calls.clear()
+        monkeypatch.setattr(S.E4, "agent_features", lambda m, e, n=n: ([torch.zeros(n, 1)], None))
+        monkeypatch.setattr(S.E4, "_recv_encode", fake_encode)
+        monkeypatch.setattr(S.E4, "_plain_only", fake_plain)
+        monkeypatch.setattr(S.E4, "_mint", fake_mint)
+        monkeypatch.setattr(S, "_plain_out", lambda *a: (np.zeros((4, 8, 3)), np.zeros(4)))
+        monkeypatch.setattr(S, "_time_bray_once", fake_bray)
+        tf = S.time_frame_e5(None, None, {"ego": None}, None, None, reps=3)
+        assert tf["shared_baseline"] and tf["B-RAY"]["baseline_s"] == pytest.approx(0.15)
+        assert tf["B-RAY"]["overhead"] == pytest.approx(0.003 / 0.15) and tf["B-RAY"]["boxes"] == 4
+        assert calls.count("bray") == 3
+        if n == 2:
+            for m in ("dense", "trigger_0.05"):
+                assert tf[m]["baseline_s"] == tf["B-RAY"]["baseline_s"]
+                assert tf[m]["overhead"] == pytest.approx(0.03 / 0.15)
+            rep = calls[5:]                             # after 5 isolated encodes
+            assert rep[:8] == ["enc", "plain", "enc", "sequential", "enc", "trigger", "enc", "bray"]
+        else:
+            assert "dense" not in tf and "not timed" in tf["mint"]
+            assert calls[5:9] == ["enc", "plain", "enc", "bray"]

@@ -48,3 +48,6 @@ runs/*/cache/
 
 # E4 dev caches (large)
 runs/*/*/cache/
+
+# nested caches (E5 dry run)
+runs/**/cache/

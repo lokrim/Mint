@@ -6,9 +6,10 @@ Per frame and condition (clean, the 4 original families, spoof_blind): exactly t
 (runners/e4_stream.frame_record: GT, receiver points, candidates of every excluded-sender subset,
 per-sender effects with receiver ray counts, attack ledger; compose() check every 10th frame) plus,
 for B-RAY (D-56), `yplus_rays`: the receiver's ray counts (R1's standard count, float64 scan) of every
-final Y+ box. Then, while the raw scenario is on disk, the D-42 timing of dense R1 and T(0.05)
-(e4_stream.time_frame, unchanged) and of B-RAY (same protocol: receiver encode + plain baseline, then
-B-RAY on the plain output) on every frame at its real n.
+final Y+ box. Then, while the raw scenario is on disk, the D-42 timing (time_frame_e5) of dense R1,
+T(0.05) and B-RAY on every frame at its real n: e4_stream.time_frame's sequence with B-RAY added to
+each repetition, all modes sharing that repetition's baseline (n = 1: B-RAY only). Timing only; no
+method output depends on it.
 
 Safety:
   * allowlist = exactly the 15 D-55 scenarios; 2021_08_23_12_58_19 (development) and anything else
@@ -90,25 +91,64 @@ def frame_record_e5(model, ds, batch, scen, i, pc_range, voxel_size):
     return rec, checks
 
 
-def time_bray(model, pp, b, pts, reps=3):
-    """D-42-style B-RAY timing: per repetition, receiver encode + plain baseline (timed), then B-RAY on
-    the plain output; overhead = B-RAY time / baseline of the same repetition; per-frame medians."""
+def _plain_out(model, pp, b, feats):
+    n = feats[0].shape[0]
+    with torch.no_grad():
+        return PL.OpenCOODPost.finalize(pp, PL._cands(pp, b["ego"], *PL._heads(model, feats, n)))
+
+
+def _time_bray_once(yp, sp, pts):
+    t0 = time.perf_counter()
+    BL.b_ray(yp, sp, pts=pts)
+    return time.perf_counter() - t0
+
+
+def time_frame_e5(model, pp, b, pts, pcr, reps=3, warm=False):
+    """D-42 timing of dense R1, T(0.05) and B-RAY with ONE shared baseline per repetition.
+
+    Same sequence as e4_stream.time_frame (isolated receiver encode, 5 reps, median; then per repetition:
+    baseline-only = receiver encode + plain, timed; then for each MINT mode receiver encode + MINT), with
+    B-RAY appended to the same repetition: receiver encode, then B-RAY on the plain output Y+ (the plain
+    output is the baseline's own output, so B-RAY's extra cost is the ray count + filter only). Overhead of
+    every mode = its extra time / that repetition's baseline. At n = 1 MINT is not run (no senders; the
+    T(0.05) path cannot run) and only B-RAY is timed against the same baseline. Per-frame medians."""
     with torch.no_grad():
         feats, _ = E4.agent_features(model, b["ego"])
     n = feats[0].shape[0]
-    R = []
+    modes = E4.TIMING_MODES if n >= 2 else ()
+    yp, sp = _plain_out(model, pp, b, feats)            # B-RAY input (deterministic; not timed)
+    if warm:
+        E4._recv_encode(model, b)
+        E4._plain_only(model, pp, b, feats)
+        for _, mode, f in modes:
+            E4._mint(model, pp, b, pts, pcr, feats, mode, f)
+        _time_bray_once(yp, sp, pts)
+    iso = float(np.median([E4._recv_encode(model, b) for _ in range(5)]))
+    reps_ = {m[0]: [] for m in modes}
+    reps_["B-RAY"] = []
     for _ in range(reps):
         tr0 = E4._recv_encode(model, b)
-        with torch.no_grad():
-            t0 = time.perf_counter()
-            yp, sp = PL.OpenCOODPost.finalize(pp, PL._cands(pp, b["ego"], *PL._heads(model, feats, n)))
-            tp0 = time.perf_counter() - t0
-        t1 = time.perf_counter()
-        BL.b_ray(yp, sp, pts=pts)
-        tb = time.perf_counter() - t1
-        R.append({"baseline_s": tr0 + tp0, "encode_baseline_s": tr0, "plain_baseline_s": tp0, "mint_extra_s": tb,
-                  "overhead": tb / (tr0 + tp0), "tiles": None, "counterfactual_s": 0.0, "boxes": len(yp)})
-    return {k: (None if R[0][k] is None else float(np.median([x[k] for x in R]))) for k in R[0]}
+        tp0 = E4._plain_only(model, pp, b, feats)
+        base = {"baseline_s": tr0 + tp0, "encode_baseline_s": tr0, "plain_baseline_s": tp0}
+        for name, mode, f in modes:
+            E4._recv_encode(model, b)
+            o = E4._mint(model, pp, b, pts, pcr, feats, mode, f)
+            t = o["timing_s"]
+            ex = t["counterfactual"] + t["evidence"] + t["compose"]
+            reps_[name].append(dict(base, mint_extra_s=ex, overhead=ex / (tr0 + tp0),
+                                    tiles=None if o["trigger"] is None else int(o["trigger"].sum()),
+                                    counterfactual_s=t["counterfactual"], evidence_s=t["evidence"],
+                                    compose_s=t["compose"]))
+        E4._recv_encode(model, b)
+        tb = _time_bray_once(yp, sp, pts)
+        reps_["B-RAY"].append(dict(base, mint_extra_s=tb, overhead=tb / (tr0 + tp0), tiles=None,
+                                   counterfactual_s=0.0, boxes=len(yp)))
+    out = {"n_agents": n, "encode_isolated_s": iso, "shared_baseline": True}
+    if n < 2:
+        out["mint"] = "not timed: n = 1, no counterfactual (MINT overhead 0 by construction)"
+    for name, R in reps_.items():
+        out[name] = {k: (None if R[0][k] is None else float(np.median([x[k] for x in R]))) for k in R[0]}
+    return out
 
 
 def run_scenario(scen, data_root, model, hyp, out_tmp, reps=3):
@@ -134,12 +174,7 @@ def run_scenario(scen, data_root, model, hyp, out_tmp, reps=3):
         np.random.seed(frame_seed(scen, i, 0))
         batch = ds.collate_batch_test([ds[i]])
         pts = np.asarray(E.cav_contents(ds, i)[0][1]["lidar_np"][:, :3], np.float64)
-        if int(batch["ego"]["record_len"][0]) >= 2:
-            tf = E4.time_frame(model, ds.post_processor, batch, pts, pcr, reps=reps, warm=(i == 0))
-        else:       # n = 1: no sender, MINT does nothing (the T(0.05) path cannot run without senders)
-            tf = {"n_agents": 1, "encode_isolated_s": float(np.median([E4._recv_encode(model, batch) for _ in range(5)])),
-                  "mint": "not timed: n = 1, no counterfactual (MINT overhead 0 by construction)"}
-        tf["B-RAY"] = time_bray(model, ds.post_processor, batch, pts, reps=reps)
+        tf = time_frame_e5(model, ds.post_processor, batch, pts, pcr, reps=reps, warm=(i == 0))
         tf["frame"] = i
         timing.append(tf)
         if i % 20 == 0:
