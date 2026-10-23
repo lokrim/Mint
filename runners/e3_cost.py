@@ -162,6 +162,83 @@ def part_diag(model, ds, pp, pcr, args):
             "threads": torch.get_num_threads(), "summary": summ, "raw": res}
 
 
+ULP_MAX = 32
+SCORE_TOL, CORNER_TOL = 1e-5, 1e-4
+
+
+@torch.no_grad()
+def tile_ulps(dense, tiles_out, sel, h):
+    """Per-element |tile - dense| in float32 ULPs of the dense value (non-padded cells only)."""
+    d = PL._to_tiles(dense[0], TILE_PX)[sel[:, 0], sel[:, 1]]
+    rows = sel[:, 0, None] * TILE_PX + torch.arange(TILE_PX)
+    valid = (rows < h)[:, None, :, None].expand_as(d)
+    dv = d[valid].numpy().astype(np.float32)
+    tv = tiles_out[valid].numpy().astype(np.float32)
+    diff = np.abs(dv.astype(np.float64) - tv.astype(np.float64))
+    ulp = np.spacing(np.abs(dv)).astype(np.float64)
+    u = diff / ulp
+    j = int(u.argmax()) if u.size else 0
+    return {"max_ulps": float(u.max()) if u.size else 0.0, "n_over": int((u > ULP_MAX).sum()), "n": int(u.size),
+            "worst": {"value": float(dv[j]), "abs_diff": float(diff[j]), "ulps": float(u[j])} if u.size else None,
+            "over_examples": [{"value": float(dv[k]), "abs_diff": float(diff[k]), "ulps": float(u[k])}
+                              for k in np.argsort(-u)[:5] if u[k] > ULP_MAX]}
+
+
+@torch.no_grad()
+def part_exact_ulp(model, ds, pp, pcr, args):
+    """Step 1 re-run under the corrected criterion (prereg correction_2026-10-23, D-46)."""
+    res = []
+    for fi in range(min(args.frames, len(ds))):
+        b, pts, feats = C.frame_inputs(model, ds, fi)
+        ego, n = b["ego"], 2
+        base = PL._heads(model, feats, n)
+        dense = PL._heads(model, feats, n, PL._exclude_masks(feats, n, [1]))
+        dc = PL._cands(pp, ego, *dense)
+        h = base[0].shape[2]
+        row = {"frame": fi}
+        masks = {f"T({f})": PL.trigger_mask(base[0], f) for f in FS}
+        masks["all"] = torch.ones_like(masks["T(0.05)"])
+        for name, m in masks.items():
+            sel = torch.nonzero(m)
+            th = PL.trigger_heads(model, feats, n, [1], sel)[1]
+            tc = PL._tile_cands(pp, ego, th, sel, base)
+            rc = restrict(dc, m)
+            same = bool(np.array_equal(tc.idx, rc.idx))
+            sd = float(np.abs(tc.scores - rc.scores).max()) if same and len(tc.idx) else (0.0 if same else None)
+            cd = float(np.abs(tc.corners - rc.corners).max()) if same and len(tc.idx) else (0.0 if same else None)
+            up, ur = tile_ulps(dense[0], th[0], sel, h), tile_ulps(dense[1], th[1], sel, h)
+            row[name] = {"tiles": int(len(sel)), "n_cands": int(len(tc.idx)), "a_cand_idx_equal": same,
+                         "b_score_maxabs": sd, "b_corner_maxabs": cd,
+                         "b_ok": bool(same and sd <= SCORE_TOL and cd <= CORNER_TOL),
+                         "c_psm": up, "c_rm": ur, "c_max_ulps": max(up["max_ulps"], ur["max_ulps"]),
+                         "c_ok": bool(up["n_over"] == 0 and ur["n_over"] == 0)}
+            row[name]["ok"] = bool(same and row[name]["b_ok"] and row[name]["c_ok"])
+        res.append(row)
+        print(fi, {k: (v["tiles"], v["a_cand_idx_equal"], v["b_ok"], round(v["c_max_ulps"], 1),
+                       v["c_psm"]["n_over"] + v["c_rm"]["n_over"]) for k, v in row.items() if k != "frame"}, flush=True)
+    summ = {}
+    for name in ("T(0.05)", "T(0.1)", "all"):
+        R = [r[name] for r in res]
+        summ[name] = {"a_frames": f"{sum(x['a_cand_idx_equal'] for x in R)}/{len(R)}",
+                      "b_frames": f"{sum(x['b_ok'] for x in R)}/{len(R)}",
+                      "c_frames": f"{sum(x['c_ok'] for x in R)}/{len(R)}",
+                      "all_frames": f"{sum(x['ok'] for x in R)}/{len(R)}",
+                      "max_score_diff": max((x["b_score_maxabs"] or 0.0) for x in R),
+                      "max_corner_diff": max((x["b_corner_maxabs"] or 0.0) for x in R),
+                      "max_ulps_psm": max(x["c_psm"]["max_ulps"] for x in R),
+                      "max_ulps_rm": max(x["c_rm"]["max_ulps"] for x in R),
+                      "elements_over_32ulp": sum(x["c_psm"]["n_over"] + x["c_rm"]["n_over"] for x in R),
+                      "elements_checked": sum(x["c_psm"]["n"] + x["c_rm"]["n"] for x in R)}
+    ok = all(r[k]["ok"] for r in res for k in ("T(0.05)", "T(0.1)")) and len(res) == 24
+    return {"note": "E3 step 1 re-run under the corrected criterion (preregistration correction_2026-10-23, D-46): "
+                    "(a) candidate anchor indices identical to dense restricted to T(f); (b) candidate score diff <= 1e-5 "
+                    "and corner diff <= 1e-4 m; (c) every non-padded psm/rm element within 32 float32 ULP of the dense "
+                    "value (ULP = numpy.spacing(|dense|)). 24-frame dev slice, n = 2; 'all' = all 572 tiles, reference "
+                    "only; development / in-sample",
+            "threads": torch.get_num_threads(), "ulp_max": ULP_MAX, "score_tol": SCORE_TOL, "corner_tol": CORNER_TOL,
+            "criterion_24of24": bool(ok), "summary": summ, "raw": res}
+
+
 def run(model, pp, b, pts, pcr, feats, mode, prof=PL.NOPROF, f=None):
     return PL.mint_frame(model, pp, b, pts, pcr, v0.Params(), feats=feats, rule=r1, cf_mode=mode, prof=prof, trigger_f=f)
 
@@ -239,15 +316,15 @@ def part_overhead(model, ds, pp, pcr, args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("part", choices=("exact", "diag", "overhead"))
+    ap.add_argument("part", choices=("exact", "exact_ulp", "diag", "overhead"))
     ap.add_argument("--frames", type=int, default=24)
     ap.add_argument("--reps", type=int, default=3)
     ap.add_argument("--threads", type=int, default=8)
     args = ap.parse_args()
     model, ds, pp, pcr = C.setup(args.threads)
-    out = {"exact": part_exact, "diag": part_diag, "overhead": part_overhead}[args.part](model, ds, pp, pcr, args)
+    out = {"exact": part_exact, "exact_ulp": part_exact_ulp, "diag": part_diag, "overhead": part_overhead}[args.part](model, ds, pp, pcr, args)
     os.makedirs(OUT, exist_ok=True)
-    name = os.path.join(OUT, {"exact": "step1_tile_exactness.json", "diag": "step1_diagnostic.json", "overhead": "step4_overhead.json"}[args.part])
+    name = os.path.join(OUT, {"exact": "step1_tile_exactness.json", "exact_ulp": "step1_revised.json", "diag": "step1_diagnostic.json", "overhead": "step4_overhead.json"}[args.part])
     json.dump(out, open(name, "w"), indent=1, default=str)
     print(json.dumps({k: v for k, v in out.items() if k not in ("raw", "encode_isolated_per_frame_s")}, indent=1, default=str))
 

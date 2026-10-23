@@ -40,3 +40,29 @@ Failing frames: f = 0.05 fails on frames 5 and 15; f = 0.10 fails on frame 5.
 3. **Tile fractions (incidental, from step 1, clean, n = 2).** The trigger keeps 14% (f = 0.10) to 21% (f = 0.05) of tiles. This is **not** an overhead measurement: per-tile decode cost and fixed costs (evidence, compose, post-processing ≈ 10% of the counterfactual stage in E2) were not measured.
 
 Proposed log entries: [`decision_log_proposed_appendix.md`](decision_log_proposed_appendix.md) (D-45 and an open item).
+
+## Step 1 under the corrected criterion (D-46): fails → stop; steps 2–4 not run
+
+Development / in-sample, 24-frame dev slice of block T (n = 2). **Correction:** you set it on 2026-10-23, after the original step-1 failure above and before any step 2–4 result existed. It is recorded in `preregistration.json` → `correction_2026-10-23` (commit `201b362`) and as proposed D-46. The JSON from the first step-1 run had no per-element ULP counts, so step 1 alone was re-run: `python runners/e3_cost.py exact_ulp`, written to [`step1_revised.json`](../runs/20261023-E3/step1_revised.json). Nothing was downloaded: the block-T re-stream was not started, 0 bytes. No calibration or test data was touched.
+
+| Tile set | (a) candidate indices = dense restricted | (b) score ≤ 1e-5 and corner ≤ 1e-4 m | (c) all psm/rm ≤ 32 ULP | All three |
+|---|---|---|---|---|
+| T(0.05) | 24/24 | 24/24 (max 9.2e-7 / 7.6e-6 m) | **0/24** | **0/24** |
+| T(0.10) | 24/24 | 24/24 (max 9.2e-7 / 7.6e-6 m) | **0/24** | **0/24** |
+| All 572 tiles (reference) | 24/24 | 24/24 | 0/24 | 0/24 |
+
+**Part (c) detail.**
+
+| Tile set | Elements over 32 ULP | Max ULP, psm | Max ULP, rm |
+|---|---|---|---|
+| T(0.05) | 135,505 of 2,966,016 (4.6%) | 9,255 | 1,367,408 |
+| T(0.10) | 86,671 of 1,984,000 (4.4%) | 9,255 | 1,367,408 |
+
+- **Where the failures are.** About 5% of rm elements and 0.04–0.07% of psm elements exceed 32 ULP.
+- **Why.** The failing elements are values near zero. Example: a dense rm value of 2.4e-7 differs by 1.9e-8, which is 1.37 million ULP of that value. The same accumulation-order rounding gives an absolute error of a fixed size, about 1e-8 to 4e-6 here. Near zero that error is a very large number of ULPs of the result.
+- **Absolute size is unchanged.** Among the worst ULP elements, the largest absolute diff is 3.9e-6. Fusion is still bitwise equal (diagnostic above).
+- **The dense-equivalent path fails too.** The all-572-tile path fails (c) on 0/24 frames, so a per-element ULP bound relative to the dense value does not separate "tile path" from "dense recomputation". It fails for the same reason the 1e-5 absolute bound did.
+
+**Outcome:** the corrected criterion fails on 24/24 frames. Per your instruction, steps 2–4 were **not run**: no re-stream, no effect recall, no NMS/effect/R1 disagreement counts, no AP, no overhead. No PASS, PARTIAL or FAIL band applies. Parts (a) and (b), the candidate-level checks, pass 24/24 at both f.
+
+**Possible next step (your decision; it would be a second post-hoc correction):** a bound that does not use the dense value's own ULP near zero. Examples: ULPs of max(|dense|, 1) or of the tensor's scale, or an absolute bound per head set from the all-tile reference path. Or (a)+(b) alone. Nothing here is proposed as a rule; see the open item in the appendix.
