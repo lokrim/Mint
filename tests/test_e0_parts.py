@@ -154,3 +154,46 @@ def test_inference_code_cannot_import_gt_labels():
                     mod = node.module if isinstance(node, ast.ImportFrom) else ",".join(a.name for a in node.names)
                     assert "mint.eval" not in (mod or ""), f"{f} imports {mod}"
                     assert "attacks" not in (mod or ""), f"{f} imports {mod}"
+
+
+from mint.reliability.v0 import Params, assess, gating_choice  # noqa: E402
+
+
+def rr(sup, trav, self_box=False):
+    c = {"SUP": sup, "TRAV": trav, "OCC": 0, "candidates": sup + trav}
+    return {"std": c, "gnd": dict(c, TRAV_GROUND=0), "self_box": self_box, "range_m": 10.0}
+
+
+def eff(sender, typ, tp, tm, rp, rm):
+    return {"sender": sender, "type": typ, "tile_plus": tp, "tile_minus": tm, "rays_plus": rp, "rays_minus": rm}
+
+
+def test_v0_gates_unsupported_add_and_keeps_supported_add():
+    rel = assess([eff(1, "ADD", (2, 3), None, rr(0, 10), None), eff(2, "ADD", (4, 4), None, rr(9, 1), None)])
+    assert rel[(1, (2, 3))].gate and not rel[(2, (4, 4))].gate
+    assert not rel[(1, (2, 3))].is_probability
+    assert gating_choice(rel) == {(2, 3): frozenset([1])}
+
+
+def test_v0_remove_effect_of_a_real_object_is_harmful_to_keep():
+    rel = assess([eff(1, "REMOVE", None, (1, 1), None, rr(10, 0))])
+    assert rel[(1, (1, 1))].gate                                       # inclusion erased a supported object
+
+
+def test_v0_unknown_and_self_box_keep():
+    rel = assess([eff(1, "ADD", (0, 0), None, rr(1, 1), None), eff(1, "ADD", (5, 5), None, rr(0, 0, True), None)])
+    assert rel[(1, (0, 0))].status == "UNKNOWN_NO_EVIDENCE" and not rel[(1, (0, 0))].gate
+    assert rel[(1, (5, 5))].status == "NOT_APPLICABLE_SELF" and not rel[(1, (5, 5))].gate
+    assert gating_choice(rel) == {}
+
+
+def test_v0_one_unknown_effect_makes_the_unit_unknown():
+    rel = assess([eff(1, "ADD", (0, 0), None, rr(0, 10), None), eff(1, "REMOVE", None, (0, 0), None, rr(1, 0))])
+    assert rel[(1, (0, 0))].status == "UNKNOWN_NO_EVIDENCE" and not rel[(1, (0, 0))].gate
+
+
+def test_v0_shift_counted_in_both_tiles_and_theta():
+    e = eff(1, "SHIFT", (0, 0), (0, 1), rr(1, 9), rr(9, 1))            # moved away from the supported spot
+    rel = assess([e])
+    assert set(rel) == {(1, (0, 0)), (1, (0, 1))} and all(r.gate for r in rel.values())
+    assert not any(r.gate for r in assess([e], Params(theta=0.9)).values())

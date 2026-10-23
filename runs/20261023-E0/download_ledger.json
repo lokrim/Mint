@@ -1,0 +1,28 @@
+{
+ "downloads": [
+  {
+   "scenario": "2021_08_22_13_37_16",
+   "started": "2026-10-23T14:35:46",
+   "bytes_downloaded": 837266907,
+   "status": "complete",
+   "bytes_written": 822464239,
+   "seconds": 76
+  },
+  {
+   "scenario": "2021_08_21_17_30_41",
+   "started": "2026-10-23T14:48:23",
+   "bytes_downloaded": 1592926667,
+   "status": "complete",
+   "bytes_written": 1486681129,
+   "seconds": 189
+  },
+  {
+   "scenario": "2021_08_20_21_48_35",
+   "started": "2026-10-23T15:06:20",
+   "bytes_downloaded": 1829661872,
+   "status": "complete",
+   "bytes_written": 1739658781,
+   "seconds": 172
+  }
+ ]
+}

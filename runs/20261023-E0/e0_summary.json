@@ -1,0 +1,646 @@
+{
+ "scenarios": {
+  "2021_08_20_21_48_35": {
+   "frames": 112,
+   "compose_checks": 12,
+   "compose_all_identical": true
+  },
+  "2021_08_21_17_30_41": {
+   "frames": 157,
+   "compose_checks": 16,
+   "compose_all_identical": true
+  },
+  "2021_08_22_13_37_16": {
+   "frames": 135,
+   "compose_checks": 14,
+   "compose_all_identical": true
+  }
+ },
+ "files": [
+  "2021_08_20_21_48_35.pkl.gz",
+  "2021_08_21_17_30_41.pkl.gz",
+  "2021_08_22_13_37_16.pkl.gz"
+ ],
+ "D24_self_box": {
+  "frames": 404,
+  "frames_exactly_one_self_gt": 404,
+  "frames_zero": 0,
+  "frames_multiple": 0,
+  "self_centre_dist_max": 0.51,
+  "frames_proxy_disagrees": 0
+ },
+ "range_image": {
+  "samples": 42,
+  "rings_values": [
+   64
+  ]
+ },
+ "ground_classifier": {
+  "ground_frac_median": 0.531,
+  "gt_box_upper_points_flagged_ground_mean": 0.0477,
+  "n_boxes": 620
+ },
+ "ray_gt_objects": {
+  "n": 7317,
+  "frac_nvis_ge3": 0.85,
+  "std": {
+   "0-20m": {
+    "n": 1558,
+    "median": 0.911,
+    "p90": 0.96,
+    "p10": 0.871
+   },
+   "20-40m": {
+    "n": 2625,
+    "median": 0.924,
+    "p90": 0.978,
+    "p10": 0.807
+   },
+   "40-70m": {
+    "n": 1517,
+    "median": 0.963,
+    "p90": 1.0,
+    "p10": 0.818
+   },
+   "70-300m": {
+    "n": 519,
+    "median": 1.0,
+    "p90": 1.0,
+    "p10": 0.83
+   }
+  },
+  "gnd": {
+   "0-20m": {
+    "n": 1558,
+    "median": 0.911,
+    "p90": 0.956,
+    "p10": 0.871
+   },
+   "20-40m": {
+    "n": 2625,
+    "median": 0.923,
+    "p90": 0.976,
+    "p10": 0.783
+   },
+   "40-70m": {
+    "n": 1517,
+    "median": 0.957,
+    "p90": 1.0,
+    "p10": 0.794
+   },
+   "70-300m": {
+    "n": 519,
+    "median": 1.0,
+    "p90": 1.0,
+    "p10": 0.75
+   }
+  }
+ },
+ "ray_null_boxes": {
+  "n": 3232,
+  "frac_nvis_ge3": 0.607,
+  "z_source": {
+   "receiver_ground": 1809,
+   "gt_median_bottom": 1423
+  },
+  "std": {
+   "0-20m": {
+    "n": 386,
+    "median": 0.072,
+    "p90": 0.631,
+    "p10": 0.0
+   },
+   "20-40m": {
+    "n": 998,
+    "median": 0.0,
+    "p90": 0.591,
+    "p10": 0.0
+   },
+   "40-70m": {
+    "n": 579,
+    "median": 0.0,
+    "p90": 0.365,
+    "p10": 0.0
+   },
+   "70-300m": {
+    "n": 0,
+    "median": null,
+    "p90": null,
+    "p10": null
+   }
+  },
+  "gnd": {
+   "0-20m": {
+    "n": 386,
+    "median": 0.0,
+    "p90": 0.631,
+    "p10": 0.0
+   },
+   "20-40m": {
+    "n": 998,
+    "median": 0.0,
+    "p90": 0.58,
+    "p10": 0.0
+   },
+   "40-70m": {
+    "n": 579,
+    "median": 0.0,
+    "p90": 0.333,
+    "p10": 0.0
+   },
+   "70-300m": {
+    "n": 0,
+    "median": null,
+    "p90": null,
+    "p10": null
+   }
+  }
+ },
+ "auroc_gt_vs_null": {
+  "std": 0.95,
+  "std_0-20m": 0.947,
+  "std_20-40m": 0.937,
+  "std_40-70m": 0.966,
+  "std_70-300m": null,
+  "gnd": 0.948,
+  "gnd_0-20m": 0.951,
+  "gnd_20-40m": 0.935,
+  "gnd_40-70m": 0.961,
+  "gnd_70-300m": null
+ },
+ "ground_estimate_required": {
+  "decision": false,
+  "null_std_median_by_band": [
+   0.072,
+   0.0,
+   0.0
+  ],
+  "auroc_gain": -0.002
+ },
+ "clean_effects": {
+  "effects": 1732,
+  "by_type": {
+   "SHIFT": {
+    "n": 781,
+    "self": 0,
+    "known": 550
+   },
+   "ADD": {
+    "n": 723,
+    "self": 159,
+    "known": 168
+   },
+   "REMOVE": {
+    "n": 228,
+    "self": 0,
+    "known": 155
+   }
+  },
+  "units": 16026,
+  "unit_labels": {
+   "HARMFUL": 381,
+   "USEFUL": 1084,
+   "NEUTRAL": 14561
+  },
+  "units_known_frac": 0.056,
+  "harmful_units_known": 131,
+  "useful_units_known": 337,
+  "units_with_D_but_no_effect": 13032
+ },
+ "clean_support_separation_dev": {
+  "ADD_std": {
+   "n_harmful": 13,
+   "n_useful": 155,
+   "auroc": 0.819,
+   "median_harmful": 0.125,
+   "median_useful": 0.889
+  },
+  "ADD_gnd": {
+   "n_harmful": 13,
+   "n_useful": 155,
+   "auroc": 0.783,
+   "median_harmful": 0.067,
+   "median_useful": 0.867
+  },
+  "REMOVE_std": {
+   "n_harmful": 69,
+   "n_useful": 86,
+   "auroc": 0.799,
+   "median_harmful": 1.0,
+   "median_useful": 0.5
+  },
+  "REMOVE_gnd": {
+   "n_harmful": 69,
+   "n_useful": 86,
+   "auroc": 0.794,
+   "median_harmful": 1.0,
+   "median_useful": 0.359
+  }
+ },
+ "attack_realization": {
+  "spoof_feat": {
+   "frames_with_sender": 404,
+   "applied": 401,
+   "realized": 261,
+   "realized_at_receiver_visible_dst(>=3 rays)": 103
+  },
+  "remove_feat": {
+   "frames_with_sender": 404,
+   "applied": 400,
+   "realized": 42,
+   "target_detected_clean": 395
+  },
+  "shift_feat": {
+   "frames_with_sender": 404,
+   "applied": 402,
+   "realized": 66,
+   "target_detected_clean": 399
+  },
+  "spoof_pts": {
+   "frames_with_sender": 404,
+   "applied": 404,
+   "realized": 166,
+   "realized_at_receiver_visible_dst(>=3 rays)": 70
+  }
+ },
+ "E0": {
+  "clean": {
+   "undefended": {
+    "0.3": 0.9542,
+    "0.5": 0.9437,
+    "0.7": 0.8737
+   },
+   "oracle_all": {
+    "0.3": 0.9627,
+    "0.5": 0.9573,
+    "0.7": 0.8799
+   },
+   "vis_oracle_all": {
+    "0.3": 0.9601,
+    "0.5": 0.9509,
+    "0.7": 0.8766
+   }
+  },
+  "spoof_feat": {
+   "AP": {
+    "undefended": {
+     "0.3": 0.9139,
+     "0.5": 0.902,
+     "0.7": 0.8323
+    },
+    "oracle_all": {
+     "0.3": 0.9553,
+     "0.5": 0.9496,
+     "0.7": 0.8724
+    },
+    "oracle_attacker": {
+     "0.3": 0.9504,
+     "0.5": 0.9424,
+     "0.7": 0.8687
+    },
+    "vis_oracle_all": {
+     "0.3": 0.9264,
+     "0.5": 0.9163,
+     "0.7": 0.8417
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.9236,
+     "0.5": 0.9134,
+     "0.7": 0.8408
+    },
+    "oracle_touched": {
+     "0.3": 0.9468,
+     "0.5": 0.9361,
+     "0.7": 0.8664
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.9205,
+     "0.5": 0.9088,
+     "0.7": 0.839
+    }
+   },
+   "attack_loss": {
+    "0.3": 0.0403,
+    "0.5": 0.0417,
+    "0.7": 0.0414
+   },
+   "recovery": {
+    "oracle_all": {
+     "0.3": 1.029,
+     "0.5": 1.14,
+     "0.7": 0.969
+    },
+    "oracle_attacker": {
+     "0.3": 0.906,
+     "0.5": 0.967,
+     "0.7": 0.878
+    },
+    "vis_oracle_all": {
+     "0.3": 0.311,
+     "0.5": 0.341,
+     "0.7": 0.228
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.241,
+     "0.5": 0.274,
+     "0.7": 0.205
+    },
+    "oracle_touched": {
+     "0.3": 0.817,
+     "0.5": 0.818,
+     "0.7": 0.822
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.164,
+     "0.5": 0.163,
+     "0.7": 0.162
+    }
+   }
+  },
+  "remove_feat": {
+   "AP": {
+    "undefended": {
+     "0.3": 0.9468,
+     "0.5": 0.936,
+     "0.7": 0.8631
+    },
+    "oracle_all": {
+     "0.3": 0.9565,
+     "0.5": 0.9508,
+     "0.7": 0.871
+    },
+    "oracle_attacker": {
+     "0.3": 0.9522,
+     "0.5": 0.9442,
+     "0.7": 0.8674
+    },
+    "vis_oracle_all": {
+     "0.3": 0.9537,
+     "0.5": 0.9442,
+     "0.7": 0.8674
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.9512,
+     "0.5": 0.9417,
+     "0.7": 0.8665
+    },
+    "oracle_touched": {
+     "0.3": 0.9483,
+     "0.5": 0.938,
+     "0.7": 0.8648
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.9478,
+     "0.5": 0.9375,
+     "0.7": 0.8643
+    }
+   },
+   "attack_loss": {
+    "0.3": 0.0074,
+    "0.5": 0.0077,
+    "0.7": 0.0106
+   },
+   "recovery": {
+    "oracle_all": {
+     "0.3": 1.31,
+     "0.5": 1.915,
+     "0.7": 0.741
+    },
+    "oracle_attacker": {
+     "0.3": 0.734,
+     "0.5": 1.056,
+     "0.7": 0.403
+    },
+    "vis_oracle_all": {
+     "0.3": 0.941,
+     "0.5": 1.062,
+     "0.7": 0.399
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.592,
+     "0.5": 0.736,
+     "0.7": 0.321
+    },
+    "oracle_touched": {
+     "0.3": 0.212,
+     "0.5": 0.256,
+     "0.7": 0.158
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.14,
+     "0.5": 0.187,
+     "0.7": 0.107
+    }
+   }
+  },
+  "shift_feat": {
+   "AP": {
+    "undefended": {
+     "0.3": 0.9164,
+     "0.5": 0.9034,
+     "0.7": 0.8278
+    },
+    "oracle_all": {
+     "0.3": 0.9531,
+     "0.5": 0.9475,
+     "0.7": 0.8609
+    },
+    "oracle_attacker": {
+     "0.3": 0.9484,
+     "0.5": 0.9403,
+     "0.7": 0.8576
+    },
+    "vis_oracle_all": {
+     "0.3": 0.9374,
+     "0.5": 0.9267,
+     "0.7": 0.8453
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.9348,
+     "0.5": 0.9236,
+     "0.7": 0.8443
+    },
+    "oracle_touched": {
+     "0.3": 0.9445,
+     "0.5": 0.934,
+     "0.7": 0.855
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.9317,
+     "0.5": 0.9193,
+     "0.7": 0.8424
+    }
+   },
+   "attack_loss": {
+    "0.3": 0.0378,
+    "0.5": 0.0404,
+    "0.7": 0.046
+   },
+   "recovery": {
+    "oracle_all": {
+     "0.3": 0.972,
+     "0.5": 1.093,
+     "0.7": 0.722
+    },
+    "oracle_attacker": {
+     "0.3": 0.847,
+     "0.5": 0.914,
+     "0.7": 0.649
+    },
+    "vis_oracle_all": {
+     "0.3": 0.556,
+     "0.5": 0.578,
+     "0.7": 0.382
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.487,
+     "0.5": 0.5,
+     "0.7": 0.36
+    },
+    "oracle_touched": {
+     "0.3": 0.745,
+     "0.5": 0.759,
+     "0.7": 0.594
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.404,
+     "0.5": 0.393,
+     "0.7": 0.318
+    }
+   }
+  },
+  "spoof_pts": {
+   "AP": {
+    "undefended": {
+     "0.3": 0.941,
+     "0.5": 0.9291,
+     "0.7": 0.8595
+    },
+    "oracle_all": {
+     "0.3": 0.9611,
+     "0.5": 0.9551,
+     "0.7": 0.8776
+    },
+    "oracle_attacker": {
+     "0.3": 0.9562,
+     "0.5": 0.9476,
+     "0.7": 0.8739
+    },
+    "vis_oracle_all": {
+     "0.3": 0.9514,
+     "0.5": 0.941,
+     "0.7": 0.8664
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.9486,
+     "0.5": 0.9381,
+     "0.7": 0.8654
+    },
+    "oracle_touched": {
+     "0.3": 0.9525,
+     "0.5": 0.9411,
+     "0.7": 0.8714
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.9453,
+     "0.5": 0.9331,
+     "0.7": 0.8634
+    }
+   },
+   "attack_loss": {
+    "0.3": 0.0132,
+    "0.5": 0.0147,
+    "0.7": 0.0143
+   },
+   "recovery": {
+    "oracle_all": {
+     "0.3": 1.523,
+     "0.5": 1.773,
+     "0.7": 1.275
+    },
+    "oracle_attacker": {
+     "0.3": 1.151,
+     "0.5": 1.26,
+     "0.7": 1.012
+    },
+    "vis_oracle_all": {
+     "0.3": 0.789,
+     "0.5": 0.81,
+     "0.7": 0.483
+    },
+    "vis_oracle_attacker": {
+     "0.3": 0.576,
+     "0.5": 0.617,
+     "0.7": 0.419
+    },
+    "oracle_touched": {
+     "0.3": 0.872,
+     "0.5": 0.822,
+     "0.7": 0.838
+    },
+    "vis_oracle_touched": {
+     "0.3": 0.33,
+     "0.5": 0.277,
+     "0.7": 0.277
+    }
+   }
+  }
+ },
+ "attacker_unit_visibility": {
+  "spoof_feat": {
+   "attacker_units": 7915,
+   "attacker_harmful": 538,
+   "attacker_harmful_known": 203,
+   "attacker_harmful_touched": 353,
+   "attacker_harmful_touched_known": 128
+  },
+  "remove_feat": {
+   "attacker_units": 7540,
+   "attacker_harmful": 178,
+   "attacker_harmful_known": 78,
+   "attacker_harmful_touched": 22,
+   "attacker_harmful_touched_known": 13
+  },
+  "shift_feat": {
+   "attacker_units": 7669,
+   "attacker_harmful": 444,
+   "attacker_harmful_known": 246,
+   "attacker_harmful_touched": 273,
+   "attacker_harmful_touched_known": 177
+  },
+  "spoof_pts": {
+   "attacker_units": 7767,
+   "attacker_harmful": 351,
+   "attacker_harmful_known": 145,
+   "attacker_harmful_touched": 166,
+   "attacker_harmful_touched_known": 70
+  }
+ },
+ "secondary_attack_touched": {
+  "metric": "vis_oracle_touched recovery at AP@0.7 (not pre-registered; gates only attacker tiles whose output the attack changed)",
+  "per_family": {
+   "spoof_feat": 0.162,
+   "remove_feat": 0.107,
+   "shift_feat": 0.318,
+   "spoof_pts": 0.277
+  },
+  "mean": 0.216
+ },
+ "primary_decision": {
+  "metric": "mean over families of vis_oracle_attacker recovery at AP@0.7",
+  "per_family": {
+   "spoof_feat": 0.205,
+   "remove_feat": 0.321,
+   "shift_feat": 0.36,
+   "spoof_pts": 0.419
+  },
+  "value": 0.326,
+  "block_bootstrap_95": [
+   0.204,
+   0.49
+  ],
+  "threshold": 0.3,
+  "proceed": true,
+  "variant_for_mint": "std"
+ }
+}

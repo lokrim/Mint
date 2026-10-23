@@ -42,3 +42,6 @@ third_party/OpenCOOD/
 .idea/
 .vscode/
 .env
+
+# E0 caches (large)
+runs/*/cache/

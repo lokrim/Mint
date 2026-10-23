@@ -1,0 +1,22 @@
+{
+ "frames": 24,
+ "all_same_boxes": true,
+ "all_same_choice": true,
+ "frames_with_gating": 9,
+ "latency_s_p50": {
+  "encode": 0.459,
+  "plain": 0.097,
+  "counterfactual": 0.073,
+  "evidence": 0.007,
+  "final": 0.0
+ },
+ "latency_s_p95": {
+  "encode": 0.525,
+  "plain": 0.127,
+  "counterfactual": 0.085,
+  "evidence": 0.02,
+  "final": 0.277
+ },
+ "agents": "2 (scenario 2021_08_22_13_37_16)",
+ "overhead_vs_plain_p50": 0.157
+}
