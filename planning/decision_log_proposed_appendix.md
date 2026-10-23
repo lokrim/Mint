@@ -88,3 +88,12 @@ Source: [e4_report.md](e4_report.md). `decision_log.md` was not edited; R1, the 
 | D-54 | **Scope statement for any final-test report:** spoof_blind (visibility-aware spoofer) causes the largest loss (0.097 AP@0.7) with R1 recovery 0.01 and a visibility-limited oracle bound of 0.05; the held-out evidence covers n = 2 only. | Omit the bypass | Known, measured limit | High |
 
 Open (needs the user, not proposed here): whether to run the one-time final test with the frozen method (E4's recommendation; a separate decision), and whether its pre-registration adds an n-stratified analysis.
+
+## Added 2026-10-24 (E5a setup; the user's decisions, given in chat); also proposed, not applied
+
+Recorded before any E5a code or result. `decision_log.md` was not edited.
+
+| ID | Decision | Alternatives | Rationale | Confidence |
+|---|---|---|---|---|
+| D-55 | **Final test set** = the OPV2V test split minus `2021_08_23_12_58_19` (moved to development by the exposure ledger, Stage-1 spike) = **15 scenarios**. Culver City is not used. Test exposure so far is detector-level only (clean AttFuse outputs and AP, Stage-1 V-01); no MINT, baseline or attack outcome has been computed on any test scenario. | Include Culver City; keep the 16th scenario | Exposure ledger; one-time test of the frozen method | User decision |
+| D-56 | **Final-test comparison set, all frozen before the test:** (1) no defense; (2) ego-only (all senders dropped); (3) B-RAY, a box-level receiver-ray filter on the final Y+ (no counterfactual; drop a box iff KNOWN and the Wilson 95% upper bound of s < 0.5, the same test as R1's ADD gate); (4) **MINT R1 (headline, D-51)**; (5) ablation R1-noREMOVE (REMOVE verdicts never gate; mirror conditions unchanged); (6) attacker-unit oracle and visibility-limited attacker-unit oracle as bounds (E0 definitions). None has a tunable parameter. | Compare R1 with no defense only | A box-level filter tests whether the counterfactual adds anything over receiver rays alone; ego-only bounds the value of cooperation; noREMOVE isolates the clean-cost source (E4 interpretation 4) | User decision |
