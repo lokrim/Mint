@@ -6,7 +6,12 @@ The **Stage-1 OPV2V feasibility work is done**; see [stage1_spike_report.md](sta
 - The released AttFuse checkpoint reproduces the published test AP@0.7: **0.8155 vs 0.815** (16 scenarios, CPU).
 - Fusion locality held in **93/93** tile tests with 2–5 agents.
 
-Still open in Stage 1: V-02 (own-frame encoding) and V-05 (message size). No MINT method results exist yet.
+The **Stage-2 ray-geometry checks** on 3 validate scenarios are in [stage2_report.md](stage2_report.md):
+- receiver-coverage gate passed (49.7%);
+- own-frame encoding collapses this checkpoint, so the OPV2V study uses OpenCOOD's `proj_first` coordinate convention (D-13b, user decision); deployment properties are stated assumptions (threat model §6);
+- each message is 15.8 MB.
+
+No MINT method results exist yet.
 
 MINT asks whether a cooperative-perception receiver can estimate, per received feature contribution (sender × BEV tile × time), the calibrated probability that including it *harms* 3D detection. It then asks whether gating on that estimate preserves clean accuracy and limits attack harm, measured against ground truth.
 

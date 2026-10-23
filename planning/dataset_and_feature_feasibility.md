@@ -83,7 +83,10 @@ Consequence: **training any cooperative detector locally is infeasible** [E]. Do
 2. OpenCOOD `point_pillar_intermediate` AttFuse config for OPV2V.
    - **Exact config to be read from the checkpoint's `config.yaml`, not assumed.** The OpenCOOD default for OPV2V AttFuse is commonly a 0.4 m voxel and a [−140.8, 140.8] × [−40, 40] m range [E, from memory; verify].
 3. **Checkpoint:** "pointpillar_attentive_fusion" (README AP@0.7 0.815 Default / 0.735 Culver) [V].
-4. **Reproduction gate:** reproduce test AP@0.7 within ±0.01 on the OPV2V test split. If `proj_first` must be True to reproduce, record that and run our own-frame-encoding variant as a sensitivity check.
+4. **Reproduction gate:** reproduce test AP@0.7 within ±0.01 on the OPV2V test split.
+   - **Done:** 0.8155 vs 0.815, using `proj_first=True`.
+   - The own-frame variant (V-02) drops AP@0.7 to 0.515.
+   - **Coordinate convention fixed as OpenCOOD's `proj_first` (D-13b, user decision 2026-10-23).** In code, the projection is done centrally by the dataloader. Deployment-level properties are assumptions A-P1..A-P4 ([threat model](information_and_threat_model.md) §6).
 5. GT = OPV2V boxes. Evaluation range follows the OpenCOOD evaluation [V code, to read].
 6. **Splits.** The detector was trained on OPV2V train. MINT uses OPV2V `validate` (fit/calibration) and `test` + Culver City (evaluation), grouped by scenario.
 7. **Ray evidence.** The receiver's own simulated cloud. Origin = the LiDAR pose from yaml. No-return semantics [U]: assume none and test.

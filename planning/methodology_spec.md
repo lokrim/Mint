@@ -25,7 +25,9 @@ Assumption status legend:
 ## 2. Inference algorithm (per frame t)
 
 ```
-inputs: ẑ[i,t] for i in senders (warped by claimed pose), receiver features z[0,t] (+dome),
+inputs: ẑ[i,t] for i in senders (OPV2V: on the receiver grid per the proj_first convention, D-13b;
+        in code projected by the dataloader; own-frame protocol D-13: warped by claimed pose),
+        receiver features z[0,t] (+dome),
         receiver range images R_k (k in receiver sensors) with NR mask, receiver ground map Gm,
         frozen detector parts (fusion F, deblock+head H, NMS), fitted models (μ,φ tables), calibrator g, θ
 1. logits ← attention logits at each scale and pixel (shared with plain AttFuse)

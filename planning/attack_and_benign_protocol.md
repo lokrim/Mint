@@ -51,7 +51,7 @@ Using the organized beam grid makes edits ray-consistent from the sender's viewp
 
 | ID | Family | Operation | Severities **[A]** |
 |---|---|---|---|
-| A-M1 | Pose spoofing | Claimed sender pose offset by 0.5/1/2 m or 1/3/5° yaw (features unchanged) | as listed |
+| A-M1 | Pose spoofing (attack scenario; **not implemented yet**) | **Under the OPV2V `proj_first` convention (D-13b, assumption A-P3):** a dishonest sender projects its points into the receiver frame with its own pose offset by 0.5/1/2 m or 1/3/5° yaw, then encodes. The result is a whole-scene misplacement inside the features, and the claimed-pose metadata can be made consistent with the lie. In the benchmark this is simulated by altering *only that sender's* projection matrix in the dataloader. Under the own-frame protocol (D-13, self-trained models only): the claimed pose is offset and the features are unchanged. | as listed |
 | A-M2 | Timestamp spoofing | Claimed stamp shifted by ±50/100 ms | as listed |
 | A-T1 | Replay / stale | Send the message from t − k, k ∈ {1, 5, 10} frames, unchanged or with tiny noise | as listed |
 | A-T2 | On/off | Any spatial family active in 1 s bursts with 1/3 s gaps | duty cycle |

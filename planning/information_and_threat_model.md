@@ -32,11 +32,14 @@ OFFLINE (training/caching; GT allowed on its designated splits)
   raw scans ─► [train/fit detector if no checkpoint] ─► frozen encoder E, fusion F, head H
   clean + train-family attacked scenes ─► counterfactual labels D (GT) ─► fit/calibrate reliability R
                                                      (calibration split separate from fit split)
-ONLINE, per sender i (UNTRUSTED principal)
-  sensor_i ─► points_i ─► E ─► z[i,t] (sender frame, multi-scale) ─► (quantize/compress?) ─► channel
+ONLINE, per sender i (UNTRUSTED principal)            [deployment interpretation; see §6]
+  sensor_i ─► points_i ─► (OPV2V convention, D-13b: project into receiver frame, assumption A-P1/A-P3)
+          ─► E ─► z[i,t] (multi-scale, on the receiver grid) ─► (quantize?) ─► channel
                                   metadata m[i,t] = (claimed pose, claimed stamp)  ─────────► channel
 ONLINE, receiver 0 (TRUSTED computing base = receiver hardware + own sensors + frozen models)
-  channel ─► decode ─► warp z[i,t] into receiver grid using m[i,t] ─► ẑ[i,t]
+  channel ─► decode ─► ẑ[i,t]   (OPV2V convention: no receiver warp; own-frame protocol D-13: warp with m[i,t])
+  NOTE: in the benchmark code all of the above runs inside ONE OpenCOOD dataloader + ONE batched model
+        call; no message is serialized or exchanged (§6, "What the code actually does").
   own sensors ─► points_0 (incl. no-return slots) ─► E ─► z[0,t]
             └──────────────► receiver evidence e[t] (range image, visibility, own detections)
   history h[<t] (receiver-held state; may contain previously accepted attacked data)
@@ -137,7 +140,36 @@ So the head output at a pixel depends only on that pixel's (and its parent coars
 | B: + receiver's own raw scan (`top`+`dome` in Mixed Signals) | A + `e[t]` range images | Yes, but **only along receiver lines of sight** | Not spoofable by senders. A physical spoofer at the receiver is out of scope. | **[P] primary**, pending decision Q3 |
 | C: + sender-supplied evidence (CAD-style occupancy, ~10 KB/frame [V: CAD §6.4.3]) | B + claimed occupancy | Sender-claimed rays | Fully forgeable consistently with its features; useful only via cross-peer conflict | Optional ablation only, budgeted as extra communication |
 
-We do **not** give the receiver the senders' clean raw clouds. OpenCOOD's `proj_first=True` path (points projected into the ego frame before encoding [X: `msig_intermediate_fusion_dataset.py`]) is a simulation shortcut. It assumes the sender encodes in the receiver frame. **[P]** Our feature path is: the sender encodes in its own frame, and the receiver warps features with the claimed pose. If a released checkpoint only works with `proj_first=True`, we record that as a protocol deviation and test its effect (V-02).
+We do **not** give the receiver the senders' clean raw clouds.
+
+### Coordinate convention for the OPV2V study (D-13b, user decision 2026-10-23)
+
+The OPV2V study follows OpenCOOD's documented `proj_first` convention, which is what the released AttFuse checkpoint was trained with. Each sender's points are expressed in the receiver's LiDAR frame **before** encoding, so sender features arrive on the receiver's BEV grid. D-13 (own-frame encoding plus receiver warp) is unchanged and still applies to any model we train ourselves.
+
+**What the code actually does** (verified by reading OpenCOOD at commit `31ba160`; no data was on disk to run a check, and no new run was made for this note):
+
+| Step | Where | What happens | Who would do it in deployment |
+|---|---|---|---|
+| Poses | `basedataset.py` `reform_param` | Reads each CAV's `lidar_pose` from its OPV2V yaml. Computes `transformation_matrix = x1_to_x2(cav lidar_pose, current ego lidar_pose)`. | The receiver's pose would have to reach the sender (A-P1). |
+| Pose noise, delay | `basedataset.py` `__init__`; checkpoint `config.yaml` has no `wild_setting` | `loc_err_flag = False`, `async_flag = False`, current ego pose used (`cur_ego_pose_flag = True`). **Poses are noise-free and synchronous in this configuration.** Whether `lidar_pose` is the simulator's ground truth is [U]: it was not checked in the yaml files. | — |
+| Participant selection | `intermediate_fusion_dataset.py` `__getitem__` | CAVs within `COM_RANGE = 70` m of the ego, by those poses | Selection from broadcast positions (A-P1) |
+| Projection | `intermediate_fusion_dataset.py` `get_item_single_car` (shuffle → `mask_ego_points` → project with `transformation_matrix` → crop to ego range → voxelize) | Done by the **dataloader**, centrally, for every agent | The sender, once per receiver (A-P2) |
+| Encoding and fusion | `point_pillar_intermediate.py`, `att_bev_backbone.py` | All agents' voxels are batched and encoded in **one** forward pass of **one** model in **one** process; `pairwise_t_matrix` is identity | Encoding by each sender; fusion by the receiver |
+| Ground truth | same `__getitem__` | Union of objects from all CAV yamls (includes the ego vehicle, D-24) | Evaluator only |
+
+MINT's own Stage 1–2 runners (`runners/stage1_*.py`, `runners/stage2_validate.py`) use this same path. **They do not implement a sender/receiver split, message serialization, pose exchange or the evaluator/inference process boundary (V-08 is still open).**
+
+**Protocol assumptions** (stated, not verified runtime behaviour):
+- **A-P1 Pose sharing.** The receiver's pose is available to senders (the OPV2V paper §IV describes broadcasting relative poses as "metadata sharing"). Not implemented or measured here. Security consequence: senders know the receiver's pose, which §7.2 already assumes.
+- **A-P2 Per-recipient encoding.** Because projection precedes encoding, a deployed sender would encode once per receiver. Its cost is **not measured**: our benchmarks time all encodings inside one process.
+- **A-P3 Honest projection in the benchmark.** In the benchmark every agent is projected with dataset poses, so projection is honest by construction. A real sender could project with any pose. **Sender-side pose manipulation is an attack scenario** (A-M1 in the [attack protocol](attack_and_benign_protocol.md)), not yet implemented.
+- **A-P4 Synchrony.** No transmission delay, and the current ego pose is used. Delay is a benign stress (B-5), not yet implemented.
+
+**Trust is unchanged.**
+- Received features `ẑ[i,t]` remain untrusted under this convention. The convention moves where alignment happens; it does not make any sender's content trustworthy.
+- In benchmark experiments, attacks must be injected only into a sender's share of the pipeline: its points before projection and encoding, its projection pose, or its encoded features. They must never be injected into dataloader steps that stand for receiver-side or evaluator-side work.
+
+**Why not D-13 for OPV2V.** Check V-02: with the released checkpoint, own-frame encoding plus a receiver bilinear warp drops AP@0.7 from 0.874 to 0.515 on 3 validate scenarios ([stage2_report.md](stage2_report.md)). Recovering that needs retraining (GPU).
 
 ## 7. Threat model
 
@@ -159,7 +191,8 @@ We do **not** give the receiver the senders' clean raw clouds. OpenCOOD's `proj_
 | T6 adaptive against MINT | Any of T1–T5 plus knowledge of `R` | White-box `R`, or gray-box (architecture without calibration data) | As above | As above |
 
 - **Never assumed:** compromise of the receiver, its sensors or clock; breaking cryptography; physical laser spoofing claims for digital edits.
-- **Temporal knowledge.** The attacker sees previously broadcast messages and its own stream. It does not see same-frame receiver data. It knows the receiver's position (static RSU).
+- **Temporal knowledge.** The attacker sees previously broadcast messages and its own stream. It does not see same-frame receiver data. It knows the receiver's position: the static RSU in Mixed Signals; under the OPV2V convention, via assumed pose sharing (A-P1, §6).
+- **Coordinate convention.** The OPV2V study follows the `proj_first` convention (§6, D-13b). Under assumption A-P3, a dishonest sender may project with any pose; this is attack scenario A-M1, not implemented yet.
 
 ### 7.3 Benign faults (not attacks, often harmful)
 

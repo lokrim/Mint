@@ -42,7 +42,7 @@ mint/
 | ID | Check | Stage |
 |---|---|---|
 | V-01 | Checkpoint provenance: hash; config; training split; reported AP reproduced within ±0.01 (OP/VR) or the training-log AP (MS) | 1 |
-| V-02 | Sender-frame encoding + receiver warp vs `proj_first=True`: AP difference reported | 1 |
+| V-02 | Sender-frame encoding + receiver warp vs `proj_first=True`: AP difference reported | 1 (**done** 2026-10-23: AP@0.7 0.874 → 0.515; coordinate convention fixed by D-13b) |
 | V-03 | Locality: masking sender i in tile u leaves head outputs outside u bit-identical before NMS; cross-tile NMS effects counted | 1 |
 | V-04 | MS label↔sync alignment (box-centre vs cluster-centroid residual per offset −3..+3 on moving objects; ≥ 50 objects) and keyframe identification | 1 |
 | V-05 | Message size definition and measurement | 1 |

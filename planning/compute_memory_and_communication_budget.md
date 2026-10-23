@@ -89,7 +89,7 @@ The message size makes the *baseline* unrealistic for real V2X links (OpenCOOD's
   - 50 warm-up frames, then ≥ 500 measured frames from block E (clean) and from attacked episodes. The effect count varies, so the attacked load matters.
   - Batch 1. Time per stage with monotonic clocks.
   - p50/p95/max. Peak RSS including children (measured, not the finalize-only RSS of lesson RP-06). Bytes on the wire.
-- **Separate:** disk I/O, decode/warp, backbone, fusion+head, counterfactual pass, ray evidence, combiner, gating.
+- **Separate:** disk I/O, decode/warp (no receiver warp under the OPV2V `proj_first` convention, D-13b; the per-recipient sender encoding cost is assumption A-P2 and is **not measured** by the current single-process benchmark), backbone, fusion+head, counterfactual pass, ray evidence, combiner, gating.
 - **Worst case.** Many effects per frame: dense traffic plus A-F4 untargeted attacks.
 - **Amortization.** Ray ranges and directions reuse the receiver's existing scan. Claim this as shared preprocessing only if the receiver's perception stack already computes it (measured).
 - **Energy.** Only if measured with a power meter. Otherwise not reported.
