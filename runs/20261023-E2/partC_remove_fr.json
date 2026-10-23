@@ -1,0 +1,1702 @@
+{
+ "note": "E2 Part C, descriptive only; development block T, in-sample; R1 unchanged. Cases = USEFUL units (D < -0.5) gated by R1 via a REMOVE effect, deduplicated across conditions",
+ "n_cases_unique": 28,
+ "per_condition": {
+  "clean": 20,
+  "spoof_feat": 20,
+  "remove_feat": 24,
+  "shift_feat": 23,
+  "spoof_pts": 20
+ },
+ "classes_rule_based": {
+  "receiver FP on unlabelled structure": 5,
+  "unclear": 11,
+  "label/IoU artefact": 11,
+  "genuine R1 error": 1
+ },
+ "cases": [
+  {
+   "case": 0,
+   "plot": "remove_fr/case00_2021_08_20_21_48_35_f003_s2.png",
+   "scen": "2021_08_20_21_48_35",
+   "frame": 3,
+   "n_agents": 4,
+   "tile": [
+    8,
+    31
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 62.23,
+   "SUP": 8,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.676,
+    1.0
+   ],
+   "score_minus": 0.235,
+   "receiver_only_score": 0.375,
+   "receiver_only_match_iou": 0.852,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 15.78,
+   "box_z_bottom_m": -0.54,
+   "box_height_m": 1.39,
+   "box_bev_lw_m": [
+    2.1,
+    4.96
+   ],
+   "pts_in_box": 16,
+   "pts_nonground": 16,
+   "z_rel_bottom_p5_p50_p95": [
+    0.39,
+    0.84,
+    1.8
+   ],
+   "z_extent_nonground_m": 1.41,
+   "nonground_extent_lw_m": [
+    4.36,
+    2.07
+   ],
+   "pts_in_envelope_0.2m": 20,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -0.15,
+    0.3,
+    1.26
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "receiver FP on unlabelled structure",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "points rise steadily along the box (0.4 -> 1.8 m): sloped terrain/ramp or structure; agrees only weakly"
+  },
+  {
+   "case": 1,
+   "plot": "remove_fr/case01_2021_08_20_21_48_35_f021_s1.png",
+   "scen": "2021_08_20_21_48_35",
+   "frame": 21,
+   "n_agents": 4,
+   "tile": [
+    4,
+    36
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 94.94,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 5,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.204,
+   "receiver_only_score": 0.268,
+   "receiver_only_match_iou": 0.938,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 50.45,
+   "box_z_bottom_m": -1.98,
+   "box_height_m": 1.48,
+   "box_bev_lw_m": [
+    2.02,
+    5.06
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    1.04,
+    1.05,
+    1.05
+   ],
+   "z_extent_nonground_m": 0.01,
+   "nonground_extent_lw_m": [
+    2.74,
+    0.09
+   ],
+   "pts_in_envelope_0.2m": 4,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -0.94,
+    -0.93,
+    -0.93
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 2,
+   "plot": "remove_fr/case02_2021_08_20_21_48_35_f021_s2.png",
+   "scen": "2021_08_20_21_48_35",
+   "frame": 21,
+   "n_agents": 4,
+   "tile": [
+    12,
+    23
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 38.7,
+   "SUP": 42,
+   "TRAV": 5,
+   "OCC": 0,
+   "s_minus": 0.894,
+   "wilson95": [
+    0.774,
+    0.954
+   ],
+   "score_minus": 0.47,
+   "receiver_only_score": 0.519,
+   "receiver_only_match_iou": 0.89,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 9.48,
+   "box_z_bottom_m": -1.87,
+   "box_height_m": 1.62,
+   "box_bev_lw_m": [
+    1.82,
+    3.74
+   ],
+   "pts_in_box": 50,
+   "pts_nonground": 47,
+   "z_rel_bottom_p5_p50_p95": [
+    0.3,
+    0.92,
+    1.49
+   ],
+   "z_extent_nonground_m": 1.12,
+   "nonground_extent_lw_m": [
+    3.59,
+    1.46
+   ],
+   "pts_in_envelope_0.2m": 52,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.67,
+    -0.96,
+    -0.39
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "receiver FP on unlabelled structure",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "layered returns 0.3-1.5 m over a compact 3.6 x 1.5 m footprint: looks like an unlabelled object; agrees"
+  },
+  {
+   "case": 3,
+   "plot": "remove_fr/case03_2021_08_20_21_48_35_f021_s3.png",
+   "scen": "2021_08_20_21_48_35",
+   "frame": 21,
+   "n_agents": 4,
+   "tile": [
+    4,
+    36
+   ],
+   "sender": 3,
+   "D": -1.0,
+   "range_m": 94.83,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 3,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.201,
+   "receiver_only_score": 0.268,
+   "receiver_only_match_iou": 0.957,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 50.35,
+   "box_z_bottom_m": -1.95,
+   "box_height_m": 1.53,
+   "box_bev_lw_m": [
+    2.04,
+    5.02
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    1.01,
+    1.02,
+    1.03
+   ],
+   "z_extent_nonground_m": 0.01,
+   "nonground_extent_lw_m": [
+    2.74,
+    0.09
+   ],
+   "pts_in_envelope_0.2m": 4,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -0.94,
+    -0.93,
+    -0.93
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule (same box as case 1, other sender)"
+  },
+  {
+   "case": 4,
+   "plot": "remove_fr/case04_2021_08_20_21_48_35_f026_s2.png",
+   "scen": "2021_08_20_21_48_35",
+   "frame": 26,
+   "n_agents": 4,
+   "tile": [
+    12,
+    20
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 38.93,
+   "SUP": 30,
+   "TRAV": 14,
+   "OCC": 25,
+   "s_minus": 0.682,
+   "wilson95": [
+    0.534,
+    0.8
+   ],
+   "score_minus": 0.204,
+   "receiver_only_score": 0.274,
+   "receiver_only_match_iou": 0.944,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 7.8,
+   "box_z_bottom_m": -1.87,
+   "box_height_m": 1.61,
+   "box_bev_lw_m": [
+    2.12,
+    4.86
+   ],
+   "pts_in_box": 28,
+   "pts_nonground": 27,
+   "z_rel_bottom_p5_p50_p95": [
+    0.35,
+    0.94,
+    1.68
+   ],
+   "z_extent_nonground_m": 1.27,
+   "nonground_extent_lw_m": [
+    4.17,
+    1.57
+   ],
+   "pts_in_envelope_0.2m": 33,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.56,
+    -0.93,
+    -0.27
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "receiver FP on unlabelled structure",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "returns on two faces, 0.3-1.8 m: object-like, unlabelled; agrees"
+  },
+  {
+   "case": 5,
+   "plot": "remove_fr/case05_2021_08_20_21_48_35_f065_s1.png",
+   "scen": "2021_08_20_21_48_35",
+   "frame": 65,
+   "n_agents": 4,
+   "tile": [
+    6,
+    30
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 57.64,
+   "SUP": 10,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "score_minus": 0.558,
+   "receiver_only_score": 0.613,
+   "receiver_only_match_iou": 0.867,
+   "gt_max_iou": 0.769,
+   "gt_nearest_centre_m": 0.47,
+   "box_z_bottom_m": -1.96,
+   "box_height_m": 1.48,
+   "box_bev_lw_m": [
+    1.91,
+    4.1
+   ],
+   "pts_in_box": 15,
+   "pts_nonground": 13,
+   "z_rel_bottom_p5_p50_p95": [
+    0.1,
+    0.97,
+    1.39
+   ],
+   "z_extent_nonground_m": 0.85,
+   "nonground_extent_lw_m": [
+    2.35,
+    1.28
+   ],
+   "pts_in_envelope_0.2m": 15,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.86,
+    -0.98,
+    -0.57
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "remove_feat"
+   ],
+   "visual_note": "box overlaps a GT car whose centre is in the neighbouring tile: tile-split label; agrees"
+  },
+  {
+   "case": 6,
+   "plot": "remove_fr/case06_2021_08_20_21_48_35_f092_s3.png",
+   "scen": "2021_08_20_21_48_35",
+   "frame": 92,
+   "n_agents": 4,
+   "tile": [
+    5,
+    25
+   ],
+   "sender": 3,
+   "D": -0.941,
+   "range_m": 21.79,
+   "SUP": 66,
+   "TRAV": 37,
+   "OCC": 0,
+   "s_minus": 0.641,
+   "wilson95": [
+    0.545,
+    0.727
+   ],
+   "score_minus": 0.219,
+   "receiver_only_score": 0.654,
+   "receiver_only_match_iou": 0.147,
+   "gt_max_iou": 0.135,
+   "gt_nearest_centre_m": 2.85,
+   "box_z_bottom_m": -1.91,
+   "box_height_m": 1.84,
+   "box_bev_lw_m": [
+    1.85,
+    3.92
+   ],
+   "pts_in_box": 105,
+   "pts_nonground": 77,
+   "z_rel_bottom_p5_p50_p95": [
+    -0.03,
+    0.81,
+    1.68
+   ],
+   "z_extent_nonground_m": 1.2,
+   "nonground_extent_lw_m": [
+    1.43,
+    0.69
+   ],
+   "pts_in_envelope_0.2m": 123,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.93,
+    -1.26,
+    -0.23
+   ],
+   "nearest_gt_centre_same_tile": true,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "shift_feat"
+   ],
+   "visual_note": "vertical column of returns at one end (face of the adjacent GT car) plus ground; agrees"
+  },
+  {
+   "case": 7,
+   "plot": "remove_fr/case07_2021_08_21_17_30_41_f005_s2.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 5,
+   "n_agents": 3,
+   "tile": [
+    4,
+    27
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 36.77,
+   "SUP": 20,
+   "TRAV": 0,
+   "OCC": 18,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.839,
+    1.0
+   ],
+   "score_minus": 0.229,
+   "receiver_only_score": 0.379,
+   "receiver_only_match_iou": 0.279,
+   "gt_max_iou": 0.299,
+   "gt_nearest_centre_m": 2.81,
+   "box_z_bottom_m": -1.92,
+   "box_height_m": 1.5,
+   "box_bev_lw_m": [
+    2.08,
+    5.21
+   ],
+   "pts_in_box": 18,
+   "pts_nonground": 18,
+   "z_rel_bottom_p5_p50_p95": [
+    0.67,
+    0.98,
+    1.31
+   ],
+   "z_extent_nonground_m": 0.63,
+   "nonground_extent_lw_m": [
+    4.87,
+    0.89
+   ],
+   "pts_in_envelope_0.2m": 19,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.24,
+    -0.94,
+    -0.61
+   ],
+   "nearest_gt_centre_same_tile": true,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "shift_feat"
+   ],
+   "visual_note": "box between two GT cars, overlapping one: duplicate/poorly localised; agrees"
+  },
+  {
+   "case": 8,
+   "plot": "remove_fr/case08_2021_08_21_17_30_41_f041_s1.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 41,
+   "n_agents": 3,
+   "tile": [
+    5,
+    30
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 57.61,
+   "SUP": 6,
+   "TRAV": 0,
+   "OCC": 5,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ],
+   "score_minus": 0.47,
+   "receiver_only_score": 0.473,
+   "receiver_only_match_iou": 0.953,
+   "gt_max_iou": 0.774,
+   "gt_nearest_centre_m": 0.38,
+   "box_z_bottom_m": -1.94,
+   "box_height_m": 1.56,
+   "box_bev_lw_m": [
+    2.01,
+    4.37
+   ],
+   "pts_in_box": 9,
+   "pts_nonground": 8,
+   "z_rel_bottom_p5_p50_p95": [
+    0.29,
+    0.97,
+    1.37
+   ],
+   "z_extent_nonground_m": 0.82,
+   "nonground_extent_lw_m": [
+    1.68,
+    0.92
+   ],
+   "pts_in_envelope_0.2m": 9,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.65,
+    -0.97,
+    -0.56
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "remove_feat"
+   ],
+   "visual_note": "overlaps GT car (centre in neighbouring tile); agrees"
+  },
+  {
+   "case": 9,
+   "plot": "remove_fr/case09_2021_08_21_17_30_41_f041_s2.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 41,
+   "n_agents": 3,
+   "tile": [
+    0,
+    25
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 43.25,
+   "SUP": 11,
+   "TRAV": 3,
+   "OCC": 18,
+   "s_minus": 0.786,
+   "wilson95": [
+    0.524,
+    0.924
+   ],
+   "score_minus": 0.331,
+   "receiver_only_score": 0.34,
+   "receiver_only_match_iou": 0.974,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 3.44,
+   "box_z_bottom_m": -1.92,
+   "box_height_m": 1.48,
+   "box_bev_lw_m": [
+    1.98,
+    4.54
+   ],
+   "pts_in_box": 12,
+   "pts_nonground": 12,
+   "z_rel_bottom_p5_p50_p95": [
+    0.7,
+    1.16,
+    1.31
+   ],
+   "z_extent_nonground_m": 0.61,
+   "nonground_extent_lw_m": [
+    2.05,
+    1.28
+   ],
+   "pts_in_envelope_0.2m": 12,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.22,
+    -0.76,
+    -0.61
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "receiver FP on unlabelled structure",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "returns 0.8-1.2 m in a row near a GT car 3.4 m away; object-like; agrees"
+  },
+  {
+   "case": 10,
+   "plot": "remove_fr/case10_2021_08_21_17_30_41_f086_s2.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 86,
+   "n_agents": 3,
+   "tile": [
+    3,
+    9
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 80.56,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 1,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.214,
+   "receiver_only_score": 0.31,
+   "receiver_only_match_iou": 0.829,
+   "gt_max_iou": 0.275,
+   "gt_nearest_centre_m": 1.2,
+   "box_z_bottom_m": -1.92,
+   "box_height_m": 1.66,
+   "box_bev_lw_m": [
+    1.87,
+    3.89
+   ],
+   "pts_in_box": 5,
+   "pts_nonground": 5,
+   "z_rel_bottom_p5_p50_p95": [
+    0.54,
+    1.12,
+    1.6
+   ],
+   "z_extent_nonground_m": 1.07,
+   "nonground_extent_lw_m": [
+    0.87,
+    0.54
+   ],
+   "pts_in_envelope_0.2m": 5,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.38,
+    -0.79,
+    -0.32
+   ],
+   "nearest_gt_centre_same_tile": true,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "rotated box overlapping a GT car; agrees"
+  },
+  {
+   "case": 11,
+   "plot": "remove_fr/case11_2021_08_21_17_30_41_f102_s2.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 102,
+   "n_agents": 3,
+   "tile": [
+    5,
+    22
+   ],
+   "sender": 2,
+   "D": -1.028,
+   "range_m": 4.3,
+   "SUP": 1729,
+   "TRAV": 1278,
+   "OCC": 0,
+   "s_minus": 0.575,
+   "wilson95": [
+    0.557,
+    0.593
+   ],
+   "score_minus": 0.207,
+   "receiver_only_score": null,
+   "receiver_only_match_iou": 0.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 3.38,
+   "box_z_bottom_m": -2.74,
+   "box_height_m": 1.64,
+   "box_bev_lw_m": [
+    2.03,
+    4.48
+   ],
+   "pts_in_box": 1754,
+   "pts_nonground": 1754,
+   "z_rel_bottom_p5_p50_p95": [
+    0.79,
+    0.8,
+    0.82
+   ],
+   "z_extent_nonground_m": 0.03,
+   "nonground_extent_lw_m": [
+    4.78,
+    2.24
+   ],
+   "pts_in_envelope_0.2m": 2181,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.95,
+    -1.93,
+    -1.92
+   ],
+   "nearest_gt_centre_same_tile": true,
+   "class": "genuine R1 error",
+   "conditions": [
+    "shift_feat"
+   ],
+   "visual_note": "flat road-surface returns (z = -1.94 m, sensor frame) inside a low box 4.3 m from the receiver: ground contamination; agrees"
+  },
+  {
+   "case": 12,
+   "plot": "remove_fr/case12_2021_08_21_17_30_41_f104_s1.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 104,
+   "n_agents": 3,
+   "tile": [
+    3,
+    7
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 93.2,
+   "SUP": 5,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.566,
+    1.0
+   ],
+   "score_minus": 0.222,
+   "receiver_only_score": 0.256,
+   "receiver_only_match_iou": 0.964,
+   "gt_max_iou": 0.315,
+   "gt_nearest_centre_m": 0.98,
+   "box_z_bottom_m": -1.96,
+   "box_height_m": 1.48,
+   "box_bev_lw_m": [
+    1.87,
+    3.88
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.47,
+    1.04,
+    1.05
+   ],
+   "z_extent_nonground_m": 0.58,
+   "nonground_extent_lw_m": [
+    1.22,
+    0.35
+   ],
+   "pts_in_envelope_0.2m": 5,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.59,
+    -0.92,
+    -0.91
+   ],
+   "nearest_gt_centre_same_tile": true,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "box on a GT car with wrong heading (IoU 0.31); agrees"
+  },
+  {
+   "case": 13,
+   "plot": "remove_fr/case13_2021_08_21_17_30_41_f104_s2.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 104,
+   "n_agents": 3,
+   "tile": [
+    3,
+    7
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 93.18,
+   "SUP": 5,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.566,
+    1.0
+   ],
+   "score_minus": 0.241,
+   "receiver_only_score": 0.256,
+   "receiver_only_match_iou": 0.952,
+   "gt_max_iou": 0.316,
+   "gt_nearest_centre_m": 0.99,
+   "box_z_bottom_m": -1.96,
+   "box_height_m": 1.47,
+   "box_bev_lw_m": [
+    1.87,
+    3.88
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.47,
+    1.04,
+    1.05
+   ],
+   "z_extent_nonground_m": 0.58,
+   "nonground_extent_lw_m": [
+    1.22,
+    0.35
+   ],
+   "pts_in_envelope_0.2m": 5,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.59,
+    -0.92,
+    -0.91
+   ],
+   "nearest_gt_centre_same_tile": true,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "same as case 12 (other sender); agrees"
+  },
+  {
+   "case": 14,
+   "plot": "remove_fr/case14_2021_08_21_17_30_41_f124_s2.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 124,
+   "n_agents": 3,
+   "tile": [
+    6,
+    26
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 30.96,
+   "SUP": 44,
+   "TRAV": 12,
+   "OCC": 0,
+   "s_minus": 0.786,
+   "wilson95": [
+    0.662,
+    0.873
+   ],
+   "score_minus": 0.216,
+   "receiver_only_score": 0.312,
+   "receiver_only_match_iou": 0.929,
+   "gt_max_iou": 0.136,
+   "gt_nearest_centre_m": 2.81,
+   "box_z_bottom_m": -1.93,
+   "box_height_m": 1.89,
+   "box_bev_lw_m": [
+    1.85,
+    3.72
+   ],
+   "pts_in_box": 60,
+   "pts_nonground": 47,
+   "z_rel_bottom_p5_p50_p95": [
+    0.08,
+    0.89,
+    1.85
+   ],
+   "z_extent_nonground_m": 1.38,
+   "nonground_extent_lw_m": [
+    1.61,
+    0.35
+   ],
+   "pts_in_envelope_0.2m": 65,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.85,
+    -1.04,
+    -0.08
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "remove_feat"
+   ],
+   "visual_note": "box offset from a GT car; support is that car's rear face; agrees"
+  },
+  {
+   "case": 15,
+   "plot": "remove_fr/case15_2021_08_21_17_30_41_f133_s1.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 133,
+   "n_agents": 3,
+   "tile": [
+    4,
+    7
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 93.54,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 2,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.297,
+   "receiver_only_score": 0.389,
+   "receiver_only_match_iou": 0.91,
+   "gt_max_iou": 0.333,
+   "gt_nearest_centre_m": 1.13,
+   "box_z_bottom_m": -1.96,
+   "box_height_m": 1.49,
+   "box_bev_lw_m": [
+    1.89,
+    3.86
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.45,
+    1.04,
+    1.04
+   ],
+   "z_extent_nonground_m": 0.59,
+   "nonground_extent_lw_m": [
+    1.29,
+    0.19
+   ],
+   "pts_in_envelope_0.2m": 4,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.51,
+    -0.92,
+    -0.92
+   ],
+   "nearest_gt_centre_same_tile": true,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "box on a GT car with wrong heading; agrees"
+  },
+  {
+   "case": 16,
+   "plot": "remove_fr/case16_2021_08_21_17_30_41_f140_s2.png",
+   "scen": "2021_08_21_17_30_41",
+   "frame": 140,
+   "n_agents": 3,
+   "tile": [
+    5,
+    30
+   ],
+   "sender": 2,
+   "D": -1.0,
+   "range_m": 57.85,
+   "SUP": 12,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.758,
+    1.0
+   ],
+   "score_minus": 0.235,
+   "receiver_only_score": 0.24,
+   "receiver_only_match_iou": 0.976,
+   "gt_max_iou": 0.724,
+   "gt_nearest_centre_m": 0.36,
+   "box_z_bottom_m": -1.94,
+   "box_height_m": 1.6,
+   "box_bev_lw_m": [
+    1.91,
+    4.11
+   ],
+   "pts_in_box": 22,
+   "pts_nonground": 19,
+   "z_rel_bottom_p5_p50_p95": [
+    0.03,
+    0.73,
+    1.38
+   ],
+   "z_extent_nonground_m": 0.87,
+   "nonground_extent_lw_m": [
+    3.09,
+    1.33
+   ],
+   "pts_in_envelope_0.2m": 26,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.91,
+    -1.4,
+    -0.56
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "remove_feat"
+   ],
+   "visual_note": "overlaps GT car (centre in neighbouring tile); agrees"
+  },
+  {
+   "case": 17,
+   "plot": "remove_fr/case17_2021_08_22_13_37_16_f014_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 14,
+   "n_agents": 2,
+   "tile": [
+    8,
+    13
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 58.04,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 6,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.201,
+   "receiver_only_score": 0.201,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 17.03,
+   "box_z_bottom_m": -1.95,
+   "box_height_m": 1.39,
+   "box_bev_lw_m": [
+    1.9,
+    4.28
+   ],
+   "pts_in_box": 5,
+   "pts_nonground": 5,
+   "z_rel_bottom_p5_p50_p95": [
+    0.95,
+    0.97,
+    0.97
+   ],
+   "z_extent_nonground_m": 0.02,
+   "nonground_extent_lw_m": [
+    1.81,
+    1.33
+   ],
+   "pts_in_envelope_0.2m": 5,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.0,
+    -0.98,
+    -0.98
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 18,
+   "plot": "remove_fr/case18_2021_08_22_13_37_16_f017_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 17,
+   "n_agents": 2,
+   "tile": [
+    12,
+    28
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 55.08,
+   "SUP": 21,
+   "TRAV": 6,
+   "OCC": 6,
+   "s_minus": 0.778,
+   "wilson95": [
+    0.592,
+    0.894
+   ],
+   "score_minus": 0.671,
+   "receiver_only_score": 0.671,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 4.05,
+   "box_z_bottom_m": -1.86,
+   "box_height_m": 1.85,
+   "box_bev_lw_m": [
+    1.85,
+    3.92
+   ],
+   "pts_in_box": 24,
+   "pts_nonground": 24,
+   "z_rel_bottom_p5_p50_p95": [
+    0.52,
+    0.93,
+    1.72
+   ],
+   "z_extent_nonground_m": 1.2,
+   "nonground_extent_lw_m": [
+    3.85,
+    1.38
+   ],
+   "pts_in_envelope_0.2m": 24,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.34,
+    -0.93,
+    -0.14
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "receiver FP on unlabelled structure",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "layered returns 0.5-1.7 m beside a GT car: object-like/wall edge; agrees"
+  },
+  {
+   "case": 19,
+   "plot": "remove_fr/case19_2021_08_22_13_37_16_f019_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 19,
+   "n_agents": 2,
+   "tile": [
+    3,
+    8
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 90.6,
+   "SUP": 5,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.566,
+    1.0
+   ],
+   "score_minus": 0.272,
+   "receiver_only_score": 0.272,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 30.15,
+   "box_z_bottom_m": -1.99,
+   "box_height_m": 1.48,
+   "box_bev_lw_m": [
+    1.86,
+    3.68
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.41,
+    0.44,
+    1.01
+   ],
+   "z_extent_nonground_m": 0.59,
+   "nonground_extent_lw_m": [
+    2.11,
+    0.44
+   ],
+   "pts_in_envelope_0.2m": 5,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.58,
+    -1.55,
+    -1.02
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 20,
+   "plot": "remove_fr/case20_2021_08_22_13_37_16_f019_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 19,
+   "n_agents": 2,
+   "tile": [
+    7,
+    13
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 56.45,
+   "SUP": 6,
+   "TRAV": 0,
+   "OCC": 2,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ],
+   "score_minus": 0.227,
+   "receiver_only_score": 0.227,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 14.78,
+   "box_z_bottom_m": -2.03,
+   "box_height_m": 1.44,
+   "box_bev_lw_m": [
+    1.99,
+    4.91
+   ],
+   "pts_in_box": 5,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.35,
+    1.03,
+    1.08
+   ],
+   "z_extent_nonground_m": 0.35,
+   "nonground_extent_lw_m": [
+    3.16,
+    1.24
+   ],
+   "pts_in_envelope_0.2m": 9,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.76,
+    -1.0,
+    -0.7
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 21,
+   "plot": "remove_fr/case21_2021_08_22_13_37_16_f040_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 40,
+   "n_agents": 2,
+   "tile": [
+    6,
+    5
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 103.16,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 2,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.308,
+   "receiver_only_score": 0.308,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 40.2,
+   "box_z_bottom_m": -2.11,
+   "box_height_m": 1.44,
+   "box_bev_lw_m": [
+    2.0,
+    4.67
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.34,
+    0.72,
+    1.1
+   ],
+   "z_extent_nonground_m": 0.76,
+   "nonground_extent_lw_m": [
+    0.88,
+    0.05
+   ],
+   "pts_in_envelope_0.2m": 4,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.77,
+    -1.39,
+    -1.01
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 22,
+   "plot": "remove_fr/case22_2021_08_22_13_37_16_f042_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 42,
+   "n_agents": 2,
+   "tile": [
+    8,
+    5
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 109.34,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.209,
+   "receiver_only_score": 0.209,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 52.53,
+   "box_z_bottom_m": -1.96,
+   "box_height_m": 1.5,
+   "box_bev_lw_m": [
+    1.85,
+    3.97
+   ],
+   "pts_in_box": 3,
+   "pts_nonground": 3,
+   "z_rel_bottom_p5_p50_p95": [
+    0.87,
+    0.88,
+    0.89
+   ],
+   "z_extent_nonground_m": 0.01,
+   "nonground_extent_lw_m": [
+    1.99,
+    0.68
+   ],
+   "pts_in_envelope_0.2m": 4,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.09,
+    -1.08,
+    -1.07
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 23,
+   "plot": "remove_fr/case23_2021_08_22_13_37_16_f043_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 43,
+   "n_agents": 2,
+   "tile": [
+    7,
+    4
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 110.03,
+   "SUP": 5,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.566,
+    1.0
+   ],
+   "score_minus": 0.245,
+   "receiver_only_score": 0.245,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 52.86,
+   "box_z_bottom_m": -1.94,
+   "box_height_m": 1.37,
+   "box_bev_lw_m": [
+    1.96,
+    5.17
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.85,
+    0.85,
+    0.86
+   ],
+   "z_extent_nonground_m": 0.01,
+   "nonground_extent_lw_m": [
+    2.05,
+    0.5
+   ],
+   "pts_in_envelope_0.2m": 4,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.09,
+    -1.09,
+    -1.08
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 24,
+   "plot": "remove_fr/case24_2021_08_22_13_37_16_f047_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 47,
+   "n_agents": 2,
+   "tile": [
+    7,
+    3
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 117.18,
+   "SUP": 4,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ],
+   "score_minus": 0.225,
+   "receiver_only_score": 0.225,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 63.38,
+   "box_z_bottom_m": -1.98,
+   "box_height_m": 1.48,
+   "box_bev_lw_m": [
+    2.07,
+    4.81
+   ],
+   "pts_in_box": 4,
+   "pts_nonground": 4,
+   "z_rel_bottom_p5_p50_p95": [
+    0.82,
+    0.83,
+    0.84
+   ],
+   "z_extent_nonground_m": 0.02,
+   "nonground_extent_lw_m": [
+    2.79,
+    0.59
+   ],
+   "pts_in_envelope_0.2m": 5,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.16,
+    -1.15,
+    -1.15
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 25,
+   "plot": "remove_fr/case25_2021_08_22_13_37_16_f054_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 54,
+   "n_agents": 2,
+   "tile": [
+    2,
+    13
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 60.57,
+   "SUP": 10,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ],
+   "score_minus": 0.204,
+   "receiver_only_score": 0.204,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.67,
+   "gt_nearest_centre_m": 0.33,
+   "box_z_bottom_m": -2.0,
+   "box_height_m": 1.55,
+   "box_bev_lw_m": [
+    1.8,
+    3.74
+   ],
+   "pts_in_box": 11,
+   "pts_nonground": 7,
+   "z_rel_bottom_p5_p50_p95": [
+    0.04,
+    0.97,
+    1.4
+   ],
+   "z_extent_nonground_m": 0.74,
+   "nonground_extent_lw_m": [
+    1.33,
+    1.1
+   ],
+   "pts_in_envelope_0.2m": 16,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.96,
+    -1.46,
+    -0.6
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "label/IoU artefact",
+   "conditions": [
+    "shift_feat"
+   ],
+   "visual_note": "overlaps GT car (centre in neighbouring tile); agrees"
+  },
+  {
+   "case": 26,
+   "plot": "remove_fr/case26_2021_08_22_13_37_16_f056_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 56,
+   "n_agents": 2,
+   "tile": [
+    2,
+    11
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 72.1,
+   "SUP": 6,
+   "TRAV": 0,
+   "OCC": 0,
+   "s_minus": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ],
+   "score_minus": 0.258,
+   "receiver_only_score": 0.258,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.0,
+   "gt_nearest_centre_m": 16.65,
+   "box_z_bottom_m": -2.07,
+   "box_height_m": 1.38,
+   "box_bev_lw_m": [
+    1.97,
+    4.92
+   ],
+   "pts_in_box": 9,
+   "pts_nonground": 6,
+   "z_rel_bottom_p5_p50_p95": [
+    0.25,
+    0.78,
+    1.16
+   ],
+   "z_extent_nonground_m": 0.81,
+   "nonground_extent_lw_m": [
+    4.27,
+    0.96
+   ],
+   "pts_in_envelope_0.2m": 9,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.82,
+    -1.29,
+    -0.91
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "shift_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "sparse single-ring returns lying on a long linear structure (wall/fence line) at long range; looks like unlabelled structure, but too few points for the rule"
+  },
+  {
+   "case": 27,
+   "plot": "remove_fr/case27_2021_08_22_13_37_16_f102_s1.png",
+   "scen": "2021_08_22_13_37_16",
+   "frame": 102,
+   "n_agents": 2,
+   "tile": [
+    1,
+    18
+   ],
+   "sender": 1,
+   "D": -1.0,
+   "range_m": 38.52,
+   "SUP": 22,
+   "TRAV": 7,
+   "OCC": 21,
+   "s_minus": 0.759,
+   "wilson95": [
+    0.579,
+    0.878
+   ],
+   "score_minus": 0.245,
+   "receiver_only_score": 0.245,
+   "receiver_only_match_iou": 1.0,
+   "gt_max_iou": 0.059,
+   "gt_nearest_centre_m": 1.79,
+   "box_z_bottom_m": -1.92,
+   "box_height_m": 1.44,
+   "box_bev_lw_m": [
+    2.06,
+    4.82
+   ],
+   "pts_in_box": 0,
+   "pts_nonground": 0,
+   "z_rel_bottom_p5_p50_p95": null,
+   "z_extent_nonground_m": null,
+   "nonground_extent_lw_m": null,
+   "pts_in_envelope_0.2m": 4,
+   "z_abs_in_envelope_p5_p50_p95": [
+    -1.79,
+    -1.54,
+    -1.3
+   ],
+   "nearest_gt_centre_same_tile": false,
+   "class": "unclear",
+   "conditions": [
+    "clean",
+    "spoof_feat",
+    "remove_feat",
+    "spoof_pts"
+   ],
+   "visual_note": "box squeezed between two GT cars that Y+ already detects; support comes from their faces (0 points inside the polygon, 22 in the 0.2 m envelope): duplicate between labelled cars"
+  }
+ ],
+ "low_evidence_cases_SUP+TRAV<=6": 15,
+ "condition_specific": {
+  "remove_feat": [
+   5,
+   8,
+   14,
+   16
+  ],
+  "shift_feat": [
+   6,
+   7,
+   11,
+   25
+  ]
+ }
+}

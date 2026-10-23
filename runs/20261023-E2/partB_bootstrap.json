@@ -1,0 +1,241 @@
+{
+ "note": "E2 Part B, development block T (3 scenarios, 404 frames), in-sample; R1 frozen; AP@0.7 OpenCOOD (non-global sort, frames in original order); paired bootstrap, 2000 resamples, seed 0, percentile CI",
+ "numpy_ap_vs_opencood_max_abs_diff": 9.270362255620057e-14,
+ "AP@0.7": {
+  "clean": {
+   "undefended": 0.8737,
+   "R1": 0.8741
+  },
+  "spoof_feat": {
+   "undefended": 0.8323,
+   "R1": 0.8392
+  },
+  "remove_feat": {
+   "undefended": 0.8631,
+   "R1": 0.8649
+  },
+  "shift_feat": {
+   "undefended": 0.8278,
+   "R1": 0.8358
+  },
+  "spoof_pts": {
+   "undefended": 0.8595,
+   "R1": 0.8634
+  }
+ },
+ "point": {
+  "clean_rel_loss": -0.0004,
+  "delta_clean": 0.0003,
+  "delta_spoof_feat": 0.0069,
+  "recovery_spoof_feat": 0.1674,
+  "delta_remove_feat": 0.0017,
+  "recovery_remove_feat": 0.1619,
+  "delta_shift_feat": 0.0081,
+  "recovery_shift_feat": 0.1756,
+  "delta_spoof_pts": 0.004,
+  "recovery_spoof_pts": 0.279,
+  "mean_recovery": 0.196
+ },
+ "bootstrap_scenario_blocks": {
+  "clean_rel_loss": {
+   "ci95": [
+    -0.0027,
+    0.0062
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "delta_clean": {
+   "ci95": [
+    -0.0055,
+    0.0023
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "delta_spoof_feat": {
+   "ci95": [
+    0.0063,
+    0.0249
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "recovery_spoof_feat": {
+   "ci95": [
+    0.1562,
+    0.5795
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "delta_remove_feat": {
+   "ci95": [
+    -0.0039,
+    0.0031
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "recovery_remove_feat": {
+   "ci95": [
+    -0.2561,
+    0.5304
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "delta_shift_feat": {
+   "ci95": [
+    0.0056,
+    0.0211
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "recovery_shift_feat": {
+   "ci95": [
+    0.1135,
+    0.3898
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "delta_spoof_pts": {
+   "ci95": [
+    0.0022,
+    0.0123
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "recovery_spoof_pts": {
+   "ci95": [
+    0.129,
+    0.6924
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "mean_recovery": {
+   "ci95": [
+    0.1261,
+    0.4076
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "_blocks": 3,
+  "_caveat": "3 blocks: the resampling distribution has at most 10 distinct frame sets; coarse"
+ },
+ "bootstrap_10frame_blocks": {
+  "clean_rel_loss": {
+   "ci95": [
+    -0.0024,
+    0.0019
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "delta_clean": {
+   "ci95": [
+    -0.0016,
+    0.0021
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "delta_spoof_feat": {
+   "ci95": [
+    0.0044,
+    0.0103
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "recovery_spoof_feat": {
+   "ci95": [
+    0.1111,
+    0.2355
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "delta_remove_feat": {
+   "ci95": [
+    -0.0005,
+    0.0037
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "recovery_remove_feat": {
+   "ci95": [
+    -0.0403,
+    0.412
+   ],
+   "dropped": 0,
+   "excludes_0": false
+  },
+  "delta_shift_feat": {
+   "ci95": [
+    0.0053,
+    0.0127
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "recovery_shift_feat": {
+   "ci95": [
+    0.1133,
+    0.2704
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "delta_spoof_pts": {
+   "ci95": [
+    0.0014,
+    0.0069
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "recovery_spoof_pts": {
+   "ci95": [
+    0.1076,
+    0.471
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "mean_recovery": {
+   "ci95": [
+    0.0949,
+    0.3279
+   ],
+   "dropped": 0,
+   "excludes_0": true
+  },
+  "_blocks": 42,
+  "_caveat": "within-scenario blocks of 10 consecutive frames (stratified); ignores between-scenario variation"
+ },
+ "recovery_ci_excludes_0": {
+  "bootstrap_scenario_blocks": {
+   "spoof_feat": true,
+   "remove_feat": false,
+   "shift_feat": true,
+   "spoof_pts": true,
+   "mean_recovery": true,
+   "clean_rel_loss": false
+  },
+  "bootstrap_10frame_blocks": {
+   "spoof_feat": true,
+   "remove_feat": false,
+   "shift_feat": true,
+   "spoof_pts": true,
+   "mean_recovery": true,
+   "clean_rel_loss": false
+  }
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "note": "E2 A1 side check (not pre-registered; added after A1 showed encode_receiver p50 0.316 s vs 0.17-0.26 s in E1). Receiver-only encode timed alone (no MINT stages interleaved), 24-frame dev slice, per-frame median of 5 reps, 8 intra-op threads; two alternating fresh processes per setting. Development, in-sample.",
+ "encode_receiver_s": {
+  "interop_default_8": [{"p50": 0.140, "p95": 0.2138}, {"p50": 0.1372, "p95": 0.1886}],
+  "interop_1": [{"p50": 0.1355, "p95": 0.1609}, {"p50": 0.1307, "p95": 0.1539}]
+ },
+ "interleaved_in_A1_s": {"p50": 0.3156, "p95": 0.3831},
+ "reading": "the interop setting does not matter; the encode is ~2.3x slower when it runs right after the MINT stages of the previous repetition (context-dependent, likely allocator/cache effects). A smaller baseline makes the overhead larger, so A3 reports both."
+}

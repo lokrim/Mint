@@ -36,3 +36,17 @@ Source: [e1_report.md](e1_report.md). `decision_log.md` was not edited; D-17 is 
 | D-41 | **Drop the attention-share fallback for blind tiles** (D-29 drop criterion met). | Keep as a module | E1 C: AUROC 0.29–0.47, 0/4 families meet the pre-registered bar; sign unstable across scenarios | High |
 
 Open (needs the user, not proposed here): under D-38 a dense counterfactual costs ≥ ~21% of the receiver's perception at n = 2 on CPU and grows ~linearly with n, so D-17 (≤ 10% p95) is not reachable by implementation changes measured in E1. The options are the user's decision: a different cost model (e.g. counterfactuals only on candidate tiles from a cheaper trigger), different hardware for the budget, or a revised budget.
+
+## Added 2026-10-23 (E2, development block T); also proposed, not applied
+
+Source: [e2_report.md](e2_report.md). `decision_log.md` was not edited; D-17 is unchanged; R1 is unchanged.
+
+| ID | Decision | Alternatives | Rationale | Confidence |
+|---|---|---|---|---|
+| D-42 | **Latency measurement protocol (refines D-38).** Per repetition, time a baseline-only run (receiver encode + plain) in the same sequence as the MINT runs and share it across modes. Also report the overhead with the receiver encode timed in isolation. When the two differ, the higher overhead is the conservative figure for D-17. | Each mode's own `plain` (E1); encode timed once per frame | E2 A1: encode 0.136 s alone vs 0.23–0.32 s after MINT stages; batched-mode `plain` inflated 0.08 → 0.21 s by context | High |
+| D-43 | **Record the E2 cost outcome: > 25% p95 band at n = 2** (best exact mode 59% p95; isolated-encode 76–85%). The structural floor is the counterfactual network forward, 22% p50 / 30% p95 of the baseline. Post-processing is 10% of the counterfactual stage, so no post-processing replacement is adopted. Streaming the 4 small scenarios is not recommended under the current D-17. | Optimise NMS/effects anyway | E2 A1/A3; pre-registered A2 trigger (≥ 40%) not met | High |
+| D-44 | **R1 uncertainty statement (development, in-sample).** AP@0.7 recovery 95% CIs exclude 0 for spoof_feat, shift_feat, spoof_pts and the 4-family mean, under both scenario-block and 10-frame-block bootstraps. remove_feat's CI includes 0. The clean relative-loss CI includes 0. Report absolute deltas (+0.2 to +0.8 AP points) alongside recovery. | Report recovery point estimates only | E2 B | Medium |
+
+Open (needs the user, not proposed here):
+- **D-17 or cost model.** Revising D-17 or the cost model (e.g. a cheaper trigger that limits counterfactuals to candidate tiles, a GPU budget, or a revised budget) is the user's decision and must be logged as a post-hoc revision.
+- **Harm-label artefact (E2 C).** 4/28 REMOVE "false rejections" are true-positive restorations whose GT centre lies in the neighbouring tile, which the tile-local D label scores as harm. Any label change (e.g. attributing a box to the tile of its matched GT) would need its own pre-registration and is not applied to E1/E2 numbers.

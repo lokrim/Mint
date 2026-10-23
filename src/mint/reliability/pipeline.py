@@ -23,6 +23,7 @@ Counterfactual modes (E1 A3; identical outputs up to float rounding, checked by 
 Extra cost per frame: the counterfactual decodes; zero extra bytes on the wire.
 """
 import time
+from contextlib import contextmanager
 
 import numpy as np
 import torch
@@ -35,6 +36,34 @@ from mint.effects.effects import effects as get_effects, tile_of
 from mint.reliability import v0
 
 TILE_M = 6.4
+
+
+class Prof:
+    """Optional sub-stage timer (E2 A1): prof.acc[stage] += seconds; a no-op when disabled."""
+
+    def __init__(self, on=True):
+        self.on, self.acc, self.stage = on, {}, None
+
+    @contextmanager
+    def __call__(self, name):
+        if not self.on:
+            yield
+            return
+        key = f"{self.stage}.{name}" if self.stage else name
+        t0 = time.perf_counter()
+        try:
+            yield
+        finally:
+            self.acc[key] = self.acc.get(key, 0.0) + time.perf_counter() - t0
+
+
+NOPROF = Prof(False)
+
+
+class OpenCOODPost:
+    """Post-processing as in E0/E1: compose.finalize (OpenCOOD nms_rotated) and effects.effects."""
+    finalize = staticmethod(finalize)
+    effects = staticmethod(get_effects)
 
 
 def receiver_ray_record(pts, gmask, box):
@@ -59,8 +88,11 @@ def _exclude_masks(feats, n, s):
     return out
 
 
-def _heads(model, feats, n, masks=None):
-    return decode(model, [fuse_scale(f[:n], None if masks is None else masks[k])[0] for k, f in enumerate(feats)])
+def _heads(model, feats, n, masks=None, prof=NOPROF):
+    with prof("fusion"):
+        fused = [fuse_scale(f[:n], None if masks is None else masks[k])[0] for k, f in enumerate(feats)]
+    with prof("deblocks_heads"):
+        return decode(model, fused)
 
 
 def _cands(pp, ego, psm, rm):
@@ -84,14 +116,16 @@ def _from_tiles(full, tiles_out, sel):
     return t.permute(2, 0, 3, 1, 4).reshape(c, r * TILE_PX, cc * TILE_PX)[:, :h].unsqueeze(0)
 
 
-def counterfactual_heads(model, feats, n, senders, mode, base=None, footprints=None):
+def counterfactual_heads(model, feats, n, senders, mode, base=None, footprints=None, prof=NOPROF):
     """{i: (psm, rm)} for Y-(i), i in senders."""
     if mode == "sequential":
-        return {i: _heads(model, feats, n, _exclude_masks(feats, n, [i])) for i in senders}
-    fused = [[fuse_scale(f[:n], m[k])[0] for k, f in enumerate(feats)]
-             for m in (_exclude_masks(feats, n, [i]) for i in senders)]
+        return {i: _heads(model, feats, n, _exclude_masks(feats, n, [i]), prof) for i in senders}
+    with prof("fusion"):
+        fused = [[fuse_scale(f[:n], m[k])[0] for k, f in enumerate(feats)]
+                 for m in (_exclude_masks(feats, n, [i]) for i in senders)]
     if mode == "batched":
-        psm, rm = decode_batch(model, [torch.stack([fz[k] for fz in fused]) for k in range(len(feats))])
+        with prof("deblocks_heads"):
+            psm, rm = decode_batch(model, [torch.stack([fz[k] for fz in fused]) for k in range(len(feats))])
         return {i: (psm[j:j + 1], rm[j:j + 1]) for j, i in enumerate(senders)}
     if mode == "footprint":
         w_head = feats[0].shape[3]
@@ -128,13 +162,15 @@ def pillar_footprints(batch_ego, n, grid=(200, 704), pillars_per_tile=16, dilate
 
 @torch.no_grad()
 def mint_frame(model, pp, batch, receiver_xyz, pc_range, params=v0.Params(), feats=None, rule=v0,
-               cf_mode="sequential", footprints=None):
+               cf_mode="sequential", footprints=None, post=OpenCOODPost, prof=NOPROF):
     """Returns dict(boxes, scores, reliability, choice, timing_s, extra_decodes).
 
     receiver_xyz: receiver scan, sensor frame. feats: per-scale [n, C, H, W] (encoded here if None,
     timed as encode_all). Timing keys: plain (fusion + decode + post-process of Y+), counterfactual
     (Y-(i) decodes + post-process + effects), evidence (rays + rule), compose (composition + final
     post-process, plus any multi-sender subset decode).
+    post: post-processing implementation (finalize, effects); OpenCOODPost or the exact fast
+    replacement mint.fusion.fastpost.FastPost (E2 A2). prof: optional sub-stage timer (E2 A1).
     """
     t = {}
     ego = batch["ego"]
@@ -146,22 +182,30 @@ def mint_frame(model, pp, batch, receiver_xyz, pc_range, params=v0.Params(), fea
     else:
         n = feats[0].shape[0]          # may exceed record_len when features are replicated (timing)
     t1 = time.perf_counter()
-    base = _heads(model, feats, n)
-    cands = {frozenset(): _cands(pp, ego, *base)}
-    yp, sp = finalize(pp, cands[frozenset()])
+    prof.stage = "plain"
+    base = _heads(model, feats, n, None, prof)
+    with prof("candidates"):
+        cands = {frozenset(): _cands(pp, ego, *base)}
+    with prof("finalize"):
+        yp, sp = post.finalize(pp, cands[frozenset()])
     t["plain"] = time.perf_counter() - t1
     t2 = time.perf_counter()
+    prof.stage = "counterfactual"
     senders = list(range(1, n))
-    heads = counterfactual_heads(model, feats, n, senders, cf_mode, base, footprints)
+    heads = counterfactual_heads(model, feats, n, senders, cf_mode, base, footprints, prof)
     eff = []
     for i in senders:
-        cands[frozenset([i])] = _cands(pp, ego, *heads[i])
-        ym, sm = finalize(pp, cands[frozenset([i])])
-        for e in get_effects(yp, sp, ym, sm):
-            eff.append({"sender": i, "type": e["type"], "plus": e["plus"], "minus": e["minus"],
-                        "tile_plus": None if e["plus"] is None else tile_of(e["plus"], pc_range, TILE_M),
-                        "tile_minus": None if e["minus"] is None else tile_of(e["minus"], pc_range, TILE_M)})
+        with prof("candidates"):
+            cands[frozenset([i])] = _cands(pp, ego, *heads[i])
+        with prof("finalize"):
+            ym, sm = post.finalize(pp, cands[frozenset([i])])
+        with prof("effects"):
+            for e in post.effects(yp, sp, ym, sm):
+                eff.append({"sender": i, "type": e["type"], "plus": e["plus"], "minus": e["minus"],
+                            "tile_plus": None if e["plus"] is None else tile_of(e["plus"], pc_range, TILE_M),
+                            "tile_minus": None if e["minus"] is None else tile_of(e["minus"], pc_range, TILE_M)})
     t["counterfactual"] = time.perf_counter() - t2
+    prof.stage = None
     t3 = time.perf_counter()
     pts = np.asarray(receiver_xyz, np.float64)
     gmask, _ = ground_mask(pts) if params.variant == "gnd" else (np.zeros(len(pts), bool), None)
@@ -177,7 +221,7 @@ def mint_frame(model, pp, batch, receiver_xyz, pc_range, params=v0.Params(), fea
         cands[s] = _cands(pp, ego, *_heads(model, feats, n, _exclude_masks(feats, n, s)))
         extra += 1
     if choice:
-        yp, sp = finalize(pp, compose(cands, choice))
+        yp, sp = post.finalize(pp, compose(cands, choice))
     t["compose"] = time.perf_counter() - t4
     return {"boxes": yp, "scores": sp, "reliability": rel, "choice": choice, "timing_s": t,
             "extra_decodes": extra, "cands": cands, "effects": eff}
