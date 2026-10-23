@@ -1,0 +1,464 @@
+loaded 2021_08_20_21_48_35
+loaded 2021_08_21_17_30_41
+loaded 2021_08_22_13_37_16
+{
+ "mode": "dev",
+ "label": "DEVELOPMENT, block T, in-sample",
+ "files": [
+  "runs/20261023-E0/cache/2021_08_20_21_48_35.pkl.gz",
+  "runs/20261023-E0/cache/2021_08_21_17_30_41.pkl.gz",
+  "runs/20261023-E0/cache/2021_08_22_13_37_16.pkl.gz"
+ ],
+ "scenarios": [
+  {
+   "scenario": "2021_08_20_21_48_35",
+   "frames": 112,
+   "compose_checks": 12,
+   "compose_all_identical": true
+  },
+  {
+   "scenario": "2021_08_21_17_30_41",
+   "frames": 157,
+   "compose_checks": 16,
+   "compose_all_identical": true
+  },
+  {
+   "scenario": "2021_08_22_13_37_16",
+   "frames": 135,
+   "compose_checks": 14,
+   "compose_all_identical": true
+  }
+ ],
+ "frames": 404,
+ "n_agents_hist": {
+  "2": 135,
+  "3": 157,
+  "4": 112
+ },
+ "numpy_ap_vs_opencood_max_abs_diff": 1.1302070390684094e-13,
+ "AP": {
+  "clean": {
+   "undefended": {
+    "AP@0.7": 0.8737,
+    "AP@0.5": 0.9437
+   },
+   "ego_only": {
+    "AP@0.7": 0.5808,
+    "AP@0.5": 0.7339,
+    "dAP@0.7": -0.2929,
+    "dAP@0.5": -0.2098,
+    "rel_loss@0.7": 0.3352
+   },
+   "B-RAY": {
+    "AP@0.7": 0.8736,
+    "AP@0.5": 0.9436,
+    "dAP@0.7": -0.0001,
+    "dAP@0.5": -0.0001,
+    "rel_loss@0.7": 0.0001
+   },
+   "R1": {
+    "AP@0.7": 0.8741,
+    "AP@0.5": 0.9471,
+    "dAP@0.7": 0.0003,
+    "dAP@0.5": 0.0033,
+    "rel_loss@0.7": -0.0004
+   },
+   "R1_noREMOVE": {
+    "AP@0.7": 0.8745,
+    "AP@0.5": 0.9444,
+    "dAP@0.7": 0.0008,
+    "dAP@0.5": 0.0006,
+    "rel_loss@0.7": -0.0009
+   },
+   "oracle_attacker": {
+    "AP@0.7": 0.8762,
+    "AP@0.5": 0.9501,
+    "dAP@0.7": 0.0025,
+    "dAP@0.5": 0.0063,
+    "rel_loss@0.7": -0.0028
+   },
+   "vis_oracle_attacker": {
+    "AP@0.7": 0.8757,
+    "AP@0.5": 0.9481,
+    "dAP@0.7": 0.002,
+    "dAP@0.5": 0.0044,
+    "rel_loss@0.7": -0.0023
+   }
+  },
+  "spoof_feat": {
+   "undefended": {
+    "AP@0.7": 0.8323,
+    "AP@0.5": 0.902,
+    "attack_loss@0.7": 0.0414
+   },
+   "ego_only": {
+    "AP@0.7": 0.5808,
+    "AP@0.5": 0.7339,
+    "dAP@0.7": -0.2514,
+    "dAP@0.5": -0.1681,
+    "recovery@0.7": -6.067
+   },
+   "B-RAY": {
+    "AP@0.7": 0.8404,
+    "AP@0.5": 0.9104,
+    "dAP@0.7": 0.0081,
+    "dAP@0.5": 0.0084,
+    "recovery@0.7": 0.196
+   },
+   "R1": {
+    "AP@0.7": 0.8392,
+    "AP@0.5": 0.9117,
+    "dAP@0.7": 0.0069,
+    "dAP@0.5": 0.0096,
+    "recovery@0.7": 0.167
+   },
+   "R1_noREMOVE": {
+    "AP@0.7": 0.8394,
+    "AP@0.5": 0.9091,
+    "dAP@0.7": 0.0071,
+    "dAP@0.5": 0.007,
+    "recovery@0.7": 0.172
+   },
+   "oracle_attacker": {
+    "AP@0.7": 0.8687,
+    "AP@0.5": 0.9424,
+    "dAP@0.7": 0.0364,
+    "dAP@0.5": 0.0404,
+    "recovery@0.7": 0.878
+   },
+   "vis_oracle_attacker": {
+    "AP@0.7": 0.8408,
+    "AP@0.5": 0.9134,
+    "dAP@0.7": 0.0085,
+    "dAP@0.5": 0.0114,
+    "recovery@0.7": 0.205
+   }
+  },
+  "remove_feat": {
+   "undefended": {
+    "AP@0.7": 0.8631,
+    "AP@0.5": 0.936,
+    "attack_loss@0.7": 0.0106
+   },
+   "ego_only": {
+    "AP@0.7": 0.5808,
+    "AP@0.5": 0.7339,
+    "dAP@0.7": -0.2823,
+    "dAP@0.5": -0.2021,
+    "recovery@0.7": -26.671
+   },
+   "B-RAY": {
+    "AP@0.7": 0.863,
+    "AP@0.5": 0.9359,
+    "dAP@0.7": -0.0001,
+    "dAP@0.5": -0.0001,
+    "recovery@0.7": -0.01
+   },
+   "R1": {
+    "AP@0.7": 0.8649,
+    "AP@0.5": 0.9409,
+    "dAP@0.7": 0.0017,
+    "dAP@0.5": 0.0049,
+    "recovery@0.7": 0.162
+   },
+   "R1_noREMOVE": {
+    "AP@0.7": 0.8639,
+    "AP@0.5": 0.9367,
+    "dAP@0.7": 0.0008,
+    "dAP@0.5": 0.0006,
+    "recovery@0.7": 0.073
+   },
+   "oracle_attacker": {
+    "AP@0.7": 0.8674,
+    "AP@0.5": 0.9442,
+    "dAP@0.7": 0.0043,
+    "dAP@0.5": 0.0081,
+    "recovery@0.7": 0.403
+   },
+   "vis_oracle_attacker": {
+    "AP@0.7": 0.8665,
+    "AP@0.5": 0.9417,
+    "dAP@0.7": 0.0034,
+    "dAP@0.5": 0.0057,
+    "recovery@0.7": 0.321
+   }
+  },
+  "shift_feat": {
+   "undefended": {
+    "AP@0.7": 0.8278,
+    "AP@0.5": 0.9034,
+    "attack_loss@0.7": 0.046
+   },
+   "ego_only": {
+    "AP@0.7": 0.5808,
+    "AP@0.5": 0.7339,
+    "dAP@0.7": -0.2469,
+    "dAP@0.5": -0.1695,
+    "recovery@0.7": -5.372
+   },
+   "B-RAY": {
+    "AP@0.7": 0.8357,
+    "AP@0.5": 0.913,
+    "dAP@0.7": 0.008,
+    "dAP@0.5": 0.0096,
+    "recovery@0.7": 0.174
+   },
+   "R1": {
+    "AP@0.7": 0.8358,
+    "AP@0.5": 0.9163,
+    "dAP@0.7": 0.0081,
+    "dAP@0.5": 0.0129,
+    "recovery@0.7": 0.176
+   },
+   "R1_noREMOVE": {
+    "AP@0.7": 0.8347,
+    "AP@0.5": 0.9115,
+    "dAP@0.7": 0.0069,
+    "dAP@0.5": 0.0081,
+    "recovery@0.7": 0.151
+   },
+   "oracle_attacker": {
+    "AP@0.7": 0.8576,
+    "AP@0.5": 0.9403,
+    "dAP@0.7": 0.0298,
+    "dAP@0.5": 0.0369,
+    "recovery@0.7": 0.649
+   },
+   "vis_oracle_attacker": {
+    "AP@0.7": 0.8443,
+    "AP@0.5": 0.9236,
+    "dAP@0.7": 0.0165,
+    "dAP@0.5": 0.0202,
+    "recovery@0.7": 0.36
+   }
+  },
+  "spoof_pts": {
+   "undefended": {
+    "AP@0.7": 0.8595,
+    "AP@0.5": 0.9291,
+    "attack_loss@0.7": 0.0143
+   },
+   "ego_only": {
+    "AP@0.7": 0.5808,
+    "AP@0.5": 0.7339,
+    "dAP@0.7": -0.2786,
+    "dAP@0.5": -0.1951,
+    "recovery@0.7": -19.546
+   },
+   "B-RAY": {
+    "AP@0.7": 0.8631,
+    "AP@0.5": 0.933,
+    "dAP@0.7": 0.0037,
+    "dAP@0.5": 0.004,
+    "recovery@0.7": 0.257
+   },
+   "R1": {
+    "AP@0.7": 0.8634,
+    "AP@0.5": 0.9364,
+    "dAP@0.7": 0.004,
+    "dAP@0.5": 0.0073,
+    "recovery@0.7": 0.279
+   },
+   "R1_noREMOVE": {
+    "AP@0.7": 0.8639,
+    "AP@0.5": 0.9336,
+    "dAP@0.7": 0.0044,
+    "dAP@0.5": 0.0046,
+    "recovery@0.7": 0.309
+   },
+   "oracle_attacker": {
+    "AP@0.7": 0.8739,
+    "AP@0.5": 0.9476,
+    "dAP@0.7": 0.0144,
+    "dAP@0.5": 0.0185,
+    "recovery@0.7": 1.012
+   },
+   "vis_oracle_attacker": {
+    "AP@0.7": 0.8654,
+    "AP@0.5": 0.9381,
+    "dAP@0.7": 0.006,
+    "dAP@0.5": 0.0091,
+    "recovery@0.7": 0.419
+   }
+  }
+ },
+ "point": {
+  "rel_loss|ego_only": 0.33523,
+  "delta|ego_only|clean": -0.2929,
+  "delta|ego_only|spoof_feat": -0.25145,
+  "delta|ego_only|remove_feat": -0.28231,
+  "delta|ego_only|shift_feat": -0.24693,
+  "delta|ego_only|spoof_pts": -0.27864,
+  "mean_delta_orig|ego_only": -0.26483,
+  "rel_loss|B-RAY": 0.00012,
+  "delta|B-RAY|clean": -0.00011,
+  "delta|B-RAY|spoof_feat": 0.00813,
+  "delta|B-RAY|remove_feat": -0.0001,
+  "delta|B-RAY|shift_feat": 0.00798,
+  "delta|B-RAY|spoof_pts": 0.00366,
+  "mean_delta_orig|B-RAY": 0.00492,
+  "rel_loss|R1": -0.00039,
+  "delta|R1|clean": 0.00034,
+  "delta|R1|spoof_feat": 0.00694,
+  "delta|R1|remove_feat": 0.00171,
+  "delta|R1|shift_feat": 0.00807,
+  "delta|R1|spoof_pts": 0.00398,
+  "mean_delta_orig|R1": 0.00517,
+  "rel_loss|R1_noREMOVE": -0.00089,
+  "delta|R1_noREMOVE|clean": 0.00078,
+  "delta|R1_noREMOVE|spoof_feat": 0.00713,
+  "delta|R1_noREMOVE|remove_feat": 0.00078,
+  "delta|R1_noREMOVE|shift_feat": 0.00693,
+  "delta|R1_noREMOVE|spoof_pts": 0.0044,
+  "mean_delta_orig|R1_noREMOVE": 0.00481,
+  "paired|R1-B-RAY|clean": 0.00045,
+  "paired|R1-B-RAY|spoof_feat": -0.0012,
+  "paired|R1-B-RAY|remove_feat": 0.00182,
+  "paired|R1-B-RAY|shift_feat": 0.0001,
+  "paired|R1-B-RAY|spoof_pts": 0.00031,
+  "paired_mean_orig|R1-B-RAY": 0.00026,
+  "paired|R1-R1_noREMOVE|clean": -0.00044,
+  "paired|R1-R1_noREMOVE|spoof_feat": -0.00019,
+  "paired|R1-R1_noREMOVE|remove_feat": 0.00094,
+  "paired|R1-R1_noREMOVE|shift_feat": 0.00115,
+  "paired|R1-R1_noREMOVE|spoof_pts": -0.00043,
+  "paired_mean_orig|R1-R1_noREMOVE": 0.00037,
+  "paired|R1-ego_only|clean": 0.29324,
+  "paired|R1-ego_only|spoof_feat": 0.25838,
+  "paired|R1-ego_only|remove_feat": 0.28402,
+  "paired|R1-ego_only|shift_feat": 0.255,
+  "paired|R1-ego_only|spoof_pts": 0.28262,
+  "paired_mean_orig|R1-ego_only": 0.27001,
+  "recovery|R1|spoof_feat": 0.16736,
+  "recovery|R1|remove_feat": 0.16194,
+  "recovery|R1|shift_feat": 0.1756,
+  "recovery|R1|spoof_pts": 0.27899,
+  "mean_recovery_orig|R1": 0.19597,
+  "recovery|B-RAY|spoof_feat": 0.19623,
+  "recovery|B-RAY|remove_feat": -0.00986,
+  "recovery|B-RAY|shift_feat": 0.17352,
+  "recovery|B-RAY|spoof_pts": 0.25701,
+  "mean_recovery_orig|B-RAY": 0.15422
+ },
+ "n1_frames": 0,
+ "B-RAY_boxes": {
+  "clean": {
+   "boxes": 7432,
+   "drop": 12,
+   "keep": 6089,
+   "keep_unknown": 927,
+   "keep_self": 404,
+   "frac_KNOWN": 0.821,
+   "dropped_gt_matched": 7,
+   "dropped_unmatched": 5
+  },
+  "spoof_feat": {
+   "boxes": 7822,
+   "drop": 139,
+   "keep": 6095,
+   "keep_unknown": 1184,
+   "keep_self": 404,
+   "frac_KNOWN": 0.797,
+   "dropped_gt_matched": 7,
+   "dropped_unmatched": 132
+  },
+  "remove_feat": {
+   "boxes": 7376,
+   "drop": 12,
+   "keep": 6066,
+   "keep_unknown": 897,
+   "keep_self": 401,
+   "frac_KNOWN": 0.824,
+   "dropped_gt_matched": 7,
+   "dropped_unmatched": 5
+  },
+  "shift_feat": {
+   "boxes": 7569,
+   "drop": 137,
+   "keep": 6083,
+   "keep_unknown": 948,
+   "keep_self": 401,
+   "frac_KNOWN": 0.822,
+   "dropped_gt_matched": 7,
+   "dropped_unmatched": 130
+  },
+  "spoof_pts": {
+   "boxes": 7598,
+   "drop": 78,
+   "keep": 6093,
+   "keep_unknown": 1023,
+   "keep_self": 404,
+   "frac_KNOWN": 0.812,
+   "dropped_gt_matched": 7,
+   "dropped_unmatched": 71
+  }
+ },
+ "realization": {
+  "spoof_feat": {
+   "frames_with_sender": 404,
+   "applied": 401,
+   "realized": 261,
+   "realized_dst_rays_lt3_or_self": 158,
+   "realized_hit_unit_KNOWN": 0,
+   "realized_hit_unit_gated_by_R1": 0,
+   "not_applied_no_blind_dst": 0
+  },
+  "remove_feat": {
+   "frames_with_sender": 404,
+   "applied": 400,
+   "realized": 42,
+   "target_detected_clean": 395
+  },
+  "shift_feat": {
+   "frames_with_sender": 404,
+   "applied": 402,
+   "realized": 66,
+   "target_detected_clean": 399
+  },
+  "spoof_pts": {
+   "frames_with_sender": 404,
+   "applied": 404,
+   "realized": 166,
+   "realized_dst_rays_lt3_or_self": 96,
+   "realized_hit_unit_KNOWN": 0,
+   "realized_hit_unit_gated_by_R1": 0,
+   "not_applied_no_blind_dst": 0
+  }
+ },
+ "B-RAY_cost_dev": {
+  "note": "seconds to count receiver rays for every final Y+ box and filter, clean condition, one run per frame, from the float16 cached scan (Apple M1 CPU, single process); no baseline timing exists in the block-T caches",
+  "all": {
+   "p50": 0.0552,
+   "p95": 0.1261,
+   "n": 404
+  },
+  "boxes_per_frame": {
+   "p50": 15.0,
+   "p95": 28.0,
+   "n": 404
+  },
+  "by_stratum": {
+   "2": {
+    "p50": 0.0342,
+    "p95": 0.0679,
+    "n": 135
+   },
+   "3": {
+    "p50": 0.065,
+    "p95": 0.1426,
+    "n": 157
+   },
+   "4+": {
+    "p50": 0.0679,
+    "p95": 0.1202,
+    "n": 112
+   }
+  }
+ },
+ "ray_count_check_dev": {
+  "what": "ADD/SHIFT Y+ boxes (clean): cached E0 effect counts (float64 scan) vs recomputed from the float16 cache",
+  "boxes": 1504,
+  "identical_counts": 1475,
+  "same_B-RAY_verdict": 1504
+ }
+}
