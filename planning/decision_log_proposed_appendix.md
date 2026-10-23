@@ -15,3 +15,11 @@
 | D-34 | Novelty wording: say "to our knowledge", compare against MADE (with/without-sender), MATE (beta trust + FOV gating), CAD/CARLO (free space) and TrustReflect (uncertain mask); recheck the search before submission. | Claim novelty of counterfactual or ray evidence | §4 | High |
 
 Related claim-ledger changes to propose (not applied): C-02 stays PROVISIONAL (search-limited); add a claim "visibility-limited oracle bound" (NOT-RUN).
+
+## Added 2026-10-23 (preflight for MINT-v0.0); also proposed, not applied
+
+| ID | Decision | Alternatives | Rationale | Confidence |
+|---|---|---|---|---|
+| D-35 | **Harm notation.** `D = L_u(Y⁺) − L_u(Y⁻(i,u))`. HARMFUL iff `D > m`; USEFUL iff `D < −m`; NEUTRAL iff `−m ≤ D ≤ m`; `m = 0.5`. `p_harm_keep = P(D > m | ev)`, `p_harm_remove = P(D < −m | ev)`. Remove sender *i* in tile *u* iff KNOWN and `p_harm_keep > κ·p_harm_remove` (κ = 1). Uncalibrated variants use raw `h_keep`, `h_remove` and are never called probabilities. D-02's `P(D ≤ m | X)` = `1 − p_harm_keep`. Only the boundary differs from contract §5.1 (`D ≥ m` there). | Keep `D ≥ m`; one-sided rule | User request 2026-10-23; makes action rule and variable names agree | High |
+| D-36 | E0 pre-registration (before any download): primary recovery metric uses AP@0.7 and the oracle restricted to the attacker's units under the receiver-visibility constraint; criterion < 30% → stop. Details in `runs/20261023-E0/preregistration.json`. | Use the all-sender oracle (mixes benign-harm fixes into "recovery") | Isolates attack-loss recovery | High |
+| D-37 | Ground handling for OPV2V ray tests is decided by a pre-registered empirical test on the development scenarios (empty synthetic boxes vs genuine objects, with and without a per-frame receiver-only ground classifier). | Assume flat ground; use GT ground | Envelope test counts ground hits under a fake box as support at near range (§ geometry note in the E0 report) | Medium |

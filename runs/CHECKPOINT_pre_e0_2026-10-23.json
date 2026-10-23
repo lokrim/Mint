@@ -1,0 +1,231 @@
+{
+ "created": "2026-10-23",
+ "purpose": "checkpoint of all run outputs (tracked and git-ignored) before E0",
+ "archive_of_ignored": {
+  "path": "data/checkpoints/runs_ignored_pre_e0_2026-10-23.tar.gz",
+  "sha256": "da9089f0375271aba51d65db0d621fce5b3ae6dbb65cc8d4b018a444ba921b20",
+  "bytes": 5519343
+ },
+ "files": [
+  {
+   "path": "runs/20261022T165007Z-S1-spike/manifest.json",
+   "bytes": 1073,
+   "sha256": "2cc67b89e5979f9d1a713d340ee3e54bab851764fbd29a216f288610826231d2"
+  },
+  {
+   "path": "runs/20261022T165007Z-S1-spike/record.json",
+   "bytes": 13700,
+   "sha256": "2bd36caea524c68aeff8c53aa6248cc8ffa09346939d19f3b764f7138daaba04"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/log.txt",
+   "bytes": 3565,
+   "sha256": "6a2af9aece45bac687b8265895fcd328e00d1ed52506626d3dd4dd3ae7c404ca"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_18_19_48_05.npz",
+   "bytes": 441235,
+   "sha256": "60bbbee9a52c09b600847f54e803b44409873e278e892cf52006afb2d5074959"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_20_21_10_24.npz",
+   "bytes": 336458,
+   "sha256": "baf66dedc5314dd0bac6b2de01b75cace2b20f31ebdee0a94c43f847b7ebbce0"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_21_09_28_12.npz",
+   "bytes": 290103,
+   "sha256": "d2e35c101f450acf77cedd2b26ec1fb7b395cb9e07b0060851d5ee1f58d4cf98"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_22_07_52_02.npz",
+   "bytes": 562828,
+   "sha256": "d224b4aa3c0ba4297c945d44aa0eaca75936fd7c5f8127417ba19e375f6ac750"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_22_09_08_29.npz",
+   "bytes": 223824,
+   "sha256": "ed6ad1c5fd158f0dc50d8263da2bc3876822635283ac91bed6d161269e66daf3"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_22_21_41_24.npz",
+   "bytes": 163654,
+   "sha256": "72c80f319868f79bfb5ba2bdaebf2181115555506dd24b8ad60b527109992b5a"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_23_12_58_19.npz",
+   "bytes": 268056,
+   "sha256": "44b1a2b074efb2d8db747a57803e79b7ee1a15bb54680d58c7a958dca8c0e1b2"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_23_15_19_19.npz",
+   "bytes": 255911,
+   "sha256": "2e6030b27ef8e4fedcfc550bca406595b20a85292334317f4b8ae645f1ea22e1"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_23_16_06_26.npz",
+   "bytes": 288502,
+   "sha256": "3611c37544c3a8bd98884b9abd226902da931a7020d90aca99e79d19fe4083c7"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_23_17_22_47.npz",
+   "bytes": 263794,
+   "sha256": "223975d9cc88b42b28377024b34f1590cbbdd5d8921d4852c7f2420a49b18673"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_23_21_07_10.npz",
+   "bytes": 301942,
+   "sha256": "7b29c8c8e5201883da2a73eedeb1606873e7e03b891da926af6f59f35140b046"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_23_21_47_19.npz",
+   "bytes": 299680,
+   "sha256": "75ce7956bf8900bf89a61960b225ae1188d555b29bd2a07892921204c5c4b2d3"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_24_07_45_41.npz",
+   "bytes": 420674,
+   "sha256": "d83e12128063ede57eb4aa73e07a2b4e33f098e9a168f6bc107a30fb3ade5846"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_24_11_37_54.npz",
+   "bytes": 141837,
+   "sha256": "c80c658f57c9570a601eb95fc3898a052ded59c3d3c5207ee96652323f548311"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_24_20_09_18.npz",
+   "bytes": 274705,
+   "sha256": "8bb30c5c48e8cd679c9a70536b6890679e3b9b295b8fafd5f8a116eac2216182"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/preds/2021_08_24_20_49_54.npz",
+   "bytes": 245281,
+   "sha256": "c6fa6bfc00c8026f3f56ef5e047e758a781934d198caa1eda180d2cecd853b79"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_18_19_48_05.json",
+   "bytes": 248527,
+   "sha256": "3c98413d78cc0cf8ba1e69dfd67927d6db9cb31a99667566fa472e7451960a23"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_20_21_10_24.json",
+   "bytes": 215097,
+   "sha256": "e7a14207bc6fa018f758483e87d47323da2a374f44542e2fa27a5e34a594a4d0"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_21_09_28_12.json",
+   "bytes": 152861,
+   "sha256": "ad4d2c001b4442845acac39c2bd522d0a15e86bb99b62bc3f2d32d7f23cba1d0"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_22_07_52_02.json",
+   "bytes": 341528,
+   "sha256": "70f60d17f976f4c3d1cb912246ebbfe3c0a72a3c72d4d5e23ce1ef6a851d76d3"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_22_09_08_29.json",
+   "bytes": 104261,
+   "sha256": "a885a7c14eb35fe86425b4fdb322c777ee99aeaf0896e5a6db8aaecfe1bcb44b"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_22_21_41_24.json",
+   "bytes": 93204,
+   "sha256": "6ba658f5bd5900fb036daf90f2c3a6f018e4759078e842605f198f80176bcc79"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_23_12_58_19.json",
+   "bytes": 152808,
+   "sha256": "0c1d9edee393378bbde7e73c1d4c43338d05e2bea9bf1d7ac4e0d1b0ef2a508d"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_23_15_19_19.json",
+   "bytes": 116799,
+   "sha256": "24c67376a946e10d1006f471aeb32d3af366f40f2a6bc33c6822002ed560fa62"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_23_16_06_26.json",
+   "bytes": 161362,
+   "sha256": "cd20e1eef4a479f299ca08bddac159373424a9ff0cae9d753791cf1e1b2b51b5"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_23_17_22_47.json",
+   "bytes": 153034,
+   "sha256": "c88ee29bc42af2f8900fb8757102c99b3d5a0537d8cda92942cbbe6d60ece33b"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_23_21_07_10.json",
+   "bytes": 175189,
+   "sha256": "ab50cb40087837fe899253d81de5e7737f03c972a4f7abb57df18b1f94a9b3ac"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_23_21_47_19.json",
+   "bytes": 203243,
+   "sha256": "f9e40d60b7f2c414a87f9b68522b67cb0a80f8355d318f9688e07b733bb86b30"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_24_07_45_41.json",
+   "bytes": 270927,
+   "sha256": "76635394b47c8a59d8868a320c9306d166830d899c479c6caa1df0d189ffd471"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_24_11_37_54.json",
+   "bytes": 58590,
+   "sha256": "ab460940a70fe564f2feb8ec7c80f8d3c28fd99c7bfac226ab5c77701570e5e9"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_24_20_09_18.json",
+   "bytes": 101919,
+   "sha256": "948fe968b24c2ca71906436ff765f283f9a2a7fc3ff66b42ac26c98d37842e21"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/scenarios/2021_08_24_20_49_54.json",
+   "bytes": 100926,
+   "sha256": "f8018ee31cf4e8cd154344f84c59b757f2ac9a30318b31d075eaf1f53542dfe8"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/summary.json",
+   "bytes": 5576,
+   "sha256": "5197cf65892d09ccb0e30a1e972d6b6d276d90b334b2de10b3c9cb314779d267"
+  },
+  {
+   "path": "runs/20261023-S1-reproduce/summary.md",
+   "bytes": 1979,
+   "sha256": "a298d06d39a247b0172ca23e87859456c61a6279a1232540b664784c7758ae1b"
+  },
+  {
+   "path": "runs/20261023-S1-seedcheck/log.txt",
+   "bytes": 297,
+   "sha256": "3f55aaa60df04835e9eaa5d771f6fc30a344e60149a1229a8886b38a42c58bb6"
+  },
+  {
+   "path": "runs/20261023-S1-seedcheck/preds/2021_08_23_12_58_19.npz",
+   "bytes": 268056,
+   "sha256": "44b1a2b074efb2d8db747a57803e79b7ee1a15bb54680d58c7a958dca8c0e1b2"
+  },
+  {
+   "path": "runs/20261023-S1-seedcheck/scenarios/2021_08_23_12_58_19.json",
+   "bytes": 153083,
+   "sha256": "75c60440b316a6bf4c191b756ea8248718eae7e797730eea84021a974ecda626"
+  },
+  {
+   "path": "runs/20261023-S2-validate/scenarios/2021_08_20_21_48_35.json",
+   "bytes": 1091886,
+   "sha256": "529e4663d51e892f19faa0a724561f09f4f2f2f3d1d073a10a633b310538c106"
+  },
+  {
+   "path": "runs/20261023-S2-validate/scenarios/2021_08_21_17_30_41.json",
+   "bytes": 1381349,
+   "sha256": "729da4c97450929a004fed560a2b0d01c848e5da11d2f16ced2217a4f01d9c76"
+  },
+  {
+   "path": "runs/20261023-S2-validate/scenarios/2021_08_22_13_37_16.json",
+   "bytes": 691539,
+   "sha256": "566319542ad72735990ccc1de6f53559f214f2a1fb138bf01a43e287028e072e"
+  },
+  {
+   "path": "runs/20261023-S2-validate/summary.json",
+   "bytes": 3340,
+   "sha256": "853f8ac85bc3124a6159cc0ee9d5deb127821768c47e17d3fc62d57b27dfcde0"
+  }
+ ]
+}

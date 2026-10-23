@@ -102,7 +102,14 @@ Scope: about 40 works, searched through 2026. **No code or results of any prior 
 
 **Definition** (consistent with D-02). For sender *i*, tile *u*, time *t*, let `Y⁺` be detections with all contributions, `Y⁻(i)` detections with sender *i* excluded in tile *u*, and `L_u(·)` a local loss against ground truth (false positives, misses, localization error). Offline only:
 
-`D(i,u,t) = L_u(Y⁺) − L_u(Y⁻(i))`; the contribution is *harmful* if `D > m`, *useful* if `D < −m`, otherwise neutral. The inference target is `P(D ≤ m | evidence)`.
+`D(i,u,t) = L_u(Y⁺) − L_u(Y⁻(i,u))`, where `Y⁺` includes sender *i* and `Y⁻(i,u)` removes its contribution in tile *u* (contract §5.1 loss: `L_u = #FP + #FN + 0.5·Σ_TP(1 − IoU)`, BEV IoU ≥ 0.5, `m = 0.5`). Three disjoint cases (notation resolved 2026-10-23, proposed D-35):
+- **HARMFUL (to keep):** `D > m`, i.e. keeping the contribution adds more than `m` local error.
+- **USEFUL (harmful to remove):** `D < −m`, i.e. removing it adds more than `m` local error.
+- **NEUTRAL:** `−m ≤ D ≤ m`.
+
+The two inference targets are `p_harm_keep = P(D > m | evidence)` and `p_harm_remove = P(D < −m | evidence)`; `p_neutral = 1 − p_harm_keep − p_harm_remove`. D-02's `P(D ≤ m | X)` equals `1 − p_harm_keep`. The only change from contract §5.1 is the boundary: the contract labels `D ≥ m` as HARMFUL; from MINT-v0 on, `D = m` exactly is NEUTRAL (it needs fractional localization terms to occur at all).
+
+**Action rule.** Remove sender *i* in tile *u* (output `Y⁻(i,u)` there) iff the status is KNOWN and `p_harm_keep > κ · p_harm_remove` (cost ratio κ, default 1). Otherwise keep `Y⁺`. The uncalibrated MINT-v0.0 uses raw scores `h_keep`, `h_remove` in place of the probabilities and must not call them probabilities.
 
 **Consequences I checked against the repo and logic**:
 
@@ -224,8 +231,9 @@ per frame t (receiver = agent 0, proj_first convention D-13b):
 Reliability(
   status ∈ {KNOWN, NO_EFFECT, UNKNOWN_NO_EVIDENCE, UNKNOWN_OOD,
             UNKNOWN_UNINFORMATIVE, UNKNOWN_STALE, NOT_APPLICABLE_EMPTY},
-  p_harm_keep : float | None     # calibrated P(D > m | evidence) iff status==KNOWN
-  p_harm_remove: float | None    # calibrated P(removal harmful)
+  p_harm_keep : float | None     # calibrated P(D > m | evidence) iff status==KNOWN and calibrator fitted
+  p_harm_remove: float | None    # calibrated P(D < −m | evidence), same conditions
+  h_keep, h_remove: float | None # raw uncalibrated scores (MINT-v0.0); never reported as probabilities
   is_probability: bool           # False for uncalibrated variants (1a, pre-calibration 1b)
   effects: tuple[EffectEvidence] # type, boxes, counts, log-BF, bin (audit)
   aux: dict                      # attention share, score jump, … (logged, unused in v0 decision)
