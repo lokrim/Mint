@@ -1,0 +1,49 @@
+{
+ "id": "E1 - cache-only diagnostics before any calibration download (development, block T)",
+ "written": "2026-10-23, before any E1 code was run",
+ "data": {"scenarios": ["2021_08_22_13_37_16", "2021_08_21_17_30_41", "2021_08_20_21_48_35"],
+          "sources": "runs/20261023-E0/cache (block T caches) and data/opv2v/devslice (24-frame slice of 2021_08_22_13_37_16, block T)",
+          "split": "development block T only (D-25); no download; no calibration (C) or test scenario is downloaded, opened or referenced",
+          "labelling": "all results are development / in-sample"},
+ "verbatim": {
+  "part_A": [
+   "1. In pipeline.py replace the final masked decode with compose()+finalize() over the already-computed decodes. Re-run mint_v0_online_check.py; require identical boxes on 24/24 frames.",
+   "2. Fix latency accounting: baseline = receiver-only encode + fusion + decode + post-process (exclude encoding of sender point clouds; report how much encode time was sender encoding). Report p50 and p95 overhead.",
+   "3. Measure the counterfactual cost for n = 2, 3, 4, 5 agents (timing only; replicated features are acceptable), both as currently implemented and with the n−1 counterfactual decodes batched into one forward pass. If cheap to implement, also measure restricting each counterfactual to sender i's non-zero feature footprint (exact because post-fusion is pixel-local); verify exactness against the dense version on the 24-frame slice.",
+   "Acceptance: table of overhead (p50/p95) vs n for each variant, against D-17 (≤10% p95)."],
+  "rule_R1": [
+   "Rule R1 \"resolvable evidence\": gate a unit only if the evidence is statistically resolvable from receiver ray counts. Use the Wilson 95% interval on each support ratio s = SUP/(SUP+TRAV):",
+   "  ADD: gate iff upper bound of s+ < 0.5",
+   "  REMOVE: gate iff lower bound of s− > 0.5",
+   "  SHIFT: gate iff the Wilson intervals of s+ and s− do not overlap AND s+ < s−",
+   "  Unit gates iff at least one effect gates and no effect in the unit is resolvably useful (the mirror conditions); otherwise keep. UNKNOWN = keep.",
+   "State in the code that rays are spatially correlated, so this is a resolvability margin, not a calibrated probability.",
+   "Evaluate R1 and θ=0 on block T, clean + 4 attack families: AP@0.5/0.7, recovery of attack loss, clean relative loss, and a breakdown of gated tiles and false rejections of useful tiles by effect type (ADD/REMOVE/SHIFT), including SHIFT displacement d."],
+  "part_C": [
+   "On UNKNOWN_NO_EVIDENCE units, report AUROC of the cached per-tile attention share (attn_tile) vs the HARMFUL label, per family and clean, with block-bootstrap CIs over scenarios. Note in the report that attention is attacker-influenced, so this tests a non-adaptive attacker only."],
+  "stop_criteria": [
+   "Recommend downloading the calibration scenarios only if R1 reaches mean AP@0.7 recovery ≥ 0.10, clean AP@0.7 relative loss ≤ 1%, and no family < −0.05, AND some variant in Part A reaches ≤ 10% p95 overhead at n = 2.",
+   "The blind-tile signal is worth a follow-up only if AUROC ≥ 0.70 with the CI lower bound > 0.60 in at least 3 of 4 families; otherwise drop it.",
+   "Do not tune R1 after seeing results. If it fails, report the failure and stop."]
+ },
+ "implementation_clarifications_fixed_before_running": {
+  "wilson": "z = 1.959964; k = SUP, n = SUP+TRAV of the standard count (E0 ground test selected 'std'); interval [lo, hi] = (k + z^2/2)/(n + z^2) -/+ z/(n + z^2) * sqrt(k(n-k)/n + z^2/4)",
+  "mirror_conditions": {"ADD useful": "lower bound of s+ > 0.5", "REMOVE useful": "upper bound of s- < 0.5",
+                        "SHIFT useful": "intervals do not overlap AND s+ > s-"},
+  "intervals_overlap": "closed intervals; non-overlap iff hi_a < lo_b or hi_b < lo_a",
+  "UNKNOWN": "unit status exactly as MINT-v0.0 (mint.reliability.v0.effect_status): a unit is KNOWN iff every effect box has >= 3 receiver rays (SUP+TRAV) and is not the receiver's own box; any other unit is kept (UNKNOWN_NO_EVIDENCE or NOT_APPLICABLE_SELF)",
+  "theta0": "MINT-v0.0 with theta = 0 (mint.reliability.v0, unchanged), recomputed from the same caches",
+  "AP_and_recovery": "as E0 / mint_v0_eval: OpenCOOD AP pooled over the 3 scenarios; recovery = (AP_policy(attacked) - AP_undefended(attacked)) / (AP_clean - AP_undefended(attacked)); frames where an attack was not applied are evaluated as clean; clean relative loss = 1 - AP_policy(clean)/AP_undefended(clean)",
+  "mean_recovery": "unweighted mean over the four families spoof_feat, remove_feat, shift_feat, spoof_pts at AP@0.7 (families with attack loss < 0.005 would be excluded, as in E0)",
+  "labels": "D, HARMFUL (D > 0.5), USEFUL (D < -0.5) exactly as E0 (runners/e0_analyze.frame_policies)",
+  "false_rejection": "a USEFUL unit that the rule gates",
+  "breakdown_attribution": "a gated unit is attributed to every effect type that gates in it (counts can sum to more than the number of gated units); SHIFT displacement d = BEV distance between the centres of the plus and minus boxes",
+  "partC_population": "UNKNOWN_NO_EVIDENCE units (MINT-v0.0 status) of every sender; clean: all frames with >= 2 agents; each family: frames where that attack was applied",
+  "partC_score_direction": "score = attn_tile[sender, tile_row, tile_col] (mean attention share of that sender in the 6.4 m tile at fusion scale 0, cached in E0); higher share is taken to predict HARMFUL; AUROC is reported in that direction only (no direction flip after seeing data)",
+  "partC_bootstrap": "block bootstrap with scenarios as blocks (3 blocks), 2000 resamples, percentile 95% CI; resamples with no positive or no negative are dropped and counted; with only 3 scenarios the CI is coarse and this is stated",
+  "partA_overhead": "overhead = (MINT time - baseline) / baseline per frame, p50 and p95 over frames; baseline = receiver-only encode + plain fusion + decode + post-process; MINT time = baseline + counterfactual decodes + effects + ray evidence + rule + composition",
+  "partA_frames": "the 24-frame dev slice; n = 2 uses the real 2-agent frames; n = 3, 4, 5 replicate sender 1's features (timing only)",
+  "partA_footprint_exactness": "exact iff final boxes and scores of every counterfactual equal the dense counterfactual on 24/24 frames; if not exact it is reported as inexact and does not count toward the Part A criterion",
+  "R1_threshold_free": "R1 has no tunable threshold; no other R1 variant is evaluated"
+ }
+}
