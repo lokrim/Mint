@@ -53,5 +53,15 @@
   "ulp_definition": "ULP of the dense value v = numpy.spacing(abs(float32(v))); evaluated per element over every non-padded cell of every selected tile, both heads (psm, rm).",
   "unchanged": "Everything else in this pre-registration (steps 2-4, f in {0.05, 0.10}, PASS/PARTIAL/FAIL bands, the approved block-T re-stream and its safeguards, implementation clarifications) is unchanged.",
   "evaluation": "Re-evaluate step 1 from the existing step-1 outputs if they contain what is required; otherwise re-run step 1 only. If the revised criterion fails: stop."
+ },
+ "correction_2_2026-10-23": {
+  "written": "2026-10-23, after the D-46 step-1 result (commit 49b7214) and before any E3 step 2-4 result exists; the user's decision, given in chat",
+  "status": "second and final post-hoc correction of the step-1 criterion only",
+  "reason": "Criterion (c) of correction_2026-10-23 (all psm/rm diffs <= 32 float32 ULP of the dense value) was mis-specified: the ULP is relative to each value, so near-zero rm/psm elements fail with absolute diffs <= 3.9e-6, and the dense-equivalent all-572-tile path fails it worse (max 34.6M ULP) than the T(f) tile paths (max 1.4M ULP). Element-wise bounds below rounding noise cannot distinguish the tile method from a path that is exact by construction.",
+  "final_step1_criterion": "(a) and (b) of correction_2026-10-23 on 24/24 frames, for T(0.05) and T(0.10): (a) candidate anchor indices above score_threshold identical to the dense candidates restricted to T(f); (b) candidate score diff <= 1e-5 and corner diff <= 1e-4 m. Criterion (c) is dropped.",
+  "finality": "This is the last change to step 1; no further revision of step 1 will be made regardless of later results.",
+  "information_used": "No cost, recall or AP information is used.",
+  "evaluation": "Evaluated from the existing runs/20261023-E3/step1_revised.json ((a) and (b) recorded per frame for both f); step 1 is not re-run.",
+  "unchanged": "Steps 2-4, f in {0.05, 0.10}, the PASS/PARTIAL/FAIL bands (effect recall >= 0.98 per type, AP@0.7 recovery within 0.02 of dense on every family, n = 2 overhead bands), the approved block-T re-stream and its safeguards, and all implementation clarifications are unchanged. Steps 2-4 test end-to-end equivalence."
  }
 }
