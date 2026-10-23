@@ -59,3 +59,35 @@ def decode(model, fused):
 def reference_fused(model, feats, record_len):
     """OpenCOOD's own AttFusion outputs, for equality checks (sample 0 only)."""
     return [model.backbone.fuse_modules[i](f, record_len)[0] for i, f in enumerate(feats)]
+
+
+@torch.no_grad()
+def receiver_features(model, batch_ego):
+    """Per-scale features of the receiver (agent 0) only, encoding only its own pillars.
+
+    This is the receiver's encode cost in deployment: sender features arrive over the wire, so the
+    encoding of sender point clouds is not receiver work. Returns a list of [1, C_k, H_k, W_k].
+    """
+    pp = batch_ego["processed_lidar"]
+    keep = pp["voxel_coords"][:, 0] == 0
+    bd = {"voxel_features": pp["voxel_features"][keep], "voxel_coords": pp["voxel_coords"][keep],
+          "voxel_num_points": pp["voxel_num_points"][keep], "record_len": torch.ones_like(batch_ego["record_len"][:1])}
+    bd = model.pillar_vfe(bd)
+    bd = model.scatter(bd)
+    x = bd["spatial_features"]
+    feats = []
+    for blk in model.backbone.blocks:
+        x = blk(x)
+        feats.append(x)
+    return feats
+
+
+@torch.no_grad()
+def decode_batch(model, fused):
+    """fused: list over scales of [B, C_k, H_k, W_k] (B counterfactuals in one forward pass)."""
+    bb = model.backbone
+    ups = [bb.deblocks[i](f) for i, f in enumerate(fused)]
+    x = torch.cat(ups, dim=1) if len(ups) > 1 else ups[0]
+    if len(bb.deblocks) > len(bb.blocks):
+        x = bb.deblocks[-1](x)
+    return model.cls_head(x), model.reg_head(x)

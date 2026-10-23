@@ -1,0 +1,32 @@
+{
+ "frames": 24,
+ "all_same_boxes": true,
+ "all_same_choice": true,
+ "frames_with_gating": 9,
+ "latency_s_p50": {
+  "encode_receiver": 0.171,
+  "encode_all": 0.475,
+  "plain": 0.084,
+  "counterfactual": 0.074,
+  "evidence": 0.009,
+  "compose": 0.0
+ },
+ "latency_s_p95": {
+  "encode_receiver": 0.256,
+  "encode_all": 0.619,
+  "plain": 0.117,
+  "counterfactual": 0.091,
+  "evidence": 0.021,
+  "compose": 0.086
+ },
+ "agents": "2 (scenario 2021_08_22_13_37_16)",
+ "final_step": "compose()+finalize() over the already-computed decodes (no final masked decode)",
+ "extra_decodes_total": 0,
+ "baseline": "receiver-only encode + plain fusion + decode + post-process",
+ "overhead_p50": 0.329,
+ "overhead_p95": 0.69,
+ "sender_encode_s_p50": 0.296,
+ "sender_encode_share_of_encode_all_p50": 0.622,
+ "overhead_old_accounting_p50": 0.158,
+ "note": "development block T, 24-frame slice, M1 CPU 8 threads, in-sample"
+}

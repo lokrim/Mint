@@ -87,17 +87,16 @@ def compose(cands, choice):
     gated = {}
     for t, s in choice.items():
         gated.setdefault(frozenset(s), set()).add(t)
-    tr, tc = base.tiles()
+    def in_tiles(c, ts):
+        r, k = c.tiles()
+        code = np.asarray([a * 10000 + b for a, b in ts], np.int64)
+        return np.isin(r.astype(np.int64) * 10000 + k, code)
     in_any = np.zeros(len(base.idx), bool)
     for s, ts in gated.items():
-        sel = np.array([(a, b) in ts for a, b in zip(tr, tc)], bool) if len(base.idx) else in_any
-        in_any |= sel
+        in_any |= in_tiles(base, ts)
     parts.append(base.take(~in_any))
     for s, ts in gated.items():
-        c = cands[s]
-        r, k = c.tiles()
-        sel = np.array([(a, b) in ts for a, b in zip(r, k)], bool) if len(c.idx) else np.zeros(0, bool)
-        parts.append(c.take(sel))
+        parts.append(cands[s].take(in_tiles(cands[s], ts)))
     idx = np.concatenate([p.idx for p in parts])
     o = np.argsort(idx, kind="stable")
     return Candidates(idx[o], np.concatenate([p.corners for p in parts])[o],
