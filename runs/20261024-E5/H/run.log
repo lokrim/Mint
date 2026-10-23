@@ -1,0 +1,26 @@
+loaded 2021_08_22_22_01_17
+loaded 2021_08_23_10_51_24
+loaded 2021_08_23_13_17_21
+loaded 2021_08_23_19_42_07
+{
+ "frames": 371,
+ "n_agents_hist": {
+  "2": 371
+ },
+ "numpy_ap_vs_opencood_max_abs_diff": 2.6867397195928788e-14,
+ "D57": {
+  "rule": "D-57: R1 - B-RAY paired dAP@0.7, mean of 4 original families, 10-frame-block bootstrap stratified by scenario, 2000 resamples, seed 0; CI low > 0 -> R1 primary, else B-RAY primary and R1 key secondary",
+  "point": -0.00557,
+  "ci95_block10": [
+   -0.009,
+   -0.0023
+  ],
+  "ci95_scenario_4blocks": [
+   -0.0173,
+   0.0032
+  ],
+  "ci_low_gt_0": false,
+  "primary": "B-RAY",
+  "key_secondary": "R1"
+ }
+}
