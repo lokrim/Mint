@@ -1,0 +1,23 @@
+{
+ "note": "E3 step 1 under the final criterion (correction_2_2026-10-23, D-48): (a) candidate anchor indices identical to dense restricted to T(f) and (b) candidate score diff <= 1e-5 and corner diff <= 1e-4 m, on 24/24 frames for T(0.05) and T(0.10). Evaluated from step1_revised.json (not re-run). 24-frame dev slice, n = 2; development / in-sample",
+ "source": "runs/20261023-E3/step1_revised.json",
+ "per_f": {
+  "T(0.05)": {
+   "a_frames": "24/24",
+   "b_frames": "24/24",
+   "a_and_b_frames": "24/24",
+   "max_score_diff": 9.238719940185547e-07,
+   "max_corner_diff": 7.62939453125e-06,
+   "pass": true
+  },
+  "T(0.1)": {
+   "a_frames": "24/24",
+   "b_frames": "24/24",
+   "a_and_b_frames": "24/24",
+   "max_score_diff": 9.238719940185547e-07,
+   "max_corner_diff": 7.62939453125e-06,
+   "pass": true
+  }
+ },
+ "criterion_24of24": true
+}

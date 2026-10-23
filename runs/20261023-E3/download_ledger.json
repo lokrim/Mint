@@ -1,0 +1,30 @@
+{
+ "note": "E3 approved block-T re-stream (preregistration deviation_approved_before_running)",
+ "byte_budget": 4600000000,
+ "downloads": [
+  {
+   "scenario": "2021_08_22_13_37_16",
+   "started": "2026-10-23T21:31:45",
+   "bytes_downloaded": 837266907,
+   "status": "complete",
+   "bytes_written": 822464239,
+   "seconds": 87
+  },
+  {
+   "scenario": "2021_08_21_17_30_41",
+   "started": "2026-10-23T21:40:09",
+   "bytes_downloaded": 1592926667,
+   "status": "complete",
+   "bytes_written": 1486681129,
+   "seconds": 143
+  },
+  {
+   "scenario": "2021_08_20_21_48_35",
+   "started": "2026-10-23T21:55:04",
+   "bytes_downloaded": 1829661872,
+   "status": "complete",
+   "bytes_written": 1739658781,
+   "seconds": 194
+  }
+ ]
+}

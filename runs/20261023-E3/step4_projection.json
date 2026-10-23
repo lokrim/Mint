@@ -1,0 +1,135 @@
+{
+ "note": "E3 step 4 projection (not a measurement): projected extra = (n - 1) * (|T(f)| * c_tile + c_sender) + c_fixed, per real block-T frame (clean), divided by the baseline-only p50 at n agents measured on the slice with n - 1 replicated sender features (timing only). Costs measured at n = 2 on the 24-frame slice (p50 over frames); evidence and compose held at their n = 2 values. n = 5 has no real block-T frames: tile counts of all multi-agent frames (n = 3 and 4) are used, labelled as such. In-sample.",
+ "per_f": {
+  "T(0.05)": {
+   "c_tile_s": 0.00021079736880104367,
+   "c_sender_s": 0.010034666542196646,
+   "c_fixed_s": 0.006024457950843498,
+   "n": {
+    "3": {
+     "tile_source": "real block-T frames with n = 3",
+     "frames": 157,
+     "tile_fraction": {
+      "mean": 0.1927,
+      "p50": 0.1976,
+      "p95": 0.2378
+     },
+     "baseline_only_p50_s": 0.2154,
+     "projected_extra_s": {
+      "p50": 0.07373399638427267,
+      "p95": 0.08343067534912066
+     },
+     "projected_overhead": {
+      "p50": 0.3423,
+      "p95": 0.3873
+     }
+    },
+    "4": {
+     "tile_source": "real block-T frames with n = 4",
+     "frames": 112,
+     "tile_fraction": {
+      "mean": 0.2527,
+      "p50": 0.2745,
+      "p95": 0.312
+     },
+     "baseline_only_p50_s": 0.2506,
+     "projected_extra_s": {
+      "p50": 0.135414018282725,
+      "p95": 0.14897882896507217
+     },
+     "projected_overhead": {
+      "p50": 0.5404,
+      "p95": 0.5945
+     }
+    },
+    "5": {
+     "tile_source": "tile counts of all multi-agent (n = 3, 4) block-T frames",
+     "frames": 269,
+     "tile_fraction": {
+      "mean": 0.2177,
+      "p50": 0.2168,
+      "p95": 0.3024
+     },
+     "baseline_only_p50_s": 0.2568,
+     "projected_extra_s": {
+      "p50": 0.15071861904494774,
+      "p95": 0.1920349033299523
+     },
+     "projected_overhead": {
+      "p50": 0.5869,
+      "p95": 0.7478
+     }
+    }
+   },
+   "n2_block_T_tile_fraction": {
+    "frames": 135,
+    "mean": 0.2092
+   }
+  },
+  "T(0.1)": {
+   "c_tile_s": 0.00022544488699376646,
+   "c_sender_s": 0.008766665938310325,
+   "c_fixed_s": 0.0022463334898930043,
+   "n": {
+    "3": {
+     "tile_source": "real block-T frames with n = 3",
+     "frames": 157,
+     "tile_fraction": {
+      "mean": 0.1808,
+      "p50": 0.1836,
+      "p95": 0.2255
+     },
+     "baseline_only_p50_s": 0.2154,
+     "projected_extra_s": {
+      "p50": 0.06712309163520461,
+      "p95": 0.0779444462109054
+     },
+     "projected_overhead": {
+      "p50": 0.3116,
+      "p95": 0.3619
+     }
+    },
+    "4": {
+     "tile_source": "real block-T frames with n = 4",
+     "frames": 112,
+     "tile_fraction": {
+      "mean": 0.2111,
+      "p50": 0.2413,
+      "p95": 0.271
+     },
+     "baseline_only_p50_s": 0.2506,
+     "projected_extra_s": {
+      "p50": 0.12188051452024329,
+      "p95": 0.13337820375692538
+     },
+     "projected_overhead": {
+      "p50": 0.4864,
+      "p95": 0.5322
+     }
+    },
+    "5": {
+     "tile_source": "tile counts of all multi-agent (n = 3, 4) block-T frames",
+     "frames": 269,
+     "tile_fraction": {
+      "mean": 0.1934,
+      "p50": 0.1958,
+      "p95": 0.2605
+     },
+     "baseline_only_p50_s": 0.2568,
+     "projected_extra_s": {
+      "p50": 0.1383123066163417,
+      "p95": 0.1716781498914191
+     },
+     "projected_overhead": {
+      "p50": 0.5386,
+      "p95": 0.6685
+     }
+    }
+   },
+   "n2_block_T_tile_fraction": {
+    "frames": 135,
+    "mean": 0.1535
+   }
+  }
+ }
+}

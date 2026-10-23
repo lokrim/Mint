@@ -123,3 +123,39 @@ def test_tile_candidates_equal_dense_restricted():
     assert (tc.idx // 2 // W < H).all()
     empty = tile_candidates(pp, pt[:0], rt[:0], sel[:0], anchors, tm, (H, W))
     assert len(empty.idx) == 0 and empty.corners.shape == (0, 8, 3)
+
+
+def _box(x, y, yaw=0.0):
+    from opencood.utils import box_utils
+    b = torch.tensor([[x, y, 0.0, 1.5, 1.8, 4.0, yaw]])
+    return box_utils.boxes_to_corners_3d(b, order="hwl").numpy()[0]
+
+
+def test_e3_equiv_effect_matching_is_bitwise_per_sender_and_type():
+    import e3_equiv as Q
+    a, b, c = _box(0, 0), _box(10, 0), _box(20, 0)
+    dense = [{"sender": 1, "type": "ADD", "plus": a, "minus": None},
+             {"sender": 1, "type": "REMOVE", "plus": None, "minus": b},
+             {"sender": 2, "type": "SHIFT", "plus": a, "minus": c}]
+    trig = [{"sender": 1, "type": "ADD", "plus": a.copy(), "minus": None},
+            {"sender": 2, "type": "SHIFT", "plus": a, "minus": c + np.float32(1e-6)},   # not bitwise
+            {"sender": 2, "type": "ADD", "plus": a, "minus": None}]                    # wrong sender
+    rep, spur = Q.match_effects(dense, trig)
+    assert rep == [True, False, False] and spur == [False, True, True]
+    rep, spur = Q.match_effects(dense + dense[:1], trig[:1])          # one trigger effect matches once
+    assert rep == [True, False, False, False] and spur == [False]
+
+
+def test_e3_equiv_restrict_and_in_mask():
+    import e3_equiv as Q
+    from mint.fusion.compose import Candidates
+    n_anchor = 2
+    cells = [(0, 0), (9, 17), (50, 100), (99, 351)]                  # tiles (0,0) (1,2) (6,12) (12,43)
+    idx = np.array([(h * W + w) * n_anchor + 1 for h, w in cells], np.int64)
+    c = Candidates(idx, np.zeros((4, 8, 3), np.float32), np.arange(4, dtype=np.float32), (H, W), n_anchor)
+    mask = np.zeros((13, 44), bool)
+    mask[1, 2] = mask[12, 43] = True
+    assert Q.restrict(c, mask).idx.tolist() == idx[[1, 3]].tolist()
+    pc = [-140.8, -40, -3, 140.8, 40, 1]
+    boxes = np.stack([_box(-140.8 + 2 * 6.4 + 1, -40 + 1 * 6.4 + 1), _box(0, 0)])   # tile (1, 2), tile (6, 22)
+    assert Q.in_mask(boxes, mask, pc).tolist() == [True, False]

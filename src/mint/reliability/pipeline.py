@@ -23,7 +23,7 @@ Counterfactual modes (E1 A3; identical outputs up to float rounding, checked by 
   trigger     (E3) per sender, decode only the tiles T(f) where Y+ has an anchor with score >= f
               (dilated by 1 tile); candidates elsewhere are absent from Y-(i), not copied from Y+.
               Fusion on tiles is bitwise equal to dense; the tile decode differs from the dense
-              decode by float rounding (<= 13 ULP on the E3 slice). Not adopted (E3 step 1).
+              decode by float rounding. Misses REMOVE effects outside T(f); not adopted (E3 FAIL, D-49).
 Extra cost per frame: the counterfactual decodes; zero extra bytes on the wire.
 """
 import time
