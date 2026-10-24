@@ -57,3 +57,4 @@ runs/20261024-AUDIT/*_cache.pkl.gz
 runs/**/extra/
 runs/**/pgd/
 runs/**/v3extra/
+runs/**/pgd_stealth/
