@@ -21,6 +21,7 @@ import e0_stream as E  # noqa: E402  (shims + paths)
 import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
+from mint.attacks import pgd_stealth as PS  # noqa: E402
 from mint.attacks import pgd_v3 as P  # noqa: E402
 from mint.attacks.blind import attack_spoof_blind  # noqa: E402
 from mint.effects.effects import effects as get_effects, tile_of  # noqa: E402
@@ -149,16 +150,21 @@ def cond_name(fam, r):
     return f"{fam}@r{r}"
 
 
-def pgd_conditions(model, pp, batch, feats0, n, ego_pts, gmask, pcr, scen, i, levels, sigma, score_thr):
-    """levels: {family: [r, ...]}; sigma: per-scale sender std (plan). Returns {cond: record} with B-NORM
-    magnitudes in record['mabs']. n = 1: no attacker -> nothing (scored as clean, as every family)."""
+def pgd_conditions(model, pp, batch, feats0, n, ego_pts, gmask, pcr, scen, i, levels, sigma, score_thr, tau=None):
+    """levels: {family: [r, ...]}; sigma: per-scale sender std (plan); tau: B-NORM thresholds (needed by the
+    D-68 stealth families). Returns {cond: record} with B-NORM magnitudes in record['mabs'].
+    n = 1: no attacker -> nothing (scored as clean, as every family)."""
     out = {}
     if n < 2:
         return out
     for fam, rs in levels.items():
         for r in rs:
             eps = [r * s for s in sigma]
-            f, led = P.pgd_attack(model, feats0, PGD_ATTACKER, fam, eps, P.rng_for(fam, r, scen, i), score_thr)
+            if fam in PS.FAMILIES:
+                f, led = PS.pgd_attack_stealth(model, feats0, PGD_ATTACKER, fam, eps, tau, PS.rng_for(fam, r, scen, i),
+                                               score_thr)
+            else:
+                f, led = P.pgd_attack(model, feats0, PGD_ATTACKER, fam, eps, P.rng_for(fam, r, scen, i), score_thr)
             led["r"] = r
             for k in range(len(f)):
                 others = [j for j in range(n) if j != PGD_ATTACKER]

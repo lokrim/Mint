@@ -196,3 +196,55 @@ def test_v3_frozen_hashes_and_untouched_v2_methods():
     v2 = json.load(open(os.path.join(ROOT, "runs/20261024-E5/preregistration_v2.json")))["file_sha256"]
     for p in ("src/mint/reliability/r1.py", "src/mint/reliability/baselines.py", "src/mint/reliability/pipeline.py"):
         assert pr["frozen_sha256"][p] == v2[p]
+
+
+# ------------------------------------------------------------------ D-68 (amended) stealth projection
+from mint.attacks import pgd_stealth as PS  # noqa: E402
+
+
+def _qp(d, f, eps, mb):
+    from scipy.optimize import minimize
+    lo = np.maximum(-eps, -f)
+    cons = [{"type": "ineq", "fun": lambda x: mb * len(f) - np.sum(f + x), "jac": lambda x: -np.ones_like(x)}]
+    r = minimize(lambda x: 0.5 * np.sum((x - d) ** 2), np.clip(d, lo, eps), jac=lambda x: x - d, method="SLSQP",
+                 bounds=list(zip(lo, np.full_like(f, eps))), constraints=cons, options={"ftol": 1e-14, "maxiter": 500})
+    assert r.success
+    return r.x
+
+
+@pytest.mark.parametrize("seed", range(12))
+def test_stealth_projection_equals_qp(seed):
+    rng = np.random.default_rng(seed)
+    n = int(rng.integers(3, 15))
+    f = np.where(rng.random(n) < 0.4, 0.0, rng.random(n))           # sparse non-negative features
+    eps = float(rng.uniform(0.05, 0.6))
+    d = rng.uniform(-1.5 * eps, 1.5 * eps, n)
+    lo_mean = float(np.mean(f + np.maximum(-eps, -f)))
+    mb = float(rng.uniform(lo_mean, np.mean(f) + eps))                 # feasible bound, often active
+    x, lam = PS.project(torch.tensor(d), torch.tensor(f), eps, mb)
+    x = x.numpy()
+    q = _qp(d, f, eps, mb)
+    assert np.allclose(x, q, atol=1e-5), (x, q)
+    assert np.all(f + x >= -1e-12) and np.all(np.abs(x) <= eps + 1e-12)
+    assert np.mean(f + x) <= mb * (1 + 1e-9)
+    if np.mean(f + np.clip(d, np.maximum(-eps, -f), eps)) <= mb:
+        assert lam == 0.0
+
+
+def test_stealth_projection_infeasible_raises():
+    f = torch.tensor([1.0, 1.0])
+    with pytest.raises(PS.Infeasible):
+        PS.project(torch.zeros(2, dtype=torch.float64), f.double(), 0.1, 0.5)
+
+
+@pytest.mark.parametrize("fam", PS.FAMILIES)
+def test_stealth_attack_constraints(fam):
+    m, f = _Tiny(), _feats(3)
+    eps = [0.5, 0.5, 0.5]                      # reachable: lowering by up to eps can meet 0.95 * tau
+    tau = [1.0, 1.0, 1.0]
+    new, led = PS.pgd_attack_stealth(m, f, 1, fam, eps, tau, PS.rng_for(fam, 1.0, "s", 0), score_thr=0.4)
+    for k, (x, y) in enumerate(zip(f, new)):
+        assert torch.equal(y[0], x[0]) and torch.equal(y[2], x[2])
+        assert float(y[1].min()) >= 0 and float((y[1] - x[1]).abs().max()) <= eps[k] * (1 + 1e-6)
+        assert led["ratio"][k] <= 0.95 * tau[k] * (1 + 1e-6)
+    assert led["objective_hist"][-1] >= led["objective_hist"][0] - 1e-6

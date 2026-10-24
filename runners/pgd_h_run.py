@@ -56,15 +56,26 @@ def main():
     ap.add_argument("--run_dir", required=True)
     ap.add_argument("--threads", type=int, default=8)
     ap.add_argument("--max_frames", type=int, default=None, help="smoke test only")
-    ap.add_argument("--out_sub", default="pgd")
+    ap.add_argument("--out_sub", default=None)
+    ap.add_argument("--stealth", action="store_true", help="D-68 stealth families from plan_stealth.json")
     a = ap.parse_args()
     rd = os.path.join(ROOT, a.run_dir)
-    plan_p = os.path.join(rd, "plan.json")
+    plan_p = os.path.join(rd, "plan_stealth.json" if a.stealth else "plan.json")
     if a.max_frames is None and not plan_committed(plan_p):
-        sys.exit("refused: plan.json must be committed before any PGD run on block H")
+        sys.exit(f"refused: {os.path.basename(plan_p)} must be committed before any PGD run on block H")
     plan = json.load(open(plan_p))
-    sigma = plan["feature_scale_clean_H"]["sigma_k"]
-    levels = {f: list(plan["threat_model"]["levels_r"]) for f in ("pgd_untargeted", "pgd_remove")}
+    if a.stealth:
+        base = json.load(open(os.path.join(rd, "plan.json")))
+        sigma = base["feature_scale_clean_H"]["sigma_k"]
+        tau = base["B-NORM"]["tau_k"]
+        assert plan["sigma_k"] == sigma and plan["tau_k"] == tau, "plan_stealth must use the committed plan's sigma/tau"
+        levels = {f: list(plan["levels_r"]) for f in plan["families"]}
+        a.out_sub = a.out_sub or "pgd_stealth"
+    else:
+        sigma = plan["feature_scale_clean_H"]["sigma_k"]
+        tau = None
+        levels = {f: list(plan["threat_model"]["levels_r"]) for f in ("pgd_untargeted", "pgd_remove")}
+        a.out_sub = a.out_sub or "pgd"
     torch.set_num_threads(a.threads)
     torch.set_num_interop_threads(1)
     model, hyp = load_model()
@@ -98,7 +109,7 @@ def main():
             clean = V.cond_record(model, pp, batch, feats0, n, ego, gmask, pcr, {"applied": True})
             assert V.same(clean["cands"], fr["conditions"]["clean"]["cands"]), f"clean candidates differ {scen} {i}"
             assert V.same(clean["effects"], fr["conditions"]["clean"]["effects"]), f"clean effects differ {scen} {i}"
-            conds = V.pgd_conditions(model, pp, batch, feats0, n, ego, gmask, pcr, scen, i, levels, sigma, thr)
+            conds = V.pgd_conditions(model, pp, batch, feats0, n, ego, gmask, pcr, scen, i, levels, sigma, thr, tau)
             frames.append({"frame": i, "n_agents": n, "conditions": conds, "frame_s": round(time.perf_counter() - t0, 2)})
             if i % 20 == 0:
                 print(f"  {scen} frame {i} n={n} {time.perf_counter() - t0:.1f}s elapsed {time.time() - t_s:.0f}s", flush=True)
