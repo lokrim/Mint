@@ -8,7 +8,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CODE = ("src/mint/attacks/pgd_stealth.py", "src/mint/attacks/pgd_v3.py", "src/mint/reliability/bnorm.py",
+CODE = ("src/mint/attacks/pgd_stealth.py", "src/mint/attacks/pgd_v3.py", "runners/pgd_h_stealth_feasibility.py", "src/mint/reliability/bnorm.py",
         "runners/v3_common.py", "runners/pgd_h_run.py", "runners/v3_analyze.py", "runners/pgd_h_plan_stealth.py")
 
 
@@ -21,10 +21,10 @@ def main():
     sig, tau = base["feature_scale_clean_H"]["sigma_k"], base["B-NORM"]["tau_k"]
     levels = [0.25, 0.5, 1.0]
     plan = {
-        "id": "v3-PGD-stealth-H", "date": "2026-10-24",
+        "id": "v3-PGD-stealth-H", "date": "2026-10-24", "version": "2 (re-committed after D-68 amendment 2; version 1 at 9db5e22; its partial run was discarded)",
         "label": "DEVELOPMENT, block H (exposed, D-53); attack design on exposed H, POST HOC (D-68 as amended); "
                  "committed before any stealth run on block H",
-        "decisions": ["D-67", "D-68 + amendment", "D-69 (decision_log_proposed_appendix.md)"],
+        "decisions": ["D-67", "D-68 + amendment 1 (exact projection) + amendment 2 (infeasible = not applied)", "D-69 (decision_log_proposed_appendix.md)"],
         "families": ["pgd_untargeted_stealth", "pgd_remove_stealth"],
         "levels_r": levels, "sigma_k": sig, "tau_k": tau,
         "eps_k_by_r": {str(r): [r * s for s in sig] for r in levels},
@@ -43,8 +43,19 @@ def main():
                                                        "ratio_k <= 0.95 tau_k (1 + 1e-6)",
             "unit_test": "tests/test_v3.py::test_stealth_projection_equals_qp (scipy SLSQP, 12 random cases)",
             "seed": "numpy default_rng(sha256('V3PGDS|family|r|scenario|frame')[:8], little endian)"},
+        "infeasible_frames (D-68 amendment 2)": {
+            "check": "before PGD on a frame, per scale from the clean features: feasible iff mean(f_k + lo_k) <= "
+                     "0.95 tau_k mean|f_receiver,k| (lo_k = max(-eps_k, -f_k)); pgd_stealth.feasibility, same float64 "
+                     "arithmetic as the projection",
+            "rule": "any scale infeasible -> the stealth attack is NOT applied on that frame: scored as clean (E0-E5 "
+                    "convention for attacks that cannot be placed); ledger reason 'stealth_infeasible'",
+            "reported": "per family, per r and per scenario: infeasible, applied, realized counts; attack loss AP@0.7 "
+                        "all-frame and realized-only, both AP definitions (v3_analyze.pgd_by_scenario)",
+            "clean_feature_count_H": "13/371 at r = 0.25, 1/371 at r = 0.5, 0 at r = 1.0, all at scale 3 "
+                                     "(stealth_feasibility_by_r.json)",
+            "test": "same rule unchanged; infeasible counts are a pre-registered reported quantity"},
         "selection_rule_for_test": "unchanged: per family, the smallest r with all-frame global-ranking AP@0.7 attack "
-                                   "loss >= 0.02 on block H; if none, 'too weak under stealth' and r = 1.0 on test",
+                                   "loss >= 0.02 on block H (infeasible frames scored as clean); if none, 'too weak under stealth' and r = 1.0 on test",
         "stop": "stealth attack loss < 0.005 at r = 1.0 (global AP) for a family -> 'stealth PGD ineffective on this "
                 "model', stop and ask before v3; any frozen method file would need to change",
         "expected_outcomes_stated_before_run": {"B-NORM": "catch rate <= 5% (about the clean false-flag rate, 1.6%)",

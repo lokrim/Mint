@@ -1,10 +1,11 @@
 {
  "id": "v3-PGD-stealth-H",
  "date": "2026-10-24",
+ "version": "2 (re-committed after D-68 amendment 2; version 1 at 9db5e22; its partial run was discarded)",
  "label": "DEVELOPMENT, block H (exposed, D-53); attack design on exposed H, POST HOC (D-68 as amended); committed before any stealth run on block H",
  "decisions": [
   "D-67",
-  "D-68 + amendment",
+  "D-68 + amendment 1 (exact projection) + amendment 2 (infeasible = not applied)",
   "D-69 (decision_log_proposed_appendix.md)"
  ],
  "families": [
@@ -58,7 +59,14 @@
   "unit_test": "tests/test_v3.py::test_stealth_projection_equals_qp (scipy SLSQP, 12 random cases)",
   "seed": "numpy default_rng(sha256('V3PGDS|family|r|scenario|frame')[:8], little endian)"
  },
- "selection_rule_for_test": "unchanged: per family, the smallest r with all-frame global-ranking AP@0.7 attack loss >= 0.02 on block H; if none, 'too weak under stealth' and r = 1.0 on test",
+ "infeasible_frames (D-68 amendment 2)": {
+  "check": "before PGD on a frame, per scale from the clean features: feasible iff mean(f_k + lo_k) <= 0.95 tau_k mean|f_receiver,k| (lo_k = max(-eps_k, -f_k)); pgd_stealth.feasibility, same float64 arithmetic as the projection",
+  "rule": "any scale infeasible -> the stealth attack is NOT applied on that frame: scored as clean (E0-E5 convention for attacks that cannot be placed); ledger reason 'stealth_infeasible'",
+  "reported": "per family, per r and per scenario: infeasible, applied, realized counts; attack loss AP@0.7 all-frame and realized-only, both AP definitions (v3_analyze.pgd_by_scenario)",
+  "clean_feature_count_H": "13/371 at r = 0.25, 1/371 at r = 0.5, 0 at r = 1.0, all at scale 3 (stealth_feasibility_by_r.json)",
+  "test": "same rule unchanged; infeasible counts are a pre-registered reported quantity"
+ },
+ "selection_rule_for_test": "unchanged: per family, the smallest r with all-frame global-ranking AP@0.7 attack loss >= 0.02 on block H (infeasible frames scored as clean); if none, 'too weak under stealth' and r = 1.0 on test",
  "stop": "stealth attack loss < 0.005 at r = 1.0 (global AP) for a family -> 'stealth PGD ineffective on this model', stop and ask before v3; any frozen method file would need to change",
  "expected_outcomes_stated_before_run": {
   "B-NORM": "catch rate <= 5% (about the clean false-flag rate, 1.6%)",
@@ -80,12 +88,13 @@
   "also": "realized-only (pgd_remove rule for *_remove_stealth, pgd_untargeted rule for *_untargeted_stealth), B-NORM catch rate and per-scale ratios, attack loss per r"
  },
  "code_sha256": {
-  "src/mint/attacks/pgd_stealth.py": "ecc5e0d65aaef6826e15d1b5b50b6c14548224da5cb27231fe0f1c0d0786fd4f",
+  "src/mint/attacks/pgd_stealth.py": "1b5c171112a4bd2c96cdc5fe31712c08b50c72ad3abefdf6217ba163ca683361",
   "src/mint/attacks/pgd_v3.py": "800fcec5f7a95ba3bed2943d6450f3a81ade0dcd0868dcd04fa23b704c804a74",
+  "runners/pgd_h_stealth_feasibility.py": "5ecf50b209c432132ab995e186afb89e3e88cdefed43fb68e34dcd9784a15dcc",
   "src/mint/reliability/bnorm.py": "6cb552b41399423c6ee46f169886d71c0fe9362fcd5ad58b42d0d3c8c18eb45f",
-  "runners/v3_common.py": "7e2ce3a51d00bafd6bea4eab7755280a5825fdf64f6d30318c457225ff4a2ec6",
+  "runners/v3_common.py": "cf28005ab32802bb8b6a91d53a893c756a5f26eb799368d5893f0b704263e3dc",
   "runners/pgd_h_run.py": "d4a49a8bd9e309ec656e7727b5fa648fbcf4ed2ea5c2d8db18e30c6add13bc8d",
-  "runners/v3_analyze.py": "127e193b0b3ccd8ae578a11b05b42db8eb9b568121585afd2de247308e585049",
-  "runners/pgd_h_plan_stealth.py": "3d6f4a24bf04338629d43b46baf7feeecb8f1ac99687371e842f273e353739db"
+  "runners/v3_analyze.py": "633dfb2437582ed485a05c1bd1d7a19c4ff34a08507079c54c316e1a3443c714",
+  "runners/pgd_h_plan_stealth.py": "5a4e6b304f36ccffed1940cd893971c922337d82109f69827ec5bced8c752554"
  }
 }

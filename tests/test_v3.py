@@ -248,3 +248,16 @@ def test_stealth_attack_constraints(fam):
         assert float(y[1].min()) >= 0 and float((y[1] - x[1]).abs().max()) <= eps[k] * (1 + 1e-6)
         assert led["ratio"][k] <= 0.95 * tau[k] * (1 + 1e-6)
     assert led["objective_hist"][-1] >= led["objective_hist"][0] - 1e-6
+
+
+def test_stealth_infeasible_not_applied():
+    m = _Tiny()
+    f = _feats(3)
+    eps = [1e-4, 1e-4, 1e-4]                         # cannot lower the attacker below 0.95 x its clean ratio
+    tau = [float(np.asarray(x[1].abs().double().mean() / x[0].abs().double().mean())) for x in f]
+    ok, flags, minr = PS.feasibility(f, 1, eps, tau)
+    assert not ok and not any(flags)
+    new, led = PS.pgd_attack_stealth(m, f, 1, "pgd_remove_stealth", eps, tau, PS.rng_for("x", 1, "s", 0), 0.4)
+    assert new is None and led["applied"] is False and led["reason"] == "stealth_infeasible"
+    ok2, _, _ = PS.feasibility(f, 1, [0.5] * 3, tau)
+    assert ok2

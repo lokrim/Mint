@@ -81,7 +81,8 @@ def frames_H(run_dir, inject_rays=True, with_pgd=True, meta=None, pgd_subs=("pgd
                 g = gfr[fr["frame"]]
                 for c, rec in g["conditions"].items():
                     fr["conditions"][c] = rec
-                    mabs[c] = rec["mabs"]
+                    if "mabs" in rec:
+                        mabs[c] = rec["mabs"]
             yield scen, fr, mabs
         print("loaded", scen, flush=True)
 
@@ -102,7 +103,8 @@ def frames_test(run_dir, meta=None):
             mabs = dict(ex["mabs"])
             for c, rec in ex["pgd"].items():
                 fr["conditions"][c] = rec
-                mabs[c] = rec["mabs"]
+                if "mabs" in rec:
+                    mabs[c] = rec["mabs"]
             yield scen, fr, mabs
         print("loaded", scen, flush=True)
 
@@ -169,6 +171,7 @@ def evaluate(frame_iter, conds, tau):
                 rz = A.realization(pp, fr, fam_r, side["c"], side["applied"])
             rz["ledger"] = {kk: v for kk, v in fr["conditions"].get(cond, {}).get("ledger", {}).items()
                             if kk not in ("objective_hist",)}
+            rz["scen"], rz["frame"] = scen, fr["frame"]
             real[cond].append(rz)
             if rz.get("realized"):
                 realized[cond].add(k)
@@ -323,6 +326,7 @@ def analyze(frame_iter, conds, tau, n_boot=N_BOOT, realized_boot=True):
     out["B-NORM_flags"] = {c: dict(f, catch_rate=None if not f["applied"] else round(f["sender1_flagged"] / f["applied"], 4))
                            for c, f in flags.items()}
     out["B-RAY_boxes"] = {c: X.bray_summary(bray[c]) for c in conds}
+    out["pgd_by_scenario"] = pgd_by_scenario(st, keys, real, conds)
     out["analysis_s"] = round(time.time() - t0)
     return out, st, keys
 
@@ -414,6 +418,34 @@ def realized_only(st, keys, conds, realized, n_boot):
     return out
 
 
+def pgd_by_scenario(st, keys, real, conds):
+    """Per PGD condition and scenario (D-68 amendment 2): frames with a sender, infeasible (stealth not applied),
+    applied, realized, and attack loss AP@0.7 (both AP definitions) all-frame and realized-only."""
+    out = {}
+    pos = {k: j for j, k in enumerate(keys)}
+    for c in conds:
+        if not c.startswith("pgd_"):
+            continue
+        rows = {}
+        for s in sorted({k[0] for k in keys}):
+            R = [r for r in real.get(c, []) if r["scen"] == s]
+            all_idx = [j for j, k in enumerate(keys) if k[0] == s]
+            rz_idx = sorted(pos[(s, r["frame"])] for r in R if r.get("realized"))
+            row = {"frames": len(all_idx), "frames_with_sender": len(R),
+                   "infeasible": sum(r["ledger"].get("reason") == "stealth_infeasible" for r in R),
+                   "applied": sum(bool(r.get("applied")) for r in R), "realized": len(rz_idx)}
+            for d in DEFS:
+                g = d == "global"
+                for name, idx in (("all_frame", all_idx), ("realized_only", rz_idx)):
+                    if idx:
+                        row[f"attack_loss_{name}|{d}"] = round(st.ap(("clean", "undefended", 0.7), idx, g)
+                                                             - st.ap((c, "undefended", 0.7), idx, g), 4)
+            rows[s] = row
+        tot = {k: sum(r[k] for r in rows.values()) for k in ("frames", "frames_with_sender", "infeasible", "applied", "realized")}
+        out[c] = {"total": tot, "by_scenario": rows}
+    return out
+
+
 def pgd_selection(point, levels):
     """D-65 rule (plan.json): smallest r with all-frame global-AP attack loss >= 0.02, else 'too weak', r = 1.0."""
     sel = {}
@@ -498,6 +530,9 @@ def stealth_constraint_check(run_dir, plan, sub="pgd_stealth"):
         G = _load(p)
         for fr in G["frames"]:
             for c, rec in fr["conditions"].items():
+                if "mabs" not in rec:
+                    assert rec["ledger"].get("reason") == "stealth_infeasible", rec["ledger"]
+                    continue
                 m = np.asarray(rec["mabs"], float)
                 r = m[1] / m[0]
                 led = rec["ledger"]

@@ -166,6 +166,9 @@ def pgd_conditions(model, pp, batch, feats0, n, ego_pts, gmask, pcr, scen, i, le
             else:
                 f, led = P.pgd_attack(model, feats0, PGD_ATTACKER, fam, eps, P.rng_for(fam, r, scen, i), score_thr)
             led["r"] = r
+            if f is None:                               # stealth infeasible: not applied, scored as clean
+                out[cond_name(fam, r)] = {"ledger": led}
+                continue
             for k in range(len(f)):
                 others = [j for j in range(n) if j != PGD_ATTACKER]
                 assert torch.equal(f[k][others], feats0[k][others])

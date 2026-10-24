@@ -5,6 +5,8 @@ Same objective, steps, step size (eps_k / 4), random start U(-eps_k, eps_k) and 
 the attacker's delta_k is replaced by its exact Euclidean projection onto
     box   lo = max(-eps_k, -f_k) <= delta_k <= hi = eps_k        (so f_k + delta_k >= 0)
     mean  mean(f_k + delta_k) <= bound_k = 0.95 * tau_k * mean|f_receiver,k|
+(amendment 2: if the constraint is unreachable at any scale, mean(f_k + lo_k) > bound_k, the attack is not applied
+on the frame: returns (None, ledger with reason 'stealth_infeasible'); the frame is scored as clean)
 which is delta_k <- clip(delta_k - lambda_k, lo, hi) with lambda_k = 0 if the mean constraint holds, else the
 smallest lambda_k >= 0 satisfying it (bisection, tolerance 1e-7 relative to the bracket). f_k >= 0 (ReLU), so
 mean|f_k + delta_k| = mean(f_k + delta_k): the B-NORM ratio of the attacker stays <= 0.95 tau_k.
@@ -55,6 +57,22 @@ def project(delta, f, eps, mean_bound, rel_tol=REL_TOL):
     return torch.clamp(d - b, lo, hi).to(delta.dtype), b
 
 
+def feasibility(feats, a, eps, tau, bound_frac=BOUND_FRAC):
+    """D-68 amendment 2: per scale, feasible iff mean(f_k + lo_k) <= bound_frac tau_k mean|f_receiver,k|
+    (lo_k = max(-eps_k, -f_k)); the same float64 arithmetic as project()'s infeasibility test.
+    Returns (all feasible, per-scale flags, per-scale lowest reachable ratio)."""
+    ok, minr = [], []
+    for k, f in enumerate(feats):
+        f64 = f[a].double()
+        lo = torch.maximum(torch.full_like(f64, -float(eps[k])), -f64)
+        rec = float(f[0].abs().double().mean())
+        mean_bound = bound_frac * float(tau[k]) * rec
+        cap = mean_bound * f64.numel() - float(f64.sum())
+        ok.append(not float(lo.sum()) > cap)
+        minr.append(float((f64 + lo).mean()) / rec)
+    return all(ok), ok, minr
+
+
 def rng_for(family, r, scen, frame):
     h = hashlib.sha256(f"V3PGDS|{family}|{r}|{scen}|{frame}".encode()).digest()
     return np.random.default_rng(int.from_bytes(h[:8], "little"))
@@ -70,6 +88,11 @@ def pgd_attack_stealth(model, feats, a, family, eps, tau, rng, score_thr, steps=
     """feats: clean per-scale [n, C, H, W]; eps, tau: per-scale lists. Returns (perturbed feats, ledger).
     Asserts f + delta >= 0, |delta| <= eps_k and ratio_k <= bound_frac * tau_k on the returned features."""
     assert family in FAMILIES and len(eps) == len(feats) == len(tau)
+    feas, ok, minr = feasibility(feats, a, eps, tau, bound_frac)
+    if not feas:                                    # D-68 amendment 2: attack not applied (scored as clean)
+        return None, {"family": family, "applied": False, "reason": "stealth_infeasible", "attacker": a,
+                      "eps": [float(e) for e in eps], "tau": [float(t) for t in tau], "bound_frac": bound_frac,
+                      "feasible_by_scale": ok, "min_reachable_ratio": minr, "clean_ratio": ratios(feats, a)}
     fam0 = base_family(family)
     model.eval()
     req = [p.requires_grad for p in model.parameters()]
