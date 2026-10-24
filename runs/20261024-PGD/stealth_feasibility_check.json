@@ -1,0 +1,49 @@
+{
+ "label": "DEVELOPMENT, block H clean frames only (no attack run); D-68 feasibility check before any stealth code",
+ "bound_0.95tau": [
+  0.9688817880154024,
+  0.9828280169493542,
+  1.13550492355965
+ ],
+ "tau": [
+  1.0198755663320025,
+  1.0345558073151098,
+  1.1952683405891051
+ ],
+ "frames": 371,
+ "clean_ratio_above_0.95tau_by_scale": [
+  0.7089,
+  0.5687,
+  0.1132
+ ],
+ "clean_frames_above_0.95tau_any_scale": 299,
+ "clean_frames_above_tau_any_scale": 6,
+ "clean_ratio_quantiles_0_25_50_75_100": [
+  [
+   0.9043,
+   0.8451,
+   0.9034
+  ],
+  [
+   0.9615,
+   0.9547,
+   0.9887
+  ],
+  [
+   0.9936,
+   0.9897,
+   1.0187
+  ],
+  [
+   1.0022,
+   1.0065,
+   1.0561
+  ],
+  [
+   1.0219,
+   1.0366,
+   1.2254
+  ]
+ ],
+ "consequence": "D-68's projection only scales delta_k by c in [0,1]; at c = 0 the ratio equals the clean ratio, so on these frames the constraint cannot be met and the per-frame assertion would fail. Stopped before writing plan_stealth.json."
+}
