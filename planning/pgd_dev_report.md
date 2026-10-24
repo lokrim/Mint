@@ -68,3 +68,53 @@ By the stop rule I have not written v3, frozen code or run the dry runs. Options
 3. **A magnitude-relative budget**, e.g. per-element |δ| ≤ r·|f| or a smaller r grid, re-selected on H under a new committed plan.
 
 Options 2 and 3 are new post-hoc design choices on exposed H and would be labelled as such. Everything is development; the final test has not been touched.
+
+---
+
+# Stealth PGD and v3
+
+All block-H numbers are **development, exposed**. The stealth families were **designed on H after its plain-PGD results were seen (post hoc)**. Every defense is frozen and unchanged; v2's 19 file hashes match. Decisions D-67, D-68 and D-69 (`643c37c`), with D-68 amendment 1 (`0e76e69`, exact projection) and amendment 2 (`fab52f9`, infeasible frames). `plan_stealth.json` v2 (`830c2f9`) was committed before the stealth run; the halted v1 run was discarded. Results: [`pgd_stealth_H_results.json`](../runs/20261024-PGD/pgd_stealth_H_results.json).
+
+**Two problems fixed before the run.**
+1. D-68 as first written was infeasible: 0.95 τ_k is below the clean median ratio at scales 1–2, so on 299/371 clean frames, shrinking δ alone can never meet the bound. Amendment 1 replaces it with the exact projection onto the L∞ box (f + δ ≥ 0) and the mean constraint. It is unit-tested against scipy SLSQP on 12 random cases.
+2. On some frames even that has no solution at scale 3: 13/371 at r = 0.25, 1 at r = 0.5, 0 at r = 1.0. Under amendment 2 the attack is not applied on those frames and they are scored as clean. The H run matched these counts exactly.
+
+**Constraint:** asserted at attack time and re-checked from B-NORM's own stored magnitudes. It holds on 2198/2198 attacked frame-conditions; the maximum ratio sits exactly at 0.95 τ_k.
+
+**Results on H.** Global AP is the headline (D-64/D-69); frame-order AP is in brackets. ΔAP is in AP@0.7 points, with the 4-block scenario CI.
+
+| condition (B-NORM catch) | infeasible | attack loss | B-NORM ΔAP | B-RAY ΔAP (rec.) | R1 ΔAP (rec.) |
+|---|---|---|---|---|---|
+| pgd_untargeted r=0.25 (100%) | — | 0.039 (0.202) | −0.144 | +0.001 (0.04) | +0.007 [0.003, 0.012] (0.17) |
+| pgd_remove r=0.25 (100%) | — | 0.034 (0.016) | −0.149 | −0.001 (−0.04) | +0.011 [0.004, 0.015] (0.33) |
+| **pgd_untargeted_stealth r=0.5** (0%) | 1 | **0.033** (0.129) | −0.002 | −0.000 [−0.003, 0.001] (−0.01) | +0.004 [0.000, 0.007] (0.12) |
+| **pgd_remove_stealth r=0.25** (0%) | 13 | **0.031** (0.014) | −0.002 | −0.001 [−0.004, 0.000] (−0.04) | +0.010 [0.002, 0.013] (0.32) |
+| pgd_untargeted_stealth r=1.0 (0%) | 0 | 0.118 (0.372) | 0.000 | +0.004 (0.03) | +0.015 (0.12) |
+| pgd_remove_stealth r=1.0 (0%) | 0 | 0.503 (0.487) | 0.000 | −0.000 (0.00) | +0.273 (0.54) |
+
+- **Selected r (all-frame global loss ≥ 0.02):** untargeted_stealth **r = 0.5** (losses 0.008 / 0.033 / 0.118 at r = 0.25 / 0.5 / 1.0); remove_stealth **r = 0.25** (0.031 / 0.135 / 0.503).
+- **Stop rule (loss < 0.005 at r = 1.0):** not met by either family.
+- **Stealth vs plain:** stealth costs the attacker almost nothing for removal (0.503 vs 0.513 at r = 1.0). For untargeted it costs a lot (0.118 vs 0.804).
+- **Expected outcomes (D-68):**
+  - B-NORM catch ≤ 5%: **met (0%).** Its small negative ΔAP comes from clean false flags on frames scored as clean.
+  - B-RAY recovery ≈ 0: **met** at every level.
+  - R1 recovery on pgd_remove_stealth > 0: **met.** +0.010 points at r = 0.25 and +0.059 at r = 0.5; the scenario CIs exclude 0.
+- **Realized-only, global AP (loss → R1 ΔAP):** remove_stealth r = 0.25: 181 frames, 0.050 → +0.016. untargeted_stealth r = 0.5: 285 frames, 0.037 → +0.004. Per-scenario infeasible and realized counts with both losses are in `pgd_by_scenario`.
+- **v2 rule on H:** passes under both AP definitions. R1 − B-RAY stays AP-definition-dependent ("not established" vs "R1 improves").
+
+**preregistration_v3** ([`runs/20261024-E5/preregistration_v3.json`](../runs/20261024-E5/preregistration_v3.json); v1/v2 unchanged) is v2 plus:
+- D-64 dual-AP rule. Holm is applied within each AP definition, success needs a pass under both, and the headline is in global AP.
+- Per-family, mean-of-3 and realized-only tables.
+- Four PGD test conditions with their expected outcomes and infeasible counts reported: `pgd_untargeted@r0.25` and `pgd_remove@r0.25` (D-67), `pgd_untargeted_stealth@r0.5` and `pgd_remove_stealth@r0.25` (D-68).
+- B-NORM (τ fixed) with its catch rate and AP cost.
+- D-69 reporting rules.
+- Procedural checks: 30 sha256s including `latest.pth`, `attfuse_parts.py`, `opencood_shims.py`, `stage1_spike.py`; OpenCOOD 31ba160 with no local diff, verified before any network access and after the run; stop-and-ask on an interrupted download; 15-scenario / 2066-frame assertion.
+
+**Freeze and dry run.** Code frozen at **`4378914`**. The no-network dry run on the dev slice ([`dryrun_v3.json`](../runs/20261024-E5/dryrun_v3/dryrun_v3.json)) ran end to end:
+- n = 2: 24 frames, all 4 PGD families.
+- forced n = 1: 24 frames, no PGD by design.
+- forced n = 5: 6 frames with 3 replicated senders; 16 subsets decoded per condition; all PGD families.
+
+Compose checks were identical in all three runs, and the frozen hashes were verified before and after. The v3 frame-order numbers equal the frozen v2 analysis exactly in all three runs. `v3_stream --dry_run` also verifies the hashes and the budget. 112 tests pass.
+
+**Final test plan.** 15 scenarios / 2066 frames. Planned 20.44e9 bytes (×1.01 = 20.64e9), budget 22e9 (headroom 1.36e9). Runtime about **19 h (range 17–24 h)**: v2's ~8 h plus ~11 h of v3 side records. Per-family PGD cost, including decoding: untargeted 1.9 h, remove 1.8 h, untargeted_stealth 2.9 h, remove_stealth 2.6 h. Then analysis, ~2–3 h.
