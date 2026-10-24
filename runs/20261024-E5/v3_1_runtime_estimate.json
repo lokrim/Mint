@@ -1,0 +1,49 @@
+{
+ "basis": "v3 estimate (preregistration_v3.json estimated_runtime, unchanged) plus the cost of the two D-70 conditions, measured per condition (PGD attack_s) in the v3.1 dry run on this machine (runs/20261024-E5/dryrun_v3_1; n = 1: none), linear in n between n = 1, 2, 5, applied to the 2066 test frames with the Stage-1 mean agent count per scenario; estimate only",
+ "v3_total_h": 19.2,
+ "v3_range_h": [
+  16.6,
+  23.5
+ ],
+ "pgd_cost_per_condition_s_per_frame_v3_1_dryrun": {
+  "pgd_remove_stealth@r1.0": {
+   "n2": 3.93,
+   "n5": 6.92
+  },
+  "pgd_untargeted_stealth@r1.0": {
+   "n2": 4.06,
+   "n5": 7.02
+  },
+  "pgd_remove_stealth@r0.25": {
+   "n2": 3.92,
+   "n5": 6.96
+  },
+  "pgd_untargeted_stealth@r0.5": {
+   "n2": 4.22,
+   "n5": 7.29
+  },
+  "pgd_remove@r0.25": {
+   "n2": 2.12,
+   "n5": 5.35
+  },
+  "pgd_untargeted@r0.25": {
+   "n2": 2.4,
+   "n5": 5.57
+  }
+ },
+ "pgd_cost_per_condition_h_v3_1_dryrun": {
+  "pgd_remove_stealth@r1.0": 2.51,
+  "pgd_untargeted_stealth@r1.0": 2.58,
+  "pgd_remove_stealth@r0.25": 2.51,
+  "pgd_untargeted_stealth@r0.5": 2.68,
+  "pgd_remove@r0.25": 1.56,
+  "pgd_untargeted@r0.25": 1.71
+ },
+ "D-70_added_h": 5.09,
+ "total_h": 24.3,
+ "range_h": [
+  20.9,
+  29.9
+ ],
+ "analysis": "e5_analyze test (frozen v2) under 1 h; v3_analyze test about 1.5-2.5 h (16 conditions x 6 methods x 2 AP definitions x 2 bootstraps of 2000 + realized-only)"
+}

@@ -1,0 +1,126 @@
+{
+ "label": "DEVELOPMENT procedural test (no network, dev slice); not results",
+ "scenarios": {
+  "2021_08_22_13_37_16": 24,
+  "2099_12_31_00_00_08": 8
+ },
+ "uninterrupted": {
+  "rc": 0,
+  "killed": false,
+  "seconds": 796,
+  "state_after": {
+   "cache": [
+    "2021_08_22_13_37_16.pkl.gz",
+    "2099_12_31_00_00_08.pkl.gz"
+   ],
+   "v3extra": [
+    "2021_08_22_13_37_16.pkl.gz",
+    "2099_12_31_00_00_08.pkl.gz"
+   ],
+   "stream_dir": [],
+   "ledger_downloads": [
+    [
+     "2021_08_22_13_37_16",
+     "complete",
+     146394944
+    ],
+    [
+     "2099_12_31_00_00_08",
+     "complete",
+     48804928
+    ]
+   ],
+   "mtimes": {
+    "2021_08_22_13_37_16.pkl.gz": 1792843922.2324572,
+    "2099_12_31_00_00_08.pkl.gz": 1792844110.02534
+   }
+  }
+ },
+ "resumed": {
+  "1_kill_during_A_after_frame_10": {
+   "rc": -9,
+   "killed": true,
+   "seconds": 189,
+   "state_after": {
+    "cache": [],
+    "v3extra": [],
+    "stream_dir": [
+     ".complete_2021_08_22_13_37_16",
+     "test"
+    ],
+    "ledger_downloads": [
+     [
+      "2021_08_22_13_37_16",
+      "complete",
+      146394944
+     ]
+    ],
+    "mtimes": {}
+   }
+  },
+  "2_restart_kill_during_B_after_frame_3": {
+   "rc": -9,
+   "killed": true,
+   "seconds": 653,
+   "state_after": {
+    "cache": [
+     "2021_08_22_13_37_16.pkl.gz"
+    ],
+    "v3extra": [
+     "2021_08_22_13_37_16.pkl.gz"
+    ],
+    "stream_dir": [
+     ".complete_2099_12_31_00_00_08",
+     "test"
+    ],
+    "ledger_downloads": [
+     [
+      "2021_08_22_13_37_16",
+      "complete",
+      146394944
+     ],
+     [
+      "2099_12_31_00_00_08",
+      "complete",
+      48804928
+     ]
+    ],
+    "mtimes": {
+     "2021_08_22_13_37_16.pkl.gz": 1792844890.50964
+    }
+   }
+  },
+  "3_restart_to_completion": {
+   "rc": 0,
+   "killed": false,
+   "seconds": 236,
+   "state_after": {
+    "cache": [
+     "2021_08_22_13_37_16.pkl.gz",
+     "2099_12_31_00_00_08.pkl.gz"
+    ],
+    "v3extra": [
+     "2021_08_22_13_37_16.pkl.gz",
+     "2099_12_31_00_00_08.pkl.gz"
+    ],
+    "stream_dir": [],
+    "ledger_downloads": [
+     [
+      "2021_08_22_13_37_16",
+      "complete",
+      146394944
+     ],
+     [
+      "2099_12_31_00_00_08",
+      "complete",
+      48804928
+     ]
+    ],
+    "mtimes": {
+     "2021_08_22_13_37_16.pkl.gz": 1792844890.50964,
+     "2099_12_31_00_00_08.pkl.gz": 1792845186.9986675
+    }
+   }
+  }
+ }
+}

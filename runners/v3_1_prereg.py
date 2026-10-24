@@ -50,6 +50,8 @@ def runtime(dry, v3_est):
     """v3 estimate (unchanged) + the D-70 conditions' PGD cost measured per condition in the v3.1 dry run
     (attack_s; n = 1: 0), linear in n between n = 1, 2, 5, applied to the 2066 test frames with the Stage-1
     mean agent count per scenario (the v3 method)."""
+    sys.path.insert(0, os.path.join(ROOT, "runners"))
+    import e0_stream  # noqa: F401  (shims + paths, needed to unpickle the records)
     cost = {}
     for tag in ("n2", "n5"):
         ex = []

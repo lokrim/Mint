@@ -1,0 +1,1946 @@
+{
+ "id": "E5 v3.1 - preregistration_v3 plus D-70 (stealth PGD families also at r = 1.0, secondary, strong-attack level, added after seeing block-H development results)",
+ "version": "v3.1 (supersedes v3 runs/20261024-E5/preregistration_v3.json only by D-70; v1, v2 and v3 kept unchanged)",
+ "written": "2026-10-24, after the v3 dry run and before any test-scenario byte is downloaded. NOT RUN: the stream needs the user's explicit approval of the final test.",
+ "base": "Every field of preregistration_v3.json holds as written unless listed in difference_from_v3 (and through v3, every field of preregistration_v2.json)",
+ "user_decisions": "D-64, D-65, D-66 (decision_log_proposed_appendix.md, committed before any v3 computation); the user's approval of preregistration_v3 with the PGD families (chat, 2026-10-24); D-70 (the user's decision in chat, 2026-10-24; committed 2c50ef0 before any v3.1 code or run)",
+ "frozen_code_commit": "605a9780805e700f4e867486d9bb3f1ad5a796a4",
+ "frozen_sha256": {
+  "src/mint/reliability/baselines.py": "6f3ec38fc300942f161cff23997834e4607b6f35f716aff863a95cf9c5a76df3",
+  "src/mint/reliability/r1.py": "031fc0dddf0d7183102088f5a1e3ae2f6d60b8f09c6dfd66b13dfd117583c0f8",
+  "src/mint/reliability/v0.py": "4897dde782211de3948770734c906ef1a78304114577b3aa33f7109fa25c445b",
+  "src/mint/reliability/pipeline.py": "4c2ccffec188bd02b189d9bc428ea44cbe4354d41590751950282ffb9dd2d5c6",
+  "src/mint/fusion/compose.py": "b332e9bc2fdfe1aed99a597a922cbf2783aa70dac7de38eecfd5d5aa19cf32ce",
+  "src/mint/effects/effects.py": "156fb7413f3a67b51db3ad887896af8397f8093562d787172924cfa3fc641c82",
+  "src/mint/geometry/rays.py": "b3e1c6a2db5fca3a6a3acf685d0922d9d58a0d9a410972e4c37a13f7dcd6fc1f",
+  "src/mint/geometry/ground.py": "6ecdd59f5847989bda84f81e11d7b227c9e87c83d57d5d0ca922f0faa52af257",
+  "src/mint/attacks/patches.py": "038bf6217b53ce1a4da191dad59c57cfd6dbf9cb6141dbeb84ab1d4cbc8dd241",
+  "src/mint/attacks/blind.py": "999d6847438093dad2658bf6bb6db412320b2392228bc05e2e00f860571b0630",
+  "src/mint/eval/harm_labels.py": "fcc349da08707b4fb183da6fb9a1cc6f8e64e7024a62394cd429ee33ecf41e3b",
+  "runners/e0_stream.py": "be5a4a497c7ac5a2b281b72dc6f061d928ee11185010dc3ffc92e3032258bb1f",
+  "runners/e0_analyze.py": "5e2aa7f4194944073cfe7ae606bdb8f44181a0172c6e06c4dc9ad756feabddd7",
+  "runners/e4_stream.py": "a6a9538f886a89f042d7141c54fb9cd28593af4eb1c0bb55a27ebb63867f92ea",
+  "runners/e4_analyze.py": "3a1d8a75f74e0b7295586ad04fc05b832b58b1b886df33b0484a50e2d2d21bf5",
+  "runners/e5_stream.py": "7a4f9283cbad48e352f10b9d9ab8707dc89f7015a005359031756dd76b15acaa",
+  "runners/e5_analyze.py": "60383936117d5ba0fdc8d67927a51b6cbd5e8555bd45a2fbf89f8590aebcb0fb",
+  "runners/stage1_reproduce.py": "9d6affef0643fadc578f1db9a9c4e1702aa375897a977e3b3f91d14db510f4fe",
+  "tools/ranged_zip.py": "abbc25a8a7469c5569ff1047e2456ff69809415b150dfc465a2a7e7113dd3fd3",
+  "src/mint/model/attfuse_parts.py": "0e46d06d0af771862ad61fc59bd2ffc1c6582eff77a686f90f606f9fb711280d",
+  "src/mint/model/opencood_shims.py": "0e645dd80f08e833c1981c807d115991fe9bf8378c76221cbabf539bd1a7003d",
+  "runners/stage1_spike.py": "d9ec82cc7b854b05338310dd2ecf25ba68a22737291ef6edc1c73b0a981a5d96",
+  "data/opv2v/ckpt/pointpillar_attentive_fusion/pointpillar_attentive_fusion/latest.pth": "f6df2f5434119392f0b3eb14dec8c2f99f15063a9058b625c06dc39de261a77c",
+  "src/mint/attacks/pgd_v3.py": "800fcec5f7a95ba3bed2943d6450f3a81ade0dcd0868dcd04fa23b704c804a74",
+  "src/mint/reliability/bnorm.py": "6cb552b41399423c6ee46f169886d71c0fe9362fcd5ad58b42d0d3c8c18eb45f",
+  "runners/v3_common.py": "cf28005ab32802bb8b6a91d53a893c756a5f26eb799368d5893f0b704263e3dc",
+  "runners/v3_stream.py": "c1442920c9dcab484b5389089d31a9f363b7d229502866e34306f4f47f3404f6",
+  "runners/v3_analyze.py": "633dfb2437582ed485a05c1bd1d7a19c4ff34a08507079c54c316e1a3443c714",
+  "runners/v3_dryrun.py": "39d019ce7d172290cd6fe47406d89deae0395e27dbc88a167ad49d3e720163b5",
+  "src/mint/attacks/pgd_stealth.py": "1b5c171112a4bd2c96cdc5fe31712c08b50c72ad3abefdf6217ba163ca683361",
+  "runners/v3_1_stream.py": "c2af8bee53df87661c43a64426a0dfd97dcd2bfc23702a89227f8f5e94e668b6",
+  "runners/v3_1_dryrun.py": "702f8f62324f8832b213a47304a15d375aa6d019da0279d744429e25db951d45"
+ },
+ "frozen_note": "v3's frozen files (all re-checked equal to preregistration_v3.json) + runners/v3_1_stream.py and runners/v3_1_dryrun.py. The v3.1 stream verifies every hash and the OpenCOOD commit before any network access and again after the run (frozen v3_stream.main/verify_frozen).",
+ "opencood": {
+  "commit": "31ba16025da27ffe4e336f011290dfbc66f9a1f1",
+  "local_diff": "none (git status --porcelain --untracked-files=no empty); untracked directory in this repo (.gitignore)"
+ },
+ "D-64_dual_AP": {
+  "definitions": {
+   "frame": "OpenCOOD frame-order AP (global_sort_detections=False; frames concatenated in (scenario, frame) order; the v2 metric)",
+   "global": "detections of all selected frames ranked by score (stable sort), same AP integral"
+  },
+  "rule": "every primary and key-secondary statistic is computed under both definitions with the same bootstrap (seed 0, 2000 resamples, scenario and 10-frame). The v2 success rule (B-RAY Holm-rejected in the co-test with R1 vs no defense on the scenario bootstrap, and B-RAY clean relative loss scenario-CI high <= 1%) is evaluated separately per AP definition, Holm within each definition. A success/robustness claim requires a pass under BOTH. Headline numbers are quoted with global-ranking AP; frame-order AP is reported for comparability with OPV2V papers. If the two disagree the report states 'AP-definition-dependent'. R1 - B-RAY (statement by scenario CI, v2 wording) is reported under both, side by side.",
+  "code": "runners/v3_analyze.criteria_v3 / d64; the frame-order path is checked to equal the frozen e5_analyze output (point and scenario CI) on the test caches (consistency_vs_frozen_v2)"
+ },
+ "comparison_set": [
+  "no defense",
+  "ego-only",
+  "B-NORM (D-66, new)",
+  "B-RAY (primary)",
+  "R1 (key secondary)",
+  "R1-noREMOVE (ablation)",
+  "oracle bounds as v2 (frozen e5_analyze)"
+ ],
+ "B-NORM": {
+  "rule": "drop sender i entirely in a frame iff, at any scale k, mean|feature_i,k| / mean|feature_receiver,k| > tau_k; output = candidates decoded without the dropped senders",
+  "tau_k": [
+   1.0198755663320025,
+   1.0345558073151098,
+   1.1952683405891051
+  ],
+  "tau_definition": "99.5th percentile (numpy linear) over clean block-H sender-frames",
+  "clean_H_flag_rate": 0.016172506738544475,
+  "role": "comparison baseline; no criterion",
+  "code": "src/mint/reliability/bnorm.py (no GT, no ledger); magnitudes recorded per condition in the stream (v3extra)"
+ },
+ "pgd_families": {
+  "role": "pre-registered SECONDARY attack families, reported per family, not part of the v2 primary mean. D-67: pgd_untargeted, pgd_remove (option 1, plain L-inf PGD) at r = 0.25, with B-NORM's catch rate and AP cost. D-68 (amended): pgd_untargeted_stealth, pgd_remove_stealth = the main PGD evaluation (B-NORM-aware). The stealth families were designed on exposed block H after its plain-PGD results were seen: POST HOC",
+  "threat_model": {
+   "attacker": "white-box (model weights, receiver features, fusion and heads known), single attacker = sender 1, perturbs only its own intermediate features at all 3 fusion scales; n = 1 frames: no attack (scored as clean, as every family)",
+   "bound": "L-inf per scale: |delta_k| <= eps_k = r * sigma_k; perturbed features projected onto >= 0 (the backbone blocks end in ReLU)",
+   "levels_r": [
+    0.25,
+    0.5,
+    1.0
+   ],
+   "eps_k_by_r": {
+    "0.25": [
+     0.12330001703387437,
+     0.030642057420300732,
+     0.006658932794548057
+    ],
+    "0.5": [
+     0.24660003406774875,
+     0.061284114840601464,
+     0.013317865589096114
+    ],
+    "1.0": [
+     0.4932000681354975,
+     0.12256822968120293,
+     0.026635731178192228
+    ]
+   },
+   "pgd": {
+    "steps": 10,
+    "step_size": "eps_k / 4",
+    "random_start": "U(-eps_k, eps_k), then projected",
+    "update": "sign of the gradient, ascent, projection after every step",
+    "returned": "final iterate",
+    "seed": "numpy default_rng(sha256('V3PGD|family|r|scenario|frame')[:8], little endian)"
+   },
+   "pseudo_labels": "no ground truth. Positive anchors = anchors whose clean fused score >= the post-processor score threshold (0.2; the pre-NMS set Y+ is selected from); the clean regression map at those anchors is the regression target",
+   "objectives": {
+    "pgd_untargeted": "maximise mean BCE(score, 1) over positives + mean BCE(score, 0) over negatives + mean smooth-L1(reg - reg_clean) over positive anchors' 7 regression values",
+    "pgd_remove": "maximise mean BCE(score, 1) over positives (= minimise the scores of Y+ boxes)"
+   },
+   "code": "src/mint/attacks/pgd_v3.py (differentiable path asserted bitwise equal to the frozen decode on clean features)"
+  },
+  "sigma_k": [
+   0.4932000681354975,
+   0.12256822968120293,
+   0.026635731178192228
+  ],
+  "stealth": {
+   "stealth_projection": {
+    "when": "after the random start and after every PGD step, per scale k",
+    "box": "lo = max(-eps_k, -f_k), hi = eps_k (f + delta >= 0 everywhere)",
+    "constraint": "mean(f_k + delta_k) <= 0.95 * tau_k * mean|f_receiver,k|",
+    "bound_ratio_0.95tau_k": [
+     0.9688817880154024,
+     0.9828280169493542,
+     1.13550492355965
+    ],
+    "projection": "exact Euclidean projection onto box and constraint: delta_k <- clip(delta_k - lambda_k, lo, hi); lambda_k = 0 if the constraint holds, else the smallest lambda_k >= 0 satisfying it, bisection on [0, max(delta_k - lo)] to tolerance 1e-7 x bracket; sums in float64",
+    "asserted_every_attacked_frame_and_scale": "f + delta >= 0, |delta| <= eps_k (1 + 1e-6), ratio_k <= 0.95 tau_k (1 + 1e-6)",
+    "unit_test": "tests/test_v3.py::test_stealth_projection_equals_qp (scipy SLSQP, 12 random cases)",
+    "seed": "numpy default_rng(sha256('V3PGDS|family|r|scenario|frame')[:8], little endian)"
+   },
+   "unchanged_from_D-65": "objectives (pgd_untargeted_stealth uses pgd_untargeted's, pgd_remove_stealth uses pgd_remove's), 10 steps, step eps_k / 4, random start U(-eps_k, eps_k), sign-gradient ascent, final iterate, no-GT pseudo-labels from the clean fused output"
+  },
+  "selection_rule": {
+   "rule": "for each family, the smallest r in {0.25, 0.5, 1.0} whose all-frame attack loss AP@0.7(clean, no defense) - AP@0.7(attacked, no defense) under GLOBAL-ranking AP is >= 0.02 on block H; if no r reaches 0.02 the family is reported as 'too weak at realistic budgets' and run on the test at r = 1.0 anyway",
+   "fixed": "before any PGD run on block H"
+  },
+  "test_levels": {
+   "pgd_untargeted": {
+    "decision": "D-67 (secondary, reported)",
+    "r": 0.25,
+    "status": "selected",
+    "eps_k": [
+     0.12330001703387437,
+     0.030642057420300732,
+     0.006658932794548057
+    ],
+    "attack_loss_global_H_by_r": {
+     "0.25": 0.03908,
+     "0.5": 0.28163,
+     "1.0": 0.80384
+    }
+   },
+   "pgd_remove": {
+    "decision": "D-67 (secondary, reported)",
+    "r": 0.25,
+    "status": "selected",
+    "eps_k": [
+     0.12330001703387437,
+     0.030642057420300732,
+     0.006658932794548057
+    ],
+    "attack_loss_global_H_by_r": {
+     "0.25": 0.03354,
+     "0.5": 0.13504,
+     "1.0": 0.51281
+    }
+   },
+   "pgd_untargeted_stealth": {
+    "decision": "D-68 as amended (main PGD evaluation; post hoc)",
+    "r": 0.5,
+    "status": "selected",
+    "eps_k": [
+     0.24660003406774875,
+     0.061284114840601464,
+     0.013317865589096114
+    ],
+    "attack_loss_global_H_by_r": {
+     "0.25": 0.00812,
+     "0.5": 0.03319,
+     "1.0": 0.11779
+    }
+   },
+   "pgd_remove_stealth": {
+    "decision": "D-68 as amended (main PGD evaluation; post hoc)",
+    "r": 0.25,
+    "status": "selected",
+    "eps_k": [
+     0.12330001703387437,
+     0.030642057420300732,
+     0.006658932794548057
+    ],
+    "attack_loss_global_H_by_r": {
+     "0.25": 0.03131,
+     "0.5": 0.13454,
+     "1.0": 0.50274
+    }
+   }
+  },
+  "test_conditions": [
+   "pgd_untargeted@r0.25",
+   "pgd_remove@r0.25",
+   "pgd_untargeted_stealth@r0.5",
+   "pgd_remove_stealth@r0.25",
+   "pgd_untargeted_stealth@r1.0",
+   "pgd_remove_stealth@r1.0"
+  ],
+  "expected_outcomes": {
+   "D-65/D-67 plain PGD": {
+    "B-RAY": "recovery approximately 0",
+    "R1": "recovery on pgd_remove > 0"
+   },
+   "D-68 stealth": {
+    "B-NORM": "catch rate <= 5% (about the clean false-flag rate)",
+    "B-RAY": "recovery approximately 0",
+    "R1": "recovery on pgd_remove_stealth > 0"
+   },
+   "operational_checks": {
+    "B-RAY approx 0": "point recovery < 0.10 under both AP definitions",
+    "R1 > 0": "R1 dAP@0.7 scenario-CI low > 0 under both AP definitions",
+    "B-NORM <= 5%": "sender-1 flag rate over attacked frames <= 0.05"
+   },
+   "stated": "D-65 before any PGD run on H; D-68 before any stealth run on H"
+  },
+  "realized": "n >= 2 and some clean Y+ box has no attacked Y+ box at BEV IoU >= 0.5 (pgd_remove, pgd_remove_stealth); n >= 2 and (some clean Y+ box has no attacked match, or some attacked Y+ box has no clean match) at BEV IoU >= 0.5 (pgd_untargeted, pgd_untargeted_stealth)",
+  "constraint_assertion": "stealth: f + delta >= 0, |delta| <= eps_k, ratio_k <= 0.95 tau_k asserted on every attacked frame and scale in the stream (pgd_stealth.pgd_attack_stealth)",
+  "attacker": "sender 1 at every n >= 2; n = 1 frames scored as clean",
+  "D-70_strong_level": {
+   "decision": "D-70 (planning/decision_log_proposed_appendix.md; the user's decision in chat, 2026-10-24; post hoc)",
+   "label": "strong-attack level, added after seeing block-H development results",
+   "role": "additional pre-registered SECONDARY conditions, run IN ADDITION to the v3 test levels (which are unchanged); reported per family like every PGD condition (per-family table, realized-only, B-NORM flags, stealth-infeasible counts); NOT part of the primary, the v2 success rule, D-64, the mean-of-3 or any criterion",
+   "attack": "D-68 as amended twice, unchanged (objective, 10 steps, step eps_k/4, random start, exact stealth projection, infeasible frames not applied and scored as clean, seed V3PGD|family|r|scenario|frame); eps_k = 1.0 x sigma_k",
+   "conditions": [
+    {
+     "family": "pgd_untargeted_stealth",
+     "r": 1.0,
+     "eps_k": [
+      0.4932000681354975,
+      0.12256822968120293,
+      0.026635731178192228
+     ],
+     "condition": "pgd_untargeted_stealth@r1.0",
+     "H_development_seen_before_D70_global": {
+      "attack_loss": 0.11779,
+      "B-NORM_catch": 0.0,
+      "recovery": {
+       "B-RAY": 0.0342,
+       "R1": 0.12404,
+       "B-NORM": 0.0
+      }
+     }
+    },
+    {
+     "family": "pgd_remove_stealth",
+     "r": 1.0,
+     "eps_k": [
+      0.4932000681354975,
+      0.12256822968120293,
+      0.026635731178192228
+     ],
+     "condition": "pgd_remove_stealth@r1.0",
+     "H_development_seen_before_D70_global": {
+      "attack_loss": 0.50274,
+      "B-NORM_catch": 0.0,
+      "recovery": {
+       "B-RAY": -0.00014,
+       "R1": 0.5428,
+       "B-NORM": 0.0
+      }
+     }
+    }
+   ],
+   "stealth_feasibility_H_r1.0": {
+    "frames": 371,
+    "infeasible_frames": 0,
+    "infeasible_by_scale": [
+     0,
+     0,
+     0
+    ]
+   },
+   "expected_outcomes": "the D-68 expectations and operational checks are reported for these conditions too (descriptive)",
+   "code": "runners/v3_1_stream.py: levels_v31 = v3 test levels + these conditions; run_scenario = the frozen v3_stream.run_scenario with these levels (PGD timed per condition); install() swaps v3_stream.PREREG and v3_stream.run_scenario, then the frozen v3_stream.main runs unchanged. Analysis: frozen v3_analyze with --prereg preregistration_v3_1.json (conditions are read from test_conditions; no code change)"
+  }
+ },
+ "D-69_reporting": {
+  "headline_AP": "global-ranking AP (D-64)",
+  "absolute_effects": "absolute dAP in AP points next to every recovery",
+  "scope_limit": "R1 cannot verify removals in receiver-blind regions (a removed object the receiver cannot see is UNKNOWN = keep)"
+ },
+ "secondary_tables_v3": {
+  "per_family": "every condition (clean, 4 original, spoof_blind, PGD at test levels) x every method: AP@0.7/0.5, dAP, recovery (None if attack loss < 0.005), attack loss; both AP definitions; scenario and 10-frame CIs",
+  "mean_of_3": "mean dAP@0.7 over spoof_feat, shift_feat, spoof_pts (excluding remove_feat) per method, and R1 - B-RAY, with CIs, both AP definitions",
+  "realized_only": "per family, frames where the attack was realized (E0-E5 definition; PGD as above): AP of clean and attacked on those frames, attack loss, dAP and recovery per method, 10-frame CIs, both AP definitions",
+  "B-NORM_flags": "per condition: frames, sender-1 flagged (catch rate), any sender flagged; clean false-flag rate",
+  "not_criteria": "descriptive; only D-64 + v2 success rule is a criterion"
+ },
+ "procedural_checks": {
+  "before_stream": "sha256 of every frozen file and the OpenCOOD commit/clean tree (v3_stream.verify_frozen); refuse on any mismatch",
+  "interrupted_download": "any ledger entry not 'complete' -> STOP and ask the user (no automatic restart)",
+  "after_stream": "frozen hashes re-checked",
+  "after_analysis": "15 scenarios and 2066 frames asserted (v3_analyze run_test completeness_check; STOP if not)",
+  "consistency": "frame-order v3 numbers of the v2 statistics equal the frozen e5_analyze output"
+ },
+ "streaming": {
+  "runner": "caffeinate -ims .venv/bin/python runners/v3_1_stream.py --run_dir runs/<date>-E5v3 --user_approved (refuses without it; = the frozen v3_stream.main with the v3.1 levels and preregistration)",
+  "planned_bytes": 20439558530,
+  "planned_bytes_x1.01": 20643954115,
+  "byte_budget": 22000000000,
+  "headroom_bytes": 1356045885,
+  "other": "as v2 (one scenario on disk, raw <= 3e9, free disk >= member + 5e9, raw deleted after both cache files are re-read)"
+ },
+ "estimated_runtime": {
+  "basis": "v3 estimate (preregistration_v3.json estimated_runtime, unchanged) plus the cost of the two D-70 conditions, measured per condition (PGD attack_s) in the v3.1 dry run on this machine (runs/20261024-E5/dryrun_v3_1; n = 1: none), linear in n between n = 1, 2, 5, applied to the 2066 test frames with the Stage-1 mean agent count per scenario; estimate only",
+  "v3_total_h": 19.2,
+  "v3_range_h": [
+   16.6,
+   23.5
+  ],
+  "pgd_cost_per_condition_s_per_frame_v3_1_dryrun": {
+   "pgd_remove_stealth@r1.0": {
+    "n2": 3.93,
+    "n5": 6.92
+   },
+   "pgd_untargeted_stealth@r1.0": {
+    "n2": 4.06,
+    "n5": 7.02
+   },
+   "pgd_remove_stealth@r0.25": {
+    "n2": 3.92,
+    "n5": 6.96
+   },
+   "pgd_untargeted_stealth@r0.5": {
+    "n2": 4.22,
+    "n5": 7.29
+   },
+   "pgd_remove@r0.25": {
+    "n2": 2.12,
+    "n5": 5.35
+   },
+   "pgd_untargeted@r0.25": {
+    "n2": 2.4,
+    "n5": 5.57
+   }
+  },
+  "pgd_cost_per_condition_h_v3_1_dryrun": {
+   "pgd_remove_stealth@r1.0": 2.51,
+   "pgd_untargeted_stealth@r1.0": 2.58,
+   "pgd_remove_stealth@r0.25": 2.51,
+   "pgd_untargeted_stealth@r0.5": 2.68,
+   "pgd_remove@r0.25": 1.56,
+   "pgd_untargeted@r0.25": 1.71
+  },
+  "D-70_added_h": 5.09,
+  "total_h": 24.3,
+  "range_h": [
+   20.9,
+   29.9
+  ],
+  "analysis": "e5_analyze test (frozen v2) under 1 h; v3_analyze test about 1.5-2.5 h (16 conditions x 6 methods x 2 AP definitions x 2 bootstraps of 2000 + realized-only)"
+ },
+ "analysis": [
+  "python runners/e5_analyze.py test --run_dir runs/<date>-E5v3   (frozen v2 analysis -> e5_test.json)",
+  "python runners/v3_analyze.py test --run_dir runs/<date>-E5v3 --prereg runs/20261024-E5/preregistration_v3_1.json   (v3 -> e5_v3.json: criteria_v3 per AP definition, D-64 verdict, tables incl. the D-70 conditions)"
+ ],
+ "outcome": {
+  "success": "only if the v2 rule passes under both AP definitions (D-64); headline in global-ranking AP",
+  "disagreement": "report 'AP-definition-dependent'",
+  "failure": "report as the result; no rescue analysis presented as confirmatory",
+  "no_rule_changes": "no change to any method, attack, level, threshold, metric or criterion after this file is committed"
+ },
+ "development_check_v3_H": {
+  "option1_H": {
+   "file": "runs/20261024-PGD/pgd_H_results.json",
+   "criteria_v3_on_H": {
+    "frame": {
+     "B-RAY_p": 0.0004997501249375312,
+     "R1_p": 0.054972513743128434,
+     "pass": true,
+     "R1_minus_BRAY": {
+      "point": -0.00559,
+      "ci95_scenario": [
+       -0.0175,
+       0.0032
+      ],
+      "ci95_block10": [
+       -0.0091,
+       -0.0024
+      ],
+      "statement": "the counterfactual's benefit over a box-level filter is not established"
+     }
+    },
+    "global": {
+     "B-RAY_p": 0.0004997501249375312,
+     "R1_p": 0.0004997501249375312,
+     "pass": true,
+     "R1_minus_BRAY": {
+      "point": 0.00289,
+      "ci95_scenario": [
+       0.0005,
+       0.0057
+      ],
+      "ci95_block10": [
+       0.001,
+       0.0047
+      ],
+      "statement": "the counterfactual improves over the box-level filter"
+     }
+    }
+   },
+   "D-64_on_H": {
+    "pass_frame_order": true,
+    "pass_global": true,
+    "success": true,
+    "verdict": "success under both AP definitions",
+    "headline_AP": "global",
+    "R1_minus_BRAY_statements": {
+     "frame": "the counterfactual's benefit over a box-level filter is not established",
+     "global": "the counterfactual improves over the box-level filter"
+    },
+    "R1_minus_BRAY_AP_definition_dependent": true
+   },
+   "pgd_dAP_and_recovery_global": {
+    "pgd_untargeted@r0.25": {
+     "B-NORM": {
+      "dAP@0.7": -0.1438,
+      "recovery": -3.67995
+     },
+     "B-RAY": {
+      "dAP@0.7": 0.00145,
+      "recovery": 0.03723
+     },
+     "R1": {
+      "dAP@0.7": 0.00681,
+      "recovery": 0.17438
+     },
+     "ego_only": {
+      "dAP@0.7": -0.1438,
+      "recovery": -3.67995
+     },
+     "attack_loss": 0.03908
+    },
+    "pgd_untargeted@r0.5": {
+     "B-NORM": {
+      "dAP@0.7": 0.09875,
+      "recovery": 0.35063
+     },
+     "B-RAY": {
+      "dAP@0.7": 0.01295,
+      "recovery": 0.04598
+     },
+     "R1": {
+      "dAP@0.7": 0.06932,
+      "recovery": 0.24615
+     },
+     "ego_only": {
+      "dAP@0.7": 0.09875,
+      "recovery": 0.35063
+     },
+     "attack_loss": 0.28163
+    },
+    "pgd_untargeted@r1.0": {
+     "B-NORM": {
+      "dAP@0.7": 0.62096,
+      "recovery": 0.77249
+     },
+     "B-RAY": {
+      "dAP@0.7": 0.01493,
+      "recovery": 0.01857
+     },
+     "R1": {
+      "dAP@0.7": 0.17697,
+      "recovery": 0.22016
+     },
+     "ego_only": {
+      "dAP@0.7": 0.62096,
+      "recovery": 0.77249
+     },
+     "attack_loss": 0.80384
+    },
+    "pgd_remove@r0.25": {
+     "B-NORM": {
+      "dAP@0.7": -0.14934,
+      "recovery": -4.45239
+     },
+     "B-RAY": {
+      "dAP@0.7": -0.00145,
+      "recovery": -0.04309
+     },
+     "R1": {
+      "dAP@0.7": 0.01109,
+      "recovery": 0.33052
+     },
+     "ego_only": {
+      "dAP@0.7": -0.14934,
+      "recovery": -4.45239
+     },
+     "attack_loss": 0.03354
+    },
+    "pgd_remove@r0.5": {
+     "B-NORM": {
+      "dAP@0.7": -0.04784,
+      "recovery": -0.35423
+     },
+     "B-RAY": {
+      "dAP@0.7": -0.00093,
+      "recovery": -0.0069
+     },
+     "R1": {
+      "dAP@0.7": 0.05953,
+      "recovery": 0.44079
+     },
+     "ego_only": {
+      "dAP@0.7": -0.04784,
+      "recovery": -0.35423
+     },
+     "attack_loss": 0.13504
+    },
+    "pgd_remove@r1.0": {
+     "B-NORM": {
+      "dAP@0.7": 0.32993,
+      "recovery": 0.64338
+     },
+     "B-RAY": {
+      "dAP@0.7": -7e-05,
+      "recovery": -0.00014
+     },
+     "R1": {
+      "dAP@0.7": 0.27211,
+      "recovery": 0.53062
+     },
+     "ego_only": {
+      "dAP@0.7": 0.32993,
+      "recovery": 0.64338
+     },
+     "attack_loss": 0.51281
+    }
+   },
+   "B-NORM_catch": {
+    "clean": 0.0162,
+    "spoof_feat": 0.0378,
+    "remove_feat": 0.0083,
+    "shift_feat": 0.0164,
+    "spoof_pts": 0.0331,
+    "spoof_blind": 0.0546,
+    "pgd_untargeted@r0.25": 1.0,
+    "pgd_untargeted@r0.5": 1.0,
+    "pgd_untargeted@r1.0": 1.0,
+    "pgd_remove@r0.25": 1.0,
+    "pgd_remove@r0.5": 1.0,
+    "pgd_remove@r1.0": 1.0
+   }
+  },
+  "stealth_H": {
+   "file": "runs/20261024-PGD/pgd_stealth_H_results.json",
+   "criteria_v3_on_H": {
+    "frame": {
+     "B-RAY_p": 0.0004997501249375312,
+     "R1_p": 0.054972513743128434,
+     "pass": true,
+     "R1_minus_BRAY": {
+      "point": -0.00559,
+      "ci95_scenario": [
+       -0.0175,
+       0.0032
+      ],
+      "ci95_block10": [
+       -0.0091,
+       -0.0024
+      ],
+      "statement": "the counterfactual's benefit over a box-level filter is not established"
+     }
+    },
+    "global": {
+     "B-RAY_p": 0.0004997501249375312,
+     "R1_p": 0.0004997501249375312,
+     "pass": true,
+     "R1_minus_BRAY": {
+      "point": 0.00289,
+      "ci95_scenario": [
+       0.0005,
+       0.0057
+      ],
+      "ci95_block10": [
+       0.001,
+       0.0047
+      ],
+      "statement": "the counterfactual improves over the box-level filter"
+     }
+    }
+   },
+   "D-64_on_H": {
+    "pass_frame_order": true,
+    "pass_global": true,
+    "success": true,
+    "verdict": "success under both AP definitions",
+    "headline_AP": "global",
+    "R1_minus_BRAY_statements": {
+     "frame": "the counterfactual's benefit over a box-level filter is not established",
+     "global": "the counterfactual improves over the box-level filter"
+    },
+    "R1_minus_BRAY_AP_definition_dependent": true
+   },
+   "pgd_dAP_and_recovery_global": {
+    "pgd_untargeted@r0.25": {
+     "B-NORM": {
+      "dAP@0.7": -0.1438,
+      "recovery": -3.67995
+     },
+     "B-RAY": {
+      "dAP@0.7": 0.00145,
+      "recovery": 0.03723
+     },
+     "R1": {
+      "dAP@0.7": 0.00681,
+      "recovery": 0.17438
+     },
+     "ego_only": {
+      "dAP@0.7": -0.1438,
+      "recovery": -3.67995
+     },
+     "attack_loss": 0.03908
+    },
+    "pgd_remove@r0.25": {
+     "B-NORM": {
+      "dAP@0.7": -0.14934,
+      "recovery": -4.45239
+     },
+     "B-RAY": {
+      "dAP@0.7": -0.00145,
+      "recovery": -0.04309
+     },
+     "R1": {
+      "dAP@0.7": 0.01109,
+      "recovery": 0.33052
+     },
+     "ego_only": {
+      "dAP@0.7": -0.14934,
+      "recovery": -4.45239
+     },
+     "attack_loss": 0.03354
+    },
+    "pgd_untargeted_stealth@r0.25": {
+     "B-NORM": {
+      "dAP@0.7": -0.00213,
+      "recovery": -0.2623
+     },
+     "B-RAY": {
+      "dAP@0.7": -0.00126,
+      "recovery": -0.15517
+     },
+     "R1": {
+      "dAP@0.7": 0.00023,
+      "recovery": 0.02879
+     },
+     "ego_only": {
+      "dAP@0.7": -0.17476,
+      "recovery": -21.51303
+     },
+     "attack_loss": 0.00812
+    },
+    "pgd_untargeted_stealth@r0.5": {
+     "B-NORM": {
+      "dAP@0.7": -0.00182,
+      "recovery": -0.05484
+     },
+     "B-RAY": {
+      "dAP@0.7": -0.0003,
+      "recovery": -0.00893
+     },
+     "R1": {
+      "dAP@0.7": 0.00397,
+      "recovery": 0.11953
+     },
+     "ego_only": {
+      "dAP@0.7": -0.14969,
+      "recovery": -4.51014
+     },
+     "attack_loss": 0.03319
+    },
+    "pgd_untargeted_stealth@r1.0": {
+     "B-NORM": {
+      "dAP@0.7": 0.0,
+      "recovery": 0.0
+     },
+     "B-RAY": {
+      "dAP@0.7": 0.00403,
+      "recovery": 0.0342
+     },
+     "R1": {
+      "dAP@0.7": 0.01461,
+      "recovery": 0.12404
+     },
+     "ego_only": {
+      "dAP@0.7": -0.06509,
+      "recovery": -0.5526
+     },
+     "attack_loss": 0.11779
+    },
+    "pgd_remove_stealth@r0.25": {
+     "B-NORM": {
+      "dAP@0.7": -0.0022,
+      "recovery": -0.0702
+     },
+     "B-RAY": {
+      "dAP@0.7": -0.00119,
+      "recovery": -0.03809
+     },
+     "R1": {
+      "dAP@0.7": 0.00987,
+      "recovery": 0.31505
+     },
+     "ego_only": {
+      "dAP@0.7": -0.15157,
+      "recovery": -4.84019
+     },
+     "attack_loss": 0.03131
+    },
+    "pgd_remove_stealth@r0.5": {
+     "B-NORM": {
+      "dAP@0.7": -0.00196,
+      "recovery": -0.01456
+     },
+     "B-RAY": {
+      "dAP@0.7": -0.00096,
+      "recovery": -0.00712
+     },
+     "R1": {
+      "dAP@0.7": 0.05885,
+      "recovery": 0.4374
+     },
+     "ego_only": {
+      "dAP@0.7": -0.04834,
+      "recovery": -0.35934
+     },
+     "attack_loss": 0.13454
+    },
+    "pgd_remove_stealth@r1.0": {
+     "B-NORM": {
+      "dAP@0.7": 0.0,
+      "recovery": 0.0
+     },
+     "B-RAY": {
+      "dAP@0.7": -7e-05,
+      "recovery": -0.00014
+     },
+     "R1": {
+      "dAP@0.7": 0.27288,
+      "recovery": 0.5428
+     },
+     "ego_only": {
+      "dAP@0.7": 0.31986,
+      "recovery": 0.63623
+     },
+     "attack_loss": 0.50274
+    }
+   },
+   "B-NORM_catch": {
+    "clean": 0.0162,
+    "spoof_feat": 0.0378,
+    "remove_feat": 0.0083,
+    "shift_feat": 0.0164,
+    "spoof_pts": 0.0331,
+    "spoof_blind": 0.0546,
+    "pgd_untargeted@r0.25": 1.0,
+    "pgd_remove@r0.25": 1.0,
+    "pgd_untargeted_stealth@r0.25": 0.0,
+    "pgd_untargeted_stealth@r0.5": 0.0,
+    "pgd_untargeted_stealth@r1.0": 0.0,
+    "pgd_remove_stealth@r0.25": 0.0,
+    "pgd_remove_stealth@r0.5": 0.0,
+    "pgd_remove_stealth@r1.0": 0.0
+   }
+  },
+  "label": "DEVELOPMENT, block H (exposed, D-53; 4 scenarios, 371 frames, n = 2); stealth PGD designed on H (post hoc); not a test",
+  "stealth_constraint_check_H": {
+   "attacked_frame_conditions": 2198,
+   "n_violations": 0,
+   "holds": true
+  },
+  "frozen_after": "no method, attack, level or rule changed after these numbers were seen"
+ },
+ "B-NORM_note": "B-NORM is in the comparison set; its catch rate (sender-1 flag rate) and AP cost are reported for every condition",
+ "scope_limits": "D-54 and D-63 (single attacker; random placement for the E4 families; spoof_blind bypass; ray-consistent / low-ray spoofs; B-RAY cannot restore removed objects; receiver sensor trusted; CARLA LiDAR; method chosen on exposed H), plus: PGD is white-box on this checkpoint with budgets relative to its clean H feature scale; B-NORM's threshold is fitted on clean H",
+ "labelling": "Test numbers are the one-time final test. All E0-E5a numbers (blocks T and H) are development or held-out-but-exposed and are reported separately. v2 is the governing pre-registration.",
+ "no_changes": "decision_log.md is not edited; proposals go to planning/decision_log_proposed_appendix.md only",
+ "dry_run_v3": {
+  "label": "DRY RUN (development, block-T dev slice, no network); not results",
+  "scenario": "2021_08_22_13_37_16",
+  "preregistration": "runs/20261024-E5/preregistration_v3.json",
+  "frozen_check_before_run": "OK",
+  "n_boot": 200,
+  "runs": {
+   "n2": {
+    "frames": 24,
+    "n_agents": [
+     2
+    ],
+    "stream_s": 681,
+    "v3_extra_s_per_frame": 16.17,
+    "analysis_s": 60,
+    "compose_all_identical": true,
+    "timing_frames": 24,
+    "pgd_conditions": [
+     "pgd_remove@r0.25",
+     "pgd_remove_stealth@r0.25",
+     "pgd_untargeted@r0.25",
+     "pgd_untargeted_stealth@r0.5"
+    ],
+    "pgd_frames": 24,
+    "subsets_decoded_per_condition": [
+     2
+    ],
+    "B-NORM_flags": {
+     "clean": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_feat": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "remove_feat": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "shift_feat": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_pts": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_blind": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_untargeted@r0.25": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 24,
+      "any_flagged": 24,
+      "catch_rate": 1.0
+     },
+     "pgd_remove@r0.25": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 24,
+      "any_flagged": 24,
+      "catch_rate": 1.0
+     },
+     "pgd_untargeted_stealth@r0.5": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_remove_stealth@r0.25": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     }
+    },
+    "criteria_v3_D-64": {
+     "pass_frame_order": true,
+     "pass_global": true,
+     "success": true,
+     "verdict": "success under both AP definitions",
+     "headline_AP": "global",
+     "R1_minus_BRAY_statements": {
+      "frame": "the counterfactual performs worse than the box-level filter",
+      "global": "the counterfactual performs worse than the box-level filter"
+     },
+     "R1_minus_BRAY_AP_definition_dependent": false
+    },
+    "consistency_vs_frozen_v2": {
+     "mean_delta_orig|B-RAY": {
+      "point": [
+       0.01333,
+       0.01333
+      ],
+      "ci95_scenario": [
+       [
+        0.0133,
+        0.0133
+       ],
+       [
+        0.0133,
+        0.0133
+       ]
+      ]
+     },
+     "mean_delta_orig|R1": {
+      "point": [
+       0.00726,
+       0.00726
+      ],
+      "ci95_scenario": [
+       [
+        0.0073,
+        0.0073
+       ],
+       [
+        0.0073,
+        0.0073
+       ]
+      ]
+     },
+     "rel_loss|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "paired_mean_orig|R1-B-RAY": {
+      "point": [
+       -0.00607,
+       -0.00607
+      ],
+      "ci95_scenario": [
+       [
+        -0.0061,
+        -0.0061
+       ],
+       [
+        -0.0061,
+        -0.0061
+       ]
+      ]
+     },
+     "identical": true
+    },
+    "v2_criteria_success": true
+   },
+   "n1": {
+    "frames": 24,
+    "n_agents": [
+     1
+    ],
+    "stream_s": 104,
+    "v3_extra_s_per_frame": 0.5,
+    "analysis_s": 45,
+    "compose_all_identical": true,
+    "timing_frames": 24,
+    "pgd_conditions": [],
+    "pgd_frames": 0,
+    "subsets_decoded_per_condition": [
+     1
+    ],
+    "B-NORM_flags": {
+     "clean": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "spoof_feat": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "remove_feat": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "shift_feat": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "spoof_pts": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "spoof_blind": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_untargeted@r0.25": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_remove@r0.25": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_untargeted_stealth@r0.5": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_remove_stealth@r0.25": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     }
+    },
+    "criteria_v3_D-64": {
+     "pass_frame_order": false,
+     "pass_global": false,
+     "success": false,
+     "verdict": "fails under both AP definitions",
+     "headline_AP": "global",
+     "R1_minus_BRAY_statements": {
+      "frame": "the counterfactual's benefit over a box-level filter is not established",
+      "global": "the counterfactual's benefit over a box-level filter is not established"
+     },
+     "R1_minus_BRAY_AP_definition_dependent": false
+    },
+    "consistency_vs_frozen_v2": {
+     "mean_delta_orig|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "mean_delta_orig|R1": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "rel_loss|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "paired_mean_orig|R1-B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "identical": true
+    },
+    "v2_criteria_success": false
+   },
+   "n5": {
+    "frames": 6,
+    "n_agents": [
+     5
+    ],
+    "stream_s": 414,
+    "v3_extra_s_per_frame": 36.89,
+    "analysis_s": 16,
+    "compose_all_identical": true,
+    "timing_frames": 6,
+    "pgd_conditions": [
+     "pgd_remove@r0.25",
+     "pgd_remove_stealth@r0.25",
+     "pgd_untargeted@r0.25",
+     "pgd_untargeted_stealth@r0.5"
+    ],
+    "pgd_frames": 6,
+    "subsets_decoded_per_condition": [
+     16
+    ],
+    "B-NORM_flags": {
+     "clean": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_feat": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "remove_feat": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "shift_feat": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_pts": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_blind": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_untargeted@r0.25": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 6,
+      "any_flagged": 6,
+      "catch_rate": 1.0
+     },
+     "pgd_remove@r0.25": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 6,
+      "any_flagged": 6,
+      "catch_rate": 1.0
+     },
+     "pgd_untargeted_stealth@r0.5": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_remove_stealth@r0.25": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     }
+    },
+    "criteria_v3_D-64": {
+     "pass_frame_order": true,
+     "pass_global": true,
+     "success": true,
+     "verdict": "success under both AP definitions",
+     "headline_AP": "global",
+     "R1_minus_BRAY_statements": {
+      "frame": "the counterfactual improves over the box-level filter",
+      "global": "the counterfactual improves over the box-level filter"
+     },
+     "R1_minus_BRAY_AP_definition_dependent": false
+    },
+    "consistency_vs_frozen_v2": {
+     "mean_delta_orig|B-RAY": {
+      "point": [
+       0.00468,
+       0.00468
+      ],
+      "ci95_scenario": [
+       [
+        0.0047,
+        0.0047
+       ],
+       [
+        0.0047,
+        0.0047
+       ]
+      ]
+     },
+     "mean_delta_orig|R1": {
+      "point": [
+       0.01487,
+       0.01487
+      ],
+      "ci95_scenario": [
+       [
+        0.0149,
+        0.0149
+       ],
+       [
+        0.0149,
+        0.0149
+       ]
+      ]
+     },
+     "rel_loss|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "paired_mean_orig|R1-B-RAY": {
+      "point": [
+       0.01019,
+       0.01019
+      ],
+      "ci95_scenario": [
+       [
+        0.0102,
+        0.0102
+       ],
+       [
+        0.0102,
+        0.0102
+       ]
+      ]
+     },
+     "identical": true
+    },
+    "v2_criteria_success": true
+   }
+  },
+  "frozen_check_after_run": "OK"
+ },
+ "user_decisions_v3": "D-64, D-65, D-66 (committed 8f561cf), D-67, D-68, D-69 (643c37c), D-68 amendment (0e76e69); plans runs/20261024-PGD/plan.json (0563fa8) and plan_stealth.json (9db5e22), each committed before its runs",
+ "dry_run_v3_1": {
+  "label": "DRY RUN (development, block-T dev slice, no network); not results",
+  "scenario": "2021_08_22_13_37_16",
+  "preregistration": "runs/20261024-E5/preregistration_v3_1.json",
+  "frozen_check_before_run": "OK",
+  "n_boot": 200,
+  "runs": {
+   "n2": {
+    "frames": 24,
+    "n_agents": [
+     2
+    ],
+    "stream_s": 813,
+    "v3_extra_s_per_frame": 22.78,
+    "analysis_s": 64,
+    "compose_all_identical": true,
+    "timing_frames": 24,
+    "pgd_conditions": [
+     "pgd_remove@r0.25",
+     "pgd_remove_stealth@r0.25",
+     "pgd_remove_stealth@r1.0",
+     "pgd_untargeted@r0.25",
+     "pgd_untargeted_stealth@r0.5",
+     "pgd_untargeted_stealth@r1.0"
+    ],
+    "pgd_frames": 24,
+    "subsets_decoded_per_condition": [
+     2
+    ],
+    "B-NORM_flags": {
+     "clean": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_feat": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "remove_feat": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "shift_feat": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_pts": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_blind": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_untargeted@r0.25": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 24,
+      "any_flagged": 24,
+      "catch_rate": 1.0
+     },
+     "pgd_remove@r0.25": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 24,
+      "any_flagged": 24,
+      "catch_rate": 1.0
+     },
+     "pgd_untargeted_stealth@r0.5": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_remove_stealth@r0.25": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_untargeted_stealth@r1.0": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_remove_stealth@r1.0": {
+      "frames_n2": 24,
+      "applied": 24,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     }
+    },
+    "criteria_v3_D-64": {
+     "pass_frame_order": true,
+     "pass_global": true,
+     "success": true,
+     "verdict": "success under both AP definitions",
+     "headline_AP": "global",
+     "R1_minus_BRAY_statements": {
+      "frame": "the counterfactual performs worse than the box-level filter",
+      "global": "the counterfactual performs worse than the box-level filter"
+     },
+     "R1_minus_BRAY_AP_definition_dependent": false
+    },
+    "consistency_vs_frozen_v2": {
+     "mean_delta_orig|B-RAY": {
+      "point": [
+       0.01333,
+       0.01333
+      ],
+      "ci95_scenario": [
+       [
+        0.0133,
+        0.0133
+       ],
+       [
+        0.0133,
+        0.0133
+       ]
+      ]
+     },
+     "mean_delta_orig|R1": {
+      "point": [
+       0.00726,
+       0.00726
+      ],
+      "ci95_scenario": [
+       [
+        0.0073,
+        0.0073
+       ],
+       [
+        0.0073,
+        0.0073
+       ]
+      ]
+     },
+     "rel_loss|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "paired_mean_orig|R1-B-RAY": {
+      "point": [
+       -0.00607,
+       -0.00607
+      ],
+      "ci95_scenario": [
+       [
+        -0.0061,
+        -0.0061
+       ],
+       [
+        -0.0061,
+        -0.0061
+       ]
+      ]
+     },
+     "identical": true
+    },
+    "v2_criteria_success": true
+   },
+   "n1": {
+    "frames": 24,
+    "n_agents": [
+     1
+    ],
+    "stream_s": 96,
+    "v3_extra_s_per_frame": 0.43,
+    "analysis_s": 34,
+    "compose_all_identical": true,
+    "timing_frames": 24,
+    "pgd_conditions": [],
+    "pgd_frames": 0,
+    "subsets_decoded_per_condition": [
+     1
+    ],
+    "B-NORM_flags": {
+     "clean": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "spoof_feat": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "remove_feat": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "shift_feat": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "spoof_pts": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "spoof_blind": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_untargeted@r0.25": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_remove@r0.25": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_untargeted_stealth@r0.5": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_remove_stealth@r0.25": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_untargeted_stealth@r1.0": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     },
+     "pgd_remove_stealth@r1.0": {
+      "frames_n2": 0,
+      "applied": 0,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": null
+     }
+    },
+    "criteria_v3_D-64": {
+     "pass_frame_order": false,
+     "pass_global": false,
+     "success": false,
+     "verdict": "fails under both AP definitions",
+     "headline_AP": "global",
+     "R1_minus_BRAY_statements": {
+      "frame": "the counterfactual's benefit over a box-level filter is not established",
+      "global": "the counterfactual's benefit over a box-level filter is not established"
+     },
+     "R1_minus_BRAY_AP_definition_dependent": false
+    },
+    "consistency_vs_frozen_v2": {
+     "mean_delta_orig|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "mean_delta_orig|R1": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "rel_loss|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "paired_mean_orig|R1-B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "identical": true
+    },
+    "v2_criteria_success": false
+   },
+   "n5": {
+    "frames": 6,
+    "n_agents": [
+     5
+    ],
+    "stream_s": 416,
+    "v3_extra_s_per_frame": 43.26,
+    "analysis_s": 16,
+    "compose_all_identical": true,
+    "timing_frames": 6,
+    "pgd_conditions": [
+     "pgd_remove@r0.25",
+     "pgd_remove_stealth@r0.25",
+     "pgd_remove_stealth@r1.0",
+     "pgd_untargeted@r0.25",
+     "pgd_untargeted_stealth@r0.5",
+     "pgd_untargeted_stealth@r1.0"
+    ],
+    "pgd_frames": 6,
+    "subsets_decoded_per_condition": [
+     16
+    ],
+    "B-NORM_flags": {
+     "clean": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_feat": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "remove_feat": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "shift_feat": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_pts": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "spoof_blind": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_untargeted@r0.25": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 6,
+      "any_flagged": 6,
+      "catch_rate": 1.0
+     },
+     "pgd_remove@r0.25": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 6,
+      "any_flagged": 6,
+      "catch_rate": 1.0
+     },
+     "pgd_untargeted_stealth@r0.5": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_remove_stealth@r0.25": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_untargeted_stealth@r1.0": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     },
+     "pgd_remove_stealth@r1.0": {
+      "frames_n2": 6,
+      "applied": 6,
+      "sender1_flagged": 0,
+      "any_flagged": 0,
+      "catch_rate": 0.0
+     }
+    },
+    "criteria_v3_D-64": {
+     "pass_frame_order": true,
+     "pass_global": true,
+     "success": true,
+     "verdict": "success under both AP definitions",
+     "headline_AP": "global",
+     "R1_minus_BRAY_statements": {
+      "frame": "the counterfactual improves over the box-level filter",
+      "global": "the counterfactual improves over the box-level filter"
+     },
+     "R1_minus_BRAY_AP_definition_dependent": false
+    },
+    "consistency_vs_frozen_v2": {
+     "mean_delta_orig|B-RAY": {
+      "point": [
+       0.00468,
+       0.00468
+      ],
+      "ci95_scenario": [
+       [
+        0.0047,
+        0.0047
+       ],
+       [
+        0.0047,
+        0.0047
+       ]
+      ]
+     },
+     "mean_delta_orig|R1": {
+      "point": [
+       0.01487,
+       0.01487
+      ],
+      "ci95_scenario": [
+       [
+        0.0149,
+        0.0149
+       ],
+       [
+        0.0149,
+        0.0149
+       ]
+      ]
+     },
+     "rel_loss|B-RAY": {
+      "point": [
+       0.0,
+       0.0
+      ],
+      "ci95_scenario": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0
+       ]
+      ]
+     },
+     "paired_mean_orig|R1-B-RAY": {
+      "point": [
+       0.01019,
+       0.01019
+      ],
+      "ci95_scenario": [
+       [
+        0.0102,
+        0.0102
+       ],
+       [
+        0.0102,
+        0.0102
+       ]
+      ]
+     },
+     "identical": true
+    },
+    "v2_criteria_success": true
+   }
+  },
+  "frozen_check_after_run": "OK",
+  "unchanged_vs_v3_dryrun": {
+   "n2": {
+    "cache_v2_record_identical": true,
+    "v3extra_v3_conditions_identical": true,
+    "new_conditions": [
+     "pgd_remove_stealth@r1.0",
+     "pgd_untargeted_stealth@r1.0"
+    ],
+    "only_D70_new": true
+   },
+   "n1": {
+    "cache_v2_record_identical": true,
+    "v3extra_v3_conditions_identical": true,
+    "new_conditions": [],
+    "only_D70_new": true
+   },
+   "n5": {
+    "cache_v2_record_identical": true,
+    "v3extra_v3_conditions_identical": true,
+    "new_conditions": [
+     "pgd_remove_stealth@r1.0",
+     "pgd_untargeted_stealth@r1.0"
+    ],
+    "only_D70_new": true
+   }
+  }
+ },
+ "user_decisions_v3_1": "D-70 (committed 2c50ef0 before any v3.1 code or run)",
+ "difference_from_v3": [
+  "/id: changed",
+  "/version: changed",
+  "/written: changed",
+  "/base: changed",
+  "/user_decisions: changed",
+  "/frozen_code_commit: changed",
+  "/frozen_sha256/runners/v3_1_stream.py: added",
+  "/frozen_sha256/runners/v3_1_dryrun.py: added",
+  "/frozen_note: changed",
+  "/pgd_families/test_conditions: changed",
+  "/pgd_families/D-70_strong_level: added",
+  "/streaming/runner: changed",
+  "/estimated_runtime/basis: changed",
+  "/estimated_runtime/v2_part_h: removed",
+  "/estimated_runtime/v3_side_record_h: removed",
+  "/estimated_runtime/pgd_cost_per_family_h: removed",
+  "/estimated_runtime/pgd_cost_per_family_s_per_frame: removed",
+  "/estimated_runtime/b_norm_magnitudes_and_E4_attack_recompute: removed",
+  "/estimated_runtime/total_h: changed",
+  "/estimated_runtime/range_h: changed",
+  "/estimated_runtime/analysis: changed",
+  "/estimated_runtime/v3_total_h: added",
+  "/estimated_runtime/v3_range_h: added",
+  "/estimated_runtime/pgd_cost_per_condition_s_per_frame_v3_1_dryrun: added",
+  "/estimated_runtime/pgd_cost_per_condition_h_v3_1_dryrun: added",
+  "/estimated_runtime/D-70_added_h: added",
+  "/analysis: changed",
+  "/dry_run_v3_1: added",
+  "/user_decisions_v3_1: added"
+ ]
+}

@@ -1,0 +1,51 @@
+{
+ "label": "DEVELOPMENT procedural test (no network, dev slice); not results",
+ "excluded_from_comparison": "wall-clock fields only: cache 'timing' (D-42 timing pass), frame_s, v3_s, attack_s; analysis 'overhead' (built from the timing pass)",
+ "caches_resumed_vs_uninterrupted": {
+  "2021_08_22_13_37_16": {
+   "cache": {
+    "frames": 24,
+    "identical_excluding_wallclock": true,
+    "first_diffs": []
+   },
+   "v3extra": {
+    "frames": 24,
+    "identical_excluding_wallclock": true,
+    "first_diffs": []
+   }
+  },
+  "2099_12_31_00_00_08": {
+   "cache": {
+    "frames": 8,
+    "identical_excluding_wallclock": true,
+    "first_diffs": []
+   },
+   "v3extra": {
+    "frames": 8,
+    "identical_excluding_wallclock": true,
+    "first_diffs": []
+   }
+  }
+ },
+ "cache_A_resumed_vs_committed_v3_dryrun_n2": {
+  "cache": {
+   "frames": 24,
+   "identical_excluding_wallclock": true,
+   "first_diffs": []
+  },
+  "v3extra": {
+   "frames": 24,
+   "identical_excluding_wallclock": true,
+   "first_diffs": []
+  }
+ },
+ "analysis_n_boot": 200,
+ "analysis_e5_test.json_resumed_vs_uninterrupted": {
+  "identical_excluding_overhead": true,
+  "diffs": []
+ },
+ "analysis_e5_v3.json_resumed_vs_uninterrupted": {
+  "identical_excluding_overhead": true,
+  "diffs": []
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "note": "E5 v3 final-test stream (D-55, preregistration_v3)",
+ "allowlist": [
+  "2021_08_22_13_37_16",
+  "2099_12_31_00_00_08"
+ ],
+ "excluded": [
+  "2021_08_23_12_58_19"
+ ],
+ "byte_budget": 22000000000,
+ "downloads": [
+  {
+   "scenario": "2021_08_22_13_37_16",
+   "started": "2026-10-24T17:45:16",
+   "bytes_downloaded": 146394944,
+   "status": "complete",
+   "bytes_written": 146394944,
+   "seconds": 0
+  },
+  {
+   "scenario": "2099_12_31_00_00_08",
+   "started": "2026-10-24T17:58:10",
+   "bytes_downloaded": 48804928,
+   "status": "complete",
+   "bytes_written": 48804928,
+   "seconds": 0
+  }
+ ],
+ "precheck": {
+  "time": "2026-10-24T17:59:18",
+  "need_csize": {
+   "2021_08_22_13_37_16": 146394944,
+   "2099_12_31_00_00_08": 48804928
+  },
+  "spent": 195199872,
+  "projected_with_1pct_headers": 195199872,
+  "budget": 22000000000
+ }
+}
