@@ -16,7 +16,8 @@ OUT = "runs/20261024-E5/preregistration_v3.json"
 CKPT_FILE = "data/opv2v/ckpt/pointpillar_attentive_fusion/pointpillar_attentive_fusion/latest.pth"
 EXTRA_FROZEN = ("src/mint/model/attfuse_parts.py", "src/mint/model/opencood_shims.py", "runners/stage1_spike.py",
                 CKPT_FILE, "src/mint/attacks/pgd_v3.py", "src/mint/reliability/bnorm.py", "runners/v3_common.py",
-                "runners/v3_stream.py", "runners/v3_analyze.py", "runners/v3_dryrun.py")
+                "runners/v3_stream.py", "runners/v3_analyze.py", "runners/v3_dryrun.py",
+                "src/mint/attacks/pgd_stealth.py")
 
 
 def sha(p):
@@ -45,24 +46,38 @@ def main():
         sys.exit(f"STOP: a v2-frozen file changed: {changed}")
     oc = subprocess.run(["git", "rev-parse", "HEAD"], cwd=os.path.join(ROOT, "third_party/OpenCOOD"),
                         capture_output=True, text=True).stdout.strip()
-    sel = H["pgd_selection"]
-    levels = {f: {"r": s["selected_r"], "status": s["status"], "eps_k": [s["selected_r"] * x for x in plan["feature_scale_clean_H"]["sigma_k"]],
-                  "attack_loss_global_H_by_r": s["attack_loss_global_by_r"]} for f, s in sel.items()}
+    S = json.load(open(os.path.join(ROOT, a.pgd_run, "pgd_stealth_H_results.json")))
+    pst = json.load(open(os.path.join(ROOT, a.pgd_run, "plan_stealth.json")))
+    sig = plan["feature_scale_clean_H"]["sigma_k"]
+    levels = {}
+    for f, s_ in H["pgd_selection"].items():                     # D-67: option-1 families at the committed rule's r
+        assert s_["selected_r"] == 0.25
+        levels[f] = {"decision": "D-67 (secondary, reported)", "r": s_["selected_r"], "status": s_["status"],
+                     "eps_k": [s_["selected_r"] * x for x in sig], "attack_loss_global_H_by_r": s_["attack_loss_global_by_r"]}
+    for f, s_ in S["pgd_selection"].items():                     # D-68: stealth families (main PGD evaluation)
+        levels[f] = {"decision": "D-68 as amended (main PGD evaluation; post hoc)", "r": s_["selected_r"], "status": s_["status"],
+                     "eps_k": [s_["selected_r"] * x for x in sig], "attack_loss_global_H_by_r": s_["attack_loss_global_by_r"]}
     test_conds = [f"{f}@r{v['r']}" for f, v in levels.items()]
-    pt = H["point"]
-    dev = {"label": "DEVELOPMENT, block H (exposed, D-53; 4 scenarios, 371 frames, n = 2); not a test",
-           "file": f"{a.pgd_run}/pgd_H_results.json",
-           "criteria_v3_on_H": {d: {"B-RAY_p": H["criteria_v3"][d]["co_test_vs_no_defense"]["B-RAY"]["p_one_sided"],
-                                    "R1_p": H["criteria_v3"][d]["co_test_vs_no_defense"]["R1"]["p_one_sided"],
-                                    "pass": H["criteria_v3"][d]["pass"],
-                                    "R1_minus_BRAY": H["criteria_v3"][d]["R1_minus_BRAY"]} for d in ("frame", "global")},
-           "D-64_on_H": H["criteria_v3"]["D-64"],
-           "mean_dAP0.7_orig": {d: {m: pt[d].get(f"mean_delta_orig|{m}") for m in ("B-NORM", "B-RAY", "R1", "ego_only")}
-                                for d in ("frame", "global")},
-           "pgd_recovery_H": H["expected_outcomes"], "B-NORM_flags_H": H["B-NORM_flags"],
-           "frozen_after": "no method, attack or rule changed after these numbers were seen"}
+    dev = {}
+    for name, R in (("option1_H", H), ("stealth_H", S)):
+        pt = R["point"]
+        dev[name] = {
+            "file": f"{a.pgd_run}/{'pgd_H_results.json' if name == 'option1_H' else 'pgd_stealth_H_results.json'}",
+            "criteria_v3_on_H": {d: {"B-RAY_p": R["criteria_v3"][d]["co_test_vs_no_defense"]["B-RAY"]["p_one_sided"],
+                                     "R1_p": R["criteria_v3"][d]["co_test_vs_no_defense"]["R1"]["p_one_sided"],
+                                     "pass": R["criteria_v3"][d]["pass"],
+                                     "R1_minus_BRAY": R["criteria_v3"][d]["R1_minus_BRAY"]} for d in ("frame", "global")},
+            "D-64_on_H": R["criteria_v3"]["D-64"],
+            "pgd_dAP_and_recovery_global": {c: {m: {"dAP@0.7": pt["global"].get(f"delta|{m}|{c}"),
+                                                    "recovery": pt["global"].get(f"recovery|{m}|{c}")}
+                                                for m in ("B-NORM", "B-RAY", "R1", "ego_only")} | {"attack_loss": pt["global"][f"attack_loss|{c}"]}
+                                            for c in R["conditions"] if c.startswith("pgd_")},
+            "B-NORM_catch": {c: v["catch_rate"] for c, v in R["B-NORM_flags"].items()}}
+    dev["label"] = "DEVELOPMENT, block H (exposed, D-53; 4 scenarios, 371 frames, n = 2); stealth PGD designed on H (post hoc); not a test"
+    dev["stealth_constraint_check_H"] = {k: S["constraint_check"][k] for k in ("attacked_frame_conditions", "n_violations", "holds")}
+    dev["frozen_after"] = "no method, attack, level or rule changed after these numbers were seen"
     pr = {
-        "id": "E5 v3 - one-time final test on the OPV2V test split: v2 plus dual-AP rule (D-64), PGD secondary families (D-65), B-NORM baseline (D-66), per-family / mean-of-3 / realized-only tables and procedural checks",
+        "id": "E5 v3 - one-time final test on the OPV2V test split: v2 plus dual-AP rule (D-64), PGD secondary families (D-65/D-67 plain, D-68 stealth), B-NORM baseline (D-66), D-69 reporting rules, per-family / mean-of-3 / realized-only tables and procedural checks",
         "version": "v3 (supersedes v2 runs/20261024-E5/preregistration_v2.json; v1 and v2 kept unchanged)",
         "written": "2026-10-24, after the block-H PGD development run and before any test-scenario byte is downloaded. NOT RUN: the stream needs the user's explicit approval of the final test.",
         "base": "Every field of preregistration_v2.json holds as written unless changed below (data, allowlist, the 5 E4 families and seeds, B-RAY primary, R1 key secondary, Holm co-test, clean bound, strata, D-42 timing, stream safeguards, budget).",
@@ -81,14 +96,26 @@ def main():
                    "clean_H_flag_rate": plan["B-NORM"]["clean_flag_rate_at_tau"], "role": "comparison baseline; no criterion",
                    "code": "src/mint/reliability/bnorm.py (no GT, no ledger); magnitudes recorded per condition in the stream (v3extra)"},
         "pgd_families": {
-            "role": "pre-registered SECONDARY attack families (D-65); reported per family; not part of the v2 primary mean",
-            "threat_model": plan["threat_model"], "sigma_k": plan["feature_scale_clean_H"]["sigma_k"],
+            "role": "pre-registered SECONDARY attack families, reported per family, not part of the v2 primary mean. "
+                    "D-67: pgd_untargeted, pgd_remove (option 1, plain L-inf PGD) at r = 0.25, with B-NORM's catch rate and AP cost. "
+                    "D-68 (amended): pgd_untargeted_stealth, pgd_remove_stealth = the main PGD evaluation (B-NORM-aware). "
+                    "The stealth families were designed on exposed block H after its plain-PGD results were seen: POST HOC",
+            "threat_model": plan["threat_model"], "sigma_k": sig, "stealth": {k: pst[k] for k in ("stealth_projection", "unchanged_from_D-65")},
             "selection_rule": plan["selection_rule_for_test"], "test_levels": levels, "test_conditions": test_conds,
-            "expected_outcomes": {"B-RAY": "recovery approximately 0 on both families (operational: point recovery < 0.10 under both AP definitions)",
-                                  "R1": "recovery on pgd_remove > 0 (operational: R1 dAP@0.7 on pgd_remove scenario-CI low > 0 under both AP definitions)",
-                                  "stated": "in D-65, before any PGD development run on block H"},
-            "realized": plan["development_run"]["realized"]["pgd_remove"] + " (pgd_remove); " + plan["development_run"]["realized"]["pgd_untargeted"] + " (pgd_untargeted)",
+            "expected_outcomes": {
+                "D-65/D-67 plain PGD": {"B-RAY": "recovery approximately 0", "R1": "recovery on pgd_remove > 0"},
+                "D-68 stealth": {"B-NORM": "catch rate <= 5% (about the clean false-flag rate)", "B-RAY": "recovery approximately 0",
+                                 "R1": "recovery on pgd_remove_stealth > 0"},
+                "operational_checks": {"B-RAY approx 0": "point recovery < 0.10 under both AP definitions",
+                                       "R1 > 0": "R1 dAP@0.7 scenario-CI low > 0 under both AP definitions",
+                                       "B-NORM <= 5%": "sender-1 flag rate over attacked frames <= 0.05"},
+                "stated": "D-65 before any PGD run on H; D-68 before any stealth run on H"},
+            "realized": plan["development_run"]["realized"]["pgd_remove"] + " (pgd_remove, pgd_remove_stealth); " + plan["development_run"]["realized"]["pgd_untargeted"] + " (pgd_untargeted, pgd_untargeted_stealth)",
+            "constraint_assertion": "stealth: f + delta >= 0, |delta| <= eps_k, ratio_k <= 0.95 tau_k asserted on every attacked frame and scale in the stream (pgd_stealth.pgd_attack_stealth)",
             "attacker": "sender 1 at every n >= 2; n = 1 frames scored as clean"},
+        "D-69_reporting": {"headline_AP": "global-ranking AP (D-64)",
+                           "absolute_effects": "absolute dAP in AP points next to every recovery",
+                           "scope_limit": "R1 cannot verify removals in receiver-blind regions (a removed object the receiver cannot see is UNKNOWN = keep)"},
         "secondary_tables_v3": {
             "per_family": "every condition (clean, 4 original, spoof_blind, PGD at test levels) x every method: AP@0.7/0.5, dAP, recovery (None if attack loss < 0.005), attack loss; both AP definitions; scenario and 10-frame CIs",
             "mean_of_3": "mean dAP@0.7 over spoof_feat, shift_feat, spoof_pts (excluding remove_feat) per method, and R1 - B-RAY, with CIs, both AP definitions",
@@ -113,9 +140,11 @@ def main():
                     "failure": "report as the result; no rescue analysis presented as confirmatory",
                     "no_rule_changes": "no change to any method, attack, level, threshold, metric or criterion after this file is committed"},
         "development_check_v3_H": dev,
+        "B-NORM_note": "B-NORM is in the comparison set; its catch rate (sender-1 flag rate) and AP cost are reported for every condition",
         "scope_limits": "D-54 and D-63 (single attacker; random placement for the E4 families; spoof_blind bypass; ray-consistent / low-ray spoofs; B-RAY cannot restore removed objects; receiver sensor trusted; CARLA LiDAR; method chosen on exposed H), plus: PGD is white-box on this checkpoint with budgets relative to its clean H feature scale; B-NORM's threshold is fitted on clean H",
         "labelling": v2["labelling"], "no_changes": v2["no_changes"],
         "dry_run_v3": json.load(open(os.path.join(ROOT, a.dryrun, "dryrun_v3.json"))) if a.dryrun else "pending",
+        "user_decisions_v3": "D-64, D-65, D-66 (committed 8f561cf), D-67, D-68, D-69 (643c37c), D-68 amendment (0e76e69); plans runs/20261024-PGD/plan.json (0563fa8) and plan_stealth.json (9db5e22), each committed before its runs",
     }
     json.dump(pr, open(os.path.join(ROOT, OUT), "w"), indent=1, default=str)
     print("written", OUT, "test levels", levels)

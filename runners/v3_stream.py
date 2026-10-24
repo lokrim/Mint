@@ -75,7 +75,7 @@ def interrupted(ledger):
     return [d for d in ledger.get("downloads", []) if d.get("status") != "complete"]
 
 
-def v3_extra(model, ds, batch, rec, scen, i, pcr, vs, levels, sigma, thr):
+def v3_extra(model, ds, batch, rec, scen, i, pcr, vs, levels, sigma, thr, tau):
     n = rec["n_agents"]
     cavs = E.cav_contents(ds, i)
     ego = np.asarray(cavs[0][1]["lidar_np"][:, :3], np.float64)
@@ -84,7 +84,15 @@ def v3_extra(model, ds, batch, rec, scen, i, pcr, vs, levels, sigma, thr):
         feats0, _ = agent_features(model, batch["ego"])
     mabs = V.bnorm_extras(model, batch, rec, scen, i, feats0, att_pts, ego, pcr, vs)
     gmask, _ = ground_mask(ego)
-    pgd = V.pgd_conditions(model, ds.post_processor, batch, feats0, n, ego, gmask, pcr, scen, i, levels, sigma, thr)
+    pgd = {}
+    for fam, rs in levels.items():                          # per family, timed (PGD cost per family)
+        t0 = time.perf_counter()
+        pgd.update(V.pgd_conditions(model, ds.post_processor, batch, feats0, n, ego, gmask, pcr, scen, i, {fam: rs},
+                                    sigma, thr, tau))
+        for r in rs:
+            c = V.cond_name(fam, r)
+            if c in pgd:
+                pgd[c]["attack_s"] = round(time.perf_counter() - t0, 3)
     for c, r in pgd.items():
         mabs[c] = r["mabs"]
     return {"frame": i, "mabs": mabs, "pgd": pgd}
@@ -102,6 +110,7 @@ def run_scenario(scen, data_root, model, hyp, out_tmp, extra_tmp, pr, reps=3, ma
     thr = ds.post_processor.params["target_args"]["score_threshold"]
     levels = {f: [v["r"]] for f, v in pr["pgd_families"]["test_levels"].items()}
     sigma = pr["pgd_families"]["sigma_k"]
+    tau = pr["B-NORM"]["tau_k"]
     nf = len(ds) if max_frames is None else min(len(ds), max_frames)
     frames, checks, timing, extras = [], [], [], []
     t_start = time.time()
@@ -114,7 +123,7 @@ def run_scenario(scen, data_root, model, hyp, out_tmp, extra_tmp, pr, reps=3, ma
         frames.append(rec)
         checks += ch
         t1 = time.perf_counter()
-        ex = v3_extra(model, ds, batch, rec, scen, i, pcr, vs, levels, sigma, thr)
+        ex = v3_extra(model, ds, batch, rec, scen, i, pcr, vs, levels, sigma, thr, tau)
         ex["v3_s"] = round(time.perf_counter() - t1, 3)
         extras.append(ex)
         if i % 20 == 0:

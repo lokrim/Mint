@@ -13,6 +13,7 @@ Bootstrap = e5_analyze's resampling exactly (units, strata, default_rng(seed), d
 (whole scenarios) and 'block10' (10-frame blocks within scenario). One-sided p = (k + 1) / (B + 1).
 
   python runners/v3_analyze.py H    --run_dir runs/20261024-PGD            (development, exposed block H)
+  python runners/v3_analyze.py H_stealth --run_dir runs/20261024-PGD       (D-68 stealth families on H, post hoc)
   python runners/v3_analyze.py test --run_dir runs/<date>-E5v3             (final test; after approval only)
   python runners/v3_analyze.py dry  --run_dir <dry-run dir> --prereg <v3>  (dry run, no assertion on 15/2066)
 """
@@ -56,14 +57,18 @@ def _load(p):
         return pickle.load(f)
 
 
-def frames_H(run_dir, inject_rays=True, with_pgd=True, meta=None):
-    """Block-H re-stream: E4-format cache + side records (float64 Y+ rays, B-NORM magnitudes) + PGD records."""
+def frames_H(run_dir, inject_rays=True, with_pgd=True, meta=None, pgd_subs=("pgd",), keep=None):
+    """Block-H re-stream: E4-format cache + side records (float64 Y+ rays, B-NORM magnitudes) + PGD records
+    from each of `pgd_subs` (keep: optional set of PGD condition names to load)."""
     for p in sorted(glob.glob(os.path.join(run_dir, "cache", "20*_[0-9][0-9].pkl.gz"))):
         scen = os.path.basename(p)[:-7]
         R = _load(p)
         Xr = _load(os.path.join(run_dir, "extra", f"{scen}.pkl.gz"))
-        G = _load(os.path.join(run_dir, "pgd", f"{scen}.pkl.gz")) if with_pgd else None
-        gfr = {g["frame"]: g for g in G["frames"]} if G else {}
+        gfr = {}
+        for sub in (pgd_subs if with_pgd else ()):
+            for g in _load(os.path.join(run_dir, sub, f"{scen}.pkl.gz"))["frames"]:
+                d = gfr.setdefault(g["frame"], {"conditions": {}})
+                d["conditions"].update({c: r for c, r in g["conditions"].items() if keep is None or c in keep})
         if meta is not None:
             meta.append({"scenario": scen, "frames": len(R["frames"])})
         for fr, ex in zip(R["frames"], Xr["frames"]):
@@ -480,12 +485,64 @@ def consistency_e5a(rd, n_boot):
             "B-NORM_disabled_equals_undefended": out["point"]["frame"]["mean_delta_orig|B-NORM"] == 0.0}
 
 
+STEALTH_MIN_LOSS = 0.005
+
+
+def stealth_constraint_check(run_dir, plan, sub="pgd_stealth"):
+    """Independent re-check from the stored magnitudes (B-NORM's own computation): on every attacked frame and
+    scale, ratio <= 0.95 tau_k (1 + 1e-6); |delta| <= eps_k and f + delta >= 0 from the attack ledger."""
+    tau = np.asarray(plan["tau_k"], float)
+    bound = 0.95 * tau
+    R, bad, n = {}, [], 0
+    for p in sorted(glob.glob(os.path.join(run_dir, sub, "20*_[0-9][0-9].pkl.gz"))):
+        G = _load(p)
+        for fr in G["frames"]:
+            for c, rec in fr["conditions"].items():
+                m = np.asarray(rec["mabs"], float)
+                r = m[1] / m[0]
+                led = rec["ledger"]
+                n += 1
+                ok = bool(np.all(r <= bound * (1 + 1e-6))) and all(
+                    l <= e * (1 + 1e-6) for l, e in zip(led["linf_delta"], led["eps"]))
+                if not ok:
+                    bad.append({"scen": G["scenario"], "frame": fr["frame"], "cond": c, "ratio": r.tolist()})
+                R.setdefault(c, []).append(r)
+    summ = {c: {"frames": len(v), "ratio_median": np.median(v, 0).round(4).tolist(), "ratio_max": np.max(v, 0).round(5).tolist(),
+                "frac_above_tau": (np.asarray(v) > tau).mean(0).round(4).tolist()} for c, v in sorted(R.items())}
+    return {"attacked_frame_conditions": n, "violations": bad[:20], "n_violations": len(bad), "holds": not bad,
+            "bound_0.95tau": bound.tolist(), "by_condition": summ}
+
+
+def run_H_stealth(run_dir, n_boot):
+    rd = os.path.join(ROOT, run_dir)
+    plan = json.load(open(os.path.join(rd, "plan_stealth.json")))
+    tau = plan["tau_k"]
+    lv = {f: plan["levels_r"] for f in plan["families"]}
+    opt1 = ("pgd_untargeted@r0.25", "pgd_remove@r0.25")              # D-67
+    st = tuple(f"{f}@r{r}" for f in lv for r in lv[f])
+    conds = ("clean",) + ORIG + ("spoof_blind",) + opt1 + st
+    meta = []
+    out, _, _ = analyze(frames_H(rd, meta=meta, pgd_subs=("pgd", "pgd_stealth"), keep=set(opt1 + st)), conds, tau, n_boot)
+    res = {"label": "DEVELOPMENT, block H (exposed, D-53); stealth PGD = attack design on exposed H, POST HOC (D-68 "
+                    "as amended); 4 scenarios, n = 2; not a test",
+           "plan": os.path.relpath(os.path.join(rd, "plan_stealth.json"), ROOT), "scenario_files": meta}
+    res.update(out)
+    res["pgd_selection"] = pgd_selection(out["point"], lv)
+    res["stealth_stop_check"] = {f: {"attack_loss_global_r1.0": out["point"]["global"][f"attack_loss|{f}@r1.0"],
+                                     "ineffective": out["point"]["global"][f"attack_loss|{f}@r1.0"] < STEALTH_MIN_LOSS}
+                                 for f in lv}
+    res["stealth_stop_check"]["stop"] = any(v["ineffective"] for v in res["stealth_stop_check"].values())
+    res["constraint_check"] = stealth_constraint_check(rd, plan)
+    res["expected_outcomes"] = expected_outcomes(out["point"], conds)
+    json.dump(res, open(os.path.join(rd, "pgd_stealth_H_results.json"), "w"), indent=1, default=str)
+    return res
+
+
 def run_test(run_dir, prereg_p, n_boot, dry=False):
     rd = os.path.join(ROOT, run_dir)
     pr = json.load(open(os.path.join(ROOT, prereg_p)))
     tau = pr["B-NORM"]["tau_k"]
-    pgd = [f"{f}@r{v['r']}" for f, v in pr["pgd_families"]["test_levels"].items()]
-    conds = ("clean",) + ORIG + ("spoof_blind",) + tuple(pgd)
+    conds = ("clean",) + ORIG + ("spoof_blind",) + tuple(pr["pgd_families"]["test_conditions"])
     meta = []
     out, _, _ = analyze(frames_test(rd, meta), conds, tau, n_boot)
     complete = {"scenarios": [len(meta), TEST_SCEN], "frames": [out["frames"], TEST_FRAMES],
@@ -513,17 +570,20 @@ def run_test(run_dir, prereg_p, n_boot, dry=False):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=("H", "test", "dry"))
+    ap.add_argument("mode", choices=("H", "H_stealth", "test", "dry"))
     ap.add_argument("--run_dir", required=True)
     ap.add_argument("--prereg", default="runs/20261024-E5/preregistration_v3.json")
     ap.add_argument("--n_boot", type=int, default=N_BOOT)
     a = ap.parse_args()
     if a.mode == "H":
         r = run_H(a.run_dir, a.n_boot)
+    elif a.mode == "H_stealth":
+        r = run_H_stealth(a.run_dir, a.n_boot)
     else:
         r = run_test(a.run_dir, a.prereg, a.n_boot, dry=a.mode == "dry")
     show = {k: r[k] for k in r if k in ("frames", "criteria_v3", "pgd_selection", "B-NORM_stop_check", "B-NORM_flags",
-                                         "completeness_check", "consistency_vs_e5a_H", "consistency_vs_frozen_v2")}
+                                         "completeness_check", "consistency_vs_e5a_H", "consistency_vs_frozen_v2",
+                                         "stealth_stop_check")}
     print(json.dumps(show, indent=1, default=str))
 
 
