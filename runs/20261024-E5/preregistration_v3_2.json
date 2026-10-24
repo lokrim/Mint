@@ -4,7 +4,7 @@
  "written": "2026-10-24, after the v3.1 final-test attempt crashed on scenario 1 with no results written. NOT RUN: relaunching the stream needs the user's explicit approval.",
  "base": "Every field of preregistration_v3_1.json holds as written unless listed in difference_from_v3_1 (and through v3.1, every field of v3 and v2)",
  "user_decisions": "D-64, D-65, D-66 (decision_log_proposed_appendix.md, committed before any v3 computation); the user's approval of preregistration_v3 with the PGD families (chat, 2026-10-24); D-70 (the user's decision in chat, 2026-10-24; committed 2c50ef0 before any v3.1 code or run); D-71 (the user's approval in chat, 2026-10-24)",
- "frozen_code_commit": "pending: set at the v3.2 code-freeze commit (the hashes below are what the stream enforces)",
+ "frozen_code_commit": "c883753f91c75e707d5df5fce8757851fad494de",
  "frozen_sha256": {
   "src/mint/reliability/baselines.py": "6f3ec38fc300942f161cff23997834e4607b6f35f716aff863a95cf9c5a76df3",
   "src/mint/reliability/r1.py": "031fc0dddf0d7183102088f5a1e3ae2f6d60b8f09c6dfd66b13dfd117583c0f8",
