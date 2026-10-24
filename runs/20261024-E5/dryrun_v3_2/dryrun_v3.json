@@ -1,0 +1,686 @@
+{
+ "label": "DRY RUN v3.2 (D-71; development, block-T dev slice, no network); not results",
+ "scenario": "2021_08_22_13_37_16",
+ "preregistration": "runs/20261024-E5/preregistration_v3_2.json",
+ "frozen_check_before_run": "OK",
+ "n_boot": 200,
+ "runs": {
+  "n2": {
+   "frames": 24,
+   "n_agents": [
+    2
+   ],
+   "stream_s": 714,
+   "v3_extra_s_per_frame": 19.91,
+   "analysis_s": 62,
+   "compose_all_identical": true,
+   "timing_frames": 24,
+   "pgd_conditions": [
+    "pgd_remove@r0.25",
+    "pgd_remove_stealth@r0.25",
+    "pgd_remove_stealth@r1.0",
+    "pgd_untargeted@r0.25",
+    "pgd_untargeted_stealth@r0.5",
+    "pgd_untargeted_stealth@r1.0"
+   ],
+   "pgd_frames": 24,
+   "subsets_decoded_per_condition": [
+    2
+   ],
+   "B-NORM_flags": {
+    "clean": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "spoof_feat": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "remove_feat": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "shift_feat": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "spoof_pts": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "spoof_blind": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_untargeted@r0.25": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 24,
+     "any_flagged": 24,
+     "catch_rate": 1.0
+    },
+    "pgd_remove@r0.25": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 24,
+     "any_flagged": 24,
+     "catch_rate": 1.0
+    },
+    "pgd_untargeted_stealth@r0.5": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_remove_stealth@r0.25": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_untargeted_stealth@r1.0": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_remove_stealth@r1.0": {
+     "frames_n2": 24,
+     "applied": 24,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    }
+   },
+   "criteria_v3_D-64": {
+    "pass_frame_order": true,
+    "pass_global": true,
+    "success": true,
+    "verdict": "success under both AP definitions",
+    "headline_AP": "global",
+    "R1_minus_BRAY_statements": {
+     "frame": "the counterfactual performs worse than the box-level filter",
+     "global": "the counterfactual performs worse than the box-level filter"
+    },
+    "R1_minus_BRAY_AP_definition_dependent": false
+   },
+   "consistency_vs_frozen_v2": {
+    "mean_delta_orig|B-RAY": {
+     "point": [
+      0.01333,
+      0.01333
+     ],
+     "ci95_scenario": [
+      [
+       0.0133,
+       0.0133
+      ],
+      [
+       0.0133,
+       0.0133
+      ]
+     ]
+    },
+    "mean_delta_orig|R1": {
+     "point": [
+      0.00726,
+      0.00726
+     ],
+     "ci95_scenario": [
+      [
+       0.0073,
+       0.0073
+      ],
+      [
+       0.0073,
+       0.0073
+      ]
+     ]
+    },
+    "rel_loss|B-RAY": {
+     "point": [
+      0.0,
+      0.0
+     ],
+     "ci95_scenario": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ]
+    },
+    "paired_mean_orig|R1-B-RAY": {
+     "point": [
+      -0.00607,
+      -0.00607
+     ],
+     "ci95_scenario": [
+      [
+       -0.0061,
+       -0.0061
+      ],
+      [
+       -0.0061,
+       -0.0061
+      ]
+     ]
+    },
+    "identical": true
+   },
+   "v2_criteria_success": true
+  },
+  "n1": {
+   "frames": 24,
+   "n_agents": [
+    1
+   ],
+   "stream_s": 91,
+   "v3_extra_s_per_frame": 0.4,
+   "analysis_s": 33,
+   "compose_all_identical": true,
+   "timing_frames": 24,
+   "pgd_conditions": [],
+   "pgd_frames": 0,
+   "subsets_decoded_per_condition": [
+    1
+   ],
+   "B-NORM_flags": {
+    "clean": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "spoof_feat": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "remove_feat": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "shift_feat": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "spoof_pts": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "spoof_blind": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "pgd_untargeted@r0.25": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "pgd_remove@r0.25": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "pgd_untargeted_stealth@r0.5": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "pgd_remove_stealth@r0.25": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "pgd_untargeted_stealth@r1.0": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    },
+    "pgd_remove_stealth@r1.0": {
+     "frames_n2": 0,
+     "applied": 0,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": null
+    }
+   },
+   "criteria_v3_D-64": {
+    "pass_frame_order": false,
+    "pass_global": false,
+    "success": false,
+    "verdict": "fails under both AP definitions",
+    "headline_AP": "global",
+    "R1_minus_BRAY_statements": {
+     "frame": "the counterfactual's benefit over a box-level filter is not established",
+     "global": "the counterfactual's benefit over a box-level filter is not established"
+    },
+    "R1_minus_BRAY_AP_definition_dependent": false
+   },
+   "consistency_vs_frozen_v2": {
+    "mean_delta_orig|B-RAY": {
+     "point": [
+      0.0,
+      0.0
+     ],
+     "ci95_scenario": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ]
+    },
+    "mean_delta_orig|R1": {
+     "point": [
+      0.0,
+      0.0
+     ],
+     "ci95_scenario": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ]
+    },
+    "rel_loss|B-RAY": {
+     "point": [
+      0.0,
+      0.0
+     ],
+     "ci95_scenario": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ]
+    },
+    "paired_mean_orig|R1-B-RAY": {
+     "point": [
+      0.0,
+      0.0
+     ],
+     "ci95_scenario": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ]
+    },
+    "identical": true
+   },
+   "v2_criteria_success": false
+  },
+  "n5": {
+   "frames": 6,
+   "n_agents": [
+    5
+   ],
+   "stream_s": 415,
+   "v3_extra_s_per_frame": 42.83,
+   "analysis_s": 16,
+   "compose_all_identical": true,
+   "timing_frames": 6,
+   "pgd_conditions": [
+    "pgd_remove@r0.25",
+    "pgd_remove_stealth@r0.25",
+    "pgd_remove_stealth@r1.0",
+    "pgd_untargeted@r0.25",
+    "pgd_untargeted_stealth@r0.5",
+    "pgd_untargeted_stealth@r1.0"
+   ],
+   "pgd_frames": 6,
+   "subsets_decoded_per_condition": [
+    16
+   ],
+   "B-NORM_flags": {
+    "clean": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "spoof_feat": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "remove_feat": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "shift_feat": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "spoof_pts": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "spoof_blind": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_untargeted@r0.25": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 6,
+     "any_flagged": 6,
+     "catch_rate": 1.0
+    },
+    "pgd_remove@r0.25": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 6,
+     "any_flagged": 6,
+     "catch_rate": 1.0
+    },
+    "pgd_untargeted_stealth@r0.5": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_remove_stealth@r0.25": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_untargeted_stealth@r1.0": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    },
+    "pgd_remove_stealth@r1.0": {
+     "frames_n2": 6,
+     "applied": 6,
+     "sender1_flagged": 0,
+     "any_flagged": 0,
+     "catch_rate": 0.0
+    }
+   },
+   "criteria_v3_D-64": {
+    "pass_frame_order": true,
+    "pass_global": true,
+    "success": true,
+    "verdict": "success under both AP definitions",
+    "headline_AP": "global",
+    "R1_minus_BRAY_statements": {
+     "frame": "the counterfactual improves over the box-level filter",
+     "global": "the counterfactual improves over the box-level filter"
+    },
+    "R1_minus_BRAY_AP_definition_dependent": false
+   },
+   "consistency_vs_frozen_v2": {
+    "mean_delta_orig|B-RAY": {
+     "point": [
+      0.00468,
+      0.00468
+     ],
+     "ci95_scenario": [
+      [
+       0.0047,
+       0.0047
+      ],
+      [
+       0.0047,
+       0.0047
+      ]
+     ]
+    },
+    "mean_delta_orig|R1": {
+     "point": [
+      0.01487,
+      0.01487
+     ],
+     "ci95_scenario": [
+      [
+       0.0149,
+       0.0149
+      ],
+      [
+       0.0149,
+       0.0149
+      ]
+     ]
+    },
+    "rel_loss|B-RAY": {
+     "point": [
+      0.0,
+      0.0
+     ],
+     "ci95_scenario": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0
+      ]
+     ]
+    },
+    "paired_mean_orig|R1-B-RAY": {
+     "point": [
+      0.01019,
+      0.01019
+     ],
+     "ci95_scenario": [
+      [
+       0.0102,
+       0.0102
+      ],
+      [
+       0.0102,
+       0.0102
+      ]
+     ]
+    },
+    "identical": true
+   },
+   "v2_criteria_success": true
+  }
+ },
+ "frozen_check_after_run": "OK",
+ "identical_vs_v3_1_dryrun": {
+  "n2": {
+   "cache_v2_record_identical": true,
+   "v3extra_frames_identical": true,
+   "v3extra_levels_sigma_identical": true,
+   "v3extra_preregistration": [
+    "runs/20261024-E5/preregistration_v3_2.json",
+    "runs/20261024-E5/preregistration_v3_1.json"
+   ],
+   "infeasible_records": 0
+  },
+  "n1": {
+   "cache_v2_record_identical": true,
+   "v3extra_frames_identical": true,
+   "v3extra_levels_sigma_identical": true,
+   "v3extra_preregistration": [
+    "runs/20261024-E5/preregistration_v3_2.json",
+    "runs/20261024-E5/preregistration_v3_1.json"
+   ],
+   "infeasible_records": 0
+  },
+  "n5": {
+   "cache_v2_record_identical": true,
+   "v3extra_frames_identical": true,
+   "v3extra_levels_sigma_identical": true,
+   "v3extra_preregistration": [
+    "runs/20261024-E5/preregistration_v3_2.json",
+    "runs/20261024-E5/preregistration_v3_1.json"
+   ],
+   "infeasible_records": 0
+  }
+ },
+ "forced_infeasible": {
+  "frames": 4,
+  "tau_scale_stream_only": 0.001,
+  "v31_raises_keyerror_mabs": true,
+  "stream_s": 52,
+  "stealth_records_ledger_only_not_in_mabs": true,
+  "other_records_complete": true,
+  "analysis_pgd_totals": {
+   "pgd_untargeted@r0.25": {
+    "frames": 4,
+    "frames_with_sender": 4,
+    "infeasible": 0,
+    "applied": 4,
+    "realized": 2
+   },
+   "pgd_remove@r0.25": {
+    "frames": 4,
+    "frames_with_sender": 4,
+    "infeasible": 0,
+    "applied": 4,
+    "realized": 2
+   },
+   "pgd_untargeted_stealth@r0.5": {
+    "frames": 4,
+    "frames_with_sender": 4,
+    "infeasible": 4,
+    "applied": 0,
+    "realized": 0
+   },
+   "pgd_remove_stealth@r0.25": {
+    "frames": 4,
+    "frames_with_sender": 4,
+    "infeasible": 4,
+    "applied": 0,
+    "realized": 0
+   },
+   "pgd_untargeted_stealth@r1.0": {
+    "frames": 4,
+    "frames_with_sender": 4,
+    "infeasible": 4,
+    "applied": 0,
+    "realized": 0
+   },
+   "pgd_remove_stealth@r1.0": {
+    "frames": 4,
+    "frames_with_sender": 4,
+    "infeasible": 4,
+    "applied": 0,
+    "realized": 0
+   }
+  },
+  "analysis_stealth_all_infeasible_not_applied": true,
+  "analysis_B-NORM_flags_stealth": {
+   "pgd_untargeted_stealth@r0.5": {
+    "frames_n2": 4,
+    "applied": 0,
+    "sender1_flagged": 0,
+    "any_flagged": 0,
+    "catch_rate": null
+   },
+   "pgd_remove_stealth@r0.25": {
+    "frames_n2": 4,
+    "applied": 0,
+    "sender1_flagged": 0,
+    "any_flagged": 0,
+    "catch_rate": null
+   },
+   "pgd_untargeted_stealth@r1.0": {
+    "frames_n2": 4,
+    "applied": 0,
+    "sender1_flagged": 0,
+    "any_flagged": 0,
+    "catch_rate": null
+   },
+   "pgd_remove_stealth@r1.0": {
+    "frames_n2": 4,
+    "applied": 0,
+    "sender1_flagged": 0,
+    "any_flagged": 0,
+    "catch_rate": null
+   }
+  },
+  "pass": true
+ }
+}
