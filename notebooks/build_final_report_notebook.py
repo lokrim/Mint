@@ -98,6 +98,8 @@ def cells(v3, v2, prereg):
 def build(v3=DEV_V3, v2=DEV_V2, prereg="runs/20261024-E5/preregistration_v3_2.json"):
     nb = nbf.v4.new_notebook()
     nb.cells = cells(v3, v2, prereg)
+    for i, c in enumerate(nb.cells):              # fixed ids: regenerating the notebook gives no spurious diff
+        c["id"] = f"cell-{i:02d}"
     nb.metadata["kernelspec"] = {"name": "python3", "display_name": "Python 3 (.venv-report)", "language": "python"}
     nb.metadata["language_info"] = {"name": "python"}
     return nb

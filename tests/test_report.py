@@ -93,6 +93,21 @@ def test_block_h_format_builds(tmp_path):
     assert "not recorded (development file)" in rep            # no completeness check in a dev file
 
 
+@need
+def test_all_agent_strata(tmp_path):
+    """e5_analyze.by_agents uses strata "2", "3", "4+" (the dev files only have "2"; the test has all three)."""
+    v2 = json.load(open(os.path.join(DRY, "e5_test.json")))
+    g = v2["by_agents"]["2"]
+    v2["by_agents"] = {"4+": dict(g, frames=101), "2": g, "3": dict(g, frames=500)}
+    p = tmp_path / "e5_test.json"
+    json.dump(v2, open(p, "w"))
+    inp = Inputs(os.path.join(DRY, "e5_v3.json"), str(p), PREREG, root=ROOT)
+    build(inp, str(tmp_path / "out"), themes=("light",), dpi=60)
+    import csv
+    rows = list(csv.DictReader(open(tmp_path / "out" / "tables" / "10_by_agents.csv")))
+    assert [r["n_agents"] for r in rows][::len({r["method"] for r in rows})] == ["2", "3", "4+"]
+
+
 def test_notebook_is_valid():
     nbformat = pytest.importorskip("nbformat")
     sys.path.insert(0, os.path.join(ROOT, "notebooks"))

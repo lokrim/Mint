@@ -20,6 +20,8 @@ caffeinate -ims .venv/bin/python runners/v3_analyze.py test --run_dir runs/20261
 ```
 `--prereg …v3_2.json` is required: the script's default is the v3 file, which lacks the D-70 conditions.
 
+A rehearsal of these exact two commands (2026-10-26) ran on a synthetic test-sized set built from development records: 15 scenarios, 2066 frames, with stealth-infeasible frames. Both exited cleanly, with peak memory about 0.85 GB on this 8 GB Mac. At 200 resamples each took about 37 min. With the real 2000 resamples and heavier n = 3–5 frames, expect roughly 1–2 h each.
+
 **3. Procedural checks after both finish (stop and report if any fails; never rerun or work around):**
 - `e5_v3.json` → `completeness_check.pass` is true (15/15 scenarios, 2066/2066 frames).
 - `e5_v3.json` → `consistency_vs_frozen_v2.identical` is true.

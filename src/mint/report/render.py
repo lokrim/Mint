@@ -42,7 +42,8 @@ def make_figures(inp, out_dir, themes=("light", "dark"), dpi=200, only=None):
             suffix = "" if theme == "light" else "_dark"
             for ext in ("png", "svg"):
                 p = os.path.join(fdir, f"{name}{suffix}.{ext}")
-                fig.savefig(p, dpi=dpi if ext == "png" else None, bbox_inches="tight", pad_inches=0.12)
+                fig.savefig(p, dpi=dpi if ext == "png" else None, bbox_inches="tight", pad_inches=0.12,
+                            metadata={"Date": None} if ext == "svg" else None)   # reproducible files
                 entry["files"][f"{theme}_{ext}"] = os.path.relpath(p, out_dir)
             plt.close(fig)
             if theme == themes[0]:

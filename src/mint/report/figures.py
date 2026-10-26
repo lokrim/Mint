@@ -418,7 +418,7 @@ def fig_r1_units(inp, t):
 # ---------------------------------------------------------------------- 10 by agent count
 def fig_by_agents(inp, t):
     ba = (inp.v2 or {}).get("by_agents") or {}
-    ns = sorted(ba, key=int)
+    ns = sorted(ba, key=lambda k: int(k.rstrip("+")))     # strata are "2", "3", "4+" (e5_analyze.STRATA)
     methods = [m for m in ("B-RAY", "R1", "R1_noREMOVE") if m in inp.methods]
     fig, ax = plt.subplots(figsize=(8, 3.4))
     rows = []
@@ -429,7 +429,7 @@ def fig_by_agents(inp, t):
             k = f"mean_delta_orig|{m}"
             v = (g.get("point") or {}).get(k)
             ci = ((g.get("bootstrap_block10") or {}).get(k) or {}).get("ci95")
-            rows.append({"n_agents": int(n), "frames": g.get("frames"), "scenarios": g.get("scenarios"), "method": m,
+            rows.append({"n_agents": n, "frames": g.get("frames"), "scenarios": g.get("scenarios"), "method": m,
                          "point": v, "ci95_block10_lo": ci[0] if ci else None, "ci95_block10_hi": ci[1] if ci else None})
             if v is None:
                 continue

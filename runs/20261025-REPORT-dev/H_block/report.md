@@ -5,14 +5,14 @@
 >
 > These numbers come from development data. They show what the report will look like; they are **not** results of the final test and must not be quoted as such.
 
-Generated 2026-10-25T18:02:23+05:30 by `runners/report_build.py`. Every number in this report is copied from the analysis outputs listed below; nothing is recomputed. Sections marked **AUTHOR** are left for the authors to write after reading the results.
+Generated 2026-10-26T12:57:18+05:30 by `runners/report_build.py`. Every number in this report is copied from the analysis outputs listed below; nothing is recomputed. Sections marked **AUTHOR** are left for the authors to write after reading the results.
 
 | Provenance | |
 |---|---|
 | `e5_v3.json` | `runs/20261024-PGD/pgd_stealth_H_results.json` · sha256 `38b8442555739930…` |
 | `e5_test.json` | `runs/20261024-E5/H/e5a_H.json` · sha256 `ce87df11255a20a0…` |
 | `preregistration` | `runs/20261024-E5/preregistration_v3_2.json` · sha256 `8756868def368e85…` |
-| Repository HEAD | `5642cecb3dfea2823018b125e6a19a8af431feb6` |
+| Repository HEAD | `c83686df3c7bc26bd5a8b17897548dc028040916` |
 | Frozen code commit (preregistration) | `c883753f91c75e707d5df5fce8757851fad494de` |
 | Preregistration version | v3.2 (supersedes v3.1 runs/20261024-E5/preregistration_v3_1.json only by D-71; v1, v2, v3 and v3.1 kept unchanged) |
 | Scenarios / frames | 4 / 371 (agents per frame: {'2': 371}) |

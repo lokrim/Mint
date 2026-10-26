@@ -1,6 +1,6 @@
 {
  "provenance": {
-  "generated": "2026-10-25T18:02:31+05:30",
+  "generated": "2026-10-26T12:57:24+05:30",
   "status": "DEVELOPMENT",
   "label": "DRY RUN (development dev slice; not results)",
   "inputs": {
@@ -17,7 +17,7 @@
     "sha256": "8756868def368e8544d412ccf1d9e922fa8b454f5d24ce3488494b8363bc5fd6"
    }
   },
-  "git_head": "5642cecb3dfea2823018b125e6a19a8af431feb6",
+  "git_head": "c83686df3c7bc26bd5a8b17897548dc028040916",
   "frozen_code_commit": "c883753f91c75e707d5df5fce8757851fad494de",
   "preregistration_version": "v3.2 (supersedes v3.1 runs/20261024-E5/preregistration_v3_1.json only by D-71; v1, v2, v3 and v3.1 kept unchanged)"
  },

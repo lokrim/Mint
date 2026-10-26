@@ -33,6 +33,6 @@ def apply(theme):
         "axes.edgecolor": t["axis"], "axes.linewidth": 0.8, "axes.spines.top": False, "axes.spines.right": False,
         "axes.grid": False, "grid.color": t["grid"], "grid.linewidth": 0.8, "grid.linestyle": "-",
         "legend.frameon": False, "legend.fontsize": 8.5, "legend.labelcolor": t["ink2"],
-        "lines.solid_capstyle": "round", "svg.fonttype": "none",
+        "lines.solid_capstyle": "round", "svg.fonttype": "none", "svg.hashsalt": "mint-report",
     })
     return t
