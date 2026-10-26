@@ -1,0 +1,22 @@
+{
+ "label": "CULVER sanity check (D-72 plan): clean detector only, first scenario; no MINT method or attack",
+ "scenario": "2021_08_22_13_37_16",
+ "frames": 24,
+ "agents_hist": {
+  "2": 24
+ },
+ "ap_frame_order_opencood_default": {
+  "AP@0.3": 0.9743,
+  "AP@0.5": 0.9664,
+  "AP@0.7": 0.8811
+ },
+ "ap_global_sort": {
+  "AP@0.3": 0.9769,
+  "AP@0.5": 0.9684,
+  "AP@0.7": 0.9235
+ },
+ "published_culver_ap07_all_scenarios": 0.735,
+ "stop_if_ap07_below": 0.6,
+ "seconds": 22,
+ "pass": true
+}

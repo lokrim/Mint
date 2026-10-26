@@ -1,0 +1,13 @@
+{
+ "what": "CULVER code freeze (D-72): sha256 of the new files, committed before the first Culver City data byte. The frozen v3.2 list (preregistration_v3_2.json frozen_sha256) is verified by culver_stream before network access and after the run.",
+ "plan": "runs/20261026-CULVER/plan.json",
+ "plan_commit": "d48fde8",
+ "new_files_sha256": {
+  "runners/culver_stream.py": "3e7bb181d478acc01d762160d51af441c3605a51e7364508a9642039a54b4d8c",
+  "runners/culver_analyze.py": "ae18d42c24530f34cbbffdb1ff69bb04071b4fd347a586aba2b61a21948ef934",
+  "runners/culver_report.py": "98e316d40859db6aaf5616c7bd1c064441019b73ba6e233d6135af2ba1b6935c",
+  "runners/culver_dryrun.py": "702edc5b0ea2104c5775905f314b69389ea717c64b0ddc5f3fb4c9b6c1f734de",
+  "src/mint/report/templates/culver_report.md.j2": "d91270c5f4fe5acf39c15cdc6d21bcbbaf7790bf1083dd4e8682f4fd93e7253e"
+ },
+ "dry_run": "runs/20261026-CULVER/dryrun/dryrun_culver.json (dev slice, 12 frames, no network): records identical to the committed v3.2 dry run; refusals (allowlist, budget, approval) work; analysis + report end to end; frozen check before/after OK"
+}

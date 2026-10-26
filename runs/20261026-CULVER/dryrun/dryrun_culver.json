@@ -1,0 +1,53 @@
+{
+ "label": "DRY RUN of the CULVER pipeline (development, block-T dev slice, no network); not results",
+ "scenario": "2021_08_22_13_37_16",
+ "frames": 12,
+ "refuses_non_culver_scenario": true,
+ "refuses_budget_above_7e9": true,
+ "refuses_without_user_approved": true,
+ "culver_stream_dry_run": {
+  "scenarios": 4,
+  "plan_bytes_total": 4907245666,
+  "projected_with_1pct": 4956318122,
+  "budget": 7000000000,
+  "within_budget": true
+ },
+ "frozen_check_before_run": "OK",
+ "stream_s": 361,
+ "identical_vs_v3_2_dryrun": {
+  "frames_compared": 12,
+  "cache_frames": true,
+  "v3extra_frames": true,
+  "levels_sigma_prereg": true,
+  "compose_all_identical": true
+ },
+ "sanity_path_dev_slice": {
+  "frames": 24,
+  "ap_frame_order_opencood_default": {
+   "AP@0.3": 0.9743,
+   "AP@0.5": 0.9664,
+   "AP@0.7": 0.8811
+  },
+  "seconds": 22
+ },
+ "culver_analyze_rc": 0,
+ "analysis_label": "DRY RUN of the CULVER analysis (development dev slice; not results)",
+ "analysis_conditions": [
+  "clean",
+  "spoof_feat",
+  "remove_feat",
+  "shift_feat",
+  "spoof_pts",
+  "spoof_blind",
+  "pgd_untargeted@r0.25",
+  "pgd_remove@r0.25",
+  "pgd_untargeted_stealth@r0.5",
+  "pgd_remove_stealth@r0.25",
+  "pgd_untargeted_stealth@r1.0",
+  "pgd_remove_stealth@r1.0"
+ ],
+ "analysis_consistency_vs_frozen_v2": true,
+ "culver_report_rc": 0,
+ "culver_report_out": "DEVELOPMENT / DRY RUN - not results: report -> runs/20261026-CULVER/dryrun/report/report.md (12 figures)",
+ "frozen_check_after_run": "OK"
+}
