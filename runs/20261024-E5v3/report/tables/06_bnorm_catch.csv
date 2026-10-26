@@ -1,0 +1,13 @@
+condition,frames_n2,applied,sender1_flagged,any_flagged,catch_rate
+clean,1947,1947,339,493,0.1741
+spoof_feat,1947,1921,382,524,0.1989
+remove_feat,1947,1921,306,474,0.1593
+shift_feat,1947,1914,327,482,0.1708
+spoof_pts,1947,1895,350,497,0.1847
+spoof_blind,1947,1925,378,518,0.1964
+pgd_untargeted@r0.25,1947,1947,1947,1947,1.0
+pgd_remove@r0.25,1947,1947,1947,1947,1.0
+pgd_untargeted_stealth@r0.5,1947,1937,0,313,0.0
+pgd_remove_stealth@r0.25,1947,1903,0,305,0.0
+pgd_untargeted_stealth@r1.0,1947,1944,0,314,0.0
+pgd_remove_stealth@r1.0,1947,1944,0,314,0.0

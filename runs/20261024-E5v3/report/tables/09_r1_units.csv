@@ -1,0 +1,7 @@
+condition,units,n_KNOWN,frac_KNOWN,gated,gated_harmful,gated_neutral,false_rejections_useful,precision,harmful_units,harmful_KNOWN,useful_units
+clean,8160,4334,0.531,718,190,7,521,0.265,1426,792,4595
+spoof_feat,9907,5218,0.527,1335,795,8,532,0.596,2875,1475,4863
+remove_feat,8252,4412,0.535,800,264,10,526,0.33,1544,887,4629
+shift_feat,9526,5437,0.571,1309,747,20,542,0.571,2402,1545,4963
+spoof_pts,8918,4714,0.529,962,433,8,521,0.45,1986,1048,4783
+spoof_blind,10265,4477,0.436,785,252,7,526,0.321,3242,884,4850

@@ -45,7 +45,8 @@ def _ci(ci, scale):
 
 def footer(fig, inp, t):
     color = CRITICAL if inp.status == "INCOMPLETE" else t[STATUS_INK[inp.status]]
-    txt = f"{STATUS_TEXT[inp.status]}  ·  {inp.label}"
+    st = STATUS_TEXT[inp.status]
+    txt = inp.label if str(inp.label).startswith(st) else f"{st}  ·  {inp.label}"
     fig.text(0.01, 0.006, textwrap.shorten(txt, 150, placeholder=" ..."), fontsize=6.5, color=color, ha="left",
              va="bottom")
 
@@ -63,6 +64,9 @@ def _dot(ax, x, y, color, t, size=7, marker="o", z=4):
     ax.plot([x], [y], marker=marker, ms=size, color=color, mec=t["surface"], mew=1.6, zorder=z, ls="none")
 
 
+BLOCK_DY = 0.2  # 10-frame-block CI drawn just below the row, else it hides under the scenario CI
+
+
 def _ci_line(ax, lo, hi, y, color, lw, alpha=1.0, z=3):
     if lo is not None:
         ax.plot([lo, hi], [y, y], color=color, lw=lw, alpha=alpha, solid_capstyle="round", zorder=z)
@@ -70,7 +74,7 @@ def _ci_line(ax, lo, hi, y, color, lw, alpha=1.0, z=3):
 
 def _ci_legend(ax, t, loc=None):
     h = [Line2D([], [], color=t["ink2"], lw=3.2, solid_capstyle="round", label="95% CI, scenario bootstrap"),
-         Line2D([], [], color=t["ink2"], lw=1.1, alpha=0.6, label="95% CI, 10-frame-block bootstrap")]
+         Line2D([], [], color=t["ink2"], lw=1.3, alpha=0.7, label="95% CI, 10-frame-block bootstrap (thin, below)")]
     ax.figure.legend(handles=h, loc="upper left", ncol=2, bbox_to_anchor=(0.005, 0.955))
 
 
@@ -107,7 +111,7 @@ def fig_headline(inp, t):
             if s["point"] is None:
                 continue
             c = t["method"][m]
-            _ci_line(ax, *_ci(s["ci_block10"], PTS), i, c, 1.1, 0.6)
+            _ci_line(ax, *_ci(s["ci_block10"], PTS), i + BLOCK_DY, c, 1.3, 0.7)
             _ci_line(ax, *_ci(s["ci_scenario"], PTS), i, c, 3.2)
             _dot(ax, s["point"] * PTS, i, c, t)
             hi = max(x for x in (s["point"] * PTS, *(_ci(s["ci_block10"], PTS)), *(_ci(s["ci_scenario"], PTS)))
@@ -183,7 +187,7 @@ def fig_clean_cost(inp, t):
             if s["point"] is None:
                 continue
             c = t["method"][m]
-            _ci_line(ax, *_ci(s["ci_block10"], 100), i, c, 1.1, 0.6)
+            _ci_line(ax, *_ci(s["ci_block10"], 100), i + BLOCK_DY, c, 1.3, 0.7)
             _ci_line(ax, *_ci(s["ci_scenario"], 100), i, c, 3.2)
             _dot(ax, s["point"] * 100, i, c, t)
         _zero(ax, t)
@@ -221,7 +225,7 @@ def fig_r1_minus_bray(inp, t, pgd=False):
             rows.append({"ap_definition": d, "statistic": k, **_rowstat(s)})
             if s["point"] is None:
                 continue
-            _ci_line(ax, *_ci(s["ci_block10"], PTS), i, t["neutral"], 1.1, 0.6)
+            _ci_line(ax, *_ci(s["ci_block10"], PTS), i + BLOCK_DY, t["neutral"], 1.3, 0.7)
             _ci_line(ax, *_ci(s["ci_scenario"], PTS), i, t["neutral"], 3.2)
             _dot(ax, s["point"] * PTS, i, t["neutral"], t, size=6.5 if (i < 2 and not pgd) else 5.5)
         if not pgd:
@@ -309,8 +313,9 @@ def fig_bnorm_catch(inp, t):
     _rows_ylim(ax, len(conds), t, -1.0)
     _xgrid(ax)
     ax.set_xlabel("frames where the attacker (sender 1) is flagged by B-NORM (%); 'clean' = false-flag rate")
-    ax.set_title("B-NORM catch rate per condition (frames with a sender)")
-    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    fig.suptitle("B-NORM catch rate per condition (frames with a sender)", x=0.01, y=0.995, ha="left", va="top",
+                 fontweight="bold", fontsize=11)
+    fig.tight_layout(rect=(0, 0.04, 1, 0.95))
     footer(fig, inp, t)
     return fig, rows
 
@@ -369,11 +374,12 @@ def fig_bray_boxes(inp, t):
     ax.set_xlim(0, xmax * 1.35)
     _xgrid(ax)
     ax.set_xlabel("boxes removed by B-RAY (count)")
-    ax.set_title("What B-RAY removes: fabricated/wrong boxes vs real cars")
+    fig.suptitle("What B-RAY removes: fabricated/wrong boxes vs real cars", x=0.01, y=0.995, ha="left", va="top",
+                 fontweight="bold", fontsize=11)
     h = [Line2D([], [], lw=8, color=a, label="no matching ground-truth car (intended)"),
          Line2D([], [], lw=8, color=b, label="matched a real car (cost)")]
-    ax.legend(handles=h, loc="lower right")
-    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    fig.legend(handles=h, loc="upper left", ncol=2, bbox_to_anchor=(0.005, 0.955))
+    fig.tight_layout(rect=(0, 0.04, 1, 0.9))
     footer(fig, inp, t)
     return fig, rows
 
@@ -407,10 +413,11 @@ def fig_r1_units(inp, t):
     ax.set_xlim(0, xmax * 1.4)
     _xgrid(ax)
     ax.set_xlabel("sender × tile contributions switched off by R1 (count; frame-order analysis)")
-    ax.set_title("What R1 switches off, judged against ground truth")
-    ax.legend(handles=[Line2D([], [], lw=8, color=t["series"][j], label=lab) for j, (_, lab) in enumerate(parts)],
-              loc="lower right")
-    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    fig.suptitle("What R1 switches off, judged against ground truth", x=0.01, y=0.995, ha="left", va="top",
+                 fontweight="bold", fontsize=11)
+    fig.legend(handles=[Line2D([], [], lw=8, color=t["series"][j], label=lab) for j, (_, lab) in enumerate(parts)],
+               loc="upper left", ncol=2, bbox_to_anchor=(0.005, 0.94))
+    fig.tight_layout(rect=(0, 0.04, 1, 0.84))
     footer(fig, inp, t)
     return fig, rows
 
