@@ -1,0 +1,98 @@
+{
+ "id": "CULVER - secondary held-out domain-shift evaluation of the frozen MINT v3.2 comparison set on OPV2V Culver City",
+ "label": "unseen town, simulated sensor",
+ "label_long": "OPV2V Culver City: simulated (CARLA) 64-beam LiDAR, the same sensor model as the OPV2V test; a digital town modelled on the layout of the real city of Culver City; unseen during detector training and during all MINT development. NOT real-sensor data.",
+ "written": "2026-10-26, before any Culver City data byte was downloaded (only the archive's central directory - member names and sizes - was read, to write this plan)",
+ "decision": "D-72 (planning/decision_log_proposed_appendix.md; proposed, the user's instruction in chat 2026-10-26)",
+ "role": "SECONDARY held-out domain-shift evaluation. The OPV2V test (runs/20261024-E5v3, preregistration_v3_2.json) stays the primary, one-time final test. Culver City results are reported separately and never pooled with the test.",
+ "data": {
+  "dataset": "OPV2V test_culver_city (all scenarios)",
+  "archive": "test_culver_city-011.zip",
+  "url": "https://ucla.app.box.com/index.php?rm=box_download_shared_file&vanity_name=UCLA-MobilityLab-OPV2V&file_id=f_1621693876387",
+  "share": "https://ucla.app.box.com/v/UCLA-MobilityLab-OPV2V (same public share as the test archive f_1621736219709 used in Stage 1 / E5; no registration or licence click-through)",
+  "archive_bytes": 4909598200,
+  "archive_members": 8671,
+  "top_level": "test_culver_city/",
+  "scenarios": {
+   "2021_09_03_09_32_17": {"cavs": ["302", "311"], "frames": 90, "member_csize_bytes": 607606005},
+   "2021_09_03_10_53_32": {"cavs": ["1773", "1782"], "frames": 118, "member_csize_bytes": 805281774},
+   "2021_09_03_20_08_37": {"cavs": ["1845", "1854", "1872"], "frames": 135, "member_csize_bytes": 1411244112},
+   "2021_09_03_22_43_57": {"cavs": ["823", "832", "841"], "frames": 207, "member_csize_bytes": 2083113775}
+  },
+  "expected_scenarios": 4,
+  "expected_frames": 550,
+  "frames_note": "frames = ego-CAV yaml count per scenario from the central directory (OpenCOOD len(dataset)); agents per frame may be fewer than the CAV count (OpenCOOD communication range)",
+  "written_to_disk": ".pcd and .yaml only (camera .png never written), one scenario at a time, raw deleted after both cache files are re-read",
+  "byte_budget": 7000000000,
+  "planned_bytes": 4907245666,
+  "planned_bytes_x1.01": 4956318122,
+  "raw_cap_per_scenario": 3000000000
+ },
+ "checkpoint": {
+  "path": "data/opv2v/ckpt/pointpillar_attentive_fusion/pointpillar_attentive_fusion/latest.pth",
+  "sha256": "f6df2f5434119392f0b3eb14dec8c2f99f15063a9058b625c06dc39de261a77c",
+  "readme_row": "OpenCOOD README 'Results on OPV2V LiDAR-track': Attentive Fusion, PointPillar, Intermediate, Default Towns 0.815/0.810, Culver City 0.735/0.731 (AP@0.7, no compression / compression); we use the no-compression model",
+  "trained_on": "config.yaml root_dir opv2v_data_dumping/train (validate_dir .../test); Culver City is a separate test-only split (OPV2V), not in train",
+  "published_culver_ap07": 0.735,
+  "published_ap_definition": "OpenCOOD frame-order AP (global_sort_detections=False; 'OPV2V paper does not perform the global sort')"
+ },
+ "frozen_code": {
+  "frozen_code_commit": "c883753f91c75e707d5df5fce8757851fad494de",
+  "governing_preregistration": "runs/20261024-E5/preregistration_v3_2.json",
+  "governing_preregistration_sha256": "8756868def368e8544d412ccf1d9e922fa8b454f5d24ce3488494b8363bc5fd6",
+  "frozen_sha256": "the full frozen_sha256 list of preregistration_v3_2.json (39 files incl. latest.pth) and the OpenCOOD commit 31ba16025da27ffe4e336f011290dfbc66f9a1f1 (clean tree); verified before any network access and again after the run (v3_stream.verify_frozen, unchanged)",
+  "verified_at_plan": "OK at HEAD f4f2abe (2026-10-26)",
+  "new_files": ["runners/culver_stream.py", "runners/culver_analyze.py", "runners/culver_report.py", "runners/culver_dryrun.py", "src/mint/report/templates/culver_report.md.j2"],
+  "new_files_rule": "new files only; no frozen file edited. Per-scenario processing = the frozen v3.1 run_scenario with the v3.2 (D-71) v3_extra, installed by v3_2_stream.install(); stream/ledger/resume logic = a copy of v3_stream.main with the Culver URL, allowlist, member prefix and byte budget. The sha256 of the new files is recorded in runs/20261026-CULVER/code_freeze.json and committed before the first Culver data byte is downloaded."
+ },
+ "methods": ["no defense", "ego-only", "B-NORM (D-66)", "B-RAY (v3.2 primary)", "R1 (v3.2 key secondary)", "R1-noREMOVE (ablation)", "oracle bounds as v2 (frozen e5_analyze)"],
+ "conditions": {
+  "list": ["clean", "spoof_feat", "remove_feat", "shift_feat", "spoof_pts", "spoof_blind", "pgd_untargeted@r0.25", "pgd_remove@r0.25", "pgd_untargeted_stealth@r0.5", "pgd_remove_stealth@r0.25", "pgd_untargeted_stealth@r1.0", "pgd_remove_stealth@r1.0"],
+  "note": "exactly the v3.2 test conditions; D-70 r = 1.0 levels keep their label 'strong-attack level, added after seeing block-H development results'"
+ },
+ "parameters_reused_unchanged": {
+  "sigma_k": [0.4932000681354975, 0.12256822968120293, 0.026635731178192228],
+  "B-NORM_tau_k": [1.0198755663320025, 1.0345558073151098, 1.1952683405891051],
+  "pgd": "10 steps, step eps/4, random start, no-GT pseudo-labels, exact stealth projection, infeasible frames not applied (D-68 am. 2), seeds V3PGD|family|r|scenario|frame",
+  "reason": "same checkpoint and same simulated sensor, so sigma_k (feature scale) and tau_k (clean H magnitude ratio) are not recomputed; nothing is fitted or tuned on Culver City"
+ },
+ "metrics": {
+  "AP": "AP@0.7 (and 0.5 in tables) under both D-64 definitions: global ranking (headline, D-69) and OpenCOOD frame order (OPV2V-comparable)",
+  "bootstrap": "as v3.2: seed 0, 2000 resamples, scenario (whole scenarios) and 10-frame blocks within scenario; one-sided p = (k+1)/(B+1); Holm co-test of B-RAY and R1 vs no defense per AP definition, alpha 0.05",
+  "analysis_code": "frozen e5_analyze (test-mode functions) and v3_analyze.run_test, called by runners/culver_analyze.py with the completeness constants set to 4 scenarios / 550 frames and the output label 'CULVER CITY (held-out domain shift)'; no statistic, method or bootstrap changed",
+  "reported": ["mean dAP@0.7 over the 4 original families (both AP defs, scenario + 10-frame CI)", "Holm co-test", "clean relative loss", "per-condition dAP for every method", "PGD recovery and attack loss", "B-NORM catch / clean false-flag rate", "stealth-infeasible counts", "realized-only tables", "R1 - B-RAY statements (v2 wording)", "runtime by agent count", "a comparison table OPV2V test vs Culver City for the headline numbers, kept separate"]
+ },
+ "success_rule": {
+  "rule": "the v3.2 rule unchanged: B-RAY Holm-rejected in the co-test with R1 vs no defense on the scenario bootstrap AND B-RAY clean relative loss scenario-CI high <= 1%, evaluated per AP definition; pass under both = 'success'; disagreement = 'AP-definition-dependent'",
+  "status": "reported DESCRIPTIVELY for this secondary evaluation together with the Holm results; it does not change or re-open the OPV2V test verdict",
+  "coarse_ci_note": "4 scenarios only: the scenario bootstrap has at most 35 distinct resamples (multisets of 4 from 4), so scenario CIs and p-values are coarse; 10-frame CIs are reported next to them but are not the pre-registered primary CI",
+  "agent_strata_note": "frames have n <= 3; per-agent-count strata have 2 scenarios each, so only 10-frame CIs exist there (frozen MIN_SCEN_FOR_SCEN_BOOT = 5)"
+ },
+ "sanity_check": {
+  "what": "clean no-defense AP@0.7 (OpenCOOD inference path and default frame-order AP) on the first Culver scenario (2021_09_03_09_32_17) right after its download, before any MINT method or attack runs on Culver City",
+  "rule": "expected in the vicinity of the published 0.735 (one scenario varies: OPV2V test per-scenario 0.72-0.97); if < 0.6 STOP and investigate (coordinate convention, config) before continuing",
+  "exposure": "detector-level only (as Stage-1 V-01)"
+ },
+ "expected_outcomes": {
+  "stated": "2026-10-26, from the OPV2V test results (runs/20261024-E5v3/report/report.md) only, before any Culver City number",
+  "clean_detector": "no-defense frame-order AP@0.7 over the 4 scenarios within about +-0.05 of 0.735 (lower than the test's 0.822); global-ranking AP higher than frame-order, as on the test (0.886 vs 0.822)",
+  "headline_mean4": "same signs as the test: global AP R1 > B-RAY >= 0, both below 1 AP point (test +0.45 / +0.15); frame-order AP B-RAY > R1 (test +0.76 / +0.19); R1 - B-RAY AP-definition-dependent as on the test; wider CIs, so the v2 rule may fail under one or both definitions by lack of power",
+  "clean_cost": "B-RAY relative loss below 1% (point); R1 clean cost under frame-order AP positive (test 0.62%) and near zero or negative under global AP; R1-noREMOVE near 0",
+  "domain_shift": "more detector false positives in an unseen town may give B-RAY more boxes to remove; whether that helps or hurts clean AP is not predicted",
+  "B-NORM": "catch ~100% on plain PGD; <= 5% on stealth PGD; clean false-flag rate and AP cost at least as large as on the test (tau_k fitted on default-town block H), so B-NORM clean cost likely several AP points",
+  "PGD": "B-RAY recovery ~0 on every PGD condition; R1 recovery on pgd_remove_stealth@r1.0 around 0.5 (test 0.56) and > 0 on the r = 0.25 remove families under global AP",
+  "spoof_blind": "no defense recovers it (identifiability limit), as on the test",
+  "fewer_agents": "Culver frames have n <= 3 (test up to 5), so per-agent-count comparisons cover n = 2, 3 only"
+ },
+ "procedural": {
+  "before_stream": "verify the v3.2 frozen sha256 list and OpenCOOD commit; refuse on mismatch; allowlist = the 4 Culver scenarios; only the Culver archive URL; byte budget 7e9 checked before the first data byte",
+  "interrupted_download": "a ledger entry not 'complete' -> STOP and ask the user",
+  "resume": "re-run the same command; scenarios with both cache files are skipped; a complete extraction marker is reused without a second download",
+  "no_peeking": "no AP or criterion is looked at on partial results (except the pre-registered first-scenario clean detector sanity check)",
+  "after_stream": "frozen hashes re-checked",
+  "after_analysis": "4 scenarios and 550 frames asserted (STOP if not)"
+ },
+ "run": "nohup caffeinate -ims .venv/bin/python runners/culver_stream.py --run_dir runs/20261026-CULVER --user_approved > runs/20261026-CULVER/run.log 2>&1 &",
+ "estimated_runtime_h": {"basis": "OPV2V test v3.2 stream: 2066 frames in 110,809 s (30.8 h) of per-scenario processing (sum of the run.log 'processed' lines), 54 s per frame on average at 1-5 agents; 25-90 s per frame per scenario", "frames": 550, "estimate": 8, "range": [6, 11]},
+ "outputs": ["runs/20261026-CULVER/cache/*.pkl.gz", "v3extra/*.pkl.gz", "download_ledger.json", "run.log", "e5_test.json (frozen v2 analysis, relabelled)", "e5_v3.json (v3 analysis, relabelled)", "report/ (status 'CULVER CITY (held-out domain shift)')"]
+}
