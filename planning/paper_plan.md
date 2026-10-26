@@ -1,3 +1,5 @@
+Superseded by paper/ (evaluation-paper framing, 2026-10)
+
 # Paper plan (intended argument; no results exist)
 
 Checkpoint 1, 2026-10-22. Working title (to be revisited after results): *MINT: Calibrated, Region-Level Reliability of Received Features in Cooperative LiDAR Perception*. Publication suitability is a conclusion to reach after the evidence exists; no venue is assumed.
