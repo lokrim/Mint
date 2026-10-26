@@ -58,3 +58,6 @@ runs/**/extra/
 runs/**/pgd/
 runs/**/v3extra/
 runs/**/pgd_stealth/
+
+# Reporting notebook environment (separate from the frozen analysis .venv)
+.venv-report/

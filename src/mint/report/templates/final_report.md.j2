@@ -1,0 +1,179 @@
+{% macro figure(name) %}
+{% set f = fig[name] %}
+![{{ f.title }}]({{ f.files.light_png }})
+
+*Figure {{ f.num }}. {{ f.caption }}* Data: [`{{ f.files.csv }}`]({{ f.files.csv }}){% if "dark_png" in f.files %} · dark version: [`{{ f.files.dark_png }}`]({{ f.files.dark_png }}){% endif %}
+{% endmacro %}
+# MINT final test (E5, OPV2V): results report
+
+> **Status: {{ status_text }}**
+> Source: {{ label }}
+{% if status != "FINAL" %}
+>
+> These numbers come from development data. They show what the report will look like; they are **not** results of the final test and must not be quoted as such.
+{% endif %}
+
+Generated {{ prov.generated }} by `runners/report_build.py`. Every number in this report is copied from the analysis outputs listed below; nothing is recomputed. Sections marked **AUTHOR** are left for the authors to write after reading the results.
+
+| Provenance | |
+|---|---|
+{% for k, v in prov.inputs.items() %}
+| `{{ k }}` | `{{ v.path }}` · sha256 `{{ v.sha256[:16] }}…` |
+{% endfor %}
+| Repository HEAD | `{{ prov.git_head or "n/a" }}` |
+| Frozen code commit (preregistration) | `{{ prov.frozen_code_commit or "n/a" }}` |
+| Preregistration version | {{ prov.preregistration_version or "n/a" }} |
+| Scenarios / frames | {{ n_scenarios }} / {{ n_frames }} (agents per frame: {{ n_agents_hist }}) |
+
+## 1. What was tested
+
+{% if comparison_set %}
+**Defenses compared** (pre-registered comparison set): {{ comparison_set | join("; ") }}.
+{% endif %}
+
+**Conditions** ({{ conditions | length }}): {{ conditions | join("; ") }}.
+{% if t.d70_note %}
+
+{{ t.d70_note }}
+{% endif %}
+
+**Metrics.** ΔAP@0.7 = AP of a defense minus AP with no defense on the same frames, in AP points (×100). Recovery = ΔAP / attack loss. Clean cost = relative AP@0.7 loss on unattacked frames. Every statistic is computed under two AP definitions: {{ DEF_NAME["global"] }} and {{ DEF_NAME["frame"] }}.
+{% if d64_rule %}
+
+**Pre-registered rule (D-64).** {{ d64_rule }}
+{% endif %}
+{% if outcome_rule %}
+
+**Outcome wording.** Success: {{ outcome_rule.success }}. Disagreement: {{ outcome_rule.disagreement }}. Failure: {{ outcome_rule.failure }}.
+{% endif %}
+
+## 2. Procedural checks
+
+{{ t.checks }}
+
+## 3. Pre-registered verdict
+
+{% if verdict.verdict %}
+**{{ verdict.verdict[:1] | upper }}{{ verdict.verdict[1:] }}.** v2 rule under global-ranking AP: {{ "passes" if verdict.pass_global else "does not pass" }}; under frame-order AP: {{ "passes" if verdict.pass_frame else "does not pass" }}.
+{% else %}
+No D-64 verdict is recorded in this file.
+{% endif %}
+
+{{ t.criteria }}
+
+**Key secondary (R1 − B-RAY), statements emitted by the frozen analysis:**
+
+{{ t.r1_minus_bray }}
+{% if verdict.r1_ap_dependent %}
+
+The key secondary is **AP-definition-dependent** (the two definitions give different statements).
+{% endif %}
+
+## 4. Headline: mean ΔAP@0.7 over the 4 original attacks
+
+{{ figure("01_headline") }}
+
+{{ t.headline }}
+
+## 5. Every attack condition
+
+{{ figure("02_per_family") }}
+
+{% if t.pgd %}
+{{ figure("02b_per_family_pgd") }}
+
+{% endif %}
+{% for d in DEFS %}
+**{{ DEF_NAME[d] }}** (ΔAP@0.7 in AP points, 95% CI scenario bootstrap)
+
+{{ t.per_family[d] }}
+
+{% endfor %}
+## 6. Cost on clean frames
+
+{{ figure("03_clean_cost") }}
+
+{{ t.clean_cost }}
+
+## 7. Key secondary: R1 versus B-RAY
+
+{{ figure("04_r1_minus_bray") }}
+
+{% if t.pgd %}
+{{ figure("04b_r1_minus_bray_pgd") }}
+{% endif %}
+## 8. Optimized (PGD) feature attacks and B-NORM
+
+{% if t.pgd %}
+{{ figure("05_pgd_recovery") }}
+
+{{ figure("06_bnorm_catch") }}
+
+{{ t.pgd }}
+{% if t.expected %}
+
+**Expected outcomes, checked descriptively** (rules stated in the preregistration before any PGD run; not criteria):
+
+{{ t.expected }}
+{% endif %}
+{% else %}
+No PGD conditions in this file.
+{% endif %}
+
+## 9. Attack strength and realized-only effects
+
+{{ figure("07_attack_strength") }}
+
+{% for d in DEFS %}
+**Realized frames only, {{ DEF_NAME[d] }}** (ΔAP@0.7 in AP points, recovery in brackets)
+
+{{ t.realized_only[d] }}
+
+{% endfor %}
+## 10. How the defenses act
+
+{{ figure("08_bray_boxes") }}
+
+{{ figure("09_r1_units") }}
+
+## 11. By number of cars
+
+{{ figure("10_by_agents") }}
+
+## 12. Interpretation (AUTHOR)
+
+<!-- AUTHOR: write this section only after reading sections 2-11. Keep to what the numbers support. -->
+*To be written by the authors.* Suggested questions, answered from the tables above:
+
+1. Does the pre-registered verdict hold under both AP definitions, and how large is the headline effect in AP points?
+2. Is the clean cost within the 1% limit, and what does B-RAY remove that it should not (section 10)?
+3. Does R1 add anything over B-RAY (section 7)? Quote the pre-registered statement as written.
+4. Which attacks are not recovered by any method (spoof in blind areas, stealth PGD), and is that the expected identifiability limit?
+5. How do the final-test numbers compare with the development numbers (blocks T and H), reported separately?
+
+## 13. Scope, labelling and deviations
+
+{% if scope_limits %}
+**Scope limits (pre-registered).** {{ scope_limits }}
+{% endif %}
+{% if labelling %}
+
+**Labelling.** {{ labelling }}
+{% endif %}
+{% if d69 %}
+
+**Reporting rules (D-69).** Headline AP: {{ d69.headline_AP }}. {{ d69.absolute_effects }}. Scope: {{ d69.scope_limit }}.
+{% endif %}
+{% if d71 %}
+
+**Deviation D-71 (stream bug fix, no method change).** {{ d71.fix }} Crashed attempt: {{ d71.crashed_attempt.crash }}; results written before the fix: {{ d71.crashed_attempt.results_written }}. Seen before the fix: {{ d71.crashed_attempt.seen_before_D71 }}.
+{% endif %}
+
+## Appendix: absolute AP@0.7
+
+{% for d in DEFS %}
+**{{ DEF_NAME[d] }}**
+
+{{ t.absolute_ap[d] }}
+
+{% endfor %}

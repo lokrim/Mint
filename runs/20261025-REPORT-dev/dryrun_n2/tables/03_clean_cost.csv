@@ -1,0 +1,11 @@
+ap_definition,method,point,ci95_scenario_lo,ci95_scenario_hi,ci95_block10_lo,ci95_block10_hi
+global,B-RAY,0.0,0.0,0.0,0.0,0.0
+global,R1,0.00229,0.0023,0.0023,0.0,0.0051
+global,R1_noREMOVE,0.0,0.0,0.0,0.0,0.0
+global,B-NORM,0.0,0.0,0.0,0.0,0.0
+frame,B-RAY,0.0,0.0,0.0,0.0,0.0
+frame,R1,0.00488,0.0049,0.0049,0.0,0.0151
+frame,R1_noREMOVE,0.0,0.0,0.0,0.0,0.0
+frame,B-NORM,0.0,0.0,0.0,0.0,0.0
+global,ego_only,0.15525,0.1553,0.1553,0.1073,0.1737
+frame,ego_only,0.20062,0.2006,0.2006,0.1095,0.2277

@@ -1,0 +1,13 @@
+condition,boxes,drop,keep,keep_unknown,keep_self,frac_KNOWN,dropped_gt_matched,dropped_unmatched
+clean,274,0,250,0,24,0.912,0,0
+spoof_feat,288,13,250,1,24,0.913,0,13
+remove_feat,274,0,250,0,24,0.912,0,0
+shift_feat,285,10,250,2,23,0.912,0,10
+spoof_pts,281,5,251,1,24,0.911,0,5
+spoof_blind,290,1,250,15,24,0.866,0,1
+pgd_untargeted@r0.25,308,11,258,15,24,0.873,0,11
+pgd_remove@r0.25,260,0,235,1,24,0.904,0,0
+pgd_untargeted_stealth@r0.5,294,3,255,12,24,0.878,0,3
+pgd_remove_stealth@r0.25,257,0,233,0,24,0.907,0,0
+pgd_untargeted_stealth@r1.0,351,31,270,26,24,0.858,0,31
+pgd_remove_stealth@r1.0,129,0,128,0,1,0.992,0,0

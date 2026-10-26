@@ -1,0 +1,15 @@
+condition,boxes,drop,keep,keep_unknown,keep_self,frac_KNOWN,dropped_gt_matched,dropped_unmatched
+clean,4164,17,3514,273,360,0.848,9,8
+spoof_feat,4545,222,3538,425,360,0.827,9,213
+remove_feat,4070,17,3492,238,323,0.862,8,9
+shift_feat,4327,196,3518,276,337,0.858,9,187
+spoof_pts,4354,122,3523,349,360,0.837,9,113
+spoof_blind,4586,34,3525,667,360,0.776,9,25
+pgd_untargeted@r0.25,5239,332,3857,681,369,0.8,14,318
+pgd_remove@r0.25,3792,8,3205,221,358,0.847,6,2
+pgd_untargeted_stealth@r0.25,4357,44,3605,348,360,0.838,10,34
+pgd_untargeted_stealth@r0.5,4805,177,3742,524,362,0.816,9,168
+pgd_untargeted_stealth@r1.0,6315,714,4058,1180,363,0.756,7,707
+pgd_remove_stealth@r0.25,3824,7,3233,226,358,0.847,5,2
+pgd_remove_stealth@r0.5,3319,6,2778,181,354,0.839,5,1
+pgd_remove_stealth@r1.0,1798,8,1722,62,6,0.962,1,7

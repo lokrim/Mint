@@ -1,0 +1,13 @@
+ap_definition,statistic,point,ci95_scenario_lo,ci95_scenario_hi,ci95_block10_lo,ci95_block10_hi
+global,paired|R1-B-RAY|pgd_untargeted@r0.25,0.00099,0.001,0.001,0.0,0.0037
+global,paired|R1-B-RAY|pgd_remove@r0.25,0.0103,0.0103,0.0103,0.0,0.0179
+global,paired|R1-B-RAY|pgd_untargeted_stealth@r0.5,0.00073,0.0007,0.0007,0.0,0.0029
+global,paired|R1-B-RAY|pgd_remove_stealth@r0.25,0.01011,0.0101,0.0101,0.0,0.0179
+global,paired|R1-B-RAY|pgd_untargeted_stealth@r1.0,0.0001,0.0001,0.0001,-0.0001,0.0012
+global,paired|R1-B-RAY|pgd_remove_stealth@r1.0,0.28228,0.2823,0.2823,0.2616,0.3147
+frame,paired|R1-B-RAY|pgd_untargeted@r0.25,0.00041,0.0004,0.0004,-0.005,0.0024
+frame,paired|R1-B-RAY|pgd_remove@r0.25,-0.00213,-0.0021,-0.0021,-0.007,0.0075
+frame,paired|R1-B-RAY|pgd_untargeted_stealth@r0.5,0.00154,0.0015,0.0015,-0.0009,0.0036
+frame,paired|R1-B-RAY|pgd_remove_stealth@r0.25,-0.01125,-0.0112,-0.0112,-0.0141,0.0066
+frame,paired|R1-B-RAY|pgd_untargeted_stealth@r1.0,0.00186,0.0019,0.0019,0.0,0.0064
+frame,paired|R1-B-RAY|pgd_remove_stealth@r1.0,0.26943,0.2694,0.2694,0.2483,0.3158

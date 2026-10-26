@@ -1,0 +1,4 @@
+n_agents,frames,scenarios,method,point,ci95_block10_lo,ci95_block10_hi
+2,371,4,B-RAY,0.02789,0.0234,0.0324
+2,371,4,R1,0.02233,0.0172,0.0274
+2,371,4,R1_noREMOVE,0.02443,0.0202,0.0289
