@@ -1,5 +1,8 @@
 # R1 methodology figure: notes
 
+Second pass (layout): the senders are labelled *untrusted* (mirroring *trusted*), $Y^{+}$ says it is used in every tile
+with $S_u=\emptyset$, and the preview centres box text vertically as TikZ does, with the Wilson table flowing inline.
+
 Files: `r1_method.tex` (TikZ, `figure*`, label `fig:r1method`), `r1_method_preview.svg` (hand-laid preview, same
 coordinates at 1 cm = 50 px, Times instead of Computer Modern). The figure is **not** `\input` in `main.tex` yet.
 No result, number or code was changed.
@@ -55,14 +58,17 @@ computed, before NMS, together with a per-(sender, tile) reliability record (ste
 4. **UNKNOWN is per unit.** One effect without evidence makes the whole unit $(i,u)$ UNKNOWN, even if another effect in
    it gates. That is why the inset places the hidden box in a different tile $u'$.
 5. **Tile assignment in composition.** `compose()` assigns pre-NMS candidates to tiles by their **anchor** cell
-   (head grid, 8 cells × 0.8 m). Effects are assigned by the **box centre** (`tile_of` with `pc_range`). Eq. `eq:compose`
-   in `main.tex` says "$b$ centred in $u$", which describes the effect rule, not the composition. That is a possible wording
-   issue in the paper; I did not change it. I did not check that the two tile grids line up exactly (that depends on
-   `pc_range` in the config, which was not on the reading list).
-6. **"Post-fusion is pixel-local"** is taken from the `compose.py`/`pipeline.py` docstrings (check V-03). I did not re-read
-   the model code (`attfuse_parts.py`, not on the list).
-7. **Ray-count variant.** `Params.variant` defaults to `"std"` (shown here). I did not check whether the frozen test
-   configuration used `"std"` or `"gnd"` (ground-aware), because the run config was not on the list.
+   (head grid, 8 cells × 0.8 m). Effects are assigned by the **box centre** (`tile_of` with `pc_range`). *Verified
+   (second pass):* the two grids coincide. Both start at the corner of `cav_lidar_range` = [−140.8, −40, …, 140.8, 40]
+   in the released checkpoint's `config.yaml` (352 × 100 head cells at 0.8 m). The remaining difference is anchor cell
+   versus regressed box centre. Eq. `eq:compose` in `main.tex` says "$b$ centred in $u$", which is slightly loose
+   for the composition step; I did not change it.
+6. **"Post-fusion is pixel-local."** *Partly verified (second pass):* `attfuse_parts.fuse_scale` is per-pixel
+   softmax attention with no learned parameters (the receiver row is never excluded), and `decode` is deblocks + heads.
+   I did not inspect the deblock kernel sizes. Pixel-locality of the decoder rests on V-03 and on the paper's statement
+   that composition equals a direct masked decode on every test scenario.
+7. **Ray-count variant.** *Verified (second pass):* `runners/e5_analyze.py` and `e5_stream`/`e4_stream` call R1 with
+   `v0.Params()`, so the standard (`"std"`) count is used, as shown.
 8. **Counterfactual mode.** "Run $n$ times" assumes the exact modes (`sequential` / `batched`). `footprint` and
    `trigger` are diagnostic or rejected (D-49) and are not shown.
 9. **Not compiled.** No LaTeX is installed locally. Node heights use fixed minimum heights, and Computer Modern at

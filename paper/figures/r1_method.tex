@@ -27,7 +27,7 @@
 \node[recv, text width=2.1cm, minimum height=2.2cm] (rx) at (0,0)
   {\textbf{Receiver} (agent 0)\\ own LiDAR scan $P_0$ + pose: \textbf{trusted}\\[2pt] encodes $P_0$ $\to$ features $f_{0,k}$, $k{=}1,2,3$};
 \node[send, text width=2.1cm, minimum height=2.4cm] (tx) at (0,-2.6)
-  {\textbf{Senders} $i=1,\dots,n{-}1$\\ features $f_{i,k}$ on the receiver's BEV grid\\[2pt] one may be malicious: $f_{1,k}+\delta_k$};
+  {\textbf{Senders} $i=1,\dots,n{-}1$\\ send features $f_{i,k}$ on the receiver's BEV grid: \textbf{untrusted}\\[2pt] one may be malicious: $f_{1,k}+\delta_k$};
 
 %---------------------------------------------------------------- shared frozen detector
 \node[frozen, text width=1.5cm, minimum height=4.4cm] (det) at (2.75,-0.3)
@@ -35,7 +35,7 @@
 
 %---------------------------------------------------------------- steps 1-2
 \node[step, text width=2.1cm, minimum height=1.8cm] (yp) at (4.9,-0.2)
-  {\rOneStep{1} \textbf{Plain output}\\[1pt] $Y^{+}=\mathrm{Dec}\big(\mathrm{Fuse}($\\ $\quad f_0,f_1,\dots,f_{n-1})\big)$};
+  {\rOneStep{1} \textbf{Plain output}\\[1pt] $Y^{+}=\mathrm{Dec}\big(\mathrm{Fuse}($\\ $\quad f_0,f_1,\dots,f_{n-1})\big)$\\[2pt] undefended; used in every tile with $S_u=\emptyset$};
 \fill[white, draw=black!75, rounded corners=1.5pt] (5.06,-2.76) rectangle (7.36,-5.16);
 \fill[white, draw=black!75, rounded corners=1.5pt] (4.98,-2.68) rectangle (7.28,-5.08);
 \node[step, text width=2.1cm, minimum height=2.4cm] (ym) at (4.9,-2.6)
@@ -71,7 +71,7 @@
 \node[step, text width=2.75cm, minimum height=2.2cm, line width=0.9pt] (cmp) at (15.05,-2.2)
   {\rOneStep{6} \textbf{Exact composition}\\[1pt] per tile $u$: pre-NMS candidates of $Y^{-}(S_u)$, $Y^{-}(\emptyset)=Y^{+}$\\[1pt] $\to$ rotated NMS $\to$ \textbf{final boxes} $Y_{\mathrm{R1}}$};
 \node[blk, draw=rOneRecv, fill=rOneRecv!7, text width=2.75cm, minimum height=1.0cm] (rec) at (15.05,-4.65)
-  {\textbf{Reliability record} per $(i,u)$:\\ status KNOWN\,/\,UNKNOWN,\\ verdicts, $g_{i,u}$};
+  {\textbf{Reliability record} per $(i,u)$:\\ KNOWN or UNKNOWN,\\ verdicts, $g_{i,u}$};
 
 %---------------------------------------------------------------- flow
 \draw[arr] (rx.east) -- (det.west |- rx.east);
