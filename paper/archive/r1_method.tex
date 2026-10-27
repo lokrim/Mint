@@ -1,0 +1,127 @@
+% R1 methodology figure (IEEE two-column, full width, drawn at final size: no scaling).
+% Needs: \usepackage{tikz,xcolor,amsmath,amssymb}; \usetikzlibrary{arrows.meta,positioning,fit,calc}
+% (all loaded by main.tex). Okabe-Ito palette (colour-blind safe); every colour cue is doubled by a
+% line style or a text label, so the figure also reads in grayscale.
+% Layout: top row = the per-frame flow (inputs, steps 1-6), 7 boxes of 2.38 cm at a 2.55 cm pitch;
+% bottom row = (a) gate rules, (b) a top-down example of step 4, (c) where B-RAY and R1 act.
+% Total width 17.7 cm (IEEE \textwidth = 18.1 cm).
+\begin{figure*}[!t]
+\centering
+\definecolor{rOneRecv}{HTML}{0072B2}   % receiver / trusted evidence (blue)
+\definecolor{rOneMal}{HTML}{D55E00}    % untrusted sender, ADD, TRAV (vermillion)
+\definecolor{rOneSup}{HTML}{009E73}    % SUP (bluish green)
+\definecolor{rOneRem}{HTML}{CC79A7}    % REMOVE (reddish purple)
+\definecolor{rOneShift}{HTML}{E69F00}  % SHIFT (orange)
+\newcommand{\rOneStep}[1]{{\setlength{\fboxsep}{0.8pt}\colorbox{black!85}{\textcolor{white}{\bfseries\,#1\,}}}}
+\begin{tikzpicture}[
+  font=\scriptsize,
+  blk/.style={draw, rounded corners=1.5pt, align=left, anchor=north west, inner sep=2.5pt,
+              line width=0.5pt, text width=#1, minimum height=2.75cm},
+  blk/.default=2.2cm,
+  recv/.style={draw=rOneRecv, fill=rOneRecv!7, line width=0.8pt},
+  send/.style={draw=rOneMal, fill=rOneMal!5, dashed, line width=0.8pt},
+  stepbox/.style={draw=black!75, fill=white},
+  note/.style={draw=black!50, fill=black!4, minimum height=3.1cm},
+  arr/.style={-{Latex[length=1.5mm]}, line width=0.6pt},
+  trust/.style={-{Latex[length=1.5mm]}, line width=0.9pt, rOneRecv}]
+
+%---------------------------------------------------------------- top row: flow
+\node[blk, recv, minimum height=1.5cm] (rx) at (0,0)
+  {\textbf{Receiver}\\ own scan $P_0$, pose:\\ \textbf{trusted}\\ features $f_{0,k}$};
+\node[blk, send, minimum height=0.95cm] (tx) at (0,-1.65)
+  {\textbf{Senders} $i\ge 1$:\\ features $f_{i,k}$, \textbf{untrusted}};
+\node[blk, stepbox] (s1) at (2.55,0)
+  {\rOneStep{1} \textbf{Plain decode}\\[2pt] $Y^{+}$: all agents,\\ frozen AttFuse\\ (per-pixel fusion)};
+\node[blk, stepbox] (s2) at (5.1,0)
+  {\rOneStep{2} \textbf{Without $i$}\\[2pt] for each sender $i$:\\ decode $Y^{-}(i)$\\[2pt] $n{-}1$ extra decodes};
+\node[blk, stepbox] (s3) at (7.65,0)
+  {\rOneStep{3} \textbf{Effects of $i$}\\[2pt] match $Y^{+}$ to $Y^{-}(i)$:\\
+   \textcolor{rOneMal}{\textbf{ADD}}: in $Y^{+}$ only\\
+   \textcolor{rOneRem!80!black}{\textbf{REM.}}: in $Y^{-}(i)$ only\\
+   \textcolor{rOneShift!75!black}{\textbf{SHIFT}}: moved\\[2pt] unit: $(i,\text{tile }u)$};
+\node[blk, stepbox] (s4) at (10.2,0)
+  {\rOneStep{4} \textbf{Ray check}\\[2pt] rays of $P_0$ through\\ each effect box:\\
+   \textcolor{rOneSup!80!black}{\textbf{SUP}} ends inside,\\ \textcolor{rOneMal}{\textbf{TRAV}} passes through\\[2pt]
+   $N{<}3$: \textbf{UNKNOWN}, keep};
+\node[blk, stepbox] (s5) at (12.75,0)
+  {\rOneStep{5} \textbf{Decision}\\[2pt] gate $(i,u)$ iff it is\\ KNOWN, ${\ge}1$ effect\\ gates, none useful\\[2pt]
+   $S_u$: gated senders};
+\node[blk, stepbox, line width=0.9pt] (s6) at (15.3,0)
+  {\rOneStep{6} \textbf{Composition}\\[2pt] per tile $u$: use\\ candidates of $Y^{-}(S_u)$\\[2pt]
+   NMS $\to$ $Y_{\mathrm{R1}}$\\ + record per $(i,u)$};
+
+\draw[arr] ([yshift=-0.75cm]rx.north east) -- ([yshift=-0.75cm]s1.north west);
+\draw[arr, rOneMal, dashed] (tx.east) -- (tx.east -| s1.west);
+\draw[arr] (s1.east) -- (s2.west);
+\draw[arr] (s2.east) -- (s3.west);
+\draw[arr] (s3.east) -- (s4.west);
+\draw[arr] (s4.east) -- (s5.west);
+\draw[arr] (s5.east) -- (s6.west);
+% trusted evidence: the receiver's own scan reaches step 4 directly, never via fusion
+\draw[trust] (rx.north) -- ++(0,0.3) -| (s4.north)
+  node[pos=0.25, above, text=rOneRecv] {receiver's own scan $P_0$: trusted evidence for step 4, never fused};
+
+%---------------------------------------------------------------- bottom row
+% (a) gate rules
+\node[blk=4.35cm, note] (rules) at (0,-3.1)
+  {\textbf{(a) Gate rules} (step 4): Wilson-95\\ interval $[\mathrm{lo},\mathrm{hi}]$ on $s=\mathrm{SUP}/N$\\[3pt]
+   \setlength{\tabcolsep}{2.4pt}%
+   \begin{tabular}{@{}lll@{}}
+     & \textit{gate} & \textit{useful}\\
+     ADD    & $\mathrm{hi}(s^{+}){<}0.5$ & $\mathrm{lo}(s^{+}){>}0.5$\\
+     REMOVE & $\mathrm{lo}(s^{-}){>}0.5$ & $\mathrm{hi}(s^{-}){<}0.5$\\
+     SHIFT  & $s^{+}{<}s^{-}$ & $s^{+}{>}s^{-}$
+   \end{tabular}\\[2pt]
+   SHIFT only if the two intervals are disjoint.};
+
+% (b) top-down example of step 4
+\node[blk=8.3cm, note] (inset) at (4.7,-3.1) {};
+\node[anchor=north west, inner sep=2.5pt] at (inset.north west) {\textbf{(b) Step 4, top-down}};
+\begin{scope}[shift={(4.8,-6.05)}]
+  \draw[black!20] (0.9,0) grid[step=1.25] (4.65,2.5);
+  \draw[black!80, line width=0.9pt] (2.15,1.25) rectangle (3.4,2.5);
+  \node[anchor=north east] at (3.4,2.5) {$u$};
+  \node[anchor=south east] at (4.65,0) {$u'$};
+  \coordinate (S) at (0.45,1.25);
+  \draw[rOneRecv, fill=rOneRecv!30, line width=0.6pt] (0.12,1.08) rectangle (0.78,1.42);
+  \fill[rOneRecv] (S) circle (1.5pt);
+  \node[anchor=north, text=rOneRecv] at (0.45,1.05) {receiver};
+  \begin{scope}
+    \clip (0.9,0) rectangle (4.65,2.5);
+    \fill[black!14] (2.4,0.92) -- ($(S)!3!(2.4,0.92)$) -- ($(S)!3!(2.4,0.55)$) -- (2.4,0.55) -- cycle;
+  \end{scope}
+  \draw[black!60, densely dotted, line width=0.7pt] (3.7,0.1) rectangle (4.3,0.38);
+  \node at (4.0,0.24) {?};
+  \draw[rOneMal, dashed, line width=0.8pt] (2.35,1.6) rectangle (3.05,1.95);
+  \foreach \y in {1.64,1.72,1.80,1.88} {
+    \draw[rOneMal, densely dashed, line width=0.5pt] (S) -- ($(S)!1.75!(2.35,\y)$);
+  }
+  \draw[black, fill=black!40, line width=0.6pt] (2.4,0.55) rectangle (3.1,0.92);
+  \foreach \y in {0.61,0.69,0.77,0.85} {
+    \draw[rOneSup, line width=0.6pt] (S) -- (2.4,\y);
+  }
+  \node[anchor=north west, align=left, text width=3.3cm, inner sep=0pt] at (4.85,2.55)
+    {\textcolor{rOneMal}{\textbf{TRAV}} (dashed): 4 rays cross the empty \textbf{fake} box, $s^{+}{=}0/4$,
+     $\mathrm{hi}{=}0.49$: ADD gates.\\[2pt]
+     \textcolor{rOneSup!80!black}{\textbf{SUP}} (solid): 4 rays end on the \textbf{real car}, $s{=}4/4$,
+     $\mathrm{lo}{=}0.51$: useful.\\[2pt]
+     \textbf{Hidden} (shaded, $u'$): $N{<}3$, UNKNOWN, keep.};
+\end{scope}
+
+% (c) where the defenses act
+\node[blk=4.2cm, note] (cmpr) at (13.3,-3.1)
+  {\textbf{(c) Where the defenses act}\\[3pt]
+   \textbf{B-RAY}: ray test on each \emph{final} box of $Y^{+}$, then delete. A box that the attacker
+   \emph{removed} cannot come back.\\[3pt]
+   \textbf{R1}: per sender and tile, \emph{before} NMS. Switching $i$ off in $u$ uses $Y^{-}(i)$ there,
+   so a removed box returns.};
+\end{tikzpicture}
+\caption{R1 per receiver frame. Top: the frozen AttFuse detector decodes once with all agents ($Y^{+}$,
+step~1) and once without each sender ($Y^{-}(i)$, step~2). Their differences are ADD, REMOVE and SHIFT effects
+of a sender $i$ in a 6.4\,m tile $u$ (step~3). Each effect box is checked against the receiver's own LiDAR rays
+(step~4); too few rays give UNKNOWN, which keeps the sender. Sender $i$ is switched off in tile $u$ only if an
+effect resolvably contradicts the rays and none is resolvably confirmed (step~5), and the output is composed
+tile by tile from the decodes already computed (step~6). Bottom: (a) the gate rules, (b) a top-down example
+of step~4, (c) where B-RAY and R1 act.}
+\label{fig:r1method}
+\end{figure*}

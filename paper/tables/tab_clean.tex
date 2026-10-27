@@ -2,13 +2,13 @@
 Method & Rel.\ loss, global & Rel.\ loss, frame-order \\
 \midrule
 B-RAY & +0.13\% {\tiny [+0.01, +0.30]} & $-$0.05\% {\tiny [$-$0.30, +0.18]} \\
-R1 & $-$0.16\% {\tiny [$-$0.35, $-$0.01]} & +0.62\% {\tiny [+0.18, +1.75]} \\
-R1-noREM & +0.01\% {\tiny [$-$0.01, +0.03]} & $-$0.03\% {\tiny [$-$0.10, $-$0.01]} \\
+MINT & $-$0.16\% {\tiny [$-$0.35, $-$0.01]} & +0.62\% {\tiny [+0.18, +1.75]} \\
+MINT-noREM & +0.01\% {\tiny [$-$0.01, +0.03]} & $-$0.03\% {\tiny [$-$0.10, $-$0.01]} \\
 B-NORM & +6.92\% {\tiny [+2.72, +11.33]} & +9.45\% {\tiny [+3.66, +15.70]} \\
 Ego-only & +23.93\% {\tiny [+19.84, +27.10]} & +32.27\% {\tiny [+26.89, +37.04]} \\
 \midrule
 \multicolumn{3}{l}{\emph{What each defense removes on clean frames}}\\
 B-RAY & \multicolumn{2}{l}{148 of 31,106 boxes dropped; 43 matched a real car} \\
-R1 & \multicolumn{2}{l}{718 of 8,160 units gated; 521 USEFUL (512 via REMOVE)} \\
-R1-noREM & \multicolumn{2}{l}{62 units gated; 10 USEFUL} \\
+MINT & \multicolumn{2}{l}{718 of 8,160 units gated; 521 USEFUL (512 via REMOVE)} \\
+MINT-noREM & \multicolumn{2}{l}{62 units gated; 10 USEFUL} \\
 B-NORM & \multicolumn{2}{l}{attacker flagged in 339/1947 sender-frames (17.4\%)} \\

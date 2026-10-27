@@ -7,17 +7,17 @@ No-defense clean AP@0.7 & 88.64 & 77.46 & 82.17 & 73.59 \\
 \midrule
 \multicolumn{5}{l}{\emph{Mean $\Delta$AP@0.7 over the 4 original attacks (pts, 95\% scenario CI)}}\\
 B-RAY & +0.15 {\tiny [$-$0.01, +0.30]} & +0.05 {\tiny [$-$0.03, +0.13]} & +0.76 {\tiny [+0.49, +1.27]} & +0.54 {\tiny [+0.22, +0.92]} \\
-R1 & +0.45 {\tiny [+0.29, +0.70]} & +0.32 {\tiny [+0.21, +0.48]} & +0.19 {\tiny [$-$0.45, +0.52]} & +0.40 {\tiny [+0.21, +0.73]} \\
-R1-noREM & +0.26 {\tiny [+0.18, +0.36]} & +0.08 {\tiny [$-$0.05, +0.18]} & +0.66 {\tiny [+0.48, +1.03]} & +0.38 {\tiny [+0.23, +0.63]} \\
+MINT & +0.45 {\tiny [+0.29, +0.70]} & +0.32 {\tiny [+0.21, +0.48]} & +0.19 {\tiny [$-$0.45, +0.52]} & +0.40 {\tiny [+0.21, +0.73]} \\
+MINT-noREM & +0.26 {\tiny [+0.18, +0.36]} & +0.08 {\tiny [$-$0.05, +0.18]} & +0.66 {\tiny [+0.48, +1.03]} & +0.38 {\tiny [+0.23, +0.63]} \\
 B-NORM & $-$5.85 {\tiny [$-$9.65, $-$2.30]} & $-$6.72 {\tiny [$-$9.17, $-$0.57]} & $-$7.13 {\tiny [$-$11.82, $-$2.73]} & $-$6.72 {\tiny [$-$9.59, $-$0.93]} \\
 Ego-only & $-$20.02 {\tiny [$-$23.10, $-$16.04]} & $-$18.36 {\tiny [$-$23.17, $-$14.57]} & $-$24.20 {\tiny [$-$29.44, $-$18.65]} & $-$20.81 {\tiny [$-$25.17, $-$16.70]} \\
 \midrule
 B-RAY clean rel.\ loss & 0.13\% & 0.14\% & $-$0.05\% & $-$0.07\% \\
-Holm reject B-RAY / R1 & yes/yes & no/yes & yes/no & yes/yes \\
-v2 rule & pass & fail & pass & pass \\
-R1 $-$ B-RAY (pts) & +0.31 {\tiny [+0.12, +0.55]} & +0.27 {\tiny [+0.12, +0.48]} & $-$0.57 {\tiny [$-$1.64, $-$0.11]} & $-$0.14 {\tiny [$-$0.40, +0.19]} \\
+Holm reject B-RAY / MINT & yes/yes & no/yes & yes/no & yes/yes \\
+Success rule & pass & fail & pass & pass \\
+MINT $-$ B-RAY (pts) & +0.31 {\tiny [+0.12, +0.55]} & +0.27 {\tiny [+0.12, +0.48]} & $-$0.57 {\tiny [$-$1.64, $-$0.11]} & $-$0.14 {\tiny [$-$0.40, +0.19]} \\
 \midrule
-\multicolumn{5}{l}{\emph{Strong stealth PGD remove ($r{=}1.0^\dagger$): attack loss; R1 recovery}}\\
+\multicolumn{5}{l}{\emph{Strong stealth PGD remove ($r{=}1.0^\dagger$): attack loss; MINT recovery}}\\
 Attack loss (pts) & 40.41 & 39.82 & 36.51 & 36.90 \\
-R1 recovery & 0.56 & 0.49 & 0.57 & 0.49 \\
+MINT recovery & 0.56 & 0.49 & 0.57 & 0.49 \\
 B-RAY recovery & $-$0.00 & $-$0.00 & 0.00 & 0.00 \\
