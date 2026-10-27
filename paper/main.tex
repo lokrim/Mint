@@ -117,7 +117,7 @@ template for most later work. Zhang et al.~\cite{zhang2024cad} fabricate occlusi
 casting and run online PGD on features, for spoofing and removal. SOMBRA~\cite{wang2025lucia} hijacks
 AttFuse's per-pixel attention on OPV2V to remove objects. PosePert~\cite{zhang2026poseguard} shifts existing
 objects by small amounts. The Blind Area Confusion attack~\cite{tao2026gcp} concentrates perturbations where
-the victim cannot see, and MVIG \CITENEEDED{} optimizes attack placement against consensus defenses.
+the victim cannot see, and MVIG~\cite{tao2026mvig} optimizes attack placement against consensus defenses.
 TrustFlip~\cite{liu2026trustflip} turns trust-based defenses against benign vehicles. Physical spoofing of the
 victim's own LiDAR~\cite{cao2019advlidar} breaks any defense that trusts the receiver's sensor, including ours.
 
@@ -148,8 +148,8 @@ OPV2V and OpenCOOD~\cite{xu2022opv2v} are the standard benchmark for AttFuse-sty
 V2V4Real~\cite{xu2023v2v4real} and Mixed Signals~\cite{luo2025mixedsignals} provide real data.
 Adaptive-attack guidance~\cite{carlini2019evaluating,tramer2020adaptive} asks that defenses be tested against
 attackers who know them, which motivates our stealth PGD. AP is usually computed by ranking detections by score
-across the whole set \CITENEEDED{} (PASCAL VOC); OpenCOOD's default instead accumulates true and false positives
-frame by frame. We are not aware of prior CP work that reports both. Pre-registration \CITENEEDED{} is rare
+across the whole set, as in PASCAL VOC~\cite{everingham2010voc}; OpenCOOD's default instead accumulates true and false positives
+frame by frame. We are not aware of prior CP work that reports both. Pre-registration~\cite{nosek2018preregistration} is rare
 in this field.
 
 %======================================================================
@@ -249,7 +249,7 @@ An effect is KNOWN if every box it involves has $N=\mathrm{SUP}+\mathrm{TRAV}\ge
 own box; otherwise the unit is UNKNOWN.
 
 \subsection{Resolvability gate (R1)}
-For $k$ supporting rays out of $N$, the Wilson score interval with $z=1.96$ is
+For $k$ supporting rays out of $N$, the Wilson score interval~\cite{wilson1927} with $z=1.96$ is
 \begin{equation}
 \mathrm{lo},\mathrm{hi}=\frac{k+z^2/2}{N+z^2}\mp\frac{z}{N+z^2}\sqrt{\frac{k(N-k)}{N}+\frac{z^2}{4}}.
 \label{eq:wilson}
@@ -470,13 +470,13 @@ $t_j$. Under $\pi_F$, a false positive in an early frame lowers the precision of
 whatever its score. Our NumPy implementation matches OpenCOOD's to $\NumpyOpencoodDiff$.
 
 \subsection{Statistics}
-Primary CIs come from a scenario bootstrap (15 clusters, $B=\BootB$ resamples, seed 0); a 10-frame block bootstrap
+Primary CIs come from a scenario bootstrap~\cite{efron1979bootstrap} (15 clusters, $B=\BootB$ resamples, seed 0); a 10-frame block bootstrap
 stratified by scenario is reported as secondary. For a statistic $\theta$ with bootstrap replicates $\theta^*_b$,
 \begin{equation}
 p=\frac{1+\#\{b:\theta^*_b\le 0\}}{B+1}.
 \label{eq:p}
 \end{equation}
-B-RAY and R1 are co-tested against no defense with Holm's step-down procedure \CITENEEDED{} at $\alpha=0.05$
+B-RAY and R1 are co-tested against no defense with Holm's step-down procedure~\cite{holm1979} at $\alpha=0.05$
 within each AP definition: with $p_{(1)}\le p_{(2)}$, reject $H_{(1)}$ if $p_{(1)}\le\alpha/2$, then $H_{(2)}$ if
 also $p_{(2)}\le\alpha$. The pre-registered success rule (v2) requires B-RAY to be Holm-rejected on the mean
 $\Delta$AP@0.7 over the four original attacks (spoof, remove, shift by feature; spoof by points) \emph{and} the
@@ -776,7 +776,7 @@ on exposed development data, and the strong levels after seeing results there.
 \textbf{Single attacker.} The attacker is always sender~1, alone. Two colluding senders could each confirm the
 other's fake; R1's per-sender counterfactual removes one sender at a time and would miss it.
 
-\textbf{Simulation.} OPV2V is CARLA simulation \CITENEEDED{}. The Culver City run tests transfer to an unseen
+\textbf{Simulation.} OPV2V is CARLA simulation~\cite{dosovitskiy2017carla}. The Culver City run tests transfer to an unseen
 town layout under the same simulated sensor, not to real sensors, real traffic or real attacks. Real LiDAR misses dark or glass surfaces (more
 UNKNOWN) and returns from vegetation or spray (false support). The receiver's sensor is assumed honest; physical
 spoofing~\cite{cao2019advlidar} would break that.

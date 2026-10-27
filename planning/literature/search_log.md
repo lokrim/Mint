@@ -55,6 +55,32 @@ Review date: **2026-10-22**. Reviewer: Claude (Opus 5.5) acting as research coll
 | Q13 | `DAIR-V2X dataset download access application region restriction CoAlign HEAL checkpoint DAIR-V2X` | standard | DAIR-V2X repo README (Google Drive mirror listed) |
 | Q14 | `Ouster OS1 point cloud no return range zero organized point cloud beam_altitude_angles beam_azimuth_angles metadata json` | standard | Ouster SDK docs (XYZ from range + beam LUT); 0.3 m minimum range (datasheet via snippet) |
 
+### Refresh queries (all 2026-10-27; citation verification and narrow novelty re-check, D-34)
+
+| # | Query (verbatim) | Mode | Kept leads |
+|---|---|---|---|
+| Q15 | `collaborative perception defense per-region counterfactual leave-one-agent-out intermediate feature fusion malicious 2026` | extended | CP-uniGuard (TMC 2026 listing; **SNIPPET**), CP-Guard, CP-Guard+, GCP. All agent-level. |
+| Q16 | `cooperative perception spatially localized malicious feature detection tile-wise with and without collaborator fusion arXiv 2025` | standard | **HetShield** (arXiv 2609.17856, new; read): one trust weight per agent per frame. MADE (agent-level with/without), GLST |
+| Q17 | `Holm 1979 "A simple sequentially rejective multiple test procedure" Scandinavian Journal of Statistics volume 6 pages` | standard | Bibliographic records (GESIS, JSTOR copy). Confirmed via OpenAlex/DOI 10.2307/4615733 |
+| Q18 | `"Learning Mutual View Information Graph for Adaptive Adversarial Collaborative Perception" CVPR 2026 openaccess thecvf` | standard | MVIG CVF page (CVPR 2026, pp. 42321–42330). **PRBI** found at CVPR 2026 (pp. 6549–6558) |
+| Q19 | `cooperative perception "counterfactual" fusion collaborator removal attribution adversarial defense V2X 2026 arXiv` | extended | TrustFlip/TrustReflect, GLST, PoseGuard, HetShield (all known/read); "Cyber-Resilient V2X CP" (ResearchGate, **SNIPPET**) |
+| Q20 | `V2X collaborative perception LiDAR free-space ray casting verify received intermediate features defense 2026` | standard | Nothing new; surveys only |
+| Q21 | `collaborative perception region-level malicious feature masking spatial attack localization BEV grid defense 2025 2026` | standard | CP-Guard, CP-uniGuard only (agent-level) |
+| Q22 | `"Cyber-Resilient V2X Cooperative Perception" Dependency-Aware Fusion Safety Envelopes Deadline-Isolated Fallback` | standard | Primary source not found. Remains **SNIPPET** (ResearchGate listing only); not assessed |
+| Q23 | `arXiv 2026 collaborative perception leave-one-out collaborator influence per-location trust map adversarial feature intermediate fusion OPV2V` | extended | **SABER** (arXiv 2610.07875, 6 Oct 2026, new; read): per-agent and per-agent-track trust |
+| Q24 | `openreview "Towards Deep Learning Models Resistant to Adversarial Attacks" ICLR 2018 conference paper` | standard | ICLR 2018 poster page; MIT DSpace (OpenReview rJzIBfZAb) |
+
+Non-search lookups used for verification (not counted against the budget): the arXiv export API, Crossref `/works`, OpenAlex, and citation meta tags on USENIX, PMLR, NeurIPS and CVF pages. DBLP returned HTTP 429 throughout and was not used. Per-entry results: [citation_verification_2026-10.md](citation_verification_2026-10.md).
+
+**Novelty re-check (D-34), 2026-10-27.** No paper found in 2025–2026 makes a per-tile or per-region with/without-sender counterfactual decision in intermediate-fusion CP, with or without receiver-ray evidence. "To our knowledge" stands. The closest new items:
+- **SABER** (2610.07875, preprint): Bayesian trust per agent and per agent–track. Visibility comes from *sender-declared* FOV (MATE-style). It has no fused-with/without counterfactual and no receiver rays. It is finer-grained than agent-level (per object track), so the Related Work section should name it next to MATE.
+- **HetShield** (2609.17856, preprint): a single per-agent scalar trust from temporal prediction residuals plus cosine agreement in the FOV overlap. It blends the whole map toward ego, with no region masking.
+- **PRBI** (CVPR 2026): pseudo-random group verification against the previous frame, applied to agents.
+- **MVIG** (CVPR 2026): an attack, not a defense; already cited.
+
+Limits: these were 7 targeted searches, and SABER and HetShield were skimmed from HTML, not read closely. This is weak evidence of absence. "Cyber-Resilient V2X CP" (Q19/Q22) could not be located beyond a snippet.
+
+
 ## Seed references (from the user) and their verification
 
 | Seed | Access | Notes |
