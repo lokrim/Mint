@@ -1,0 +1,17 @@
+ap_definition,statistic,point,ci95_scenario_lo,ci95_scenario_hi,ci95_block10_lo,ci95_block10_hi
+global,paired_mean_orig|R1-B-RAY,0.00266,0.0012,0.0048,0.0016,0.0037
+global,paired_mean_3|R1-B-RAY,0.00243,0.001,0.0046,0.0014,0.0035
+global,paired|R1-B-RAY|clean,0.00236,0.0006,0.0044,0.0013,0.0034
+global,paired|R1-B-RAY|spoof_feat,0.00195,0.0002,0.0041,0.0009,0.003
+global,paired|R1-B-RAY|remove_feat,0.00335,0.0019,0.0055,0.0022,0.0045
+global,paired|R1-B-RAY|shift_feat,0.00301,0.0013,0.0052,0.0018,0.0042
+global,paired|R1-B-RAY|spoof_pts,0.00234,0.0006,0.0044,0.0013,0.0034
+global,paired|R1-B-RAY|spoof_blind,0.00213,0.0004,0.0041,0.0012,0.0032
+frame,paired_mean_orig|R1-B-RAY,-0.00135,-0.004,0.0019,-0.0032,0.0006
+frame,paired_mean_3|R1-B-RAY,-0.00169,-0.0047,0.0016,-0.0036,0.0002
+frame,paired|R1-B-RAY|clean,-0.00099,-0.0037,0.0022,-0.0028,0.0011
+frame,paired|R1-B-RAY|spoof_feat,-0.00225,-0.006,0.001,-0.0041,-0.0006
+frame,paired|R1-B-RAY|remove_feat,-0.00033,-0.0025,0.0025,-0.0023,0.002
+frame,paired|R1-B-RAY|shift_feat,-0.00126,-0.0039,0.0019,-0.0036,0.0012
+frame,paired|R1-B-RAY|spoof_pts,-0.00156,-0.0048,0.0019,-0.0034,0.0003
+frame,paired|R1-B-RAY|spoof_blind,-0.00059,-0.0034,0.0023,-0.0024,0.0009

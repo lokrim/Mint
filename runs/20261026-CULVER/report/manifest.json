@@ -1,0 +1,215 @@
+{
+ "provenance": {
+  "generated": "2026-10-27T07:29:56+05:30",
+  "status": "CULVER",
+  "label": "CULVER CITY (held-out domain shift; secondary, D-72; unseen town, simulated sensor)",
+  "inputs": {
+   "e5_v3.json": {
+    "path": "runs/20261026-CULVER/e5_v3.json",
+    "sha256": "fa6325dee8058bac2cc7d132ede41ea16a3755554912cc2662678565bf85ac23"
+   },
+   "e5_test.json": {
+    "path": "runs/20261026-CULVER/e5_test.json",
+    "sha256": "5d4481334d983c9c523e276adc3106caae6b7e903fe9aec3498a209b87353ff2"
+   },
+   "preregistration": {
+    "path": "runs/20261024-E5/preregistration_v3_2.json",
+    "sha256": "8756868def368e8544d412ccf1d9e922fa8b454f5d24ce3488494b8363bc5fd6"
+   }
+  },
+  "git_head": "3d79603e9648ebe9e86f47d12a7a43b0f4df559b",
+  "frozen_code_commit": "c883753f91c75e707d5df5fce8757851fad494de",
+  "preregistration_version": "v3.2 (supersedes v3.1 runs/20261024-E5/preregistration_v3_1.json only by D-71; v1, v2, v3 and v3.1 kept unchanged)"
+ },
+ "figures": [
+  {
+   "name": "01_headline",
+   "num": "1",
+   "title": "Headline: mean \u0394AP@0.7 over the 4 original attacks",
+   "caption": "Each defense's mean change in AP@0.7 against no defense, over spoof/remove/shift (feature) and spoof (points). Dot = point estimate; thick line = 95% CI from the scenario bootstrap (the pre-registered primary CI); thin line = 10-frame-block bootstrap. Ego-only is far off-scale and is listed in the table only.",
+   "files": {
+    "light_png": "figures/01_headline.png",
+    "light_svg": "figures/01_headline.svg",
+    "csv": "tables/01_headline.csv",
+    "dark_png": "figures/01_headline_dark.png",
+    "dark_svg": "figures/01_headline_dark.svg"
+   },
+   "n_rows": 10
+  },
+  {
+   "name": "02_per_family",
+   "num": "2a",
+   "title": "\u0394AP@0.7 per condition: clean and original attacks",
+   "caption": "Every non-PGD condition \u00d7 defense, both AP definitions, 95% CI from the scenario bootstrap. Ego-only in the table only.",
+   "files": {
+    "light_png": "figures/02_per_family.png",
+    "light_svg": "figures/02_per_family.svg",
+    "csv": "tables/02_per_family.csv",
+    "dark_png": "figures/02_per_family_dark.png",
+    "dark_svg": "figures/02_per_family_dark.svg"
+   },
+   "n_rows": 48
+  },
+  {
+   "name": "02b_per_family_pgd",
+   "num": "2b",
+   "title": "\u0394AP@0.7 per condition: optimized (PGD) attacks",
+   "caption": "As 2a for the PGD conditions, on its own scale (PGD effects are much larger than the original attacks').",
+   "files": {
+    "light_png": "figures/02b_per_family_pgd.png",
+    "light_svg": "figures/02b_per_family_pgd.svg",
+    "csv": "tables/02b_per_family_pgd.csv",
+    "dark_png": "figures/02b_per_family_pgd_dark.png",
+    "dark_svg": "figures/02b_per_family_pgd_dark.svg"
+   },
+   "n_rows": 48
+  },
+  {
+   "name": "03_clean_cost",
+   "num": "3",
+   "title": "Clean cost (relative AP@0.7 loss)",
+   "caption": "Relative AP@0.7 loss on clean frames. The pre-registered success rule requires B-RAY's scenario-CI high \u2264 1% under both AP definitions.",
+   "files": {
+    "light_png": "figures/03_clean_cost.png",
+    "light_svg": "figures/03_clean_cost.svg",
+    "csv": "tables/03_clean_cost.csv",
+    "dark_png": "figures/03_clean_cost_dark.png",
+    "dark_svg": "figures/03_clean_cost_dark.svg"
+   },
+   "n_rows": 10
+  },
+  {
+   "name": "04_r1_minus_bray",
+   "num": "4a",
+   "title": "Key secondary: R1 \u2212 B-RAY",
+   "caption": "Paired difference R1 \u2212 B-RAY in \u0394AP@0.7, the pre-registered means and each non-PGD condition. Each panel quotes the statement the frozen analysis emitted.",
+   "files": {
+    "light_png": "figures/04_r1_minus_bray.png",
+    "light_svg": "figures/04_r1_minus_bray.svg",
+    "csv": "tables/04_r1_minus_bray.csv",
+    "dark_png": "figures/04_r1_minus_bray_dark.png",
+    "dark_svg": "figures/04_r1_minus_bray_dark.svg"
+   },
+   "n_rows": 16
+  },
+  {
+   "name": "04b_r1_minus_bray_pgd",
+   "num": "4b",
+   "title": "R1 \u2212 B-RAY under PGD attacks",
+   "caption": "Paired difference per PGD condition (descriptive; not part of the key secondary).",
+   "files": {
+    "light_png": "figures/04b_r1_minus_bray_pgd.png",
+    "light_svg": "figures/04b_r1_minus_bray_pgd.svg",
+    "csv": "tables/04b_r1_minus_bray_pgd.csv",
+    "dark_png": "figures/04b_r1_minus_bray_pgd_dark.png",
+    "dark_svg": "figures/04b_r1_minus_bray_pgd_dark.svg"
+   },
+   "n_rows": 12
+  },
+  {
+   "name": "05_pgd_recovery",
+   "num": "5",
+   "title": "PGD attacks: recovery",
+   "caption": "Recovery = \u0394AP@0.7 / attack loss per optimized-attack condition. n/a when the attack loss is < 0.005.",
+   "files": {
+    "light_png": "figures/05_pgd_recovery.png",
+    "light_svg": "figures/05_pgd_recovery.svg",
+    "csv": "tables/05_pgd_recovery.csv",
+    "dark_png": "figures/05_pgd_recovery_dark.png",
+    "dark_svg": "figures/05_pgd_recovery_dark.svg"
+   },
+   "n_rows": 48
+  },
+  {
+   "name": "06_bnorm_catch",
+   "num": "6",
+   "title": "B-NORM catch rate",
+   "caption": "Share of frames with a sender in which B-NORM flags the attacker; on 'clean' this is the false-flag rate.",
+   "files": {
+    "light_png": "figures/06_bnorm_catch.png",
+    "light_svg": "figures/06_bnorm_catch.svg",
+    "csv": "tables/06_bnorm_catch.csv",
+    "dark_png": "figures/06_bnorm_catch_dark.png",
+    "dark_svg": "figures/06_bnorm_catch_dark.svg"
+   },
+   "n_rows": 12
+  },
+  {
+   "name": "07_attack_strength",
+   "num": "7",
+   "title": "Attack strength",
+   "caption": "Attack loss per condition over all frames (with CI) and over the frames where the attack was realized.",
+   "files": {
+    "light_png": "figures/07_attack_strength.png",
+    "light_svg": "figures/07_attack_strength.svg",
+    "csv": "tables/07_attack_strength.csv",
+    "dark_png": "figures/07_attack_strength_dark.png",
+    "dark_svg": "figures/07_attack_strength_dark.svg"
+   },
+   "n_rows": 22
+  },
+  {
+   "name": "08_bray_boxes",
+   "num": "8",
+   "title": "B-RAY removals",
+   "caption": "Boxes B-RAY removed, split by whether they matched a real car.",
+   "files": {
+    "light_png": "figures/08_bray_boxes.png",
+    "light_svg": "figures/08_bray_boxes.svg",
+    "csv": "tables/08_bray_boxes.csv",
+    "dark_png": "figures/08_bray_boxes_dark.png",
+    "dark_svg": "figures/08_bray_boxes_dark.svg"
+   },
+   "n_rows": 12
+  },
+  {
+   "name": "09_r1_units",
+   "num": "9",
+   "title": "R1 gating against ground truth",
+   "caption": "Contributions (sender \u00d7 6.4 m tile) R1 switched off, by their ground-truth label.",
+   "files": {
+    "light_png": "figures/09_r1_units.png",
+    "light_svg": "figures/09_r1_units.svg",
+    "csv": "tables/09_r1_units.csv",
+    "dark_png": "figures/09_r1_units_dark.png",
+    "dark_svg": "figures/09_r1_units_dark.svg"
+   },
+   "n_rows": 6
+  },
+  {
+   "name": "10_by_agents",
+   "num": "10",
+   "title": "Effect by number of cars",
+   "caption": "Mean \u0394AP@0.7 over the 4 original attacks per agent count (frozen v2 analysis, frame-order AP).",
+   "files": {
+    "light_png": "figures/10_by_agents.png",
+    "light_svg": "figures/10_by_agents.svg",
+    "csv": "tables/10_by_agents.csv",
+    "dark_png": "figures/10_by_agents_dark.png",
+    "dark_svg": "figures/10_by_agents_dark.svg"
+   },
+   "n_rows": 6
+  }
+ ],
+ "report": "report.md",
+ "extra_tables": [
+  "tables/11_test_vs_culver.csv"
+ ],
+ "comparison_source": {
+  "opv2v_test": {
+   "e5_v3.json": {
+    "path": "runs/20261024-E5v3/e5_v3.json",
+    "sha256": "70324a707f23e20bac16010ce08465c394dfd7e84e274a0eec575fb73e5568eb"
+   },
+   "e5_test.json": {
+    "path": "runs/20261024-E5v3/e5_test.json",
+    "sha256": "4b6823ba3603420a7fbe2b0fc3f1183c688697ef86e0165e3b707537d3a350b8"
+   },
+   "preregistration": {
+    "path": "runs/20261024-E5/preregistration_v3_2.json",
+    "sha256": "8756868def368e8544d412ccf1d9e922fa8b454f5d24ce3488494b8363bc5fd6"
+   }
+  }
+ },
+ "note": "Every number is copied from the input analysis JSON files; nothing is recomputed."
+}

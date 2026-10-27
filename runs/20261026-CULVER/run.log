@@ -1,0 +1,42 @@
+frozen sha256 (preregistration_v3_2) + OpenCOOD commit verified
+need {'2021_09_03_09_32_17': 607606005, '2021_09_03_10_53_32': 805281774, '2021_09_03_20_08_37': 1411244112, '2021_09_03_22_43_57': 2083113775} spent 607751485 projected 4950387542 budget 7000000000
+resuming by loading epoch 10000
+2021_09_03_09_32_17 reusing complete extraction
+  2021_09_03_09_32_17 frame 0/90 n=2 6.5s + v3 22.5s elapsed 29s
+  2021_09_03_09_32_17 frame 20/90 n=2 6.2s + v3 21.2s elapsed 615s
+  2021_09_03_09_32_17 frame 40/90 n=2 6.2s + v3 21.5s elapsed 1179s
+  2021_09_03_09_32_17 frame 60/90 n=2 6.5s + v3 30.8s elapsed 1933s
+  2021_09_03_09_32_17 frame 80/90 n=2 5.5s + v3 20.6s elapsed 2535s
+2021_09_03_09_32_17 processed 90 frames in 3370s; cache 27 MB, v3extra 3 MB
+2021_09_03_10_53_32 downloaded 0.805 GB (total 1.413), raw 0.73 GB
+  2021_09_03_10_53_32 frame 0/118 n=2 6.6s + v3 21.7s elapsed 28s
+  2021_09_03_10_53_32 frame 20/118 n=2 7.8s + v3 21.7s elapsed 610s
+  2021_09_03_10_53_32 frame 40/118 n=2 8.1s + v3 22.1s elapsed 1216s
+  2021_09_03_10_53_32 frame 60/118 n=2 7.2s + v3 21.2s elapsed 1801s
+  2021_09_03_10_53_32 frame 80/118 n=2 7.1s + v3 22.2s elapsed 2388s
+  2021_09_03_10_53_32 frame 100/118 n=2 7.3s + v3 23.0s elapsed 2989s
+2021_09_03_10_53_32 processed 118 frames in 4476s; cache 38 MB, v3extra 7 MB
+2021_09_03_20_08_37 downloaded 1.412 GB (total 2.825), raw 1.22 GB
+  2021_09_03_20_08_37 frame 0/135 n=2 10.2s + v3 24.5s elapsed 35s
+  2021_09_03_20_08_37 frame 20/135 n=3 11.7s + v3 25.3s elapsed 794s
+  2021_09_03_20_08_37 frame 40/135 n=3 14.5s + v3 27.7s elapsed 1623s
+  2021_09_03_20_08_37 frame 60/135 n=3 14.9s + v3 27.6s elapsed 2454s
+  2021_09_03_20_08_37 frame 80/135 n=3 14.0s + v3 27.5s elapsed 3297s
+  2021_09_03_20_08_37 frame 100/135 n=3 13.7s + v3 26.6s elapsed 4106s
+  2021_09_03_20_08_37 frame 120/135 n=3 13.9s + v3 27.0s elapsed 4934s
+2021_09_03_20_08_37 processed 135 frames in 7277s; cache 66 MB, v3extra 25 MB
+2021_09_03_22_43_57 downloaded 2.084 GB (total 4.908), raw 1.90 GB
+  2021_09_03_22_43_57 frame 0/207 n=2 9.5s + v3 23.6s elapsed 33s
+  2021_09_03_22_43_57 frame 20/207 n=2 12.1s + v3 24.0s elapsed 815s
+  2021_09_03_22_43_57 frame 40/207 n=2 14.7s + v3 23.2s elapsed 1542s
+  2021_09_03_22_43_57 frame 60/207 n=2 13.1s + v3 20.4s elapsed 2287s
+  2021_09_03_22_43_57 frame 80/207 n=2 14.5s + v3 24.3s elapsed 3048s
+  2021_09_03_22_43_57 frame 100/207 n=2 15.6s + v3 24.2s elapsed 3837s
+  2021_09_03_22_43_57 frame 120/207 n=2 16.0s + v3 24.8s elapsed 4640s
+  2021_09_03_22_43_57 frame 140/207 n=1 8.2s + v3 3.1s elapsed 5321s
+  2021_09_03_22_43_57 frame 160/207 n=1 9.3s + v3 3.4s elapsed 5580s
+  2021_09_03_22_43_57 frame 180/207 n=1 9.3s + v3 3.1s elapsed 5827s
+  2021_09_03_22_43_57 frame 200/207 n=1 8.6s + v3 3.2s elapsed 6060s
+2021_09_03_22_43_57 processed 207 frames in 8885s; cache 68 MB, v3extra 10 MB
+post-run frozen check: OK
+all done

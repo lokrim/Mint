@@ -1,0 +1,246 @@
+loaded 2021_09_03_09_32_17
+loaded 2021_09_03_10_53_32
+loaded 2021_09_03_20_08_37
+loaded 2021_09_03_22_43_57
+loaded 2021_09_03_09_32_17
+loaded 2021_09_03_10_53_32
+loaded 2021_09_03_20_08_37
+loaded 2021_09_03_22_43_57
+e5_test.json written
+loaded 2021_09_03_09_32_17
+loaded 2021_09_03_10_53_32
+loaded 2021_09_03_20_08_37
+loaded 2021_09_03_22_43_57
+{
+ "frames": 550,
+ "criteria_v3": {
+  "frame": {
+   "co_test_vs_no_defense": {
+    "B-RAY": {
+     "point": 0.00536,
+     "ci95_scenario": [
+      0.0022,
+      0.0092
+     ],
+     "ci95_block10": [
+      0.0044,
+      0.0064
+     ],
+     "k_le_0": 0,
+     "B": 2000,
+     "p_one_sided": 0.0004997501249375312,
+     "holm": {
+      "p": 0.0004997501249375312,
+      "rank": 1,
+      "threshold": 0.025,
+      "reject": true
+     }
+    },
+    "R1": {
+     "point": 0.00401,
+     "ci95_scenario": [
+      0.0021,
+      0.0073
+     ],
+     "ci95_block10": [
+      0.0024,
+      0.0058
+     ],
+     "k_le_0": 0,
+     "B": 2000,
+     "p_one_sided": 0.0004997501249375312,
+     "holm": {
+      "p": 0.0004997501249375312,
+      "rank": 2,
+      "threshold": 0.05,
+      "reject": true
+     }
+    }
+   },
+   "clean_rel_loss": {
+    "B-RAY": {
+     "point": -0.00075,
+     "ci95_scenario": [
+      -0.0018,
+      0.0007
+     ],
+     "ci95_block10": [
+      -0.0019,
+      0.0005
+     ]
+    },
+    "R1": {
+     "point": 0.00059,
+     "ci95_scenario": [
+      -0.0023,
+      0.0037
+     ],
+     "ci95_block10": [
+      -0.0017,
+      0.0027
+     ]
+    },
+    "B-NORM": {
+     "point": 0.09298,
+     "ci95_scenario": [
+      0.0135,
+      0.1413
+     ],
+     "ci95_block10": [
+      0.0566,
+      0.1295
+     ]
+    }
+   },
+   "B-RAY_clean_ci_hi_le_0.01": true,
+   "pass": true,
+   "R1_holm_reject": true,
+   "R1_minus_BRAY": {
+    "point": -0.00135,
+    "ci95_scenario": [
+     -0.004,
+     0.0019
+    ],
+    "ci95_block10": [
+     -0.0032,
+     0.0006
+    ],
+    "statement": "the counterfactual's benefit over a box-level filter is not established"
+   }
+  },
+  "global": {
+   "co_test_vs_no_defense": {
+    "B-RAY": {
+     "point": 0.00052,
+     "ci95_scenario": [
+      -0.0003,
+      0.0013
+     ],
+     "ci95_block10": [
+      -0.0003,
+      0.0013
+     ],
+     "k_le_0": 241,
+     "B": 2000,
+     "p_one_sided": 0.12093953023488256,
+     "holm": {
+      "p": 0.12093953023488256,
+      "rank": 2,
+      "threshold": 0.05,
+      "reject": false
+     }
+    },
+    "R1": {
+     "point": 0.00319,
+     "ci95_scenario": [
+      0.0021,
+      0.0048
+     ],
+     "ci95_block10": [
+      0.0021,
+      0.0042
+     ],
+     "k_le_0": 0,
+     "B": 2000,
+     "p_one_sided": 0.0004997501249375312,
+     "holm": {
+      "p": 0.0004997501249375312,
+      "rank": 1,
+      "threshold": 0.025,
+      "reject": true
+     }
+    }
+   },
+   "clean_rel_loss": {
+    "B-RAY": {
+     "point": 0.00135,
+     "ci95_scenario": [
+      0.0008,
+      0.0019
+     ],
+     "ci95_block10": [
+      0.0006,
+      0.0023
+     ]
+    },
+    "R1": {
+     "point": -0.00169,
+     "ci95_scenario": [
+      -0.0035,
+      0.0003
+     ],
+     "ci95_block10": [
+      -0.0029,
+      -0.0005
+     ]
+    },
+    "B-NORM": {
+     "point": 0.08768,
+     "ci95_scenario": [
+      0.0064,
+      0.1261
+     ],
+     "ci95_block10": [
+      0.0527,
+      0.1232
+     ]
+    }
+   },
+   "B-RAY_clean_ci_hi_le_0.01": true,
+   "pass": false,
+   "R1_holm_reject": true,
+   "R1_minus_BRAY": {
+    "point": 0.00266,
+    "ci95_scenario": [
+     0.0012,
+     0.0048
+    ],
+    "ci95_block10": [
+     0.0016,
+     0.0037
+    ],
+    "statement": "the counterfactual improves over the box-level filter"
+   }
+  },
+  "D-64": {
+   "pass_frame_order": true,
+   "pass_global": false,
+   "success": false,
+   "verdict": "AP-definition-dependent",
+   "headline_AP": "global",
+   "R1_minus_BRAY_statements": {
+    "frame": "the counterfactual's benefit over a box-level filter is not established",
+    "global": "the counterfactual improves over the box-level filter"
+   },
+   "R1_minus_BRAY_AP_definition_dependent": true
+  }
+ },
+ "completeness_check": {
+  "scenarios": [
+   4,
+   4
+  ],
+  "frames": [
+   550,
+   550
+  ],
+  "pass": true
+ },
+ "consistency_vs_frozen_v2": {
+  "mean_delta_orig|B-RAY": {
+   "point": [
+    0.00536,
+    0.00536
+   ],
+   "ci95_scenario": [
+    [
+     0.0022,
+     0.0092
+    ],
+    [
+     0.0022,
+     0.0092
+    ]
+   ]
+  },
+  "mean_delta_orig|R1
