@@ -8,16 +8,20 @@ Reads (read-only):
   runs/20261024-E5/dev/e5a_dev.json, H/e5a_H.json         development blocks T and H (metadata only)
   runs/20261024-AUDIT/X0_global_sort_bootstrap.json       development T/H under both AP definitions
   planning/e4_report.md                                   timing machine string (not stored in any JSON)
+  runs/20261026-CULVER/e5_v3.json, e5_test.json, plan.json, sanity_first_scenario.json
+                                                          Culver City (D-72; secondary, held-out domain shift;
+                                                          unseen town, simulated sensor): macros prefixed Cul
 
 Writes:
   paper/numbers.tex          \\newcommand macros (AP points = AP x 100)
-  paper/tables/*.tex         tabular bodies for Tables I-VII
+  paper/tables/*.tex         tabular bodies for Tables I-VIII (tab_culver: OPV2V test vs Culver City)
 
 Run from anywhere:  python3 paper/gen_numbers.py
 Standard library only. Nothing is recomputed except unit conversion (x100), recovery bounds for the
 oracle rows (dAP / attack loss, both read from e5_test.json), and simple sums/ratios of counts.
 """
 import csv
+import os
 import json
 import re
 from pathlib import Path
@@ -437,6 +441,106 @@ for block in ("T", "H"):
         vals = dev_row(block, defn)
         for (p, c), k in zip(vals, ("BRAY", "RONE", "RmB")):
             M(f"Dev{block}{D}{k}", pts(p)); M(f"Dev{block}{D}{k}CI", ci(*c))
+
+# ---------------------------------------------------------------- Culver City (D-72; secondary, held-out domain shift)
+# Unseen town, simulated sensor. Separate evaluation of the same frozen code; never pooled with the test. Prefix Cul.
+CUL_RUN = ROOT / os.environ.get("MINT_CULVER_RUN", "runs/20261026-CULVER")
+CV3 = json.load(open(CUL_RUN / "e5_v3.json"))
+CTEST = json.load(open(CUL_RUN / "e5_test.json"))
+CPLAN = json.load(open(ROOT / "runs/20261026-CULVER/plan.json"))
+CSAN = json.load(open(CUL_RUN / "sanity_first_scenario.json"))
+if "MINT_CULVER_RUN" not in os.environ:
+    assert CV3["label"].startswith("CULVER CITY") and CV3["completeness_check"]["pass"], CV3["label"]
+assert CV3["conditions"] == CONDS and CV3["preregistration"] == V3["preregistration"]
+ccrit = CV3["criteria_v3"]
+with open(OUT / "tables/tab_splits.tex", "a") as f:
+    f.write("\\midrule\n")
+    f.write(f"Culver & {CV3['scenarios']} & {CV3['frames']} & "
+            f"{min(int(k) for k in CV3['n_agents_hist'])}--{max(int(k) for k in CV3['n_agents_hist'])} & "
+            "secondary, held-out domain shift (unseen town, simulated sensor) \\\\\n")
+M("CulScenarios", CV3["scenarios"]); M("CulFrames", CV3["frames"])
+chist = CV3["n_agents_hist"]
+M("CulNmin", min(int(k) for k in chist)); M("CulNmax", max(int(k) for k in chist))
+M("CulArchiveGB", plain(CPLAN["data"]["archive_bytes"] / 1e9, 1))
+M("CulPublishedAP", plain(100 * CPLAN["checkpoint"]["published_culver_ap07"], 1))
+M("CulSanityAP", plain(100 * CSAN["ap_frame_order_opencood_default"]["AP@0.7"], 2))
+M("CulSanityFrames", CSAN["frames"])
+M("CulAPCleanGlob", plain(100 * CV3["AP"]["global"]["clean"]["undefended"]["AP@0.7"], 2))
+M("CulAPCleanFrame", plain(100 * CV3["AP"]["frame"]["clean"]["undefended"]["AP@0.7"], 2))
+for d in ("global", "frame"):
+    D = DTAG[d]
+    for m in METHODS:
+        t = CV3["tables"][d]["mean_of_4_orig"][m]
+        M(f"CulHead{D}{MTAG[m]}", pts(t["point"])); M(f"CulHead{D}{MTAG[m]}CI", ci(*t["ci95_scenario"]))
+        M(f"CulHead{D}{MTAG[m]}CIblock", ci(*t["ci95_block10"]))
+        cl = CV3["tables"][d]["clean_rel_loss"][m]
+        M(f"CulClean{D}{MTAG[m]}", pct(cl["point"], 2))
+        M(f"CulClean{D}{MTAG[m]}CI", f"[{sgn(100 * cl['ci95_scenario'][0])}, {sgn(100 * cl['ci95_scenario'][1])}]\\%")
+    cd = ccrit[d]
+    for m in ("B-RAY", "R1"):
+        t = cd["co_test_vs_no_defense"][m]
+        M(f"CulV{D}{MTAG[m]}P", f"{t['p_one_sided']:.4f}")
+        M(f"CulV{D}{MTAG[m]}Reject", "yes" if t["holm"]["reject"] else "no")
+    M(f"CulV{D}CleanOK", "yes" if cd["B-RAY_clean_ci_hi_le_0.01"] else "no")
+    M(f"CulV{D}Pass", "passes" if cd["pass"] else "does not pass")
+    rb = cd["R1_minus_BRAY"]
+    M(f"CulV{D}RmB", pts(rb["point"])); M(f"CulV{D}RmBCI", ci(*rb["ci95_scenario"]))
+    M(f"CulV{D}RmBCIblock", ci(*rb["ci95_block10"])); M(f"CulV{D}RmBStatement", rb["statement"])
+    for c in CONDS[1:]:
+        M(f"CulLoss{D}{CTAG[c]}", plain(100 * CV3["point"][d][f"attack_loss|{c}"]))
+        for m in METHODS:
+            M(f"CulD{D}{CTAG[c]}{MTAG[m]}", pts(CV3["point"][d][f"delta|{m}|{c}"]))
+            r = CV3["point"][d].get(f"recovery|{m}|{c}")
+            if r is not None:
+                M(f"CulRec{D}{CTAG[c]}{MTAG[m]}", plain(r))
+M("CulVerdict", ccrit["D-64"]["verdict"])
+M("CulRmBDependent", "yes" if ccrit["D-64"].get("R1_minus_BRAY_AP_definition_dependent") else "no")
+for c in CONDS:
+    M(f"CulCatch{CTAG[c]}", pct(CV3["B-NORM_flags"][c]["catch_rate"], 0 if c.startswith("pgd") else 1))
+cpg = {c: CV3["pgd_by_scenario"][c]["total"] for c in CV3["pgd_by_scenario"]}
+for c in cpg:
+    M(f"CulInfeasible{CTAG[c]}", cpg[c]["infeasible"])
+cbb = CV3["B-RAY_boxes"]["clean"]
+M("CulBrayCleanDrop", cbb["drop"]); M("CulBrayCleanDropGT", cbb["dropped_gt_matched"])
+M("CulBrayCleanBoxes", f"{cbb['boxes']:,}".replace(",", "{,}"))
+cov = CTEST["overhead"]["by_stratum"]
+for k, tag in (("2", "Two"), ("3", "Three")):
+    if k in cov:
+        for mode, mt in (("dense", "Dense"), ("B-RAY", "Bray")):
+            if mode in cov[k]:
+                M(f"CulOv{mt}{tag}Pfifty", f"{100 * cov[k][mode]['overhead']['p50']:.0f}\\%")
+
+with open(OUT / "tables/tab_culver.tex", "w") as f:
+    f.write("% generated by gen_numbers.py -- do not edit\n")
+    f.write("& \\multicolumn{2}{c}{Global-ranking AP} & \\multicolumn{2}{c}{Frame-order AP} \\\\\n")
+    f.write("\\cmidrule(lr){2-3}\\cmidrule(lr){4-5}\n")
+    f.write("Statistic & Test & Culver & Test & Culver \\\\\n\\midrule\n")
+    f.write("No-defense clean AP@0.7 & " + " & ".join(
+        f"{100 * v['AP'][d]['clean']['undefended']['AP@0.7']:.2f}" for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
+    f.write("\\midrule\n\\multicolumn{5}{l}{\\emph{Mean $\\Delta$AP@0.7 over the 4 original attacks (pts, 95\\% scenario CI)}}\\\\\n")
+    for m in METHODS:
+        cells = []
+        for d in ("global", "frame"):
+            for v in (V3, CV3):
+                t = v["tables"][d]["mean_of_4_orig"][m]
+                cells.append(f"{pts(t['point'])} {{\\tiny {ci(*t['ci95_scenario'])}}}")
+        f.write(f"{MNAME[m]} & " + " & ".join(cells) + " \\\\\n")
+    f.write("\\midrule\n")
+    f.write("B-RAY clean rel.\\ loss & " + " & ".join(
+        f"{pct(v['criteria_v3'][d]['clean_rel_loss']['B-RAY']['point'], 2)}" for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
+    f.write("Holm reject B-RAY / R1 & " + " & ".join(
+        "/".join("yes" if v["criteria_v3"][d]["co_test_vs_no_defense"][m]["holm"]["reject"] else "no" for m in ("B-RAY", "R1"))
+        for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
+    f.write("v2 rule & " + " & ".join("pass" if v["criteria_v3"][d]["pass"] else "fail"
+                                      for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
+    f.write("R1 $-$ B-RAY (pts) & " + " & ".join(
+        f"{pts(v['criteria_v3'][d]['R1_minus_BRAY']['point'])} {{\\tiny {ci(*v['criteria_v3'][d]['R1_minus_BRAY']['ci95_scenario'])}}}"
+        for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
+    f.write("\\midrule\n\\multicolumn{5}{l}{\\emph{Strong stealth PGD remove ($r{=}1.0^\\dagger$): attack loss; R1 recovery}}\\\\\n")
+    c = "pgd_remove_stealth@r1.0"
+    f.write("Attack loss (pts) & " + " & ".join(plain(100 * v["point"][d][f"attack_loss|{c}"]) for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
+    f.write("R1 recovery & " + " & ".join(plain(v["point"][d][f"recovery|R1|{c}"]) for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
+    f.write("B-RAY recovery & " + " & ".join(plain(v["point"][d][f"recovery|B-RAY|{c}"]) for d in ("global", "frame") for v in (V3, CV3)) + " \\\\\n")
 
 # ---------------------------------------------------------------- write numbers.tex
 with open(OUT / "numbers.tex", "w") as f:

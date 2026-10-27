@@ -708,3 +708,347 @@
 \newcommand{\DevHFrameRONECI}{[$-$0.35, +3.15]}
 \newcommand{\DevHFrameRmB}{$-$0.56}
 \newcommand{\DevHFrameRmBCI}{[$-$1.73, +0.32]}
+\newcommand{\CulScenarios}{4}
+\newcommand{\CulFrames}{550}
+\newcommand{\CulNmin}{1}
+\newcommand{\CulNmax}{3}
+\newcommand{\CulArchiveGB}{4.9}
+\newcommand{\CulPublishedAP}{73.5}
+\newcommand{\CulSanityAP}{91.68}
+\newcommand{\CulSanityFrames}{90}
+\newcommand{\CulAPCleanGlob}{77.46}
+\newcommand{\CulAPCleanFrame}{73.59}
+\newcommand{\CulHeadGlobBRAY}{+0.05}
+\newcommand{\CulHeadGlobBRAYCI}{[$-$0.03, +0.13]}
+\newcommand{\CulHeadGlobBRAYCIblock}{[$-$0.03, +0.13]}
+\newcommand{\CulCleanGlobBRAY}{0.14\%}
+\newcommand{\CulCleanGlobBRAYCI}{[+0.08, +0.19]\%}
+\newcommand{\CulHeadGlobRONE}{+0.32}
+\newcommand{\CulHeadGlobRONECI}{[+0.21, +0.48]}
+\newcommand{\CulHeadGlobRONECIblock}{[+0.21, +0.42]}
+\newcommand{\CulCleanGlobRONE}{$-$0.17\%}
+\newcommand{\CulCleanGlobRONECI}{[$-$0.35, +0.03]\%}
+\newcommand{\CulHeadGlobRNoRem}{+0.08}
+\newcommand{\CulHeadGlobRNoRemCI}{[$-$0.05, +0.18]}
+\newcommand{\CulHeadGlobRNoRemCIblock}{[+0.01, +0.16]}
+\newcommand{\CulCleanGlobRNoRem}{0.09\%}
+\newcommand{\CulCleanGlobRNoRemCI}{[+0.00, +0.27]\%}
+\newcommand{\CulHeadGlobBNORM}{$-$6.72}
+\newcommand{\CulHeadGlobBNORMCI}{[$-$9.17, $-$0.57]}
+\newcommand{\CulHeadGlobBNORMCIblock}{[$-$9.51, $-$4.01]}
+\newcommand{\CulCleanGlobBNORM}{8.77\%}
+\newcommand{\CulCleanGlobBNORMCI}{[+0.64, +12.61]\%}
+\newcommand{\CulHeadGlobEgo}{$-$18.36}
+\newcommand{\CulHeadGlobEgoCI}{[$-$23.17, $-$14.57]}
+\newcommand{\CulHeadGlobEgoCIblock}{[$-$20.66, $-$16.11]}
+\newcommand{\CulCleanGlobEgo}{25.02\%}
+\newcommand{\CulCleanGlobEgoCI}{[+20.28, +29.37]\%}
+\newcommand{\CulVGlobBRAYP}{0.1209}
+\newcommand{\CulVGlobBRAYReject}{no}
+\newcommand{\CulVGlobRONEP}{0.0005}
+\newcommand{\CulVGlobRONEReject}{yes}
+\newcommand{\CulVGlobCleanOK}{yes}
+\newcommand{\CulVGlobPass}{does not pass}
+\newcommand{\CulVGlobRmB}{+0.27}
+\newcommand{\CulVGlobRmBCI}{[+0.12, +0.48]}
+\newcommand{\CulVGlobRmBCIblock}{[+0.16, +0.37]}
+\newcommand{\CulVGlobRmBStatement}{the counterfactual improves over the box-level filter}
+\newcommand{\CulLossGlobSpoofFeat}{1.15}
+\newcommand{\CulDGlobSpoofFeatBRAY}{+0.23}
+\newcommand{\CulRecGlobSpoofFeatBRAY}{0.20}
+\newcommand{\CulDGlobSpoofFeatRONE}{+0.43}
+\newcommand{\CulRecGlobSpoofFeatRONE}{0.37}
+\newcommand{\CulDGlobSpoofFeatRNoRem}{+0.23}
+\newcommand{\CulRecGlobSpoofFeatRNoRem}{0.20}
+\newcommand{\CulDGlobSpoofFeatBNORM}{$-$6.82}
+\newcommand{\CulRecGlobSpoofFeatBNORM}{$-$5.94}
+\newcommand{\CulDGlobSpoofFeatEgo}{$-$18.23}
+\newcommand{\CulRecGlobSpoofFeatEgo}{$-$15.88}
+\newcommand{\CulLossGlobRemoveFeat}{0.79}
+\newcommand{\CulDGlobRemoveFeatBRAY}{$-$0.10}
+\newcommand{\CulRecGlobRemoveFeatBRAY}{$-$0.13}
+\newcommand{\CulDGlobRemoveFeatRONE}{+0.23}
+\newcommand{\CulRecGlobRemoveFeatRONE}{0.29}
+\newcommand{\CulDGlobRemoveFeatRNoRem}{$-$0.07}
+\newcommand{\CulRecGlobRemoveFeatRNoRem}{$-$0.08}
+\newcommand{\CulDGlobRemoveFeatBNORM}{$-$6.49}
+\newcommand{\CulRecGlobRemoveFeatBNORM}{$-$8.18}
+\newcommand{\CulDGlobRemoveFeatEgo}{$-$18.59}
+\newcommand{\CulRecGlobRemoveFeatEgo}{$-$23.43}
+\newcommand{\CulLossGlobShiftFeat}{1.97}
+\newcommand{\CulDGlobShiftFeatBRAY}{+0.12}
+\newcommand{\CulRecGlobShiftFeatBRAY}{0.06}
+\newcommand{\CulDGlobShiftFeatRONE}{+0.42}
+\newcommand{\CulRecGlobShiftFeatRONE}{0.21}
+\newcommand{\CulDGlobShiftFeatRNoRem}{+0.19}
+\newcommand{\CulRecGlobShiftFeatRNoRem}{0.09}
+\newcommand{\CulDGlobShiftFeatBNORM}{$-$6.48}
+\newcommand{\CulRecGlobShiftFeatBNORM}{$-$3.29}
+\newcommand{\CulDGlobShiftFeatEgo}{$-$17.41}
+\newcommand{\CulRecGlobShiftFeatEgo}{$-$8.83}
+\newcommand{\CulLossGlobSpoofPts}{0.17}
+\newcommand{\CulDGlobSpoofPtsBRAY}{$-$0.04}
+\newcommand{\CulDGlobSpoofPtsRONE}{+0.19}
+\newcommand{\CulDGlobSpoofPtsRNoRem}{$-$0.01}
+\newcommand{\CulDGlobSpoofPtsBNORM}{$-$7.09}
+\newcommand{\CulDGlobSpoofPtsEgo}{$-$19.22}
+\newcommand{\CulLossGlobSpoofBlind}{1.45}
+\newcommand{\CulDGlobSpoofBlindBRAY}{$-$0.07}
+\newcommand{\CulRecGlobSpoofBlindBRAY}{$-$0.05}
+\newcommand{\CulDGlobSpoofBlindRONE}{+0.14}
+\newcommand{\CulRecGlobSpoofBlindRONE}{0.10}
+\newcommand{\CulDGlobSpoofBlindRNoRem}{$-$0.06}
+\newcommand{\CulRecGlobSpoofBlindRNoRem}{$-$0.04}
+\newcommand{\CulDGlobSpoofBlindBNORM}{$-$7.05}
+\newcommand{\CulRecGlobSpoofBlindBNORM}{$-$4.86}
+\newcommand{\CulDGlobSpoofBlindEgo}{$-$17.93}
+\newcommand{\CulRecGlobSpoofBlindEgo}{$-$12.36}
+\newcommand{\CulLossGlobPgdUnt}{5.35}
+\newcommand{\CulDGlobPgdUntBRAY}{+0.03}
+\newcommand{\CulRecGlobPgdUntBRAY}{0.00}
+\newcommand{\CulDGlobPgdUntRONE}{+0.31}
+\newcommand{\CulRecGlobPgdUntRONE}{0.06}
+\newcommand{\CulDGlobPgdUntRNoRem}{+0.12}
+\newcommand{\CulRecGlobPgdUntRNoRem}{0.02}
+\newcommand{\CulDGlobPgdUntBNORM}{$-$11.79}
+\newcommand{\CulRecGlobPgdUntBNORM}{$-$2.20}
+\newcommand{\CulDGlobPgdUntEgo}{$-$14.03}
+\newcommand{\CulRecGlobPgdUntEgo}{$-$2.62}
+\newcommand{\CulLossGlobPgdRem}{4.75}
+\newcommand{\CulDGlobPgdRemBRAY}{$-$0.12}
+\newcommand{\CulRecGlobPgdRemBRAY}{$-$0.02}
+\newcommand{\CulDGlobPgdRemRONE}{+0.97}
+\newcommand{\CulRecGlobPgdRemRONE}{0.20}
+\newcommand{\CulDGlobPgdRemRNoRem}{$-$0.08}
+\newcommand{\CulRecGlobPgdRemRNoRem}{$-$0.02}
+\newcommand{\CulDGlobPgdRemBNORM}{$-$12.38}
+\newcommand{\CulRecGlobPgdRemBNORM}{$-$2.61}
+\newcommand{\CulDGlobPgdRemEgo}{$-$14.63}
+\newcommand{\CulRecGlobPgdRemEgo}{$-$3.08}
+\newcommand{\CulLossGlobPgdUntSt}{4.71}
+\newcommand{\CulDGlobPgdUntStBRAY}{$-$0.06}
+\newcommand{\CulRecGlobPgdUntStBRAY}{$-$0.01}
+\newcommand{\CulDGlobPgdUntStRONE}{+0.27}
+\newcommand{\CulRecGlobPgdUntStRONE}{0.06}
+\newcommand{\CulDGlobPgdUntStRNoRem}{+0.08}
+\newcommand{\CulRecGlobPgdUntStRNoRem}{0.02}
+\newcommand{\CulDGlobPgdUntStBNORM}{$-$2.86}
+\newcommand{\CulRecGlobPgdUntStBNORM}{$-$0.61}
+\newcommand{\CulDGlobPgdUntStEgo}{$-$14.67}
+\newcommand{\CulRecGlobPgdUntStEgo}{$-$3.11}
+\newcommand{\CulLossGlobPgdRemSt}{4.38}
+\newcommand{\CulDGlobPgdRemStBRAY}{$-$0.12}
+\newcommand{\CulRecGlobPgdRemStBRAY}{$-$0.03}
+\newcommand{\CulDGlobPgdRemStRONE}{+0.96}
+\newcommand{\CulRecGlobPgdRemStRONE}{0.22}
+\newcommand{\CulDGlobPgdRemStRNoRem}{$-$0.07}
+\newcommand{\CulRecGlobPgdRemStRNoRem}{$-$0.02}
+\newcommand{\CulDGlobPgdRemStBNORM}{$-$4.68}
+\newcommand{\CulRecGlobPgdRemStBNORM}{$-$1.07}
+\newcommand{\CulDGlobPgdRemStEgo}{$-$15.00}
+\newcommand{\CulRecGlobPgdRemStEgo}{$-$3.43}
+\newcommand{\CulLossGlobPgdUntStStrong}{13.70}
+\newcommand{\CulDGlobPgdUntStStrongBRAY}{+0.18}
+\newcommand{\CulRecGlobPgdUntStStrongBRAY}{0.01}
+\newcommand{\CulDGlobPgdUntStStrongRONE}{+0.88}
+\newcommand{\CulRecGlobPgdUntStStrongRONE}{0.06}
+\newcommand{\CulDGlobPgdUntStStrongRNoRem}{+0.69}
+\newcommand{\CulRecGlobPgdUntStStrongRNoRem}{0.05}
+\newcommand{\CulDGlobPgdUntStStrongBNORM}{$-$2.97}
+\newcommand{\CulRecGlobPgdUntStStrongBNORM}{$-$0.22}
+\newcommand{\CulDGlobPgdUntStStrongEgo}{$-$5.68}
+\newcommand{\CulRecGlobPgdUntStStrongEgo}{$-$0.42}
+\newcommand{\CulLossGlobPgdRemStStrong}{39.82}
+\newcommand{\CulDGlobPgdRemStStrongBRAY}{$-$0.03}
+\newcommand{\CulRecGlobPgdRemStStrongBRAY}{$-$0.00}
+\newcommand{\CulDGlobPgdRemStStrongRONE}{+19.53}
+\newcommand{\CulRecGlobPgdRemStStrongRONE}{0.49}
+\newcommand{\CulDGlobPgdRemStStrongRNoRem}{+0.09}
+\newcommand{\CulRecGlobPgdRemStStrongRNoRem}{0.00}
+\newcommand{\CulDGlobPgdRemStStrongBNORM}{$-$2.29}
+\newcommand{\CulRecGlobPgdRemStStrongBNORM}{$-$0.06}
+\newcommand{\CulDGlobPgdRemStStrongEgo}{+20.44}
+\newcommand{\CulRecGlobPgdRemStStrongEgo}{0.51}
+\newcommand{\CulHeadFrameBRAY}{+0.54}
+\newcommand{\CulHeadFrameBRAYCI}{[+0.22, +0.92]}
+\newcommand{\CulHeadFrameBRAYCIblock}{[+0.44, +0.64]}
+\newcommand{\CulCleanFrameBRAY}{$-$0.07\%}
+\newcommand{\CulCleanFrameBRAYCI}{[$-$0.18, +0.07]\%}
+\newcommand{\CulHeadFrameRONE}{+0.40}
+\newcommand{\CulHeadFrameRONECI}{[+0.21, +0.73]}
+\newcommand{\CulHeadFrameRONECIblock}{[+0.24, +0.58]}
+\newcommand{\CulCleanFrameRONE}{0.06\%}
+\newcommand{\CulCleanFrameRONECI}{[$-$0.23, +0.37]\%}
+\newcommand{\CulHeadFrameRNoRem}{+0.38}
+\newcommand{\CulHeadFrameRNoRemCI}{[+0.23, +0.63]}
+\newcommand{\CulHeadFrameRNoRemCIblock}{[+0.29, +0.48]}
+\newcommand{\CulCleanFrameRNoRem}{0.02\%}
+\newcommand{\CulCleanFrameRNoRemCI}{[$-$0.09, +0.20]\%}
+\newcommand{\CulHeadFrameBNORM}{$-$6.72}
+\newcommand{\CulHeadFrameBNORMCI}{[$-$9.59, $-$0.93]}
+\newcommand{\CulHeadFrameBNORMCIblock}{[$-$9.37, $-$4.07]}
+\newcommand{\CulCleanFrameBNORM}{9.30\%}
+\newcommand{\CulCleanFrameBNORMCI}{[+1.35, +14.13]\%}
+\newcommand{\CulHeadFrameEgo}{$-$20.81}
+\newcommand{\CulHeadFrameEgoCI}{[$-$25.17, $-$16.70]}
+\newcommand{\CulHeadFrameEgoCIblock}{[$-$23.22, $-$18.57]}
+\newcommand{\CulCleanFrameEgo}{30.79\%}
+\newcommand{\CulCleanFrameEgoCI}{[+25.28, +35.77]\%}
+\newcommand{\CulVFrameBRAYP}{0.0005}
+\newcommand{\CulVFrameBRAYReject}{yes}
+\newcommand{\CulVFrameRONEP}{0.0005}
+\newcommand{\CulVFrameRONEReject}{yes}
+\newcommand{\CulVFrameCleanOK}{yes}
+\newcommand{\CulVFramePass}{passes}
+\newcommand{\CulVFrameRmB}{$-$0.14}
+\newcommand{\CulVFrameRmBCI}{[$-$0.40, +0.19]}
+\newcommand{\CulVFrameRmBCIblock}{[$-$0.32, +0.06]}
+\newcommand{\CulVFrameRmBStatement}{the counterfactual's benefit over a box-level filter is not established}
+\newcommand{\CulLossFrameSpoofFeat}{2.38}
+\newcommand{\CulDFrameSpoofFeatBRAY}{+0.86}
+\newcommand{\CulRecFrameSpoofFeatBRAY}{0.36}
+\newcommand{\CulDFrameSpoofFeatRONE}{+0.63}
+\newcommand{\CulRecFrameSpoofFeatRONE}{0.27}
+\newcommand{\CulDFrameSpoofFeatRNoRem}{+0.63}
+\newcommand{\CulRecFrameSpoofFeatRNoRem}{0.26}
+\newcommand{\CulDFrameSpoofFeatBNORM}{$-$6.81}
+\newcommand{\CulRecFrameSpoofFeatBNORM}{$-$2.87}
+\newcommand{\CulDFrameSpoofFeatEgo}{$-$20.28}
+\newcommand{\CulRecFrameSpoofFeatEgo}{$-$8.54}
+\newcommand{\CulLossFrameRemoveFeat}{0.96}
+\newcommand{\CulDFrameRemoveFeatBRAY}{+0.07}
+\newcommand{\CulRecFrameRemoveFeatBRAY}{0.08}
+\newcommand{\CulDFrameRemoveFeatRONE}{+0.04}
+\newcommand{\CulRecFrameRemoveFeatRONE}{0.04}
+\newcommand{\CulDFrameRemoveFeatRNoRem}{$-$0.01}
+\newcommand{\CulRecFrameRemoveFeatRNoRem}{$-$0.02}
+\newcommand{\CulDFrameRemoveFeatBNORM}{$-$6.56}
+\newcommand{\CulRecFrameRemoveFeatBNORM}{$-$6.84}
+\newcommand{\CulDFrameRemoveFeatEgo}{$-$21.70}
+\newcommand{\CulRecFrameRemoveFeatEgo}{$-$22.62}
+\newcommand{\CulLossFrameShiftFeat}{3.04}
+\newcommand{\CulDFrameShiftFeatBRAY}{+0.78}
+\newcommand{\CulRecFrameShiftFeatBRAY}{0.26}
+\newcommand{\CulDFrameShiftFeatRONE}{+0.65}
+\newcommand{\CulRecFrameShiftFeatRONE}{0.21}
+\newcommand{\CulDFrameShiftFeatRNoRem}{+0.62}
+\newcommand{\CulRecFrameShiftFeatRNoRem}{0.21}
+\newcommand{\CulDFrameShiftFeatBNORM}{$-$6.46}
+\newcommand{\CulRecFrameShiftFeatBNORM}{$-$2.13}
+\newcommand{\CulDFrameShiftFeatEgo}{$-$19.62}
+\newcommand{\CulRecFrameShiftFeatEgo}{$-$6.46}
+\newcommand{\CulLossFrameSpoofPts}{1.01}
+\newcommand{\CulDFrameSpoofPtsBRAY}{+0.43}
+\newcommand{\CulRecFrameSpoofPtsBRAY}{0.43}
+\newcommand{\CulDFrameSpoofPtsRONE}{+0.28}
+\newcommand{\CulRecFrameSpoofPtsRONE}{0.28}
+\newcommand{\CulDFrameSpoofPtsRNoRem}{+0.29}
+\newcommand{\CulRecFrameSpoofPtsRNoRem}{0.28}
+\newcommand{\CulDFrameSpoofPtsBNORM}{$-$7.05}
+\newcommand{\CulRecFrameSpoofPtsBNORM}{$-$7.00}
+\newcommand{\CulDFrameSpoofPtsEgo}{$-$21.65}
+\newcommand{\CulRecFrameSpoofPtsEgo}{$-$21.52}
+\newcommand{\CulLossFrameSpoofBlind}{2.73}
+\newcommand{\CulDFrameSpoofBlindBRAY}{+0.07}
+\newcommand{\CulRecFrameSpoofBlindBRAY}{0.03}
+\newcommand{\CulDFrameSpoofBlindRONE}{+0.01}
+\newcommand{\CulRecFrameSpoofBlindRONE}{0.00}
+\newcommand{\CulDFrameSpoofBlindRNoRem}{$-$0.00}
+\newcommand{\CulRecFrameSpoofBlindRNoRem}{$-$0.00}
+\newcommand{\CulDFrameSpoofBlindBNORM}{$-$7.11}
+\newcommand{\CulRecFrameSpoofBlindBNORM}{$-$2.60}
+\newcommand{\CulDFrameSpoofBlindEgo}{$-$19.92}
+\newcommand{\CulRecFrameSpoofBlindEgo}{$-$7.29}
+\newcommand{\CulLossFramePgdUnt}{14.02}
+\newcommand{\CulDFramePgdUntBRAY}{+1.80}
+\newcommand{\CulRecFramePgdUntBRAY}{0.13}
+\newcommand{\CulDFramePgdUntRONE}{+1.46}
+\newcommand{\CulRecFramePgdUntRONE}{0.10}
+\newcommand{\CulDFramePgdUntRNoRem}{+1.39}
+\newcommand{\CulRecFramePgdUntRNoRem}{0.10}
+\newcommand{\CulDFramePgdUntBNORM}{$-$5.94}
+\newcommand{\CulRecFramePgdUntBNORM}{$-$0.42}
+\newcommand{\CulDFramePgdUntEgo}{$-$8.64}
+\newcommand{\CulRecFramePgdUntEgo}{$-$0.62}
+\newcommand{\CulLossFramePgdRem}{2.76}
+\newcommand{\CulDFramePgdRemBRAY}{$-$0.07}
+\newcommand{\CulRecFramePgdRemBRAY}{$-$0.03}
+\newcommand{\CulDFramePgdRemRONE}{+0.40}
+\newcommand{\CulRecFramePgdRemRONE}{0.15}
+\newcommand{\CulDFramePgdRemRNoRem}{$-$0.05}
+\newcommand{\CulRecFramePgdRemRNoRem}{$-$0.02}
+\newcommand{\CulDFramePgdRemBNORM}{$-$17.20}
+\newcommand{\CulRecFramePgdRemBNORM}{$-$6.24}
+\newcommand{\CulDFramePgdRemEgo}{$-$19.90}
+\newcommand{\CulRecFramePgdRemEgo}{$-$7.22}
+\newcommand{\CulLossFramePgdUntSt}{10.99}
+\newcommand{\CulDFramePgdUntStBRAY}{+0.95}
+\newcommand{\CulRecFramePgdUntStBRAY}{0.09}
+\newcommand{\CulDFramePgdUntStRONE}{+0.94}
+\newcommand{\CulRecFramePgdUntStRONE}{0.09}
+\newcommand{\CulDFramePgdUntStRNoRem}{+0.88}
+\newcommand{\CulRecFramePgdUntStRNoRem}{0.08}
+\newcommand{\CulDFramePgdUntStBNORM}{$-$3.59}
+\newcommand{\CulRecFramePgdUntStBNORM}{$-$0.33}
+\newcommand{\CulDFramePgdUntStEgo}{$-$11.66}
+\newcommand{\CulRecFramePgdUntStEgo}{$-$1.06}
+\newcommand{\CulLossFramePgdRemSt}{2.50}
+\newcommand{\CulDFramePgdRemStBRAY}{$-$0.07}
+\newcommand{\CulRecFramePgdRemStBRAY}{$-$0.03}
+\newcommand{\CulDFramePgdRemStRONE}{+0.41}
+\newcommand{\CulRecFramePgdRemStRONE}{0.16}
+\newcommand{\CulDFramePgdRemStRNoRem}{$-$0.03}
+\newcommand{\CulRecFramePgdRemStRNoRem}{$-$0.01}
+\newcommand{\CulDFramePgdRemStBNORM}{$-$4.82}
+\newcommand{\CulRecFramePgdRemStBNORM}{$-$1.93}
+\newcommand{\CulDFramePgdRemStEgo}{$-$20.16}
+\newcommand{\CulRecFramePgdRemStEgo}{$-$8.06}
+\newcommand{\CulLossFramePgdUntStStrong}{27.64}
+\newcommand{\CulDFramePgdUntStStrongBRAY}{+3.14}
+\newcommand{\CulRecFramePgdUntStStrongBRAY}{0.11}
+\newcommand{\CulDFramePgdUntStStrongRONE}{+3.14}
+\newcommand{\CulRecFramePgdUntStStrongRONE}{0.11}
+\newcommand{\CulDFramePgdUntStStrongRNoRem}{+3.03}
+\newcommand{\CulRecFramePgdUntStStrongRNoRem}{0.11}
+\newcommand{\CulDFramePgdUntStStrongBNORM}{$-$3.60}
+\newcommand{\CulRecFramePgdUntStStrongBNORM}{$-$0.13}
+\newcommand{\CulDFramePgdUntStStrongEgo}{+4.99}
+\newcommand{\CulRecFramePgdUntStStrongEgo}{0.18}
+\newcommand{\CulLossFramePgdRemStStrong}{36.90}
+\newcommand{\CulDFramePgdRemStStrongBRAY}{+0.02}
+\newcommand{\CulRecFramePgdRemStStrongBRAY}{0.00}
+\newcommand{\CulDFramePgdRemStStrongRONE}{+17.93}
+\newcommand{\CulRecFramePgdRemStStrongRONE}{0.49}
+\newcommand{\CulDFramePgdRemStStrongRNoRem}{+0.18}
+\newcommand{\CulRecFramePgdRemStStrongRNoRem}{0.00}
+\newcommand{\CulDFramePgdRemStStrongBNORM}{$-$2.88}
+\newcommand{\CulRecFramePgdRemStStrongBNORM}{$-$0.08}
+\newcommand{\CulDFramePgdRemStStrongEgo}{+14.24}
+\newcommand{\CulRecFramePgdRemStStrongEgo}{0.39}
+\newcommand{\CulVerdict}{AP-definition-dependent}
+\newcommand{\CulRmBDependent}{yes}
+\newcommand{\CulCatchClean}{18.4\%}
+\newcommand{\CulCatchSpoofFeat}{20.5\%}
+\newcommand{\CulCatchRemoveFeat}{17.6\%}
+\newcommand{\CulCatchShiftFeat}{18.8\%}
+\newcommand{\CulCatchSpoofPts}{20.5\%}
+\newcommand{\CulCatchSpoofBlind}{22.1\%}
+\newcommand{\CulCatchPgdUnt}{100\%}
+\newcommand{\CulCatchPgdRem}{100\%}
+\newcommand{\CulCatchPgdUntSt}{0\%}
+\newcommand{\CulCatchPgdRemSt}{0\%}
+\newcommand{\CulCatchPgdUntStStrong}{0\%}
+\newcommand{\CulCatchPgdRemStStrong}{0\%}
+\newcommand{\CulInfeasiblePgdUnt}{0}
+\newcommand{\CulInfeasiblePgdRem}{0}
+\newcommand{\CulInfeasiblePgdUntSt}{0}
+\newcommand{\CulInfeasiblePgdRemSt}{32}
+\newcommand{\CulInfeasiblePgdUntStStrong}{0}
+\newcommand{\CulInfeasiblePgdRemStStrong}{0}
+\newcommand{\CulBrayCleanDrop}{79}
+\newcommand{\CulBrayCleanDropGT}{45}
+\newcommand{\CulBrayCleanBoxes}{20{,}973}
+\newcommand{\CulOvDenseTwoPfifty}{46\%}
+\newcommand{\CulOvBrayTwoPfifty}{20\%}
+\newcommand{\CulOvDenseThreePfifty}{105\%}
+\newcommand{\CulOvBrayThreePfifty}{27\%}

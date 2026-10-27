@@ -7,8 +7,8 @@ Working title: *Physically Verified Counterfactual Gating for Robust Cooperative
 | Path | What |
 |---|---|
 | `main.tex` | The paper. Every result number is a macro from `numbers.tex` or a table from `tables/`. |
-| `numbers.tex` | Generated. ~700 `\newcommand` macros (AP points = AP × 100). |
-| `tables/*.tex` | Generated table bodies: splits (I), attacks (II), main results global / frame-order (III a/b), verdict (IV), clean cost (V), runtime (VI), development vs test (VII). |
+| `numbers.tex` | Generated. ~1,050 `\newcommand` macros (Culver City macros are prefixed `\Cul`) (AP points = AP × 100). |
+| `tables/*.tex` | Generated table bodies: splits (I), attacks (II), main results global / frame-order (III a/b), verdict (IV), clean cost (V), runtime (VI), development vs test (VII), OPV2V test vs Culver City (VIII, `tab_culver.tex`). |
 | `figures/*.png` | Copied unchanged from `runs/20261024-E5v3/report/figures/` (light versions). |
 | `refs.bib` | Subset of `planning/literature/references.bib`, entries unchanged except that the provenance `note={access: ...}` field is renamed `mintaccess` so it does not print. |
 | `gen_numbers.py` | Regenerates `numbers.tex` and `tables/` from the frozen outputs (stdlib only). |
@@ -22,7 +22,7 @@ From the repository root (needs the run outputs, not on Overleaf):
 python3 paper/gen_numbers.py
 ```
 
-Sources read: `runs/20261024-E5v3/e5_v3.json`, `e5_test.json`, `report/tables/*.csv`; `runs/20261024-E5/preregistration_v3_2.json`; `runs/20261024-E5/dev/e5a_dev.json`, `H/e5a_H.json` (block sizes); `runs/20261024-AUDIT/X0_global_sort_bootstrap.json` (development T/H under both AP definitions); `planning/e4_report.md` (timing machine string). The script asserts that the report CSVs equal `e5_v3.json` where they overlap.
+Sources read: `runs/20261024-E5v3/e5_v3.json`, `e5_test.json`, `report/tables/*.csv`; `runs/20261024-E5/preregistration_v3_2.json`; `runs/20261024-E5/dev/e5a_dev.json`, `H/e5a_H.json` (block sizes); `runs/20261024-AUDIT/X0_global_sort_bootstrap.json` (development T/H under both AP definitions); `planning/e4_report.md` (timing machine string); `runs/20261026-CULVER/e5_v3.json`, `e5_test.json`, `plan.json`, `sanity_first_scenario.json` (Culver City, secondary held-out domain shift, D-72; the script refuses them unless the label says CULVER CITY and the 4-scenario / 550-frame completeness check passed). The script asserts that the report CSVs equal `e5_v3.json` where they overlap.
 
 ## Compile on Overleaf
 
@@ -34,7 +34,7 @@ The draft was **not compiled locally** (no LaTeX installed). Static checks passe
 
 ## Page estimate
 
-About 5,000 words of text plus 8 figures (2 TikZ, 6 PNG) and 8 tables (2 full width): roughly 9–10 pages including references. To reach 8 + references, candidates to cut or move to an appendix: Fig. 6 (B-NORM catch, also in the text), Fig. 8 (R1 − B-RAY), Table VII, and the Related Work paragraphs on anomaly defenses.
+About 5,000 words of text plus 8 figures (2 TikZ, 6 PNG) and 9 tables (2 full width): roughly 9–10 pages including references. To reach 8 + references, candidates to cut or move to an appendix: Fig. 6 (B-NORM catch, also in the text), Fig. 8 (R1 − B-RAY), Table VII, and the Related Work paragraphs on anomaly defenses.
 
 ## TODO left in the draft
 
@@ -53,3 +53,5 @@ About 5,000 words of text plus 8 figures (2 TikZ, 6 PNG) and 8 tables (2 full wi
 ## Provenance of the test results
 
 `runs/20261024-E5v3/e5_v3.json` (sha256 `70324a707f23e20b…`) and `e5_test.json` (sha256 `4b6823ba3603420a…`), as listed in `runs/20261024-E5v3/report/report.md`.
+
+Culver City (secondary held-out domain shift; simulated, real-city layout, unseen during detector training and during all MINT development; not real-sensor data): `runs/20261026-CULVER/e5_v3.json` (sha256 `fa6325dee8058bac…`) and `e5_test.json` (sha256 `5d4481334d983c9c…`), report `runs/20261026-CULVER/report/report.md`. Never pooled with the test.

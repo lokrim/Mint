@@ -47,7 +47,11 @@ $p=\VGlobBRAYP$ after Holm; two-sided CI \VGlobBRAYCI). R1 is the only defense w
 \NumConditions{} conditions under global-ranking AP, and the only one that recovers removal attacks
 (\dGlobPgdRemStStrongRONE\pts{} at the strongest level). Free-space filtering and the norm check fail against
 optimized and stealthy attacks. The comparison of R1 with B-RAY reverses when OPV2V's default frame-order AP
-is used (\VGlobRmB{} vs.\ \VFrameRmB\pts), a warning for evaluation practice in the field. We report the
+is used (\VGlobRmB{} vs.\ \VFrameRmB\pts), a warning for evaluation practice in the field. A secondary,
+held-out run of the frozen code on OPV2V's Culver City split (simulated, real-city layout, unseen during detector
+training and during all MINT development; \CulFrames{} frames) reproduces the signs of the test effects (R1
+\CulHeadGlobRONE, B-RAY \CulHeadGlobBRAY\pts{} under global-ranking AP), but B-RAY's gain is not significant
+there. We report the
 costs: receiver-blind regions stay undefended, R1 switches off useful contributions on clean frames, and its
 compute overhead grows with the number of cars.
 \end{abstract}
@@ -92,7 +96,8 @@ thresholds and attack levels were frozen before the test data were opened, and t
 own rays, with UNKNOWN$=$keep (Sec.~\ref{sec:method}).
 \item A pre-registered, one-time final test on \TestScenarios{} OPV2V test scenarios (\TestFrames{} frames) with
 \NumConditions{} conditions, including copy-paste, point-level, receiver-blind, PGD and B-NORM-aware stealth PGD
-attacks, against re-implemented baselines (Sec.~\ref{sec:protocol}).
+attacks, against re-implemented baselines (Sec.~\ref{sec:protocol}), and a secondary, held-out domain-shift
+evaluation of the frozen code on OPV2V's unseen Culver City town (simulated sensor; Sec.~\ref{sec:culver}).
 \item The finding that the pre-registered primary (B-RAY) passes narrowly. R1 is the only defense positive in
 all conditions under global-ranking AP, and the only one that recovers removal attacks
 (\dGlobPgdRemStStrongRONE\pts{} at the strongest level). Free-space filters and norm checks fail against
@@ -363,12 +368,15 @@ three blocks. Block~T was used to write R1. Block~H was a held-out check of the 
 was exposed, and the primary selection and the stealth attacks were developed on it. The test block is the
 OPV2V test split minus one scenario that had been opened earlier: \TestScenarios{} scenarios, \TestFrames{}
 frames, with $n=1$ in \TestNOne{} frames, $n=2$ in \TestNTwo, $n=3$ in \TestNThree{} and $n\ge 4$ in
-\TestNFourPlus. Before the test, only clean detector outputs on it had been seen. Culver City was not used.
+\TestNFourPlus. Before the test, only clean detector outputs on it had been seen. Culver City was not used in
+the test. After it, the frozen code was run once on OPV2V's Culver City split as a separate, secondary
+held-out domain-shift evaluation (Sec.~\ref{sec:culver}).
 \textbf{All block~T and H numbers in this paper are development numbers} and are never pooled with test
 numbers.
 
 \begin{table}[t]
-\caption{Data blocks and exposure.}
+\caption{Data blocks and exposure. Culver City (simulated, real-city layout, unseen during detector training and
+during all MINT development) was evaluated after the test and is reported separately (Sec.~\ref{sec:culver}).}
 \label{tab:splits}
 \centering
 \footnotesize
@@ -706,6 +714,48 @@ test results.}}
 \end{tabular}}
 \end{table}
 
+\subsection{Unseen-town evaluation (Culver City)}
+\label{sec:culver}
+After the test, we ran the frozen code once on OPV2V's Culver City split (\CulScenarios{} scenarios,
+\CulFrames{} frames, $n=\CulNmin$--\CulNmax). This is a secondary, held-out domain-shift evaluation, planned and
+committed before any Culver City data were downloaded (D-72). The town is simulated with the same CARLA LiDAR
+model as the rest of OPV2V, but its layout is modelled on the real Culver City, and it was unseen during
+detector training and during all MINT development. \textbf{It is not real-sensor data.} Methods, $\sigma_k$,
+$\tau_k$, attack levels, seeds and analysis were reused unchanged; nothing was fitted on Culver City. A planned
+check on the first scenario, before any defense or attack ran, gave clean AP@0.7 of \CulSanityAP{} (frame
+order, \CulSanityFrames{} frames). Over all scenarios, the no-defense frame-order AP@0.7 is \CulAPCleanFrame{}
+(\CulPublishedAP{} released with the checkpoint~\cite{xu2022opv2v}). Table~\ref{tab:culver} sets the headline
+numbers next to the test. The two are never pooled, and with four scenarios the scenario CIs are coarse.
+
+Under global-ranking AP, R1's mean gain over the four original attacks is \CulHeadGlobRONE\pts{}
+\CulHeadGlobRONECI{} (Holm reject). B-RAY's is \CulHeadGlobBRAY\pts{} \CulHeadGlobBRAYCI{} ($p=\CulVGlobBRAYP$,
+not rejected). The v3.2 success rule, applied descriptively, therefore \CulVGlobPass{} under global-ranking AP
+and \CulVFramePass{} under frame-order AP (B-RAY \CulHeadFrameBRAY, R1 \CulHeadFrameRONE\pts; both rejected).
+Clean cost stays below 1\% for both. R1~$-$~B-RAY is \CulVGlobRmB\pts{} \CulVGlobRmBCI{} under global ranking
+and \CulVFrameRmB\pts{} \CulVFrameRmBCI{} under frame order. That is the sign pattern of the test, but the
+frame-order difference is not resolved. On the strong stealth removal ($r=1.0^\dagger$), R1 recovers
+\CulDGlobPgdRemStStrongRONE{} of \CulLossGlobPgdRemStStrong\pts{} (recovery \CulRecGlobPgdRemStStrongRONE; test
+\RecGlobPgdRemStStrongRONE) and B-RAY \CulDGlobPgdRemStStrongBRAY\pts. B-NORM catches \CulCatchPgdUnt{} of plain
+PGD and \CulCatchPgdRemStStrong{} of strong stealth PGD, and flags \CulCatchClean{} of clean frames (test
+\CatchClean). No defense recovers the receiver-blind spoof. The direction of every headline effect transfers
+to the unseen town. B-RAY's small global-ranking gain does not reach significance on four scenarios.
+
+\begin{table}[t]
+\caption{OPV2V test (primary, \TestScenarios{} scenarios) vs.\ Culver City (secondary held-out domain shift;
+simulated, real-city layout, unseen during detector training and MINT development; \CulScenarios{} scenarios,
+coarse CIs). Never pooled. AP points; $^\dagger$ strong level added post hoc (D-70).}
+\label{tab:culver}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\input{tables/tab_culver.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
 %======================================================================
 \section{Discussion and Limitations}
 \label{sec:discussion}
@@ -726,7 +776,8 @@ on exposed development data, and the strong levels after seeing results there.
 \textbf{Single attacker.} The attacker is always sender~1, alone. Two colluding senders could each confirm the
 other's fake; R1's per-sender counterfactual removes one sender at a time and would miss it.
 
-\textbf{Simulation.} OPV2V is CARLA simulation \CITENEEDED{}. Real LiDAR misses dark or glass surfaces (more
+\textbf{Simulation.} OPV2V is CARLA simulation \CITENEEDED{}. The Culver City run tests transfer to an unseen
+town layout under the same simulated sensor, not to real sensors, real traffic or real attacks. Real LiDAR misses dark or glass surfaces (more
 UNKNOWN) and returns from vegetation or spray (false support). The receiver's sensor is assumed honest; physical
 spoofing~\cite{cao2019advlidar} would break that.
 
@@ -753,11 +804,13 @@ pre-registered rule narrowly; R1, a tile-level counterfactual verified by the re
 defense positive in every condition under global-ranking AP and the only one that recovered removal attacks.
 A norm check failed against stealthy attacks, and no receiver-ray method helped in receiver-blind regions.
 Which of R1 and B-RAY looks better depends on the AP definition, so CP papers should report both.
+On the unseen Culver City town (simulated sensor; secondary), the signs of these effects held, but B-RAY's
+global-ranking gain was not significant on four scenarios.
 
 Three directions follow. (i) A hybrid that uses B-RAY's box filter for added objects and only R1's REMOVE test
 for removals; our ablation suggests the REMOVE test carries the removal recovery, but the hybrid is untested.
-(ii) Validation on held-out data never touched by method design: OPV2V's Culver City split and real-world
-V2V4Real~\cite{xu2023v2v4real}. (iii) Per-frame checkpointing of the test stream, which currently writes
+(ii) Validation on real-sensor data never touched by method design, such as
+V2V4Real~\cite{xu2023v2v4real}; Culver City covers only a simulated domain shift. (iii) Per-frame checkpointing of the test stream, which currently writes
 results per completed scenario.
 
 \section*{Data and Code Availability}
