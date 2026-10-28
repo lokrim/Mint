@@ -1,0 +1,37 @@
+statistic,ap_definition,opv2v_test,culver_city
+Scenarios / frames,,15 / 2066,1 / 12
+Agents per frame,,"{'1': 119, '2': 866, '3': 869, '4': 111, '5': 101}",{'2': 12}
+No-defense clean AP@0.7 (absolute),global,0.8864,0.9062
+No-defense clean AP@0.7 (absolute),frame,0.8217,0.8635
+"B-RAY (primary): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",global,"+0.15 [-0.01, +0.30]","+0.44 [+0.44, +0.44]"
+"B-RAY (primary): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",frame,"+0.76 [+0.49, +1.27]","+1.27 [+1.27, +1.27]"
+"R1 (key secondary): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",global,"+0.45 [+0.29, +0.70]","+0.44 [+0.44, +0.44]"
+"R1 (key secondary): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",frame,"+0.19 [-0.45, +0.52]","+1.07 [+1.07, +1.07]"
+"R1-noREMOVE (ablation): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",global,"+0.26 [+0.18, +0.36]","+0.44 [+0.44, +0.44]"
+"R1-noREMOVE (ablation): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",frame,"+0.66 [+0.48, +1.03]","+1.07 [+1.07, +1.07]"
+"B-NORM (baseline): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",global,"-5.85 [-9.65, -2.30]","+0.00 [+0.00, +0.00]"
+"B-NORM (baseline): mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",frame,"-7.13 [-11.82, -2.73]","+0.00 [+0.00, +0.00]"
+"Ego-only: mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",global,"-20.02 [-23.10, -16.04]","-14.24 [-14.23, -14.23]"
+"Ego-only: mean ΔAP@0.7, 4 original attacks (pts, scen. CI)",frame,"-24.20 [-29.44, -18.65]","-14.88 [-14.88, -14.88]"
+B-RAY (primary): clean relative AP@0.7 loss (scen. CI),global,"0.13% [+0.01, +0.30]","0.00% [+0.00, +0.00]"
+B-RAY (primary): clean relative AP@0.7 loss (scen. CI),frame,"-0.05% [-0.30, +0.18]","0.00% [+0.00, +0.00]"
+R1 (key secondary): clean relative AP@0.7 loss (scen. CI),global,"-0.16% [-0.35, -0.01]","0.00% [+0.00, +0.00]"
+R1 (key secondary): clean relative AP@0.7 loss (scen. CI),frame,"0.62% [+0.18, +1.75]","0.00% [+0.00, +0.00]"
+"Holm co-test vs no defense (1-sided, scenario bootstrap)",global,B-RAY p=0.0335 reject; R1 p=0.0005 reject,B-RAY p=0.0050 reject; R1 p=0.0050 reject
+"Holm co-test vs no defense (1-sided, scenario bootstrap)",frame,B-RAY p=0.0005 reject; R1 p=0.2259 no reject,B-RAY p=0.0050 reject; R1 p=0.0050 reject
+v2 success rule (B-RAY Holm reject and clean CI high <= 1%),global,passes,passes
+v2 success rule (B-RAY Holm reject and clean CI high <= 1%),frame,passes,passes
+D-64 verdict,,success under both AP definitions,success under both AP definitions
+"R1 − B-RAY, mean of 4 (pts, scen. CI) and statement",global,"+0.31 [+0.12, +0.55]: “the counterfactual improves over the box-level filter”","+0.00 [+0.00, +0.00]: “the counterfactual's benefit over a box-level filter is not established”"
+"R1 − B-RAY, mean of 4 (pts, scen. CI) and statement",frame,"-0.57 [-1.64, -0.11]: “the counterfactual performs worse than the box-level filter”","-0.19 [-0.19, -0.19]: “the counterfactual performs worse than the box-level filter”"
+"spoof in receiver-blind area: attack loss, ΔAP (recovery)",global,loss +2.21; B-RAY -0.01 (rec. -0.00); R1 +0.19 (rec. 0.09),loss +1.29; B-RAY +0.00 (rec. 0.00); R1 +0.00 (rec. 0.00)
+"spoof in receiver-blind area: attack loss, ΔAP (recovery)",frame,loss +4.39; B-RAY +0.14 (rec. 0.03); R1 -0.34 (rec. -0.08),loss +2.80; B-RAY +0.00 (rec. 0.00); R1 +0.00 (rec. 0.00)
+"PGD remove stealth r=0.25: attack loss, ΔAP (recovery)",global,loss +3.06; B-RAY -0.10 (rec. -0.03); R1 +1.13 (rec. 0.37),loss +2.27; B-RAY +0.00 (rec. 0.00); R1 +0.65 (rec. 0.28)
+"PGD remove stealth r=0.25: attack loss, ΔAP (recovery)",frame,loss +1.14; B-RAY -0.02 (rec. -0.02); R1 -0.14 (rec. -0.13),loss +0.33; B-RAY +0.00; R1 -0.93
+"PGD remove stealth r=1.0: attack loss, ΔAP (recovery)",global,loss +40.41; B-RAY -0.01 (rec. -0.00); R1 +22.50 (rec. 0.56),loss +46.74; B-RAY +0.00 (rec. 0.00); R1 +28.00 (rec. 0.60)
+"PGD remove stealth r=1.0: attack loss, ΔAP (recovery)",frame,loss +36.51; B-RAY +0.06 (rec. 0.00); R1 +20.94 (rec. 0.57),loss +42.60; B-RAY +0.00 (rec. 0.00); R1 +26.75 (rec. 0.63)
+"PGD untargeted stealth r=1.0: attack loss, ΔAP (recovery)",global,loss +8.86; B-RAY +0.12 (rec. 0.01); R1 +0.40 (rec. 0.04),loss +3.24; B-RAY +0.03 (rec. 0.01); R1 +0.03 (rec. 0.01)
+"PGD untargeted stealth r=1.0: attack loss, ΔAP (recovery)",frame,loss +20.10; B-RAY +2.09 (rec. 0.10); R1 +1.33 (rec. 0.07),loss +15.99; B-RAY +4.20 (rec. 0.26); R1 +4.20 (rec. 0.26)
+"B-NORM sender-1 flag rate, clean (no attack)",,17.4%,0.0%
+"B-NORM sender-1 flag rate, PGD untargeted r=0.25",,100.0%,100.0%
+"B-NORM sender-1 flag rate, PGD untargeted stealth r=0.5",,0.0%,0.0%

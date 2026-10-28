@@ -1,0 +1,13 @@
+condition,frames_n2,applied,sender1_flagged,any_flagged,catch_rate
+clean,12,12,0,0,0.0
+spoof_feat,12,12,0,0,0.0
+remove_feat,12,12,0,0,0.0
+shift_feat,12,12,0,0,0.0
+spoof_pts,12,12,0,0,0.0
+spoof_blind,12,12,0,0,0.0
+pgd_untargeted@r0.25,12,12,12,12,1.0
+pgd_remove@r0.25,12,12,12,12,1.0
+pgd_untargeted_stealth@r0.5,12,12,0,0,0.0
+pgd_remove_stealth@r0.25,12,12,0,0,0.0
+pgd_untargeted_stealth@r1.0,12,12,0,0,0.0
+pgd_remove_stealth@r1.0,12,12,0,0,0.0

@@ -1,0 +1,13 @@
+ap_definition,statistic,point,ci95_scenario_lo,ci95_scenario_hi,ci95_block10_lo,ci95_block10_hi
+global,paired|R1-B-RAY|pgd_untargeted@r0.25,0.0,0.0,0.0,0.0,0.0
+global,paired|R1-B-RAY|pgd_remove@r0.25,0.00676,0.0068,0.0068,0.0,0.0083
+global,paired|R1-B-RAY|pgd_untargeted_stealth@r0.5,0.0,0.0,0.0,0.0,0.0
+global,paired|R1-B-RAY|pgd_remove_stealth@r0.25,0.00645,0.0065,0.0065,0.0,0.008
+global,paired|R1-B-RAY|pgd_untargeted_stealth@r1.0,8e-05,0.0001,0.0001,0.0,0.0001
+global,paired|R1-B-RAY|pgd_remove_stealth@r1.0,0.27996,0.28,0.28,0.2616,0.378
+frame,paired|R1-B-RAY|pgd_untargeted@r0.25,0.0,0.0,0.0,0.0,0.0
+frame,paired|R1-B-RAY|pgd_remove@r0.25,-0.00206,-0.0021,-0.0021,-0.0021,0.0
+frame,paired|R1-B-RAY|pgd_untargeted_stealth@r0.5,0.0,0.0,0.0,0.0,0.0
+frame,paired|R1-B-RAY|pgd_remove_stealth@r0.25,-0.00932,-0.0093,-0.0093,-0.0093,0.0
+frame,paired|R1-B-RAY|pgd_untargeted_stealth@r1.0,0.0,0.0,0.0,0.0,0.0
+frame,paired|R1-B-RAY|pgd_remove_stealth@r1.0,0.26752,0.2675,0.2675,0.2495,0.3684

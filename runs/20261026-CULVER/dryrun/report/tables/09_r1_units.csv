@@ -1,0 +1,7 @@
+condition,units,n_KNOWN,frac_KNOWN,gated,gated_harmful,gated_neutral,false_rejections_useful,precision,harmful_units,harmful_KNOWN,useful_units
+clean,24,11,0.458,0,0,0,0,,1,1,21
+spoof_feat,28,15,0.536,4,4,0,0,1.0,5,5,21
+remove_feat,24,11,0.458,0,0,0,0,,1,1,21
+shift_feat,28,14,0.5,3,3,0,0,1.0,5,4,21
+spoof_pts,25,12,0.48,0,0,0,0,,2,2,21
+spoof_blind,30,11,0.367,0,0,0,0,,7,1,21

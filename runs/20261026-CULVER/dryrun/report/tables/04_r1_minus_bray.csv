@@ -1,0 +1,17 @@
+ap_definition,statistic,point,ci95_scenario_lo,ci95_scenario_hi,ci95_block10_lo,ci95_block10_hi
+global,paired_mean_orig|R1-B-RAY,3e-05,0.0,0.0,0.0,0.0
+global,paired_mean_3|R1-B-RAY,4e-05,0.0,0.0,0.0,0.0001
+global,paired|R1-B-RAY|clean,0.0,0.0,0.0,0.0,0.0
+global,paired|R1-B-RAY|spoof_feat,0.0,0.0,0.0,0.0,0.0
+global,paired|R1-B-RAY|remove_feat,0.0,0.0,0.0,0.0,0.0
+global,paired|R1-B-RAY|shift_feat,0.00011,0.0001,0.0001,0.0,0.0002
+global,paired|R1-B-RAY|spoof_pts,0.0,0.0,0.0,0.0,0.0
+global,paired|R1-B-RAY|spoof_blind,0.0,0.0,0.0,0.0,0.0
+frame,paired_mean_orig|R1-B-RAY,-0.00192,-0.0019,-0.0019,-0.0024,0.0
+frame,paired_mean_3|R1-B-RAY,-0.00256,-0.0026,-0.0026,-0.0033,0.0
+frame,paired|R1-B-RAY|clean,0.0,0.0,0.0,0.0,0.0
+frame,paired|R1-B-RAY|spoof_feat,-0.00767,-0.0077,-0.0077,-0.0098,0.0
+frame,paired|R1-B-RAY|remove_feat,0.0,0.0,0.0,0.0,0.0
+frame,paired|R1-B-RAY|shift_feat,0.0,0.0,0.0,0.0,0.0
+frame,paired|R1-B-RAY|spoof_pts,0.0,0.0,0.0,0.0,0.0
+frame,paired|R1-B-RAY|spoof_blind,0.0,0.0,0.0,0.0,0.0
